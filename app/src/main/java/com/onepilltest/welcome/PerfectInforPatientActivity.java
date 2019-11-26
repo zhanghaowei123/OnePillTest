@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import com.onepilltest.R;
 
 public class PerfectInforPatientActivity extends AppCompatActivity {
     private ImageView imgBack;

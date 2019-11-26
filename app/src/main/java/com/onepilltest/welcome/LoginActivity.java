@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import com.onepilltest.R;
 public class LoginActivity extends AppCompatActivity {
     private EditText editPhone;
     private EditText editPassword;

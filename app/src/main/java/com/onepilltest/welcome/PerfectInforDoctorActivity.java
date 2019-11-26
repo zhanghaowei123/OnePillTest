@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import com.onepilltest.R;
 
 public class PerfectInforDoctorActivity extends AppCompatActivity {
     private ImageView imgBack;
@@ -22,7 +23,7 @@ public class PerfectInforDoctorActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate ( savedInstanceState );
         setContentView ( R.layout.doctorinfo_layout );
-        editName = findViewById ( R.id.perfect_doctor );
+        editName = findViewById ( R.id.perfect_doctorname );
         editNum = findViewById ( R.id.perfect_dnum );
         editHosptal = findViewById ( R.id.perfect_hosptal );
         editAddress = findViewById ( R.id.perfect_address );
