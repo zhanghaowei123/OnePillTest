@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- 选项卡按钮所在布局 -->
+    <LinearLayout
+        android:id="@+id/tab_widget"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <!-- 首页 -->
+        <LinearLayout
+            android:id="@+id/tab_spec_home"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/iv_home"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/home_normal" />
+
+            <TextView
+                android:id="@+id/tv_home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="首页" />
+
+        </LinearLayout>
+
+        <!-- 附近 -->
+        <LinearLayout
+            android:id="@+id/tab_spec_near"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/iv_near"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/near_normal" />
+
+            <TextView
+                android:id="@+id/tv_near"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="附近" />
+
+        </LinearLayout>
+
+        <!-- 消息 -->
+        <LinearLayout
+            android:id="@+id/tab_spec_msg"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/iv_msg"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/message_normal" />
+
+            <TextView
+                android:id="@+id/tv_msg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="消息" />
+
+        </LinearLayout>
+        <!-- 个人 -->
+        <LinearLayout
+            android:id="@+id/tab_spec_me"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/iv_me"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/personal_normal" />
+
+            <TextView
+                android:id="@+id/tv_me"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="个人" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <!-- Fragment内容显示的帧布局 -->
+    <FrameLayout
+        android:id="@+id/tab_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/tab_widget" />
+</RelativeLayout>

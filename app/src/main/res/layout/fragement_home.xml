@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F1F1F1"
+    android:orientation="vertical">
+
+    <!--每日提醒-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#D5F2F2">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingLeft="60dp"
+            android:text="每日提醒"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_remingimg"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="@drawable/bg_shape"
+            android:gravity="center_vertical"
+            android:text="555" />
+        <!--椭圆形提示框-->
+    </LinearLayout>
+    <!--找医生···-->
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="115dp"
+        android:background="#fff"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal">
+
+            <ImageView
+                android:id="@+id/iv_find_doctor"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="#fff"
+                android:src="@drawable/find_doctors" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/iv_find_doctor"
+                android:paddingLeft="5dp"
+                android:text="找医生" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal">
+
+            <ImageView
+                android:id="@+id/iv_find_medicine"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="#fff"
+                android:src="@drawable/medical_box" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/iv_find_medicine"
+                android:paddingLeft="5dp"
+                android:text="找药品" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal">
+
+            <ImageView
+                android:id="@+id/iv_inquiry"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="#fff"
+                android:src="@drawable/inquiry" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/iv_inquiry"
+                android:paddingLeft="10dp"
+                android:text="问诊" />
+        </RelativeLayout>
+
+
+    </LinearLayout>
+    <!--文章-->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycle_view"
+        android:background="#F1F1F1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>
