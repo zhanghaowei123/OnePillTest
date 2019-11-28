@@ -36,6 +36,7 @@ public class PerfectInforPatientActivity extends AppCompatActivity {
     private OkHttpClient okHttpClient;
     private SharedPreferences sharedPreferences;
     private UserPatient userPatient;
+    private boolean flag = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,7 +61,11 @@ public class PerfectInforPatientActivity extends AppCompatActivity {
                 //1.创建OkHttpClient对象  入口
                 okHttpClient = new OkHttpClient();
                 registerInfo();
-                postUserPatient();
+                if (flag) {
+                    postUserPatient();
+                } else {
+                    Toast.makeText(getApplicationContext(), "请完善个人信息", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -105,6 +110,11 @@ public class PerfectInforPatientActivity extends AppCompatActivity {
         userPatient.setNickName(edituserName.getText().toString());
         userPatient.setPID(edituserNum.getText().toString());
         userPatient.setAddress(edituserAddress.getText().toString());
+        if (!userPatient.getNickName().equals("")
+                && !userPatient.getPID().equals("")
+                && !userPatient.getAddress().equals("")) {
+            flag = true;
+        }
     }
 
     private void findView() {

@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.onepilltest.R;
@@ -22,6 +23,7 @@ public class RegisterPatient extends AppCompatActivity {
     private EditText editCheckwords;
     private ImageView imgNext;
     private SharedPreferences sharedPreferences;
+    private boolean flag = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,7 +39,10 @@ public class RegisterPatient extends AppCompatActivity {
                         Intent intent = new Intent();
                         intent.setClass(RegisterPatient.this, PerfectInforPatientActivity.class);
                         register();
-                        startActivity(intent);
+                        if (flag)
+                            startActivity(intent);
+                        else
+                            Toast.makeText(getApplicationContext(), "请完善个人信息", Toast.LENGTH_SHORT).show();
                     }
                 }
         );
@@ -47,7 +52,11 @@ public class RegisterPatient extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("phone", editPhone.getText().toString());
         editor.putString("password", editPassword.getText().toString());
-        editor.commit();
+        if (!editPhone.getText().toString().equals("")
+                && !editPassword.getText().toString().equals("")) {
+            flag = true;
+            editor.commit();
+        }
     }
 
     private void initView() {
