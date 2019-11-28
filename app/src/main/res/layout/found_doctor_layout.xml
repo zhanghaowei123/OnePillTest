@@ -7,27 +7,26 @@
     <!--header-->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:background="#e9e4e4"
+        android:layout_height="40dp"
+        android:background="#56ced4"
         android:orientation="horizontal">
         <ImageView
-            android:id="@+id/img_left1"
+            android:id="@+id/findoctor_left"
             android:src="@drawable/left"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
-            android:text="找 医 生"
-            android:textSize="25dp"
-            android:textColor="#000"
-            android:layout_marginLeft="90dp"
+            android:text="找   医   生"
+            android:textSize="20dp"
+            android:layout_marginLeft="110dp"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <ImageView
             android:src="@drawable/logo"
             android:layout_marginLeft="80dp"
-            android:layout_width="100dp"
+            android:layout_width="70dp"
             android:layout_height="50dp" />
     </LinearLayout>
     <LinearLayout
@@ -37,12 +36,14 @@
         android:layout_marginTop="10dp"
         android:layout_gravity="center">
         <ImageView
+            android:id="@+id/img_select"
             android:layout_marginTop="10dp"
             android:src="@drawable/found"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <EditText
-            android:id="@+id/login_mima"
+            android:hint="搜索医生"
+            android:id="@+id/findoctor_select"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
@@ -70,19 +71,27 @@
             android:layout_height="wrap_content">
             <TableRow>
                 <Button
+                    android:id="@+id/tb_one"
                     android:text="流感"
+                    android:onClick="buttonClick"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <Button
+                    android:id="@+id/tb_two"
                     android:text="头痛"
+                    android:onClick="buttonClick"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <Button
+                    android:id="@+id/tb_three"
                     android:text="伤寒"
+                    android:onClick="buttonClick"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <Button
+                    android:id="@+id/tb_four"
                     android:text="宝宝健康"
+                    android:onClick="buttonClick"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </TableRow>
@@ -94,22 +103,30 @@
             <TableRow>
 
                 <Button
+                    android:id="@+id/tb_five"
                     android:text="肠胃"
+                    android:onClick="buttonClick"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
                 <Button
+                    android:id="@+id/tb_six"
                     android:text="皮肤"
+                    android:onClick="buttonClick"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
                 <Button
+                    android:id="@+id/tb_seven"
                     android:text="肥胖"
+                    android:onClick="buttonClick"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
                 <Button
+                    android:id="@+id/tb_eight"
                     android:text="月经不调"
+                    android:onClick="buttonClick"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </TableRow>
@@ -122,25 +139,43 @@
             <TableRow>
 
                 <Button
+                    android:id="@+id/tb_nine"
                     android:text="心血管"
+                    android:onClick="buttonClick"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
                 <Button
+                    android:id="@+id/tb_ten"
                     android:text="鼻炎"
+                    android:onClick="buttonClick"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
                 <Button
+                    android:id="@+id/tb_eleven"
                     android:text="焦虑"
+                    android:onClick="buttonClick"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
                 <Button
+                    android:id="@+id/tb_twelve"
                     android:text="口腔问题"
+                    android:onClick="buttonClick"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </TableRow>
         </TableLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="......"
+                android:textSize="25dp"
+                android:layout_marginLeft="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>
