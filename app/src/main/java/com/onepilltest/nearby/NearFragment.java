@@ -80,7 +80,6 @@ public class NearFragment extends Fragment {
         baiduMap.setMyLocationConfiguration(configuration);
         //启动定位图层
         baiduMap.setMyLocationEnabled(true);
-        locationClient.start();
         return view;
     }
 
@@ -147,6 +146,7 @@ public class NearFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        mapView.onResume();
     }
 
     @Override

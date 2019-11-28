@@ -18,7 +18,7 @@ import com.onepilltest.personal.PersonalFragment;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity {
 
     private class MyTabSpec {
         private ImageView imageView = null;
