@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@drawable/underline"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--<LinearLayout
+        android:background="@drawable/underline"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <Button
+            android:id="@+id/question_back"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:background="#00ffffff"
+            android:text="取消"
+            android:textColor="#777"
+            android:textSize="12dp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="7"
+            android:gravity="center"
+            android:text="快速问诊"
+            android:textSize="16dp" />
+
+        <Button
+            android:id="@+id/question_finish"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:background="#00ffffff"
+            android:text="完成"
+            android:textColor="#777"
+            android:textSize="12dp" />
+    </LinearLayout>-->
+
+
+
+    <!--标题栏-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/question_back"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@drawable/back" />
+
+        <TextView
+            android:textColor="#000"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
+            android:text="快速问诊"
+            android:textSize="16dp" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent" />
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <!--为谁咨询-->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_weight="5"
+            android:gravity="center"
+            android:orientation="vertical">
+
+
+
+            <EditText
+                android:id="@+id/kswz_title"
+                android:background="@drawable/edit_shape"
+                android:textSize="12dp"
+                android:hint="请输入咨询标题"
+                android:layout_width="150dp"
+                android:layout_height="30dp" />
+        </LinearLayout>
+
+        <!--是否就诊过-->
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_marginBottom="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="是否线下去医院就诊过" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/kswz_outline_yes"
+                    android:textColor="#777"
+                    android:background="#eee"
+                    android:padding="0dp"
+                    android:textSize="10dp"
+                    android:layout_width="60dp"
+                    android:layout_height="20dp"
+                    android:text="是" />
+
+                <Button
+                    android:id="@+id/kswz_outline_no"
+                    android:textColor="#777"
+                    android:background="#eee"
+                    android:layout_marginLeft="20dp"
+                    android:padding="0dp"
+                    android:textSize="10dp"
+                    android:layout_width="60dp"
+                    android:layout_height="20dp"
+                    android:text="否" />
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_margin="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#ccc" />
+
+    <EditText
+        android:id="@+id/kswz_main"
+        android:gravity="top"
+        android:height="200dp"
+        android:inputType="textMultiLine"
+        android:background="@null"
+        android:padding="15dp"
+        android:textSize="13dp"
+        android:hint="请描述你的年龄，性别，症状及就诊经历，便于医生进行准确的分析，我们会保证你的隐私安全"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/kswz_upfile"
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:layout_margin="10dp"
+            android:background="#afafaf" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="你上传的附件仅队解答问题的医生可见"
+            android:textSize="12dp" />
+
+
+    </LinearLayout>
+    <Button
+
+        android:layout_marginTop="30dp"
+        android:id="@+id/question_finish"
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:background="@drawable/button_circle"
+        android:text="完成"
+        android:textColor="#fff"
+        android:textSize="14dp" />
+
+</LinearLayout>

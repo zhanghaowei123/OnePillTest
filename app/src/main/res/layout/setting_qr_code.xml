@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f7f7f7"
+    android:orientation="vertical">
+
+    <!--标题栏-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/setting_qr_code_back"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@drawable/back" />
+
+        <TextView
+            android:textColor="#000"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
+            android:text="二维码名片"
+            android:textSize="16dp" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent" />
+    </LinearLayout>
+
+    <!--二维码-->
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="330dp"
+            android:layout_height="400dp"
+            android:padding="10dp"
+            android:layout_gravity="center"
+            android:background="@drawable/linearlayout_circle_all">
+            <LinearLayout
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:src="@drawable/user"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp" />
+                <LinearLayout
+                    android:layout_marginLeft="10dp"
+                    android:orientation="vertical"
+                    android:gravity="left"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:textColor="#000"
+                        android:textSize="16dp"
+                        android:gravity="center"
+                        android:text="Charlotte"
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp" />
+                    <TextView
+                        android:textColor="#555"
+                        android:textSize="14dp"
+                        android:gravity="center"
+                        android:text="河北  石家庄"
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:paddingTop="10dp"
+                android:gravity="center"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:src="@drawable/erweima"
+                    android:layout_width="230dp"
+                    android:layout_height="230dp" />
+                <TextView
+                    android:textColor="#555"
+                    android:paddingTop="25dp"
+                    android:gravity="center"
+                    android:text="扫一扫上面的二维码，加我好友"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

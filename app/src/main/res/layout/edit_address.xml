@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f7f7f7"
+    android:orientation="vertical">
+    <!--标题栏-->
+    <!--<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginBottom="1dp"
+        android:background="#fff"
+        android:orientation="horizontal">
+        &lt;!&ndash;返回按钮&ndash;&gt;
+        <Button
+            android:id="@+id/edit_address_back"
+            android:background="@android:color/transparent"
+            android:layout_width="0dp"
+            android:textSize="13dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="返回"
+            android:textColor="#555" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="7"
+            android:gravity="center"
+            android:text="用户地址"
+            android:textColor="#555"
+            android:textSize="16dp" />
+
+        <Button
+            android:id="@+id/edit_address_save"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="保存"
+            android:background="@android:color/transparent"
+            android:textColor="#555"
+            android:textSize="12dp" />
+    </LinearLayout>-->
+
+
+    <!--标题栏-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/underline"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/edit_address_back"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_weight="4"
+            android:background="@drawable/back" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="38"
+            android:text="用户地址"
+            android:textColor="#000"
+            android:textSize="16dp" />
+
+        <Button
+            android:id="@+id/edit_address_save"
+            android:layout_width="0dp"
+            android:layout_height="27dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="7dp"
+            android:layout_weight="6"
+            android:background="@drawable/button_circle_little"
+            android:text="保存"
+            android:textColor="#fff" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#fff"
+        android:paddingLeft="15dp"
+        android:paddingRight="6dp"
+        android:orientation="vertical">
+
+        <!--收货人-->
+        <LinearLayout
+            android:background="@drawable/underline"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+            <TextView
+                android:text="收货人"
+                android:textSize="14dp"
+                android:layout_marginRight="10dp"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:background="@null"
+                android:textSize="14dp"
+                android:hint="请填写收货人姓名"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <!--联系信息-->
+        <LinearLayout
+            android:background="@drawable/underline"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+            <TextView
+                android:text="联系信息"
+                android:textSize="14dp"
+                android:layout_marginRight="10dp"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:background="@null"
+                android:textSize="14dp"
+                android:hint="请填写收货人联系信息"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <!--所在地区-->
+        <LinearLayout
+            android:background="@drawable/underline"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+            <TextView
+                android:text="所在地区"
+                android:textSize="14dp"
+                android:layout_marginRight="10dp"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:background="@null"
+                android:textSize="14dp"
+                android:hint="请填写收货人所在地区"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <!--详细地址-->
+        <LinearLayout
+            android:background="@drawable/underline"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+            <TextView
+                android:text="详细地址"
+                android:textSize="14dp"
+                android:layout_marginRight="10dp"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:background="@null"
+                android:textSize="14dp"
+                android:hint="请填写收货人详细地址"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+</LinearLayout>

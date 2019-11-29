@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/wallet_list_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="100dp"
+            android:text="2018-09-23"
+            android:textSize="17dp" />
+
+        <TextView
+            android:id="@+id/wallet_list_cash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-￥20.0"
+            android:textColor="#d55"
+            android:textSize="17dp" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:gravity="right"
+            android:layout_height="match_parent"
+            android:layout_weight="3">
+
+            <com.onepilltest.others.RoundImageView
+                android:layout_width="50dp"
+                android:layout_marginRight="10dp"
+                android:layout_height="50dp"
+                android:layout_centerInParent="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/user">
+
+            </com.onepilltest.others.RoundImageView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:paddingLeft="5dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="7"
+            android:gravity="center"
+            android:orientation="vertical">
+            <TextView
+                android:layout_marginBottom="7dp"
+                android:gravity="left"
+                android:text="李四  18831107935"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:gravity="left"
+                android:text="河北师范大学软件学院302"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3">
+            <Button
+                android:text="编辑"
+                android:id="@+id/user_address_edit"
+                android:background="@android:color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -1,5 +1,6 @@
 package com.onepilltest.index;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,8 +10,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 
 import com.onepilltest.R;
+import com.onepilltest.message.QuestionActivity;
+import com.onepilltest.personal.AddressActivity;
+import com.onepilltest.personal.EditAddressActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +26,8 @@ public class HomeFragment extends Fragment {
     private List<Article> articles = new ArrayList<>();
     private RecyclerView recyclerView;
     private IndexAdapter indexAdapter;
+    ImageView Question;
+    MyListener myListener;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,10 +40,16 @@ public class HomeFragment extends Fragment {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragement_home, container, false);
-
+        myListener = new MyListener();
+        find(view);
         initData();
         initView(view);
         return view;
+    }
+
+    private void find(View view) {
+        Question = view.findViewById(R.id.iv_inquiry);
+        Question.setOnClickListener(myListener);
     }
 
     private void initData() {
@@ -56,4 +70,18 @@ public class HomeFragment extends Fragment {
                 LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
     }
+
+    private class MyListener implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()){
+                case R.id.iv_inquiry:
+                    Intent question_intent = new Intent(getContext(), QuestionActivity.class);
+                    startActivity(question_intent);
+                    break;
+            }
+        }
+    }
 }
+
+
