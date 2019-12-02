@@ -15,7 +15,6 @@ import android.widget.Button;
 import com.onepilltest.R;
 import com.onepilltest.index.Article;
 import com.onepilltest.index.IndexAdapter;
-import com.onepilltest.index.MainActivity;
 import com.onepilltest.message.QuestionActivity;
 
 import java.util.ArrayList;
