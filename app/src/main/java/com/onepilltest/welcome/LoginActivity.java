@@ -75,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
                 Result msg = new Gson().fromJson(jsonStr, Result.class);
                 if (msg.getCode() == 1) {//登录成功
                     UserPatient u = msg.getUser();
-                    Toast.makeText(getApplicationContext(), "登录成功", Toast.LENGTH_SHORT).show();
+                   Log.e("success","登录成功");
                     Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                     startActivity(intent);
                 } else if (msg.getCode() == 2) {//登录失败
