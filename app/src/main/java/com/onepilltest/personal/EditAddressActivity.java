@@ -43,7 +43,7 @@ public class EditAddressActivity extends AppCompatActivity {
                     startActivity(back_intent);
                     break;
                 case R.id.edit_address_save:
-                    Intent add_intent = new Intent(EditAddressActivity.this, SettingActivity.class);
+                    Intent add_intent = new Intent(EditAddressActivity.this, changedActivity.class);
                     startActivity(add_intent);
                     break;
             }
