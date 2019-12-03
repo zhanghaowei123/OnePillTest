@@ -64,7 +64,7 @@ public class SettingActivity extends AppCompatActivity {
                     startActivity(user_img_intent);
                     break;
                 case R.id.setting_user_nickname://昵称
-                    Intent nickname_intent = new Intent(SettingActivity.this, EditUserInfoActivity.class);
+                    Intent nickname_intent = new Intent(SettingActivity.this, changeNickActivity.class);
                     startActivity(nickname_intent);
                     break;
                 case R.id.setting_user_degress://身份
@@ -77,6 +77,11 @@ public class SettingActivity extends AppCompatActivity {
                     break;
             }
         }
+    }
+
+    public void JumpAccount(){
+        Intent intent = new Intent(SettingActivity.this,switchActivity.class);
+        startActivity(intent);
     }
 
 }

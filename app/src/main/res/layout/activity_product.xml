@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+    <FrameLayout android:layout_width="match_parent"
+        android:layout_height="270dp"
+        android:orientation="vertical"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+        <!--用来存放轮播图里图片的viewPage -->
+        <android.support.v4.view.ViewPager
+            android:id="@+id/pc_product"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </android.support.v4.view.ViewPager>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_gravity="bottom"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <!--android:background="#DEDEDE">-->
+
+            <!--小圆点-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/smallpoint"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginRight="200dp"
+                android:padding="10dp">
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
+    <!--上面FrameLayout是轮播图-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="#F1F1F1"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tv_productName"
+            android:paddingTop="10dp"
+            android:text="123"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:text="123"
+            android:paddingTop="10dp"
+            android:textSize="20sp"
+            android:id="@+id/tv_productType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <TabHost
+        android:id="@android:id/tabhost"
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+        <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+            <TabWidget
+                android:id="@android:id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <FrameLayout
+                android:layout_below="@android:id/tabs"
+                android:id="@android:id/tabcontent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:id="@+id/tab_1"
+                    android:background="#fff666"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/tab_2"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/tab_3"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/tab_4"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                </LinearLayout>
+
+            </FrameLayout>
+
+
+        </RelativeLayout>
+    </TabHost>
+    <!--<LinearLayout-->
+        <!--android:background="#F1F1F1"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="80dp">-->
+
+    <!--</LinearLayout>-->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <Button
+            android:text="收藏"
+            android:layout_gravity="bottom"
+            android:id="@+id/btn_coll"
+            android:layout_marginLeft="-4dp"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="60dp" />
+        <Button
+            android:text="添加至购物车"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="-8dp"
+            android:id="@+id/btn_addcart"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="60dp" />
+        <Button
+            android:text="咨询"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="-8dp"
+            android:layout_marginRight="-4dp"
+            android:id="@+id/btn_cons"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="60dp" />
+    </LinearLayout>
+</LinearLayout>

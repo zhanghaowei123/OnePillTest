@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="#fff"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <Button
+        android:id="@+id/btn_back"
+        android:text="返回"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:onClick="back"
+        android:background="@null" />
+    <ImageView
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/logo_1"
+        android:layout_width="75dp"
+        android:layout_height="40dp" />
+    <TextView
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center_horizontal"
+        android:textSize="30px"
+        android:text="轻触头像以切换账户"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp" />
+    <RelativeLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:orientation="horizontal">
+        <com.example.lenovo.onepill_text_2.small.RoundImageView
+            android:id="@+id/nowBody"
+            android:layout_marginLeft="80dp"
+            android:src="@drawable/nowbody"
+            android:layout_width="70dp"
+            android:layout_height="70dp" />
+        <ImageButton
+            android:id="@+id/nextBody"
+            android:layout_marginLeft="70dp"
+            android:layout_toRightOf="@id/nowBody"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="@drawable/add_id"/>
+        <TextView
+            android:id="@+id/nowId"
+            android:layout_below="@id/nowBody"
+            android:layout_marginLeft="70dp"
+            android:text="13662159461"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp" />
+        <TextView
+            android:id="@+id/nextId"
+            android:layout_toRightOf="@id/nowId"
+            android:layout_below="@id/nextBody"
+            android:layout_marginLeft="70dp"
+            android:text="切换账号"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp" />
+        <ImageView
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="80dp"
+            android:id="@+id/green_point"
+            android:src="@drawable/green_point"
+            android:layout_below="@id/nowId"
+            android:layout_width="7dp"
+            android:layout_height="7dp" />
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/nowId"
+            android:layout_toRightOf="@id/green_point"
+            android:text="当前使用"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+</LinearLayout>
