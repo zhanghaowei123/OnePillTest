@@ -1,6 +1,7 @@
 package com.onepilltest.entity;
 
 public class UserPatient {
+    private String UserId;
     private String nickName;
     private String phone;
     private String password;
@@ -20,6 +21,14 @@ public class UserPatient {
         this.PID = PID;
         this.address = address;
         this.headImg = headImg;
+    }
+
+    public String getUserId() {
+        return UserId;
+    }
+
+    public void setUserId(String userId) {
+        UserId = userId;
     }
 
     public String getNickName() {
