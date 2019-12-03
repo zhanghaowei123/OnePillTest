@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:paddingLeft="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:orientation="horizontal"
+        android:background="@drawable/underline">
+
+        <ImageView
+            android:id="@+id/fas_iv_patient"
+            android:src="@drawable/pill1"
+            android:layout_gravity="center"
+            android:layout_marginRight="30dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp" />
+
+        <LinearLayout
+            android:paddingTop="15dp"
+            android:layout_width="230dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/fas_tv_patient"
+                android:text="ggg"
+                android:textSize="18dp"
+                android:textColor="#3C3C3C"
+                android:layout_width="match_parent"
+                android:layout_height="35dp" />
+
+            <TextView
+                android:id="@+id/fas_tv_type"
+                android:text="hhh"
+                android:textSize="18dp"
+                android:textColor="#3C3C3C"
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:src="@drawable/yes"
+            android:layout_gravity="center"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+
+    </LinearLayout>
+
+</LinearLayout>
