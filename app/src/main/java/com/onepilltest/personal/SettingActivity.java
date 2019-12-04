@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.onepilltest.R;
@@ -16,7 +17,7 @@ import com.onepilltest.message.QuestionActivity;
  */
 public class SettingActivity extends AppCompatActivity {
 
-    Button userAddress = null;//用户地址
+    LinearLayout userAddress = null;//用户地址
     Button back = null;//返回键
     MyListener myListener = null;
     com.onepilltest.others.RoundImageView user_img = null;//头像

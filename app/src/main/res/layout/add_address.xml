@@ -14,7 +14,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/edit_address_back"
+            android:id="@+id/add_address_back"
             android:layout_width="0dp"
             android:layout_height="30dp"
             android:layout_gravity="center"
@@ -25,12 +25,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="38"
-            android:text="用户地址"
+            android:text="添加地址"
             android:textColor="#000"
             android:textSize="16dp" />
 
         <Button
-            android:id="@+id/edit_address_save"
+            android:id="@+id/add_address_save"
             android:layout_width="0dp"
             android:layout_height="27dp"
             android:layout_marginLeft="5dp"
@@ -67,7 +67,7 @@
                 android:textSize="14dp" />
 
             <EditText
-                android:id="@+id/edit_address_name"
+                android:id="@+id/add_address_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"
@@ -91,7 +91,7 @@
                 android:textSize="14dp" />
 
             <EditText
-                android:id="@+id/edit_address_phoneNumber"
+                android:id="@+id/add_address_phoneNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"
@@ -115,7 +115,7 @@
                 android:textSize="14dp" />
 
             <EditText
-                android:id="@+id/edit_address_address"
+                android:id="@+id/add_address_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"
@@ -139,7 +139,7 @@
                 android:textSize="14dp" />
 
             <EditText
-                android:id="@+id/edit_address_more"
+                android:id="@+id/add_address_more"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"
@@ -163,7 +163,7 @@
                 android:textSize="14dp" />
 
             <EditText
-                android:id="@+id/edit_address_postalCode"
+                android:id="@+id/add_address_postalCode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"

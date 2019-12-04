@@ -1,6 +1,7 @@
 package com.onepilltest.welcome;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -31,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText editPassword;
     private Button btnLogin;
     private ImageView imgEye;
-    private TextView textRegister;
+    private TextView textRegister;//注册
     private OkHttpClient okHttpClient;
 
     @Override
@@ -73,8 +74,15 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(Call call, Response response) throws IOException {
                 String jsonStr = response.body().string();
                 Result msg = new Gson().fromJson(jsonStr, Result.class);
+                //获取当前用户的信息
+
+
+
                 if (msg.getCode() == 1) {//登录成功
                     UserPatient u = msg.getUser();
+                    Log.e("UserId",""+u.getUserId()+"|"+u.getAddress());
+
+                    save(u);//把u存进SharedPreferences
                    Log.e("success","登录成功");
                     Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                     startActivity(intent);
@@ -85,6 +93,18 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    //用SharedPreferences存储
+    private void save(UserPatient userPatient) {
+
+        SharedPreferences sharedPreferences = getSharedPreferences("NowUser",MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(userPatient,UserPatient.class);
+        Log.e("json字符串",json);
+        editor.putString("NowUser",json);
+        editor.commit();
     }
 
     private void findViews() {

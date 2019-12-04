@@ -2,11 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.onepilltest">
 
-    <!--读写SD卡权限-->
+    <!-- 读写SD卡权限 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-    <!--地图等的相关权限-->
+    <!-- 地图等的相关权限 -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -15,14 +15,15 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <!-- 这个权限用于进行网络定位-->
+    <!-- 这个权限用于进行网络定位 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <!-- 这个权限用于访问GPS定位-->
+    <!-- 这个权限用于访问GPS定位 -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <!-- 获取运营商信息，用于支持提供运营商信息相关的接口-->
+    <!-- 获取运营商信息，用于支持提供运营商信息相关的接口 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <!-- 用于读取手机当前的状态-->
+    <!-- 用于读取手机当前的状态 -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -31,10 +32,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <!--配置访问百度地图的API_KEY-->
+
+        <!-- 配置访问百度地图的API_KEY -->
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="r26pHuDLyGxHGZHEBLU5LMQHK64D0Z0j" />
+
         <activity android:name=".welcome.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -42,7 +45,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--百度地图定位服务-->
+        <!-- 百度地图定位服务 -->
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
@@ -67,6 +70,8 @@
         <activity android:name=".personal.EditUserInfoActivity" />
         <activity android:name=".personal.EditAddressActivity" />
         <activity android:name=".message.QuestionActivity" />
+        <activity android:name=".personal.AddAddressActivity"></activity>
+        <activity android:name=".personal.HelpAndFeedBackActivity"></activity>
     </application>
 
 </manifest>

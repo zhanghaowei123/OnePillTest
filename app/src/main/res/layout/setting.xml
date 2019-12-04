@@ -154,7 +154,7 @@
                     android:layout_weight="2"
                     android:gravity="left"
                     android:paddingLeft="20dp"
-                    android:text="绑定手机号"
+                    android:text="手机号"
                     android:textColor="#444"
                     android:textSize="14dp" />
 
@@ -182,6 +182,7 @@
 
             <!--我的地址-->
             <LinearLayout
+                android:id="@+id/setting_user_address"
                 android:layout_width="match_parent"
                 android:layout_height="47dp"
                 android:background="@drawable/underline"
@@ -213,7 +214,6 @@
                     android:textColor="#999" />
 
                 <Button
-                    android:id="@+id/setting_user_address"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

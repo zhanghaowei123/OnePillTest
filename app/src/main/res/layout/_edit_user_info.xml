@@ -30,6 +30,7 @@
             android:textSize="16dp" />
 
         <Button
+            android:id="@+id/edit_user_info_save"
             android:layout_width="0dp"
             android:layout_height="27dp"
             android:layout_marginLeft="5dp"
