@@ -18,6 +18,7 @@ import com.onepilltest.URL.Connect;
 import com.onepilltest.entity.Result;
 import com.onepilltest.entity.UserPatient;
 import com.onepilltest.index.HomeActivity;
+import com.onepilltest.personal.UserBook;
 
 import java.io.IOException;
 
@@ -82,6 +83,8 @@ public class LoginActivity extends AppCompatActivity {
                     UserPatient u = msg.getUser();
                     Log.e("UserId",""+u.getUserId()+"|"+u.getAddress());
 
+                    //把用户存入UserBook
+                    UserBook.addUser(u);
                     save(u);//把u存进SharedPreferences
                    Log.e("success","登录成功");
                     Intent intent = new Intent(LoginActivity.this, HomeActivity.class);

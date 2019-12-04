@@ -42,6 +42,8 @@ public class AddAddressActivity extends AppCompatActivity {
     Address addAddress = null;
     Gson gson = null;
 
+    public static String NowUserName = "null";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +62,7 @@ public class AddAddressActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("NowUser", MODE_PRIVATE);
         String json = sharedPreferences.getString("NowUser","");
         nowUser = gson.fromJson(json,UserPatient.class);
+        //NowUserName = nowUser.getNickName();
         return nowUser;
     }
 
