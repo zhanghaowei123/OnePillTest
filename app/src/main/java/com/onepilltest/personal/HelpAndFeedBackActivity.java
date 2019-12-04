@@ -30,7 +30,7 @@ public class HelpAndFeedBackActivity extends AppCompatActivity{
     }
 
     private void find() {
-        ivback = findViewById(R.id.myorders_back);
+        ivback = findViewById(R.id.hafb_back);
         ivback.setOnClickListener(myListener);
         etadd = findViewById(R.id.add_content);
         etadd.setOnClickListener(myListener);
@@ -49,7 +49,7 @@ public class HelpAndFeedBackActivity extends AppCompatActivity{
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
-                case R.id.myorders_back:
+                case R.id.hafb_back:
                     Intent intent = new Intent(HelpAndFeedBackActivity.this, PersonalActivity.class);
                     startActivity(intent);
                     break;
