@@ -119,6 +119,12 @@ public class AddAddressActivity extends AppCompatActivity {
             public void onResponse(Call call, Response response) throws IOException {
                 Log.e("返回结果","发送成功");
                 Log.e("返回","onResponse: " + response.body().string());
+                String re = response.body().string();
+                if(re.equals("yes")){//添加成功
+                    Log.e("结果","成功");
+                }else if(re.equals("no")){//添加失败
+                    Log.e("结果","失败");
+                }
             }
         });
     }
