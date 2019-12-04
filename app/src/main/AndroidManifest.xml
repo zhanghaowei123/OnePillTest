@@ -72,6 +72,10 @@
         <activity android:name=".message.QuestionActivity" />
         <activity android:name=".personal.AddAddressActivity"></activity>
         <activity android:name=".personal.HelpAndFeedBackActivity"></activity>
+        <activity android:name=".personal.ShoppingCartActivity"></activity>
+        <activity android:name=".personal.FocusAndSaveActivity"></activity>
+        <activity android:name=".personal.MyOrdersActivity"></activity>
+        <activity android:name=".personal.BuyerOrdersActivity"></activity>
     </application>
 
 </manifest>
