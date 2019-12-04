@@ -1,11 +1,13 @@
 package com.onepilltest.personal;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.onepilltest.R;
@@ -66,6 +68,10 @@ public class FocusAndSaveActivity extends AppCompatActivity{
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
+                case R.id.focus_back:
+                    Intent intent = new Intent(FocusAndSaveActivity.this, PersonalActivity.class);
+                    startActivity(intent);
+                    break;
                 case R.id.fas_doctor:
                     changeTab(tabStrId[0]);
                     break;
@@ -113,9 +119,11 @@ public class FocusAndSaveActivity extends AppCompatActivity{
     }
 
     private void setListener() {
+        ImageView ivback = findViewById(R.id.focus_back);
         TextView tvdoctor = findViewById(R.id.fas_doctor);
         TextView tvpatient = findViewById(R.id.fas_patient);
         MyListner listner = new MyListner();
+        ivback.setOnClickListener(listner);
         tvdoctor.setOnClickListener(listner);
         tvpatient.setOnClickListener(listner);
     }
