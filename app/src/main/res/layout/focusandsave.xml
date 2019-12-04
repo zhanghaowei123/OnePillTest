@@ -21,7 +21,7 @@
         <TextView
             android:id="@+id/fas_doctor"
             android:text="医生"
-            android:textSize="18dp"
+            android:textSize="17dp"
             android:textColor="#3C3C3C"
             android:gravity="center"
             android:layout_width="wrap_content"
@@ -31,7 +31,7 @@
         <TextView
             android:id="@+id/fas_patient"
             android:text="病人"
-            android:textSize="18dp"
+            android:textSize="17dp"
             android:textColor="#3C3C3C"
             android:gravity="center"
             android:layout_width="wrap_content"
