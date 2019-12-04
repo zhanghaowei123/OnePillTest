@@ -69,7 +69,7 @@ public class FocusAndSaveActivity extends AppCompatActivity{
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.focus_back:
-                    Intent intent = new Intent(FocusAndSaveActivity.this, PersonalActivity.class);
+                    Intent intent = new Intent(FocusAndSaveActivity.this, PersonalFragment.class);
                     startActivity(intent);
                     break;
                 case R.id.fas_doctor:

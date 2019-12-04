@@ -50,11 +50,11 @@ public class HelpAndFeedBackActivity extends AppCompatActivity{
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.hafb_back:
-                    Intent intent = new Intent(HelpAndFeedBackActivity.this, PersonalActivity.class);
+                    Intent intent = new Intent(HelpAndFeedBackActivity.this, PersonalFragment.class);
                     startActivity(intent);
                     break;
                 case R.id.help_submit:
-                    Intent intent1 = new Intent(HelpAndFeedBackActivity.this, PersonalActivity.class);
+                    Intent intent1 = new Intent(HelpAndFeedBackActivity.this, PersonalFragment.class);
                     startActivity(intent1);
                     break;
             }

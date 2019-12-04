@@ -52,13 +52,13 @@ public class ShoppingCartActivity extends AppCompatActivity{
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.cart_back:
-                    Intent intent = new Intent(ShoppingCartActivity.this, PersonalActivity.class);
+                    Intent intent = new Intent(ShoppingCartActivity.this, PersonalFragment.class);
                     startActivity(intent);
                     break;
-//                case R.id.sc_pay:
-//                    Intent intent1 = new Intent(ShoppingCartActivity.this, SweepActivity.class);
-//                    startActivity(intent1);
-//                    break;
+                case R.id.sc_pay:
+                    Intent intent1 = new Intent(ShoppingCartActivity.this, SweepActivity.class);
+                    startActivity(intent1);
+                    break;
             }
         }
     }
