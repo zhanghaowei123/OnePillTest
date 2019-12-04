@@ -1,6 +1,6 @@
 <resources>
 
-    <!-- Base application theme. -->
+     <!--Base application theme. -->
     <style name="AppTheme" parent="Base.Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
@@ -8,4 +8,8 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!--不带标题栏的主题-->
+    <style name="ThemeNoTitle" parent="AppTheme">
+        <item name="windowNoTitle">true</item>
+    </style>
 </resources>

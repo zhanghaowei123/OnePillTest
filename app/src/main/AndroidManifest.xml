@@ -23,6 +23,10 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <!-- 用于读取手机当前的状态 -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+    <uses-permission android:name="android.permission.READ_SMS"/>
+    <uses-permission android:name="android.permission.GET_TASKS"/>
 
     <application
         android:allowBackup="true"
@@ -31,7 +35,7 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/ThemeNoTitle">
 
         <!-- 配置访问百度地图的API_KEY -->
         <meta-data
@@ -70,12 +74,8 @@
         <activity android:name=".personal.EditUserInfoActivity" />
         <activity android:name=".personal.EditAddressActivity" />
         <activity android:name=".message.QuestionActivity" />
-        <activity android:name=".personal.AddAddressActivity"></activity>
-        <activity android:name=".personal.HelpAndFeedBackActivity"></activity>
-        <activity android:name=".personal.ShoppingCartActivity"></activity>
-        <activity android:name=".personal.FocusAndSaveActivity"></activity>
-        <activity android:name=".personal.MyOrdersActivity"></activity>
-        <activity android:name=".personal.BuyerOrdersActivity"></activity>
+        <activity android:name=".index.CommentActivity"/>
+        <activity android:name=".welcome.SuccessActivity"/>
     </application>
 
 </manifest>

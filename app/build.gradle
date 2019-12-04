@@ -1,4 +1,14 @@
 apply plugin: 'com.android.application'
+// 添加插件
+apply plugin: 'com.mob.sdk'
+
+MobSDK{
+    appKey "2d56f72063034"
+    appSecret "eca0694413ffa7ff41ab38445e675149"
+    SMSSDK {
+        autoSMS true
+    }
+}
 
 android {
     sourceSets {
@@ -6,7 +16,6 @@ android {
             jniLibs.srcDirs = ['libs']
         }
     }
-
     signingConfigs {
         config {
             keyAlias 'key'

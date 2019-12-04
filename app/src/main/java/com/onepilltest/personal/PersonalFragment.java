@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +14,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.onepilltest.R;
-import com.onepilltest.index.Article;
+import com.onepilltest.entity.Article;
 import com.onepilltest.index.IndexAdapter;
 import com.onepilltest.message.QuestionActivity;
 

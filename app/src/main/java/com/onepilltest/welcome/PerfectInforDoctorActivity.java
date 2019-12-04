@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
 import com.onepilltest.R;
 import com.onepilltest.URL.Connect;
@@ -49,6 +50,7 @@ public class PerfectInforDoctorActivity extends AppCompatActivity {
     private boolean flag = false;
     private static final int REQUEST_IMAGE = 1;
     private static final int REQUEST_DCIM = 2;
+    private boolean isBack = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -64,6 +66,25 @@ public class PerfectInforDoctorActivity extends AppCompatActivity {
                 intent.setClass(PerfectInforDoctorActivity.this, RegisterDoctor.class);
                 startActivity(intent);
                 Toast.makeText(getApplicationContext(), "请完善个人信息", Toast.LENGTH_LONG).show();
+            }
+        });
+        imgPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //动态申请权限
+                ActivityCompat.requestPermissions(PerfectInforDoctorActivity.this,
+                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_IMAGE);
+                isBack = false;
+            }
+        });
+
+        imgPhotoback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //动态申请权限
+                ActivityCompat.requestPermissions(PerfectInforDoctorActivity.this,
+                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_IMAGE);
+                isBack = true;
             }
         });
         btnSucceed.setOnClickListener(new View.OnClickListener() {
@@ -101,7 +122,14 @@ public class PerfectInforDoctorActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-
+                //成功时回调
+                String isSuccessful = response.body().string();
+                if (isSuccessful.equals("true")) {
+                    Log.e("successful", isSuccessful);
+                    Intent intent = new Intent(PerfectInforDoctorActivity.this,
+                            SuccessActivity.class);
+                    startActivity(intent);
+                }
             }
         });
     }
@@ -120,13 +148,6 @@ public class PerfectInforDoctorActivity extends AppCompatActivity {
                 && !userDoctor.getPID().equals("")) {
             flag = true;
         }
-
-        /**
-         * 显示图库照片:要使用到读取SD卡权限，动态申请权限
-         */
-        ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                        REQUEST_IMAGE);
     }
 
     //权限提示框，用户点击允许时回调该方法
@@ -136,10 +157,12 @@ public class PerfectInforDoctorActivity extends AppCompatActivity {
                                            @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         //打开手机相册
-        Intent intent = new Intent();
-        intent.setAction(Intent.ACTION_PICK);
-        intent.setType("image/*");
-        startActivityForResult(intent,REQUEST_DCIM);
+        if (requestCode == REQUEST_IMAGE) {
+            Intent intent = new Intent();
+            intent.setAction(Intent.ACTION_PICK);
+            intent.setType("image/*");
+            startActivityForResult(intent, REQUEST_DCIM);
+        }
     }
 
     @Override
@@ -147,16 +170,47 @@ public class PerfectInforDoctorActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         //获取照片：通过ContentResolver访问图库的ContentProvider公开的数据
-        Uri uri = data.getData();//图片的Uri对象
-        Cursor cursor = getContentResolver().query(uri,null,null,
-                null,null);
-        if (cursor.moveToFirst()) {
-            //获取图片的路径
-            String imagePath = cursor.getString(cursor.getColumnIndex("_data"));
-            File imageFile = new File(imagePath);
-            Glide.with(this)
-                    .load(imageFile)//本地图片的File对象
-                    .into(imgPhoto);
+        if (requestCode == REQUEST_DCIM && resultCode == RESULT_OK) {
+            Uri uri = data.getData();//图片的Uri对象
+            Cursor cursor = getContentResolver().query(uri, null, null,
+                    null, null);
+            RequestOptions requestOptions = new RequestOptions().fitCenter().override(100, 100);
+            if (cursor.moveToFirst()) {
+                //获取图片的路径
+                String imagePath = cursor.getString(cursor.getColumnIndex("_data"));
+                if (!isBack) {
+                    imgPhoto.setBackgroundResource(0);
+                    Glide.with(this)
+                            .load(imagePath)//本地图片的File对象
+                            .apply(requestOptions)
+                            .into(imgPhoto);
+                } else {
+                    imgPhotoback.setBackgroundResource(0);
+                    Glide.with(this)
+                            .load(imagePath)//本地图片的File对象
+                            .apply(requestOptions)
+                            .into(imgPhotoback);
+                }
+
+                //上传头像到服务器端
+//                File file = new File(imagePath);
+//                RequestBody body = RequestBody.create(MediaType.parse("image/*"),file);
+//                Request request = new Request.Builder().url(Connect.BASE_URL+"UploadServlet")
+//                        .post(body)
+//                        .build();
+//                Call call = okHttpClient.newCall(request);
+//                call.enqueue(new Callback() {
+//                    @Override
+//                    public void onFailure(Call call, IOException e) {
+//                        e.printStackTrace();
+//                    }
+//
+//                    @Override
+//                    public void onResponse(Call call, Response response) throws IOException {
+//                        Log.e("上传头像",response.body().string());
+//                    }
+//                });
+            }
         }
     }
 

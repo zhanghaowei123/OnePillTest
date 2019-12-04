@@ -96,7 +96,7 @@ public class PerfectInforPatientActivity extends AppCompatActivity {
                 if (isSuccessful.equals("true")) {
                     Log.e("successful", isSuccessful);
                     Intent intent = new Intent(PerfectInforPatientActivity.this,
-                            LoginActivity.class);
+                            SuccessActivity.class);
                     startActivity(intent);
                 }
             }

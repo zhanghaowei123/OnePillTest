@@ -3,6 +3,7 @@ package com.onepilltest.index;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 
 
 import com.onepilltest.R;
+import com.onepilltest.entity.Article;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +53,8 @@ public class IndexAdapter extends RecyclerView.Adapter {
         //设置每一项所显示的内容
         MyItemViewHolder itemViewHolder = (MyItemViewHolder) viewHolder;
         itemViewHolder.writerName.setText(articles.get(i).getWriterName());
-        itemViewHolder.articleContent.setText(articles.get(i).getArticleCotent());
+        itemViewHolder.articleContent.setText(articles.get(i).getContent());
+        itemViewHolder.title.setText(articles.get(i).getTitle());
         itemViewHolder.commentCotent.setText(articles.get(i).getComment());
         itemViewHolder.tag.setText(articles.get(i).getTag());
         //设置每一项的点击事件监听器
@@ -76,6 +79,7 @@ public class IndexAdapter extends RecyclerView.Adapter {
         public TextView articleContent;
         public TextView tag;
         public TextView commentCotent;
+        public TextView title;
         public LinearLayout root;//每一个Item的根视图
 
         public MyItemViewHolder(@NonNull View itemView) {
@@ -84,6 +88,7 @@ public class IndexAdapter extends RecyclerView.Adapter {
             articleContent = itemView.findViewById(R.id.tv_article_content);
             tag = itemView.findViewById(R.id.tv_tag);
             commentCotent = itemView.findViewById(R.id.tv_comment_content);
+            title = itemView.findViewById(R.id.tv_article_title);
             root = itemView.findViewById(R.id.ll_article);
         }
     }
