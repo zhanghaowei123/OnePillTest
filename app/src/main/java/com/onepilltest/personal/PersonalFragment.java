@@ -11,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.onepilltest.R;
 import com.onepilltest.index.Article;
@@ -25,10 +27,13 @@ public class PersonalFragment extends Fragment{
     private List<Article> articles = new ArrayList<>();
     private RecyclerView recyclerView;
     private IndexAdapter indexAdapter;
-    Button bQuestion = null;
-    Button bSetting = null;
-    Button bWallet = null;
-    Button bAddress = null;
+    private ImageView setting;
+    private LinearLayout order;
+    private LinearLayout cart;
+    private LinearLayout wallet;
+    private LinearLayout ask;
+    private LinearLayout help;
+    private LinearLayout focus;
     MyListener myListener = null;
 
 
@@ -45,14 +50,20 @@ public class PersonalFragment extends Fragment{
      * @param view
      */
     private void find(View view) {
-        bQuestion = view.findViewById(R.id.zanding_question);
-        bQuestion.setOnClickListener(myListener);
-        bSetting = view.findViewById(R.id.zanding_setting);
-        bSetting.setOnClickListener(myListener);
-        bWallet = view.findViewById(R.id.zanding_wallet);
-        bWallet.setOnClickListener(myListener);
-        bAddress = view.findViewById(R.id.zanding_user_address);
-        bAddress.setOnClickListener(myListener);
+        setting = view.findViewById(R.id.iv_setting);
+        setting.setOnClickListener(myListener);
+        order = view.findViewById(R.id.ll_order);
+        order.setOnClickListener(myListener);
+        cart = view.findViewById(R.id.ll_cart);
+        cart.setOnClickListener(myListener);
+        wallet = view.findViewById(R.id.ll_wallet);
+        wallet.setOnClickListener(myListener);
+        ask = view.findViewById(R.id.ll_ask);
+        ask.setOnClickListener(myListener);
+        help = view.findViewById(R.id.ll_help);
+        help.setOnClickListener(myListener);
+        focus = view.findViewById(R.id.ll_sc);
+        focus.setOnClickListener(myListener);
 
     }
 
@@ -60,7 +71,7 @@ public class PersonalFragment extends Fragment{
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.person_zanding, container, false);
+        View view = inflater.inflate(R.layout.personal, container, false);
 
         initData();
         initView(view);
@@ -85,21 +96,34 @@ public class PersonalFragment extends Fragment{
         @Override
         public void onClick(View v) {
             switch (v.getId()){
-                case R.id.zanding_question:
-                    Intent question_intent = new Intent(getContext(), QuestionActivity.class);
-                    startActivity(question_intent);
+                case R.id.iv_setting:
+                    Intent intent = new Intent(getContext(),SettingActivity.class);
+                    startActivity(intent);
                     break;
-                case R.id.zanding_setting:
-                    Intent setting_intent = new Intent(getContext(), SettingActivity.class);
-                    startActivity(setting_intent);
+                case R.id.ll_order:
+                    Intent intent1 = new Intent(getContext(),MyOrdersActivity.class);
+                    startActivity(intent1);
                     break;
-                case R.id.zanding_wallet:
-                    Intent wallet_intent = new Intent(getContext(), WalletActivity.class);
-                    startActivity(wallet_intent);
+                case R.id.ll_cart:
+                    Intent intent2 = new Intent(getContext(),ShoppingCartActivity.class);
+                    startActivity(intent2);
                     break;
-                case R.id.zanding_user_address:
-                    Intent address_intent = new Intent(getContext(), AddressActivity.class);
-                    startActivity(address_intent);
+                case R.id.ll_wallet:
+                    Intent intent3 = new Intent(getContext(),WalletActivity.class);
+                    startActivity(intent3);
+                    break;
+                case R.id.ll_ask:
+                    Intent intent4 = new Intent(getContext(),recordActivity.class);
+                    startActivity(intent4);
+                    break;
+                case R.id.ll_help:
+                    Intent intent5 = new Intent(getContext(),HelpAndFeedBackActivity.class);
+                    startActivity(intent5);
+                    break;
+                case R.id.ll_sc:
+                    Intent intent6 = new Intent(getContext(),FocusAndSaveActivity.class);
+                    startActivity(intent6);
+                    break;
             }
         }
     }
