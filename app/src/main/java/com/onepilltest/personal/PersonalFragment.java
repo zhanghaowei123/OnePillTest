@@ -64,7 +64,6 @@ public class PersonalFragment extends Fragment{
         help.setOnClickListener(myListener);
         focus = view.findViewById(R.id.ll_sc);
         focus.setOnClickListener(myListener);
-
     }
 
     @Nullable
