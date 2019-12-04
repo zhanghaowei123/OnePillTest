@@ -66,6 +66,7 @@
             <EditText
                 android:id="@+id/perfect_dnum"
                 android:hint="请输入您的身份证号"
+                android:inputType="number"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content" />
         </LinearLayout>

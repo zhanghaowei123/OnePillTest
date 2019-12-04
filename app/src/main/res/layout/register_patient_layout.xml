@@ -50,6 +50,7 @@
                 android:layout_height="wrap_content" />
             <EditText
                 android:hint="请输入您的手机号"
+                android:inputType="number"
                 android:textSize="15dp"
                 android:id="@+id/edit_register_patient_phone"
                 android:layout_width="250dp"
@@ -79,6 +80,7 @@
             android:layout_marginTop="20dp">
             <EditText
                 android:hint="验证码"
+                android:inputType="number"
                 android:textSize="15dp"
                 android:id="@+id/edit_register_patient_getcheckwords"
                 android:layout_width="200dp"

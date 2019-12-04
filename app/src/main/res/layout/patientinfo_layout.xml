@@ -68,6 +68,7 @@
                 android:layout_height="wrap_content" />
             <EditText
                 android:id="@+id/user_num"
+                android:inputType="number"
                 android:hint="请输入您的身份证号"
                 android:textSize="15dp"
                 android:layout_width="250dp"

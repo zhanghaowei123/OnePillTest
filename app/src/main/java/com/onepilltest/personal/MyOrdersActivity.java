@@ -33,7 +33,7 @@ public class MyOrdersActivity extends AppCompatActivity{
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.myorders_back:
-                    Intent intent = new Intent(MyOrdersActivity.this, PersonalActivity.class);
+                    Intent intent = new Intent(MyOrdersActivity.this, PersonalFragment.class);
                     startActivity(intent);
                     break;
             }
