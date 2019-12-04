@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/ll"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:orientation="horizontal"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent" >
+
+        <CheckBox
+            android:id="@+id/cb_check"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_margin="10dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp" />
+
+    <LinearLayout
+        android:paddingTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/sc_tv_name"
+            android:textColor="#3C3C3C"
+            android:paddingTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="37dp"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/sc_tv_type"
+            android:textColor="#3C3C3C"
+            android:paddingTop="6dp"
+            android:layout_width="match_parent"
+            android:layout_height="33dp"
+            android:textSize="16sp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp">
+
+            <TextView
+                android:id="@+id/sc_tv_price"
+                android:textSize="15dp"
+                android:textColor="#FF0000"
+                android:paddingTop="8dp"
+                android:layout_width="140dp"
+                android:layout_height="match_parent" />
+
+            <Button
+                android:id="@+id/btn_minus"
+                android:text="-"
+                android:layout_width="30dp"
+                android:layout_height="35dp" />
+
+            <TextView
+                android:id="@+id/tv_count"
+                android:gravity="center"
+                android:text="1"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btn_plus"
+                android:text="+"
+                android:layout_width="30dp"
+                android:layout_height="35dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
