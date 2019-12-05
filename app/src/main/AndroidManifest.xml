@@ -42,7 +42,7 @@
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="r26pHuDLyGxHGZHEBLU5LMQHK64D0Z0j" />
 
-        <activity android:name=".welcome.LoginActivity">
+        <activity android:name=".welcome.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -76,6 +76,8 @@
         <activity android:name=".message.QuestionActivity" />
         <activity android:name=".index.CommentActivity"/>
         <activity android:name=".welcome.SuccessActivity"/>
+        <activity android:name=".welcome.LoginActivity"></activity>
+        <activity android:name=".welcome.LoginDoctorActivity"/>
     </application>
 
 </manifest>
