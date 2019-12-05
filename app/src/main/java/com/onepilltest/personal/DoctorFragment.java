@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.onepilltest.R;
+import com.onepilltest.entity.SaveDoctor;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.onepilltest.personal;
+package com.onepilltest.entity;
 
 public class SaveDoctor {
     private String name;

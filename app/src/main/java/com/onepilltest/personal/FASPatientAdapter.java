@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.onepilltest.R;
+import com.onepilltest.entity.SavePatient;
 
 import java.util.ArrayList;
 import java.util.List;

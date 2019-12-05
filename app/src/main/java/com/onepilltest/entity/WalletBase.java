@@ -1,4 +1,4 @@
-package com.onepilltest.personal;
+package com.onepilltest.entity;
 
 //交易记录
 public class WalletBase  {
