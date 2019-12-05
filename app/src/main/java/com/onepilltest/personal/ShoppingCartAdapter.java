@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.onepilltest.R;
+import com.onepilltest.entity.Cart;
 
 import java.util.List;
 
