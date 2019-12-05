@@ -27,7 +27,7 @@
 
             <TextView
                 android:id="@+id/fas_tv_doctor"
-                android:text="ggg"
+                android:text=""
                 android:textSize="18dp"
                 android:textColor="#3C3C3C"
                 android:layout_width="match_parent"
@@ -35,7 +35,7 @@
 
             <TextView
                 android:id="@+id/fas_tv_type"
-                android:text="hhh"
+                android:text=""
                 android:textSize="18dp"
                 android:textColor="#3C3C3C"
                 android:layout_width="match_parent"
