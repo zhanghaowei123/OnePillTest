@@ -32,7 +32,7 @@ public class EditAddressActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //去掉顶部标题
-        getSupportActionBar().hide();
+        //getSupportActionBar().hide();
         setContentView(R.layout.edit_address);
         myListener = new MyListener();
         find();

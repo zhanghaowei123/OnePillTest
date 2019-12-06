@@ -17,7 +17,7 @@ public class QR_codeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //去掉顶部标题
-        getSupportActionBar().hide();
+        //getSupportActionBar().hide();
         setContentView(R.layout.setting_qr_code);
 
         myListener = new MyListener();

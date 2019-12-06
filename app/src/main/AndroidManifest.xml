@@ -76,6 +76,7 @@
         <activity android:name=".message.QuestionActivity" />
         <activity android:name=".index.CommentActivity"/>
         <activity android:name=".welcome.SuccessActivity"/>
+        <activity android:name=".personal.AddAddressActivity"></activity>
     </application>
 
 </manifest>

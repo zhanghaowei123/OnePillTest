@@ -18,7 +18,7 @@ public class EditUserInfoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //去掉顶部标题
-        getSupportActionBar().hide();
+        //getSupportActionBar().hide();
         setContentView(R.layout._edit_user_info);
         myListener = new MyListener();
         find();
@@ -27,7 +27,7 @@ public class EditUserInfoActivity extends AppCompatActivity {
     private void find() {
         back = findViewById(R.id.edit_user_info_back);
         back.setOnClickListener(myListener);
-        save = findViewById(R.id.edit_address_save);
+        save = findViewById(R.id.edit_user_info_save);
         save.setOnClickListener(myListener);
     }
 

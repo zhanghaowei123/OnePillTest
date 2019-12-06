@@ -76,9 +76,6 @@ public class LoginActivity extends AppCompatActivity {
                 String jsonStr = response.body().string();
                 Result msg = new Gson().fromJson(jsonStr, Result.class);
                 //获取当前用户的信息
-
-
-
                 if (msg.getCode() == 1) {//登录成功
                     UserPatient u = msg.getUser();
                     Log.e("UserId",""+u.getUserId()+"|"+u.getAddress());

@@ -7,7 +7,6 @@ import com.onepilltest.entity.UserPatient;
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.content.Context.MODE_PRIVATE;
 
 public class UserBook {
     public static UserPatient NowUser = null;

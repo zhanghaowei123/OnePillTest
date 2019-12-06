@@ -19,6 +19,9 @@ import com.onepilltest.entity.Address;
 import com.onepilltest.entity.UserPatient;
 import com.onepilltest.welcome.LoginActivity;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.io.IOException;
 
 import okhttp3.Call;
@@ -37,7 +40,6 @@ public class AddAddressActivity extends AppCompatActivity {
     EditText et_address = null;
     EditText et_more = null;
     EditText et_postalCode = null;
-    private UserPatient nowUser = null;
     private OkHttpClient okHttpClient = null;
     Address addAddress = null;
     Gson gson = null;
@@ -48,23 +50,22 @@ public class AddAddressActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //去掉顶部标题
-        getSupportActionBar().hide();
+        //getSupportActionBar().hide();
         setContentView(R.layout.add_address);
         myListener = new MyListener();
         find();
-        nowUser = getNowUser();
         gson = new Gson();
         okHttpClient = new OkHttpClient();
     }
 
-    //获取当前账号的信息
+    /*//获取当前账号的信息
     public UserPatient getNowUser() {
         SharedPreferences sharedPreferences = getSharedPreferences("NowUser", MODE_PRIVATE);
         String json = sharedPreferences.getString("NowUser","");
         nowUser = gson.fromJson(json,UserPatient.class);
         //NowUserName = nowUser.getNickName();
         return nowUser;
-    }
+    }*/
 
     private void find() {
         save = findViewById(R.id.add_address_save);
@@ -95,11 +96,13 @@ public class AddAddressActivity extends AppCompatActivity {
         }
     }
 
+
+
     //添加地址
     private void save() {
 
 
-        int UserId = Integer.parseInt(nowUser.getUserId());
+        int UserId =UserBook.NowUser.getUserId();
         String name = et_name.getText().toString();
         String phoneNumber = et_phoneNumber.getText().toString();
         String address = et_address.getText().toString();
@@ -107,9 +110,10 @@ public class AddAddressActivity extends AppCompatActivity {
         String postalCode = et_postalCode.getText().toString();
         addAddress = new Address(UserId,name,phoneNumber,address,more,postalCode);
         Log.e("测试当前账户","!!!"+UserId);
+        AddressDao dao = new AddressDao();
+        dao.save(addAddress);
 
-
-        Request request = new Request.Builder().url(Connect.BASE_URL+"AddAddressServlet?name="+name+"&phoneNumber="+phoneNumber
+        /*Request request = new Request.Builder().url(Connect.BASE_URL+"AddAddressServlet?name="+name+"&phoneNumber="+phoneNumber
         +"&address="+address+"&more="+more+"&postalCode="+postalCode+"&UserId="+UserId+"&Code=").build();
         Call call = okHttpClient.newCall(request);
         call.enqueue(new Callback() {
@@ -129,6 +133,8 @@ public class AddAddressActivity extends AppCompatActivity {
                     Log.e("结果","失败");
                 }
             }
-        });
+        });*/
+
+
     }
 }
