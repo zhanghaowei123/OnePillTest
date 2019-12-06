@@ -24,7 +24,6 @@ import com.onepilltest.R;
 import com.onepilltest.URL.Connect;
 import com.onepilltest.entity.UserDoctor;
 
-import java.io.File;
 import java.io.IOException;
 
 import okhttp3.Call;
@@ -127,7 +126,7 @@ public class PerfectInforDoctorActivity extends AppCompatActivity {
                 if (isSuccessful.equals("true")) {
                     Log.e("successful", isSuccessful);
                     Intent intent = new Intent(PerfectInforDoctorActivity.this,
-                            SuccessActivity.class);
+                            UserSuccessActivity.class);
                     startActivity(intent);
                 }
             }
@@ -192,10 +191,10 @@ public class PerfectInforDoctorActivity extends AppCompatActivity {
                             .into(imgPhotoback);
                 }
 
-                //上传头像到服务器端
+                //上传医师资格证到服务器端
 //                File file = new File(imagePath);
 //                RequestBody body = RequestBody.create(MediaType.parse("image/*"),file);
-//                Request request = new Request.Builder().url(Connect.BASE_URL+"UploadServlet")
+//                Request request = new Request.Builder().url(Connect.BASE_URL+"RegisterDoctorServlet")
 //                        .post(body)
 //                        .build();
 //                Call call = okHttpClient.newCall(request);

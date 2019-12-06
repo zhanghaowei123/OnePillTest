@@ -74,15 +74,12 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String jsonStr = response.body().string();
+                Log.e("test",jsonStr.toString());
                 Result msg = new Gson().fromJson(jsonStr, Result.class);
                 //获取当前用户的信息
-
-
-
                 if (msg.getCode() == 1) {//登录成功
                     UserPatient u = msg.getUser();
                     Log.e("UserId",""+u.getUserId()+"|"+u.getAddress());
-
                     //把用户存入UserBook
                     UserBook.addUser(u);
                     save(u);//把u存进SharedPreferences

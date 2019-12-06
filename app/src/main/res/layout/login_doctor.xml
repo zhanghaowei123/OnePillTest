@@ -36,7 +36,7 @@
             android:layout_height="wrap_content" />
 
         <EditText
-            android:id="@+id/edit_phone"
+            android:id="@+id/edit_phone_doctor"
             android:inputType="number"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
@@ -60,7 +60,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <EditText
-                android:id="@+id/edit_password"
+                android:id="@+id/edit_password_doctor"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:hint="请输入您的密码"
@@ -69,7 +69,7 @@
                 android:textSize="15dp"
                 android:inputType="textPassword"/>
             <ImageView
-                android:id="@+id/img_eye"
+                android:id="@+id/img_eye_doctor"
                 android:src="@drawable/eyeclose"
                 android:layout_marginLeft="210dp"
                 android:layout_width="wrap_content"
@@ -84,7 +84,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btn_login"
+            android:id="@+id/btn_login_doctor"
             android:layout_width="wrap_content"
             android:layout_height="45dp"
             android:text="登录"
@@ -95,7 +95,7 @@
             android:background="@drawable/button_circle_shape"/>
         <!--注册-->
         <TextView
-            android:id="@+id/text_register"
+            android:id="@+id/text_register_doctor"
             android:textStyle="bold"
             android:text="点我注册"
             android:textColor="#fff"

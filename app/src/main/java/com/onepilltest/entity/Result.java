@@ -2,6 +2,7 @@ package com.onepilltest.entity;
 
 public class Result {
     private UserPatient user;
+    private UserDoctor doctor;
     private int code; //1.登录成功 2.电话不存在 3.密码错误
 
     public UserPatient getUser() {
@@ -20,5 +21,11 @@ public class Result {
         this.code = code;
     }
 
+    public UserDoctor getDoctor() {
+        return doctor;
+    }
 
-}	
+    public void setDoctor(UserDoctor doctor) {
+        this.doctor = doctor;
+    }
+}
