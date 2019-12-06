@@ -108,7 +108,6 @@ public class HomeFragment extends Fragment {
     public void updateUI(String msg) {
         if (msg.equals("文章")) {
             //更新视图
-            Log.e("gg","更新了哦");
             indexAdapter.notifyDataSetChanged();
         }
     }

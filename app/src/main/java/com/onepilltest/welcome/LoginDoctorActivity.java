@@ -3,6 +3,7 @@ package com.onepilltest.welcome;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -28,7 +29,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginDoctorActivity extends AppCompatActivity implements View.OnClickListener {
     private EditText editPhone;
     private EditText editPassword;
     private Button btnLogin;
@@ -37,31 +38,42 @@ public class LoginActivity extends AppCompatActivity {
     private OkHttpClient okHttpClient;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-
+        setContentView(R.layout.login_doctor);
         findViews();
-        textRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+    }
+
+    private void findViews() {
+        editPhone = findViewById(R.id.edit_phone_doctor);
+        editPassword = findViewById(R.id.edit_password_doctor);
+        imgEye = findViewById(R.id.img_eye_doctor);
+        btnLogin = findViewById(R.id.btn_login_doctor);
+        textRegister = findViewById(R.id.text_register_doctor);
+        textRegister.setOnClickListener(this);
+        btnLogin.setOnClickListener(this);
+        imgEye.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.text_register_doctor:
                 Intent intent = new Intent();
-                intent.setClass(LoginActivity.this, RegisteredActivity.class);
+                intent.setClass(LoginDoctorActivity.this, RegisteredActivity.class);
                 startActivity(intent);
-            }
-        });
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                break;
+            case R.id.btn_login_doctor:
                 okHttpClient = new OkHttpClient();
                 login();
-            }
-        });
+                break;
+
+        }
     }
 
     private void login() {
         Request request = new Request.Builder()
-                .url(Connect.BASE_URL + "PatientLoginServlet?phone=" + editPhone.getText().toString()
+                .url(Connect.BASE_URL + "DoctorLoginServlet?phone=" + editPhone.getText().toString()
                         + "&password=" + editPassword.getText().toString())
                 .build();
         Call call = okHttpClient.newCall(request);
@@ -74,17 +86,17 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String jsonStr = response.body().string();
-                Log.e("test",jsonStr.toString());
+                Log.e("test", jsonStr.toString());
                 Result msg = new Gson().fromJson(jsonStr, Result.class);
                 //获取当前用户的信息
                 if (msg.getCode() == 1) {//登录成功
-                    UserPatient u = msg.getUser();
-                    Log.e("UserId",""+u.getUserId()+"|"+u.getAddress());
-                    //把用户存入UserBook
-                    UserBook.addUser(u);
-                    save(u);//把u存进SharedPreferences
-                   Log.e("success","登录成功");
-                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+//                    UserPatient u = msg.getUser();
+//                    Log.e("DoctorId", "" + u.getUserId() + "|" + u.getAddress());
+//                    //把用户存入UserBook
+//                    UserBook.addUser(u);
+//                    save(u);//把u存进SharedPreferences
+                    Log.e("success", "登录成功");
+                    Intent intent = new Intent(LoginDoctorActivity.this, HomeActivity.class);
                     startActivity(intent);
                 } else if (msg.getCode() == 2) {//登录失败
                     Toast.makeText(getApplicationContext(), "电话不存在", Toast.LENGTH_SHORT).show();
@@ -94,24 +106,15 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-
     //用SharedPreferences存储
     private void save(UserPatient userPatient) {
 
-        SharedPreferences sharedPreferences = getSharedPreferences("NowUser",MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("NowDoctor",MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
         String json = gson.toJson(userPatient,UserPatient.class);
         Log.e("json字符串",json);
-        editor.putString("NowUser",json);
+        editor.putString("NowDoctor",json);
         editor.commit();
-    }
-
-    private void findViews() {
-        editPhone = findViewById(R.id.edit_phone);
-        editPassword = findViewById(R.id.edit_password);
-        imgEye = findViewById(R.id.img_eye);
-        btnLogin = findViewById(R.id.btn_login);
-        textRegister = findViewById(R.id.text_register);
     }
 }
