@@ -17,6 +17,7 @@ import com.google.gson.Gson;
 import com.onepilltest.R;
 import com.onepilltest.URL.Connect;
 import com.onepilltest.entity.Result;
+import com.onepilltest.entity.UserDoctor;
 import com.onepilltest.entity.UserPatient;
 import com.onepilltest.index.HomeActivity;
 import com.onepilltest.personal.UserBook;
@@ -88,13 +89,13 @@ public class LoginDoctorActivity extends AppCompatActivity implements View.OnCli
                 String jsonStr = response.body().string();
                 Log.e("test", jsonStr.toString());
                 Result msg = new Gson().fromJson(jsonStr, Result.class);
-                //获取当前用户的信息
+                //获取当前医生的信息
                 if (msg.getCode() == 1) {//登录成功
-//                    UserPatient u = msg.getUser();
-//                    Log.e("DoctorId", "" + u.getUserId() + "|" + u.getAddress());
-//                    //把用户存入UserBook
-//                    UserBook.addUser(u);
-//                    save(u);//把u存进SharedPreferences
+                    UserDoctor u = msg.getDoctor();
+                    Log.e("DoctorId", "" + u.getDoctorId()+ "|" + u.getAddress());
+                    //把用户存入UserBook
+                    UserBook.addUser(u,UserBook.Doctor);
+                   save(u);//把u存进SharedPreferences
                     Log.e("success", "登录成功");
                     Intent intent = new Intent(LoginDoctorActivity.this, HomeActivity.class);
                     startActivity(intent);
@@ -107,12 +108,12 @@ public class LoginDoctorActivity extends AppCompatActivity implements View.OnCli
         });
     }
     //用SharedPreferences存储
-    private void save(UserPatient userPatient) {
+    private void save(UserDoctor userDoctor) {
 
         SharedPreferences sharedPreferences = getSharedPreferences("NowDoctor",MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
-        String json = gson.toJson(userPatient,UserPatient.class);
+        String json = gson.toJson(userDoctor,UserDoctor.class);
         Log.e("json字符串",json);
         editor.putString("NowDoctor",json);
         editor.commit();

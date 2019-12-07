@@ -81,7 +81,7 @@ public class LoginActivity extends AppCompatActivity {
                     UserPatient u = msg.getUser();
                     Log.e("UserId",""+u.getUserId()+"|"+u.getAddress());
                     //把用户存入UserBook
-                    UserBook.addUser(u);
+                    UserBook.addUser(u,UserBook.Patient);
                     save(u);//把u存进SharedPreferences
                    Log.e("success","登录成功");
                     Intent intent = new Intent(LoginActivity.this, HomeActivity.class);

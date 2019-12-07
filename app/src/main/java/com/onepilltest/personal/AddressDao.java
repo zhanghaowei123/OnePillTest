@@ -20,6 +20,10 @@ import okhttp3.Response;
 
 public class AddressDao {
 
+    /**
+     * 保存
+     * @param addaddress
+     */
     public void save(Address addaddress){
 
         int UserId = UserBook.NowUser.getUserId();
@@ -28,7 +32,6 @@ public class AddressDao {
         String address = addaddress.getAddress();
         String more = addaddress.getMore();
         String postalCode = addaddress.getPostalCode();
-        boolean f = false;
 
         OkHttpClient okHttpClient = new OkHttpClient();
         Request request = new Request.Builder().url(Connect.BASE_URL+"AddAddressServlet?name="+name+"&phoneNumber="+phoneNumber
@@ -55,6 +58,10 @@ public class AddressDao {
     }
 
 
+    /**
+     *搜索全部地址
+     * @param UserId
+     */
     public void searchAll(int UserId){
         OkHttpClient okHttpClient = new OkHttpClient();
         Request request = new Request.Builder().url(Connect.BASE_URL+"AddAddressServlet?UserId="+UserId).build();
