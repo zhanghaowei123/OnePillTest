@@ -69,6 +69,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call call, IOException e) {
                 e.printStackTrace();
+//                Log.e("cnm",);
             }
 
             @Override

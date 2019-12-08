@@ -131,10 +131,6 @@ public class HomeFragment extends Fragment {
                     Intent question_intent = new Intent(getContext(), QuestionActivity.class);
                     startActivity(question_intent);
                     break;
-                case R.id.iv_commentImg:
-                    Intent intent = new Intent(getContext(), CommentActivity.class);
-                    startActivity(intent);
-                    break;
             }
         }
     }

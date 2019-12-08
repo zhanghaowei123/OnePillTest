@@ -22,7 +22,7 @@ public class QuestionActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //去掉顶部标题
-        getSupportActionBar().hide();
+//        getSupportActionBar().hide();
         setContentView(R.layout.question);
         myListener = new MyListener();
         find();

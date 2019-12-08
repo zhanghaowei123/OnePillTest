@@ -1,12 +1,14 @@
 package com.onepilltest.index;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -49,7 +51,7 @@ public class IndexAdapter extends RecyclerView.Adapter {
      * @param i          所显示的条数
      */
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder,final int i) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, final int i) {
         //设置每一项所显示的内容
         MyItemViewHolder itemViewHolder = (MyItemViewHolder) viewHolder;
         itemViewHolder.writerName.setText(articles.get(i).getWriterName());
@@ -62,6 +64,13 @@ public class IndexAdapter extends RecyclerView.Adapter {
             @Override
             public void onClick(View v) {
                 Toast.makeText(context, "点击第" + (i + 1) + "条数据", Toast.LENGTH_SHORT).show();
+            }
+        });
+        itemViewHolder.imgComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, CommentActivity.class);
+                context.startActivity(intent);
             }
         });
     }
@@ -81,6 +90,7 @@ public class IndexAdapter extends RecyclerView.Adapter {
         public TextView commentCotent;
         public TextView title;
         public LinearLayout root;//每一个Item的根视图
+        public ImageView imgComment;
 
         public MyItemViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -90,6 +100,7 @@ public class IndexAdapter extends RecyclerView.Adapter {
             commentCotent = itemView.findViewById(R.id.tv_comment_content);
             title = itemView.findViewById(R.id.tv_article_title);
             root = itemView.findViewById(R.id.ll_article);
+            imgComment = itemView.findViewById(R.id.iv_commentImg);
         }
     }
 }
