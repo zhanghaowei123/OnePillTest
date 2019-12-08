@@ -47,10 +47,9 @@ public class AddressActivity extends AppCompatActivity {
         setContentView(R.layout.user_address);
         myListener = new MyListener();
         find();
+        Log.e("用户"+UserBook.NowUser.getNickName(),"进入地址列表");
         //将主线程注册成为订阅者
         EventBus.getDefault().register(this);
-
-        Toast.makeText(AddressActivity.this, "地址栏", Toast.LENGTH_SHORT).show();
         initBases();//初始化baseList数据
 
         //创建ContentAdapter实例，传入上下文， 子布局id ,数据baseList
@@ -69,11 +68,10 @@ public class AddressActivity extends AppCompatActivity {
                 Address info = baseList.get(position);
                 Bundle bundle = new Bundle();
                 Gson gson = new Gson();
-                bundle.putString("info", gson.toJson(info.getAddress()));
+                bundle.putString("info", gson.toJson(info));
 
                 Intent intent = new Intent(AddressActivity.this, EditAddressActivity.class);
                 intent.putExtras(bundle);
-                finish();
                 startActivity(intent);
 
 
@@ -82,30 +80,43 @@ public class AddressActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+        Log.e("用户"+UserBook.NowUser.getNickName(),"退出地址列表");
+    }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
-    private void UpdateUI(EventMessage msg) {
+    public void UpdateUI(EventMessage msg) {
+
 
         if(msg.getCode().equals("AddressDao_save")){
             if(msg.getJson().equals("yes")){
-                adapter.notifyDataSetChanged();
+                new AddressDao().searchAll(UserBook.NowUser.getUserId());
+                Log.e("添加成功",""+baseList.get(0).getAddress());
                 Toast.makeText(getApplicationContext(),"添加成功",Toast.LENGTH_SHORT);
             }else if(msg.getJson().equals("no")){
+                Log.e("添加失败",""+baseList.get(0).getAddress());
                 Toast.makeText(getApplicationContext(),"添加失败",Toast.LENGTH_SHORT);
             }
         }else if(msg.getCode().equals("AddressDao_searchAll")){
             List<Address> addressList = gson.fromJson(msg.getJson(),new TypeToken<List<Address>>() {}.getType());
-            baseList = addressList;
+            //baseList = new ArrayList<>();
+            baseList.clear();
+            baseList.addAll(addressList);
+            Log.e("接收到EventBus",""+baseList.get(0).getAddress());
             adapter.notifyDataSetChanged();
         }
     }
 
     private void initBases() {
 
+        Log.e("用户"+UserBook.NowUser.getNickName(),"进入initBases");
         AddressDao dao = new AddressDao();
         dao.searchAll(UserBook.NowUser.getUserId());
-
+        Log.e("更新地址列表",""+baseList.toString());
     }
-
 
 
 
@@ -122,10 +133,12 @@ public class AddressActivity extends AppCompatActivity {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.user_address_add:
+                    Log.e("用户"+UserBook.NowUser.getNickName(),"点击添加按钮");
                     Intent add_intent = new Intent(AddressActivity.this, AddAddressActivity.class);
                     startActivity(add_intent);
                     break;
                 case R.id.user_address_back:
+                    Log.e("用户"+UserBook.NowUser.getNickName(),"点击返回按钮");
                     Intent back_intent = new Intent(AddressActivity.this, SettingActivity.class);
                     startActivity(back_intent);
                     break;

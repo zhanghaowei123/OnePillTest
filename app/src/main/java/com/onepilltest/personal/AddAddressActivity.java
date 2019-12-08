@@ -89,8 +89,6 @@ public class AddAddressActivity extends AppCompatActivity {
                     finish();
                 case R.id.add_address_save:
                     save();
-                    Intent save_intent = new Intent(AddAddressActivity.this, AddressActivity.class);
-                    startActivity(save_intent);
                     break;
             }
         }
@@ -109,9 +107,10 @@ public class AddAddressActivity extends AppCompatActivity {
         String more = et_more.getText().toString();
         String postalCode = et_postalCode.getText().toString();
         addAddress = new Address(UserId,name,phoneNumber,address,more,postalCode);
-        Log.e("测试当前账户","!!!"+UserId);
+        Log.e("添加地址save",""+UserId+"\n"+name+"\n"+phoneNumber+"\n"+address+"\n"+more+"\n"+postalCode);
         AddressDao dao = new AddressDao();
         dao.save(addAddress);
+        finish();
 
         /*Request request = new Request.Builder().url(Connect.BASE_URL+"AddAddressServlet?name="+name+"&phoneNumber="+phoneNumber
         +"&address="+address+"&more="+more+"&postalCode="+postalCode+"&UserId="+UserId+"&Code=").build();

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -40,6 +41,7 @@ public class EditAddressActivity extends AppCompatActivity {
         Bundle info = getIntent().getExtras();
         //获取Bundle的信息
         String json=info.getString("info");
+        Log.e("G送字符串",""+json);
         address = gson.fromJson(json,Address.class);
         init(address);
     }

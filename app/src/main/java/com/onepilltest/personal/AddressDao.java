@@ -32,10 +32,11 @@ public class AddressDao {
         String address = addaddress.getAddress();
         String more = addaddress.getMore();
         String postalCode = addaddress.getPostalCode();
+        String code = "add";
 
         OkHttpClient okHttpClient = new OkHttpClient();
-        Request request = new Request.Builder().url(Connect.BASE_URL+"AddAddressServlet?name="+name+"&phoneNumber="+phoneNumber
-                +"&address="+address+"&more="+more+"&postalCode="+postalCode+"&UserId="+UserId+"&Code=").build();
+        Request request = new Request.Builder().url(Connect.BASE_URL+"AddressServlet?name="+name+"&phoneNumber="+phoneNumber
+                +"&address="+address+"&more="+more+"&postalCode="+postalCode+"&UserId="+UserId+"&Code="+code).build();
         Call call = okHttpClient.newCall(request);
         call.enqueue(new Callback() {
             @Override
@@ -47,9 +48,8 @@ public class AddressDao {
             public void onResponse(Call call, Response response) throws IOException {
                 EventMessage msg = new EventMessage();
                 Log.e("返回结果","发送成功");
-                Log.e("返回","onResponse: " + response.body().string());
                 String re = response.body().string();
-
+                Log.e("save返回结果",re+"");
                 msg.setCode("AddressDao_save");
                 msg.setJson(re);
                 EventBus.getDefault().post(msg);
@@ -64,7 +64,8 @@ public class AddressDao {
      */
     public void searchAll(int UserId){
         OkHttpClient okHttpClient = new OkHttpClient();
-        Request request = new Request.Builder().url(Connect.BASE_URL+"AddAddressServlet?UserId="+UserId).build();
+        String code = "searchAll";
+        Request request = new Request.Builder().url(Connect.BASE_URL+"AddressServlet?UserId="+UserId+"&Code="+code).build();
         Call call = okHttpClient.newCall(request);
         call.enqueue(new Callback() {
             @Override
@@ -79,8 +80,11 @@ public class AddressDao {
                 msg.setCode("AddressDao_searchAll");
                 msg.setJson(re);
                 EventBus.getDefault().post(msg);
+                Log.e("查询全部",""+msg.getJson());
 
             }
         });
+
+
     }
 }

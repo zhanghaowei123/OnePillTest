@@ -75,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String jsonStr = response.body().string();
-                Log.e("test",jsonStr.toString());
+                Log.e("登陆",jsonStr.toString());
                 Result msg = new Gson().fromJson(jsonStr, Result.class);
                 //获取当前用户的信息
                 if (msg.getCode() == 1) {//登录成功
@@ -83,6 +83,7 @@ public class LoginActivity extends AppCompatActivity {
                     Log.e("UserId",""+u.getUserId()+"|"+u.getAddress());
                     //把用户存入UserBook
                     UserBook.addUser(u,UserBook.Patient);
+                    Log.e("当前用户",""+UserBook.NowUser.getUserId());
                     save(u);//把u存进SharedPreferences
                    Log.e("success","登录成功");
                     Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
@@ -104,6 +105,7 @@ public class LoginActivity extends AppCompatActivity {
         Gson gson = new Gson();
         String json = gson.toJson(userPatient,UserPatient.class);
         Log.e("json字符串",json);
+        Log.e("NowUser","UserId:"+UserBook.NowUser.getUserId());
         editor.putString("NowUser",json);
         editor.commit();
     }
