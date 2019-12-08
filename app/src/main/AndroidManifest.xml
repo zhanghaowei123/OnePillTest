@@ -23,10 +23,10 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <!-- 用于读取手机当前的状态 -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.READ_CONTACTS"/>
-    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
-    <uses-permission android:name="android.permission.READ_SMS"/>
-    <uses-permission android:name="android.permission.GET_TASKS"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
 
     <application
         android:allowBackup="true"
@@ -43,7 +43,7 @@
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="r26pHuDLyGxHGZHEBLU5LMQHK64D0Z0j" />
 
-        <activity android:name=".welcome.LoginActivity">
+        <activity android:name=".welcome.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -63,8 +63,12 @@
         <activity android:name=".index.HomeActivity" />
         <activity android:name=".index.FoundPatientActivity" />
         <activity android:name=".index.FoundDoctorActivity" />
+        <activity android:name=".welcome.LoginActivity" />
+        <activity android:name=".welcome.LoginDoctorActivity" />
         <activity android:name=".welcome.PerfectInforDoctorActivity" />
         <activity android:name=".welcome.PerfectInforPatientActivity" />
+        <activity android:name=".welcome.UserSuccessActivity" />
+        <activity android:name=".welcome.DoctorSuccessActivity" />
         <activity android:name=".welcome.RegisteredActivity" />
         <activity android:name=".welcome.RegisterDoctor" />
         <activity android:name=".welcome.RegisterPatient" />
@@ -75,10 +79,8 @@
         <activity android:name=".personal.EditUserInfoActivity" />
         <activity android:name=".personal.EditAddressActivity" />
         <activity android:name=".message.QuestionActivity" />
-        <activity android:name=".index.CommentActivity"/>
-        <activity android:name=".welcome.UserSuccessActivity"/>
-        <activity android:name=".welcome.DoctorSuccessActivity"/>
-        <activity android:name=".personal.AddAddressActivity"/>
+        <activity android:name=".index.CommentActivity" />
+        <activity android:name=".personal.AddAddressActivity" />
     </application>
 
 </manifest>
