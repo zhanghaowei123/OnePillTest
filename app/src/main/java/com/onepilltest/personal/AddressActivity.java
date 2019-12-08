@@ -107,6 +107,15 @@ public class AddressActivity extends AppCompatActivity {
             baseList.addAll(addressList);
             Log.e("接收到EventBus",""+baseList.get(0).getAddress());
             adapter.notifyDataSetChanged();
+        }else if (msg.getCode().equals("AddressDao_update")){
+            if(msg.getJson().equals("yes")){
+                new AddressDao().searchAll(UserBook.NowUser.getUserId());
+                Log.e("更新成功",""+baseList.get(0).getAddress());
+                Toast.makeText(getApplicationContext(),"更新成功",Toast.LENGTH_SHORT);
+            }else if(msg.getJson().equals("no")){
+                Log.e("更新失败",""+baseList.get(0).getAddress());
+                Toast.makeText(getApplicationContext(),"更新失败",Toast.LENGTH_SHORT);
+            }
         }
     }
 
