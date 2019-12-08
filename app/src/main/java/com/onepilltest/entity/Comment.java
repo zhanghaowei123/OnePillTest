@@ -4,6 +4,7 @@ public class Comment {
     private String name;
     private String ccomment;
     private String headImg;
+    private String articleId;
 
     public Comment() {
     }
@@ -11,6 +12,14 @@ public class Comment {
     public Comment(String name, String ccomment) {
         this.name = name;
         this.ccomment = ccomment;
+    }
+
+    public String getArticleId() {
+        return articleId;
+    }
+
+    public void setArticleId(String articleId) {
+        this.articleId = articleId;
     }
 
     public String getName() {
@@ -35,5 +44,13 @@ public class Comment {
 
     public void setHeadImg(String headImg) {
         this.headImg = headImg;
+    }
+
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "name='" + name + '\'' +
+                ", ccomment='" + ccomment + '\'' +
+                '}';
     }
 }
