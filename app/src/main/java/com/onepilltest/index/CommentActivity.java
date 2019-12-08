@@ -18,6 +18,8 @@ import com.onepilltest.URL.Connect;
 import com.onepilltest.entity.Article;
 import com.onepilltest.entity.Comment;
 import com.onepilltest.personal.UserBook;
+import com.onepilltest.welcome.PerfectInforPatientActivity;
+import com.onepilltest.welcome.UserSuccessActivity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -30,8 +32,10 @@ import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class CommentActivity extends AppCompatActivity implements View.OnClickListener {
@@ -43,6 +47,7 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
     private ListView commentListView;
     private CommentAdapter commentAdapter;
     private EditText etComment;
+    private Comment comment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,13 +119,49 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
                 startActivity(intent);
                 break;
             case R.id.btn_send_comment:
-                Comment comment = new Comment();
+                comment = new Comment();
                 comment.setName(UserBook.NowUser.getNickName());
+                Log.e("hahah", UserBook.NowUser.getNickName());
                 comment.setCcomment(etComment.getText().toString());
-                comments.addAll((List<Comment>) comment);
+                comments.add(comment);
+                //更新到数据库
+                insertComment();
+                Log.e("comment", comment.toString());
+                etComment.clearComposingText();
+                etComment.clearFocus();
+                etComment.setText("");
                 commentAdapter.notifyDataSetChanged();
                 break;
         }
+    }
+
+    private void insertComment() {
+        String jsonStr = null;
+        jsonStr = new Gson().toJson(comment);
+        Log.e("test", jsonStr.toString());
+        RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain;charset=utf-8"),
+                jsonStr);
+        Request request = new Request.Builder()
+                .post(requestBody)
+                .url(Connect.BASE_URL + "CommentInsertServlet")
+                .build();
+        Call call = okHttpClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+                Log.e("false", e.toString());
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                //成功时回调
+                String isSuccessful = response.body().string();
+                if (isSuccessful.equals("true")) {
+                    Log.e("successful", isSuccessful);
+                }
+            }
+        });
     }
 
     @Override
