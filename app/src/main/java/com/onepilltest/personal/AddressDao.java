@@ -87,4 +87,39 @@ public class AddressDao {
 
 
     }
+
+    /**
+     * 查询
+     */
+    public void update(Address updateaddress){
+        int UserId = UserBook.NowUser.getUserId();
+        String name = updateaddress.getName();
+        String phoneNumber = updateaddress.getPhoneNumber();
+        String address = updateaddress.getAddress();
+        String more = updateaddress.getMore();
+        String postalCode = updateaddress.getPostalCode();
+        String code = "update";
+
+        OkHttpClient okHttpClient = new OkHttpClient();
+        Request request = new Request.Builder().url(Connect.BASE_URL+"AddressServlet?name="+name+"&phoneNumber="+phoneNumber
+                +"&address="+address+"&more="+more+"&postalCode="+postalCode+"&UserId="+UserId+"&Code="+code).build();
+        Call call = okHttpClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                EventMessage msg = new EventMessage();
+                Log.e("返回结果","发送成功");
+                String re = response.body().string();
+                Log.e("update返回结果",re+"");
+                msg.setCode("AddressDao_update");
+                msg.setJson(re);
+                EventBus.getDefault().post(msg);
+            }
+        });
+    }
 }
