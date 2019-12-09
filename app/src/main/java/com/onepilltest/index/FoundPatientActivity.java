@@ -30,7 +30,8 @@ public class FoundPatientActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent ();
-//                intent.setClass ( FoundPatientActivity.this, );
+                intent.setClass ( FoundPatientActivity.this,HomeFragment.class);
+                startActivity(intent);
             }
         } );
         imgSelect.setOnClickListener ( new View.OnClickListener () {

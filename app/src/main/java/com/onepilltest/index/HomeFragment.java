@@ -49,6 +49,8 @@ public class HomeFragment extends Fragment {
     private SharedPreferences sharedPreferences;
     private OkHttpClient okHttpClient;
     private Article article;
+    private ImageView imgFoundDoctor;
+    private ImageView imgFoundPatient;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -94,7 +96,7 @@ public class HomeFragment extends Fragment {
                 Type type = new TypeToken<List<Article>>() {
                 }.getType();
                 articles.addAll((List<Article>) new Gson().fromJson(articleListStr, type));
-                //Log.e("push", articleListStr.toString());
+                Log.e("push", articleListStr.toString());
                 //在onResponse里面不能直接更新界面
                 //接收到之后发送消息  通知给主线程
                 EventBus.getDefault().post("文章");
@@ -108,6 +110,7 @@ public class HomeFragment extends Fragment {
     public void updateUI(String msg) {
         if (msg.equals("文章")) {
             //更新视图
+            Log.e("gg","更新了哦");
             indexAdapter.notifyDataSetChanged();
         }
     }
@@ -131,6 +134,19 @@ public class HomeFragment extends Fragment {
                     Intent question_intent = new Intent(getContext(), QuestionActivity.class);
                     startActivity(question_intent);
                     break;
+                case R.id.iv_commentImg:
+                    Intent intent = new Intent(getContext(), CommentActivity.class);
+                    startActivity(intent);
+                    break;
+                case R.id.iv_find_doctor:
+                    Intent inent_findoctor = new Intent();
+                    inent_findoctor.setClass(getContext(),FoundDoctorActivity.class);
+                    startActivity(inent_findoctor);
+                case R.id.iv_find_medicine:
+                    Intent intent_findpatient = new Intent();
+                    intent_findpatient.setClass(getContext(),FoundPatientActivity.class);
+                    startActivity(intent_findpatient);
+
             }
         }
     }
