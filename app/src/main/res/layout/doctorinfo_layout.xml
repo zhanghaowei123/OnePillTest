@@ -46,16 +46,16 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="76dp"
                 android:layout_height="wrap_content"
-                android:text="姓         名:"
+                android:text="姓名:"
                 android:textSize="16dp" />
 
             <EditText
                 android:id="@+id/perfect_doctorname"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:textSize="16dp"
+                android:textSize="15dp"
                 android:hint="请输入您的姓名" />
         </LinearLayout>
 
@@ -66,7 +66,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="76dp"
                 android:layout_height="wrap_content"
                 android:text="身份证号:"
                 android:textSize="16dp" />
@@ -75,7 +75,7 @@
                 android:id="@+id/perfect_dnum"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:textSize="16dp"
+                android:textSize="15dp"
                 android:hint="请输入您的身份证号" />
         </LinearLayout>
 
@@ -86,7 +86,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="76dp"
                 android:layout_height="wrap_content"
                 android:text="医疗机构:"
                 android:textSize="16dp" />
@@ -95,7 +95,7 @@
                 android:id="@+id/perfect_hosptal"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:textSize="16dp"
+                android:textSize="15dp"
                 android:hint="请输入您的医疗机构" />
         </LinearLayout>
 
@@ -106,7 +106,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="76dp"
                 android:layout_height="wrap_content"
                 android:text="现居住地:"
                 android:textSize="16dp" />
@@ -115,7 +115,7 @@
                 android:id="@+id/perfect_address"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:textSize="16dp"
+                android:textSize="15dp"
                 android:hint="请输入您的的现居住地" />
         </LinearLayout>
 
@@ -133,7 +133,8 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
 
                 <LinearLayout
                     android:layout_width="175dp"

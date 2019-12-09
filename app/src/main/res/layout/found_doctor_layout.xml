@@ -18,10 +18,10 @@
             android:layout_width="25dp"
             android:layout_height="25dp" />
         <TextView
-            android:text="找 医 生"
+            android:text="找医生"
             android:textSize="18dp"
             android:gravity="center"
-            android:layout_width="280dp"
+            android:layout_width="290dp"
             android:layout_height="match_parent" />
         <ImageView
             android:src="@drawable/logo"

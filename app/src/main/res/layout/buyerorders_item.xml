@@ -25,7 +25,7 @@
 
             <TextView
                 android:text="dad店铺"
-                android:textSize="18dp"
+                android:textSize="16dp"
                 android:gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent" />

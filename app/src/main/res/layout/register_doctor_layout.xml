@@ -12,24 +12,23 @@
 
         <ImageView
             android:id="@+id/img_left1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="10dp"
             android:layout_gravity="center"
             android:src="@drawable/left" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="95dp"
-            android:text="医 生 注 册"
+            android:layout_width="290dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="医生注册"
             android:textColor="#fff"
-            android:textSize="25dp" />
+            android:textSize="18dp" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="90dp"
             android:src="@drawable/logo" />
     </LinearLayout>
     <!--注册输入-->
@@ -46,10 +45,10 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:text="手机号:"
-                android:textSize="20dp" />
+                android:textSize="17dp" />
 
             <EditText
                 android:id="@+id/edit_register_doctor_phone"
@@ -66,10 +65,10 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:text="密码:"
-                android:textSize="20dp" />
+                android:textSize="17dp" />
 
             <EditText
                 android:id="@+id/edit_register_doctor_password"

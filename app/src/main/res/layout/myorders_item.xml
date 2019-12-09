@@ -30,7 +30,7 @@
 
                 <TextView
                     android:text="dad店铺"
-                    android:textSize="16dp"
+                    android:textSize="15dp"
                     android:gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent" />
@@ -104,8 +104,8 @@
                 <ImageView
                     android:src="@drawable/zfb"
                     android:layout_gravity="center"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp" />
+                    android:layout_width="25dp"
+                    android:layout_height="25dp" />
 
                 <TextView
                     android:text="支付"
