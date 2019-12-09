@@ -92,7 +92,8 @@ public class AddressDao {
      * 查询
      */
     public void update(Address updateaddress){
-        int UserId = UserBook.NowUser.getUserId();
+        int Id = updateaddress.getId();
+        int UserId = updateaddress.getUserId();
         String name = updateaddress.getName();
         String phoneNumber = updateaddress.getPhoneNumber();
         String address = updateaddress.getAddress();
@@ -102,8 +103,9 @@ public class AddressDao {
 
         OkHttpClient okHttpClient = new OkHttpClient();
         Request request = new Request.Builder().url(Connect.BASE_URL+"AddressServlet?name="+name+"&phoneNumber="+phoneNumber
-                +"&address="+address+"&more="+more+"&postalCode="+postalCode+"&UserId="+UserId+"&Code="+code).build();
+                +"&address="+address+"&more="+more+"&postalCode="+postalCode+"&UserId="+UserId+"&Id="+Id+"&Code="+code).build();
         Call call = okHttpClient.newCall(request);
+        /*Log.e("火车","Id"+Id);*/
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -117,6 +119,31 @@ public class AddressDao {
                 String re = response.body().string();
                 Log.e("update返回结果",re+"");
                 msg.setCode("AddressDao_update");
+                msg.setJson(re);
+                EventBus.getDefault().post(msg);
+            }
+        });
+    }
+
+
+    public void delet(int id){
+        OkHttpClient okHttpClient = new OkHttpClient();
+        String code = "delete";
+        Request request = new Request.Builder().url(Connect.BASE_URL+"AddressServlet?Id="+id+"&Code="+code).build();
+        Call call = okHttpClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                EventMessage msg = new EventMessage();
+                Log.e("返回结果","发送成功");
+                String re = response.body().string();
+                Log.e("delete返回结果",re+"");
+                msg.setCode("AddressDao_delete");
                 msg.setJson(re);
                 EventBus.getDefault().post(msg);
             }

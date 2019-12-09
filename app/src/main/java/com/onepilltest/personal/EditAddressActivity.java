@@ -24,10 +24,11 @@ public class EditAddressActivity extends AppCompatActivity {
     EditText et_more = null;
     EditText et_postalCode = null;
 
+    Button delete = null;
     Button back = null;
     Button save = null;
     MyListener myListener = null;
-    Address address = null;
+    Address editaddress = null;
     Gson gson = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +43,9 @@ public class EditAddressActivity extends AppCompatActivity {
         //获取Bundle的信息
         String json=info.getString("info");
         Log.e("G送字符串",""+json);
-        address = gson.fromJson(json,Address.class);
-        init(address);
+        editaddress = gson.fromJson(json,Address.class);
+        Log.e("火车Id",""+editaddress.toString()+"???:"+editaddress.getId());
+        init(editaddress);
     }
 
     private void init(Address address){
@@ -62,6 +64,8 @@ public class EditAddressActivity extends AppCompatActivity {
         et_phone = findViewById(R.id.edit_address_phoneNumber);
         et_postalCode = findViewById(R.id.edit_address_postalCode);
 
+        delete = findViewById(R.id.edit_address_delet);
+        delete.setOnClickListener(myListener);
         back = findViewById(R.id.edit_address_back);
         back.setOnClickListener(myListener);
         save = findViewById(R.id.edit_address_save);
@@ -77,13 +81,35 @@ public class EditAddressActivity extends AppCompatActivity {
                     startActivity(back_intent);
                     break;
                 case R.id.edit_address_save:
-
                     //存入数据库
-
-                    Intent add_intent = new Intent(EditAddressActivity.this, AddressActivity.class);
-                    startActivity(add_intent);
+                    save();
+                    break;
+                case R.id.edit_address_delet:
+                    delete(editaddress);
                     break;
             }
         }
+    }
+
+    private void delete(Address deleteaddress) {
+
+        AddressDao dao = new AddressDao();
+        dao.delet(deleteaddress.getId());
+        finish();
+    }
+
+    private void save() {
+        int Id = editaddress.getId();
+        int UserId =UserBook.NowUser.getUserId();
+        String name = et_name.getText().toString();
+        String phoneNumber = et_phone.getText().toString();
+        String address = et_address.getText().toString();
+        String more = et_more.getText().toString();
+        String postalCode = et_postalCode.getText().toString();
+        editaddress = new Address(Id,UserId,name,phoneNumber,address,more,postalCode);
+
+        AddressDao dao = new AddressDao();
+        dao.update(editaddress);
+        finish();
     }
 }

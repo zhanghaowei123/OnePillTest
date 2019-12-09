@@ -38,9 +38,14 @@ public class SettingActivity extends AppCompatActivity {
         user_img = findViewById(R.id.setting_user_img);
         user_img.setOnClickListener(myListener);
         nickName = findViewById(R.id.setting_user_nickname);
-        nickName.setOnClickListener(myListener);
+        nickName.setText(UserBook.NowUser.getNickName());
         degree = findViewById(R.id.setting_user_degress);
-        degree.setOnClickListener(myListener);
+        if (UserBook.Code == UserBook.Patient){
+            degree.setText("用户");
+        }else if(UserBook.Code == UserBook.Doctor){
+            degree.setText("医生");
+        }
+
         QR_code = findViewById(R.id.setting_user_QR_code);
         QR_code.setOnClickListener(myListener);
         back = findViewById(R.id.setting_back);

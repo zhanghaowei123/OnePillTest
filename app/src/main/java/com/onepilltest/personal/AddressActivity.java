@@ -116,6 +116,15 @@ public class AddressActivity extends AppCompatActivity {
                 Log.e("更新失败",""+baseList.get(0).getAddress());
                 Toast.makeText(getApplicationContext(),"更新失败",Toast.LENGTH_SHORT);
             }
+        }else if (msg.getCode().equals("AddressDao_delete")){
+            if(msg.getJson().equals("yes")){
+                new AddressDao().searchAll(UserBook.NowUser.getUserId());
+                Log.e("添加成功",""+baseList.get(0).getAddress());
+                Toast.makeText(getApplicationContext(),"添加成功",Toast.LENGTH_SHORT);
+            }else if(msg.getJson().equals("no")){
+                Log.e("添加失败",""+baseList.get(0).getAddress());
+                Toast.makeText(getApplicationContext(),"添加失败",Toast.LENGTH_SHORT);
+            }
         }
     }
 

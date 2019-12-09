@@ -9,9 +9,19 @@ public class Address {
     private String more;
     private String postalCode;
 
-    public Address(int UserId,String name,String phoneNumber,String address,String more,String postalCode){
+    public Address(int UserId, String name, String phoneNumber, String address, String more, String postalCode) {
         this.UserId = UserId;
         this.Id = 0;
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.more = more;
+        this.postalCode = postalCode;
+    }
+
+    public Address(int id, int UserId, String name, String phoneNumber, String address, String more, String postalCode) {
+        this.UserId = UserId;
+        this.Id = id;
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.address = address;
@@ -73,5 +83,10 @@ public class Address {
 
     public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
+    }
+
+    public String toString() {
+        return "Id" + getId() + "\nUserId" + getUserId() + "\nname" + getName() + "\nphoneNumber" + getPhoneNumber() + "\nAddress" + getAddress() + "\nmore" + getMore() + "\npostalCode" + getPostalCode();
+
     }
 }
