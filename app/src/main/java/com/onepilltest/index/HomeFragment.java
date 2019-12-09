@@ -50,7 +50,7 @@ public class HomeFragment extends Fragment {
     private OkHttpClient okHttpClient;
     private Article article;
     private ImageView imgFoundDoctor;
-    private ImageView imgFoundPatient;
+    private ImageView imgFoundMedicine;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -76,6 +76,10 @@ public class HomeFragment extends Fragment {
     private void find(View view) {
         Question = view.findViewById(R.id.iv_inquiry);
         Question.setOnClickListener(myListener);
+        imgFoundDoctor = view.findViewById(R.id.iv_find_doctor);
+        imgFoundDoctor.setOnClickListener(myListener);
+        imgFoundMedicine = view.findViewById(R.id.iv_find_medicine);
+        imgFoundMedicine.setOnClickListener(myListener);
     }
 
     private void setArticles() {
@@ -110,7 +114,7 @@ public class HomeFragment extends Fragment {
     public void updateUI(String msg) {
         if (msg.equals("文章")) {
             //更新视图
-            Log.e("gg","更新了哦");
+            Log.e("gg", "更新了哦");
             indexAdapter.notifyDataSetChanged();
         }
     }
@@ -140,11 +144,11 @@ public class HomeFragment extends Fragment {
                     break;
                 case R.id.iv_find_doctor:
                     Intent inent_findoctor = new Intent();
-                    inent_findoctor.setClass(getContext(),FoundDoctorActivity.class);
+                    inent_findoctor.setClass(getContext(), FoundDoctorActivity.class);
                     startActivity(inent_findoctor);
                 case R.id.iv_find_medicine:
                     Intent intent_findpatient = new Intent();
-                    intent_findpatient.setClass(getContext(),FoundPatientActivity.class);
+                    intent_findpatient.setClass(getContext(), FoundPatientActivity.class);
                     startActivity(intent_findpatient);
 
             }

@@ -7,7 +7,6 @@ public class Article {
     private String content;
     private String tag;
     private String title;
-    private String comment;
 
     public Article() {
     }
@@ -18,14 +17,6 @@ public class Article {
         this.content = articleCotent;
         this.tag = tag;
         this.title = title;
-    }
-
-    public String getComment() {
-        return comment;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment;
     }
 
     public int getId() {

@@ -57,7 +57,6 @@ public class IndexAdapter extends RecyclerView.Adapter {
         itemViewHolder.writerName.setText(articles.get(i).getWriterName());
         itemViewHolder.articleContent.setText(articles.get(i).getContent());
         itemViewHolder.title.setText(articles.get(i).getTitle());
-        itemViewHolder.commentCotent.setText(articles.get(i).getComment());
         itemViewHolder.tag.setText(articles.get(i).getTag());
         //设置每一项的点击事件监听器
         itemViewHolder.root.setOnClickListener(new View.OnClickListener() {
@@ -70,6 +69,8 @@ public class IndexAdapter extends RecyclerView.Adapter {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, CommentActivity.class);
+                int num = i + 1;
+                intent.putExtra("articleId",num+"");
                 context.startActivity(intent);
             }
         });
@@ -87,7 +88,6 @@ public class IndexAdapter extends RecyclerView.Adapter {
         public TextView writerName;
         public TextView articleContent;
         public TextView tag;
-        public TextView commentCotent;
         public TextView title;
         public LinearLayout root;//每一个Item的根视图
         public ImageView imgComment;
@@ -97,7 +97,6 @@ public class IndexAdapter extends RecyclerView.Adapter {
             writerName = itemView.findViewById(R.id.tv_writer_name);
             articleContent = itemView.findViewById(R.id.tv_article_content);
             tag = itemView.findViewById(R.id.tv_tag);
-            commentCotent = itemView.findViewById(R.id.tv_comment_content);
             title = itemView.findViewById(R.id.tv_article_title);
             root = itemView.findViewById(R.id.ll_article);
             imgComment = itemView.findViewById(R.id.iv_commentImg);

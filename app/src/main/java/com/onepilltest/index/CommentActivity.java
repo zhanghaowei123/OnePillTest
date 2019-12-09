@@ -48,6 +48,7 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
     private CommentAdapter commentAdapter;
     private EditText etComment;
     private Comment comment;
+    private String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +64,7 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
 
     private void requestData() {
         Request request = new Request.Builder()
-                .url(Connect.BASE_URL + "CommentServlet")
+                .url(Connect.BASE_URL + "CommentServlet?articleId=" + comment.getArticleId())
                 .build();
         Call call = okHttpClient.newCall(request);
         call.enqueue(new Callback() {
@@ -107,6 +108,10 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
         etComment = findViewById(R.id.et_comment);
         ivCommentLeft = findViewById(R.id.iv_comment_left);
         btnSendComment = findViewById(R.id.btn_send_comment);
+        Intent intent = getIntent();
+        id = intent.getStringExtra("articleId");
+        comment = new Comment();
+        comment.setArticleId(Integer.parseInt(id));
         ivCommentLeft.setOnClickListener(this);
         btnSendComment.setOnClickListener(this);
     }
@@ -119,10 +124,10 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
                 startActivity(intent);
                 break;
             case R.id.btn_send_comment:
-                comment = new Comment();
                 comment.setName(UserBook.NowUser.getNickName());
                 Log.e("hahah", UserBook.NowUser.getNickName());
                 comment.setCcomment(etComment.getText().toString());
+                comment.setArticleId(Integer.parseInt(id));
                 comments.add(comment);
                 //更新到数据库
                 insertComment();

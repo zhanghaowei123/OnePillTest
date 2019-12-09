@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.onepilltest.R;
+import com.onepilltest.entity.Article;
 import com.onepilltest.entity.Comment;
 
 import java.util.List;
