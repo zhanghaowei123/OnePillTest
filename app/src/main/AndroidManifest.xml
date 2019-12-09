@@ -79,6 +79,7 @@
         <activity android:name=".personal.QR_codeActivity" />
         <activity android:name=".personal.EditUserInfoActivity" />
         <activity android:name=".personal.EditAddressActivity" />
+        <activity android:name=".personal.recordActivity"/>
         <activity android:name=".message.QuestionActivity" />
         <activity android:name=".index.CommentActivity" />
         <activity android:name=".personal.AddAddressActivity" />

@@ -13,24 +13,23 @@
 
         <ImageView
             android:id="@+id/img_left_yd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="10dp"
             android:layout_gravity="center"
             android:src="@drawable/left" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="90dp"
+            android:layout_width="290dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
             android:text="完善个人信息"
             android:textColor="#fff"
-            android:textSize="20dp" />
+            android:textSize="18dp" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
             android:src="@drawable/a1" />
     </LinearLayout>
 
@@ -49,70 +48,74 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="姓          名:"
-                android:textSize="18dp" />
+                android:text="姓         名:"
+                android:textSize="16dp" />
 
             <EditText
                 android:id="@+id/perfect_doctorname"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
+                android:textSize="16dp"
                 android:hint="请输入您的姓名" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="身份证号:"
-                android:textSize="18dp" />
+                android:textSize="16dp" />
 
             <EditText
                 android:id="@+id/perfect_dnum"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
+                android:textSize="16dp"
                 android:hint="请输入您的身份证号" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="医疗机构:"
-                android:textSize="18dp" />
+                android:textSize="16dp" />
 
             <EditText
                 android:id="@+id/perfect_hosptal"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
+                android:textSize="16dp"
                 android:hint="请输入您的医疗机构" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="现居住地:"
-                android:textSize="18dp" />
+                android:textSize="16dp" />
 
             <EditText
                 android:id="@+id/perfect_address"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
+                android:textSize="16dp"
                 android:hint="请输入您的的现居住地" />
         </LinearLayout>
 
@@ -126,7 +129,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="请上传您的医师资格证书截图:"
-                android:textSize="18dp" />
+                android:textSize="16dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"

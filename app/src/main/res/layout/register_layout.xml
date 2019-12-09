@@ -13,21 +13,20 @@
         <ImageView
             android:id="@+id/img_left"
             android:src="@drawable/left"
+            android:layout_marginLeft="10dp"
             android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_width="25dp"
+            android:layout_height="25dp" />
         <TextView
-            android:text="注 册"
-            android:textSize="25dp"
+            android:text="注册"
+            android:textSize="18dp"
             android:textColor="#fff"
             android:textStyle="bold"
-            android:layout_marginLeft="120dp"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:gravity="center"
+            android:layout_width="290dp"
+            android:layout_height="match_parent" />
         <ImageView
             android:src="@drawable/a1"
-            android:layout_marginLeft="100dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -41,7 +40,7 @@
             android:id="@+id/register_doctor"
             android:layout_marginTop="30dp"
             android:src="@drawable/doctor"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content" />
         <TextView
             android:text="医生注册"
@@ -54,7 +53,7 @@
             android:id="@+id/register_patient"
             android:layout_marginTop="30dp"
             android:src="@drawable/bingren"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content" />
         <TextView
             android:text="用户注册"

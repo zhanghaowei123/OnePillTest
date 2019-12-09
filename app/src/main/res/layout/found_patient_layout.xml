@@ -7,26 +7,26 @@
     <!--header-->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
         android:background="#e9e4e4"
         android:orientation="horizontal">
         <ImageView
             android:id="@+id/findpatient_left"
             android:src="@drawable/left"
             android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_width="25dp"
+            android:layout_height="25dp" />
         <TextView
             android:text="找 药 品"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:textColor="#000"
-            android:layout_marginLeft="110dp"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:gravity="center"
+            android:layout_width="280dp"
+            android:layout_height="match_parent" />
         <ImageView
             android:src="@drawable/logo"
-            android:layout_marginLeft="70dp"
+            android:layout_gravity="center"
             android:layout_width="70dp"
             android:layout_height="40dp" />
     </LinearLayout>
@@ -38,15 +38,16 @@
         android:layout_gravity="center">
         <ImageView
             android:id="@+id/img_findpa_select"
-            android:layout_marginTop="10dp"
             android:src="@drawable/found"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_gravity="center"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
         <EditText
             android:id="@+id/findpatient_select"
             android:layout_width="300dp"
             android:hint="搜索药品"
-            android:layout_height="wrap_content"
+            android:textSize="14dp"
+            android:layout_height="35dp"
             android:inputType="textPassword"
             android:gravity="center"
             android:textColor="#fefefe"
@@ -63,17 +64,19 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp">
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
                 android:src="@drawable/kids"/>
             <LinearLayout
+                android:layout_marginLeft="8dp"
                 android:id="@+id/findpatient_kids"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <TextView
                     android:text="儿童安全用药"
-                    android:textSize="15dp"
+                    android:textSize="14dp"
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
@@ -90,15 +93,17 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="45dp">
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
                 android:src="@drawable/oldmen"/>
             <LinearLayout
+                android:layout_marginLeft="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <TextView
-                    android:textSize="15dp"
+                    android:textSize="14dp"
                     android:textStyle="bold"
                     android:text="老人常用药"
                     android:layout_width="wrap_content"
@@ -122,23 +127,25 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp">
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
                 android:src="@drawable/women"/>
             <LinearLayout
+                android:layout_marginLeft="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <TextView
                     android:text="妇科用药"
-                    android:textSize="15dp"
+                    android:textSize="14dp"
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="益母草、短效避孕药"/>
+                    android:text="益母草、避孕药..."/>
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
@@ -146,18 +153,20 @@
             android:layout_width="wrap_content"
             android:orientation="horizontal"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp">
+            android:layout_marginLeft="34dp">
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
                 android:src="@drawable/medicine"/>
             <LinearLayout
+                android:layout_marginLeft="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <TextView
                     android:text="其他药物"
-                    android:textSize="15dp"
+                    android:textSize="14dp"
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
@@ -181,7 +190,7 @@
             android:layout_marginLeft="5dp"
             android:text="家庭常备药"
             android:textColor="#40e848"
-            android:textSize="17dp"
+            android:textSize="16dp"
             android:textStyle="bold" />
 
         <TableLayout

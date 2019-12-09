@@ -15,8 +15,8 @@
             android:id="@+id/cart_back"
             android:src="@drawable/left"
             android:layout_gravity="center"
-            android:layout_width="30dp"
-            android:layout_height="30dp" />
+            android:layout_width="25dp"
+            android:layout_height="25dp" />
 
         <TextView
             android:gravity="center"
@@ -37,7 +37,7 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycle_cart"
         android:layout_width="match_parent"
-        android:layout_height="500dp"/>
+        android:layout_height="490dp"/>
 
     <LinearLayout
         android:paddingLeft="8dp"
@@ -62,7 +62,7 @@
             android:layout_height="wrap_content" />
 
         <TextView
-            android:layout_marginLeft="60dp"
+            android:layout_marginLeft="70dp"
             android:textColor="#3C3C3C"
             android:textSize="15dp"
             android:text="合计："
@@ -92,7 +92,7 @@
             android:background="@drawable/button_circle_shape2"
             android:text="删除"
             android:textSize="16dp"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="10dp"
             android:layout_gravity="center"
             android:layout_width="70dp"
             android:layout_height="50dp" />
