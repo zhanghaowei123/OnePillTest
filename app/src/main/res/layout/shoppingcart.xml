@@ -1,102 +1,186 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout android:layout_height="match_parent"
+<LinearLayout android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <LinearLayout
-        android:background="#FFFFFF"
-        android:paddingLeft="10dp"
+    <!--<LinearLayout-->
+        <!--android:background="#FFFFFF"-->
+        <!--android:paddingLeft="10dp"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="horizontal">-->
+
+        <!--<ImageView-->
+            <!--android:id="@+id/cart_back"-->
+            <!--android:src="@drawable/left"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:layout_width="25dp"-->
+            <!--android:layout_height="25dp" />-->
+
+        <!--<TextView-->
+            <!--android:gravity="center"-->
+            <!--android:textSize="16dp"-->
+            <!--android:text="购物车"-->
+            <!--android:textColor="#3C3C3C"-->
+            <!--android:layout_width="290dp"-->
+            <!--android:layout_height="match_parent" />-->
+
+    <!--</LinearLayout>-->
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="40dp">
 
         <ImageView
             android:id="@+id/cart_back"
             android:src="@drawable/left"
             android:layout_gravity="center"
+            android:layout_marginTop="10dp"
             android:layout_width="25dp"
             android:layout_height="25dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="150dp"
+            android:gravity="center_vertical"
+            android:text="购物车"
+            android:textColor="#000"
+            android:textSize="20dp" />
 
         <TextView
+            android:id="@+id/tv_cart_manage"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
             android:gravity="center"
-            android:textSize="16dp"
-            android:text="购物车"
-            android:textColor="#3C3C3C"
-            android:layout_width="290dp"
-            android:layout_height="match_parent" />
+            android:text="管理"
+            android:textColor="#000"
+            android:textSize="20dp" />
 
-        <ImageView
-            android:src="@drawable/logo"
-            android:layout_gravity="center"
-            android:layout_width="60dp"
-            android:layout_height="40dp" />
-
-    </LinearLayout>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycle_cart"
-        android:layout_marginTop="40dp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        <TextView
+            android:id="@+id/tv_cart_finish"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            android:text="完成"
+            android:textColor="#000"
+            android:textSize="20dp"
+            android:visibility="gone" />
+    </RelativeLayout>
 
     <LinearLayout
-        android:paddingLeft="8dp"
-        android:background="#FFFFFF"
-        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:background="#E9E6E6"
+        android:orientation="vertical">
 
-        <CheckBox
-            android:id="@+id/cb_allcheck"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:id="@+id/ll_cake_empty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="visible">
 
-        <TextView
-            android:textColor="#3C3C3C"
-            android:textSize="15dp"
-            android:layout_gravity="center"
-            android:text="全选"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="120dp"
+                android:src="@drawable/empty_cart" />
 
-        <TextView
-            android:layout_marginLeft="60dp"
-            android:textColor="#3C3C3C"
-            android:textSize="15dp"
-            android:text="合计："
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="购物车还是空的"
+                android:textColor="#000"
+                android:textSize="20dp" />
 
-        <TextView
-            android:id="@+id/tv_allprice"
-            android:textSize="15dp"
-            android:text=""
-            android:textColor="#FFAF60"
-            android:layout_gravity="center"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center_horizontal"
+                android:text="去挑选几件中意的商品吧" />
+        </LinearLayout>
 
-        <Button
-            android:id="@+id/sc_pay"
-            android:background="@drawable/button_circle_shape2"
-            android:textSize="16dp"
-            android:text="结算"
-            android:layout_gravity="center"
-            android:layout_width="80dp"
-            android:layout_height="50dp" />
-        <Button
-            android:id="@+id/sc_delete"
-            android:background="@drawable/button_circle_shape2"
-            android:text="删除"
-            android:textSize="16dp"
-            android:layout_marginLeft="10dp"
-            android:layout_gravity="center"
-            android:layout_width="80dp"
-            android:layout_height="50dp" />
+        <ListView
+            android:id="@+id/lv_cart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:dividerHeight="5dp"
+            android:visibility="gone">
 
+        </ListView>
     </LinearLayout>
 
-</RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1 "
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/cb_choose_all"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="全选"
+            android:textSize="17dp" />
+
+        <Button
+            android:id="@+id/btn_settlement"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/mybuttonborder"
+            android:text="结算"
+            android:textColor="#fff"
+            android:textSize="20dp" />
+
+        <Button
+            android:id="@+id/btn_delete"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/mybuttonborder"
+            android:text="删除"
+            android:textColor="#fff"
+            android:textSize="20dp"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="110dp"
+            android:id="@+id/ll_cart_total_price">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="合计:"
+                android:textColor="#000"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/tv_settlement_price"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:maxEms="10"
+                android:maxLines="1"
+                android:text="￥ 0"
+                android:textColor="#ff0000"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</LinearLayout>

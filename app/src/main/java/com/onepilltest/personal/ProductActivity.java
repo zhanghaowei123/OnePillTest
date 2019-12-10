@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TabHost;
@@ -19,6 +20,7 @@ public class ProductActivity extends Activity {
     private int[] mImg_id;
     private ArrayList<ImageView> mImgList;
     private LinearLayout smallpoint;
+    private Button btnAddCart;
     private int previousSelectedPosition = 0;
     boolean isRunning = false;
 
@@ -27,6 +29,8 @@ public class ProductActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product);
+
+        btnAddCart = findViewById(R.id.btn_addcart);
 
         initLoopView();  //实现轮播图
 
@@ -39,6 +43,9 @@ public class ProductActivity extends Activity {
         tabHost.addTab(tabHost.newTabSpec("function").setIndicator("功能主治").setContent(R.id.tab_2));
         tabHost.addTab(tabHost.newTabSpec("sideEffect").setIndicator("副作用").setContent(R.id.tab_3));
         tabHost.addTab(tabHost.newTabSpec("explain").setIndicator("使用说明").setContent(R.id.tab_4));
+
+        //添加购物车
+
 
     }
 

@@ -1,19 +1,40 @@
 package com.onepilltest.entity;
 
+import java.io.Serializable;
+
 public class Cart {
+
+
+    private int id;
     private String name;
     private String type;
-    private int price;
+    private int medicinePrice;
     private String medicineSize;
     private int count;
+    private Medicine medicine;
+
+    public Serializable getMedicine() {
+        return (Serializable) medicine;
+    }
+
+    public void setMedicine(Medicine medicine) {
+        this.medicine = medicine;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getMedicineSize() {
         return medicineSize;
     }
 
     public void setMedicineSize(String medicineSize) {
-        this.medicineSize = medicineSize;
-    }
+        this.medicineSize = medicineSize; }
 
     public int getCount() {
         return count;
@@ -39,12 +60,12 @@ public class Cart {
         this.type = type;
     }
 
-    public int getPrice() {
-        return price;
+    public int getMedicinePrice() {
+        return medicinePrice;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+    public void setMedicinePrice(int price) {
+        this.medicinePrice = price;
     }
 
     @Override
