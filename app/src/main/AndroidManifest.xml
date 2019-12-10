@@ -88,6 +88,8 @@
         <activity android:name=".personal.FocusAndSaveActivity"/>
         <activity android:name=".personal.ShoppingCartActivity"/>
         <activity android:name=".personal.HelpAndFeedBackActivity"/>
+        <activity android:name=".personal.switchActivity"></activity>
+        <activity android:name=".personal.UserList"></activity>
     </application>
 
 </manifest>

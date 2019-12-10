@@ -30,6 +30,7 @@ public class UserDao {
         OkHttpClient okHttpClient = new OkHttpClient();
         Request request = new Request.Builder().url(Connect.BASE_URL+"EditUserServlet?UserId="+UserId+"&Code="+code+"&"+code+"="+str).build();
         Call call = okHttpClient.newCall(request);
+        Log.e("用户","Code"+code+"UserId"+UserId+"str"+str);
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {

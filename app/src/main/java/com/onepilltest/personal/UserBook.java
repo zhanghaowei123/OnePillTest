@@ -1,6 +1,7 @@
 package com.onepilltest.personal;
 
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.onepilltest.entity.UserDoctor;
 import com.onepilltest.entity.UserPatient;
@@ -36,13 +37,18 @@ public class UserBook {
 
     public static void addUser(UserPatient userPatient, int code) {
         int size = UserList.size();
+        Log.e("UserList","size"+size);
         Code = code;
-        boolean f = false;
-        for (int i = 0; i < size; i++) {
-            if (UserList.get(i).getUserId() != userPatient.getUserId())
-                f = true;
+        boolean f = true;
+        if(size ==0){
+            UserList.add(userPatient);
         }
-        if (f)
+        for (int i = 0; i < size; i++) {
+            Log.e("UserList","比较"+UserList.get(i).getUserId()+"\n"+userPatient.getUserId());
+            if (UserList.get(i).getUserId() == userPatient.getUserId())
+                f = false;
+        }
+        if (f && size!=0)
             UserList.add(userPatient);
         NowUser = userPatient;
     }
@@ -50,15 +56,30 @@ public class UserBook {
     public static void addUser(UserDoctor userDoctor, int code) {
         int size = UserList.size();
         Code = code;
-        boolean f = false;
+        boolean f = true;
+        if(size ==0){
+            DoctorList.add(userDoctor);
+        }
         for (int i = 0; i < size; i++) {
-            if (DoctorList.get(i).getDoctorId() != userDoctor.getDoctorId())
-                f = true;
+            if (DoctorList.get(i).getDoctorId() == userDoctor.getDoctorId())
+                f = false;
         }
         if (f)
             DoctorList.add(userDoctor);
         NowDoctor = userDoctor;
     }
 
+    public static List<UserPatient> getList (){
+        return UserList;
+    }
+    public static String print(){
+        String str = "";
+        for(int i = 0;i<UserList.size();i++){
+            str += "\n"+UserList.get(i).getNickName();
+
+        }
+        str+="UserList一共记录了"+UserList.size()+"个用户信息";
+        return str;
+    }
 
 }

@@ -100,7 +100,7 @@ public class HomeFragment extends Fragment {
                 Type type = new TypeToken<List<Article>>() {
                 }.getType();
                 articles.addAll((List<Article>) new Gson().fromJson(articleListStr, type));
-                Log.e("push", articleListStr.toString());
+
                 //在onResponse里面不能直接更新界面
                 //接收到之后发送消息  通知给主线程
                 EventBus.getDefault().post("文章");

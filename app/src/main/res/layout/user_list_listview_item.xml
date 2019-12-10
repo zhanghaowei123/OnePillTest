@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <com.onepilltest.others.RoundImageView
+            android:id="@+id/user_list_listview_item_headImg"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/user" />
+
+        <LinearLayout
+            android:layout_weight="10"
+            android:paddingBottom="10dp"
+            android:paddingTop="15dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="20dp">
+
+            <TextView
+                android:id="@+id/user_list_listview_item_nickName"
+                android:textSize="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="两小无猜" />
+
+            <TextView
+                android:id="@+id/user_list_listview_item_phone"
+                android:layout_marginTop="5dp"
+                android:text="18831107935"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_weight="2"
+            android:layout_width="0dp"
+            android:gravity="center"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/user_list_listview_item_btn"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+</LinearLayout>

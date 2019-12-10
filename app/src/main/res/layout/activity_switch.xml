@@ -1,79 +1,166 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:layout_height="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:orientation="vertical"
+    android:layout_height="match_parent"
     android:background="#fff"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-    <Button
-        android:id="@+id/btn_back"
-        android:text="返回"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:onClick="back"
-        android:background="@null" />
+    android:orientation="vertical">
+
+    <!--logo-->
     <ImageView
-        android:layout_marginTop="30dp"
-        android:layout_gravity="center_horizontal"
-        android:src="@drawable/logo_1"
         android:layout_width="75dp"
-        android:layout_height="40dp" />
-    <TextView
-        android:layout_marginTop="30dp"
+        android:layout_height="40dp"
         android:layout_gravity="center_horizontal"
-        android:textSize="30px"
-        android:text="轻触头像以切换账户"
+        android:layout_marginTop="60dp"
+        android:src="@drawable/logo_1" />
+    <!--轻触头像-->
+    <TextView
         android:layout_width="wrap_content"
-        android:layout_height="25dp" />
-    <RelativeLayout
-        android:layout_marginTop="20dp"
+        android:layout_height="25dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:text="轻触头像以切换账户"
+        android:textSize="30px" />
+
+
+    <!--<RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="150dp"
+        android:layout_marginTop="20dp"
         android:orientation="horizontal">
-        <com.example.lenovo.onepill_text_2.small.RoundImageView
-            android:id="@+id/nowBody"
-            android:layout_marginLeft="80dp"
-            android:src="@drawable/nowbody"
-            android:layout_width="70dp"
-            android:layout_height="70dp" />
-        <ImageButton
-            android:id="@+id/nextBody"
-            android:layout_marginLeft="70dp"
-            android:layout_toRightOf="@id/nowBody"
+
+        <com.onepilltest.others.RoundImageView
+            android:id="@+id/activity_switch_headImg"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:background="@drawable/add_id"/>
-        <TextView
-            android:id="@+id/nowId"
-            android:layout_below="@id/nowBody"
+            android:layout_marginLeft="80dp"
+            android:src="@drawable/nowbody" />
+
+        <ImageButton
+            android:id="@+id/activity_switch_button"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:layout_marginLeft="70dp"
-            android:text="13662159461"
+            android:layout_toRightOf="@id/activity_switch_headImg"
+            android:background="@drawable/add_id" />
+
+        <TextView
+            android:id="@+id/activity_switch_nickName"
             android:layout_width="wrap_content"
-            android:layout_height="20dp" />
+            android:layout_height="20dp"
+            android:layout_below="@id/activity_switch_headImg"
+            android:layout_marginLeft="70dp"
+            android:text="13662159461" />
+
         <TextView
             android:id="@+id/nextId"
-            android:layout_toRightOf="@id/nowId"
-            android:layout_below="@id/nextBody"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_below="@id/activity_switch_button"
             android:layout_marginLeft="70dp"
-            android:text="切换账号"
-            android:layout_width="wrap_content"
-            android:layout_height="20dp" />
+            android:layout_toRightOf="@id/activity_switch_nickName"
+            android:text="切换账号" />
+
+
+
         <ImageView
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="80dp"
             android:id="@+id/green_point"
-            android:src="@drawable/green_point"
-            android:layout_below="@id/nowId"
             android:layout_width="7dp"
-            android:layout_height="7dp" />
+            android:layout_height="7dp"
+            android:layout_below="@id/activity_switch_nickName"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="15dp"
+            android:src="@drawable/green_point" />
+
         <TextView
-            android:layout_marginTop="10dp"
-            android:layout_below="@id/nowId"
-            android:layout_toRightOf="@id/green_point"
-            android:text="当前使用"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </RelativeLayout>
+            android:layout_height="wrap_content"
+            android:layout_below="@id/activity_switch_nickName"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/green_point"
+            android:text="当前使用" />
+    </RelativeLayout>-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="80dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <com.onepilltest.others.RoundImageView
+                    android:id="@+id/activity_switch_headImg"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:src="@drawable/nowbody" />
+
+                <TextView
+                    android:id="@+id/activity_switch_nickName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:text="13662159461" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/green_point"
+                        android:layout_width="7dp"
+                        android:layout_height="7dp"
+                        android:layout_marginRight="5dp"
+                        android:src="@drawable/green_point" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="当前使用" />
+                </LinearLayout>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingLeft="30dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/activity_switch_button"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:background="@drawable/add_id" />
+
+                <TextView
+                    android:id="@+id/nextId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:text="切换账号" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>
