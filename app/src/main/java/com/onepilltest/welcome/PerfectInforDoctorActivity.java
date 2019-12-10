@@ -24,11 +24,13 @@ import com.onepilltest.R;
 import com.onepilltest.URL.Connect;
 import com.onepilltest.entity.UserDoctor;
 
+import java.io.File;
 import java.io.IOException;
 
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -61,9 +63,10 @@ public class PerfectInforDoctorActivity extends AppCompatActivity {
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(PerfectInforDoctorActivity.this, RegisterDoctor.class);
-                startActivity(intent);
+//                Intent intent = new Intent();
+//                intent.setClass(PerfectInforDoctorActivity.this, RegisterDoctor.class);
+//                startActivity(intent);
+                finish();
                 Toast.makeText(getApplicationContext(), "请完善个人信息", Toast.LENGTH_LONG).show();
             }
         });
@@ -89,8 +92,6 @@ public class PerfectInforDoctorActivity extends AppCompatActivity {
         btnSucceed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //1.创建OkHttpClient对象  入口
-                okHttpClient = new OkHttpClient();
                 registerInfo();
                 if (flag) {
                     postUserDoctor();
@@ -183,37 +184,79 @@ public class PerfectInforDoctorActivity extends AppCompatActivity {
                             .load(imagePath)//本地图片的File对象
                             .apply(requestOptions)
                             .into(imgPhoto);
+                    /**
+                     * 上传到服务器
+                     */
+                    // 3.1 获取 OkHttpClient 对象
+                    // 3.2 Post 请求，创建 RequestBody 对象 指定上传类型：图片；指定上传内容
+                    MediaType MutilPart_Form_Data = MediaType.parse("multipart/form-data; charset=utf-8");
+                    MultipartBody.Builder requestBodyBuilder = new MultipartBody.Builder()
+                            .setType(MultipartBody.FORM)
+                            .addFormDataPart("keyVo", "上传医师资格证");
+
+                    File file = new File(imagePath);
+//                // 可使用for循环添加img file
+                    requestBodyBuilder.addFormDataPart("files", file.getName(),
+                            RequestBody.create(MutilPart_Form_Data, file));
+                    // 3.3 其余一致
+                    RequestBody requestBody = requestBodyBuilder.build();
+                    Request request = new Request.Builder().url(Connect.BASE_URL + "GetImageFrontServlet")
+                            .post(requestBody)
+                            .build();
+                    Call call = okHttpClient.newCall(request);
+                    call.enqueue(new Callback() {
+                        @Override
+                        public void onFailure(Call call, IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        @Override
+                        public void onResponse(Call call, Response response) throws IOException {
+                            Log.e("上传医师资格证：", response.body().string());
+                        }
+                    });
                 } else {
                     imgPhotoback.setBackgroundResource(0);
                     Glide.with(this)
                             .load(imagePath)//本地图片的File对象
                             .apply(requestOptions)
                             .into(imgPhotoback);
-                }
+                    // 3.1 获取 OkHttpClient 对象
+                    // 3.2 Post 请求，创建 RequestBody 对象 指定上传类型：图片；指定上传内容
+                    MediaType MutilPart_Form_Data = MediaType.parse("multipart/form-data; charset=utf-8");
+                    MultipartBody.Builder requestBodyBuilder = new MultipartBody.Builder()
+                            .setType(MultipartBody.FORM)
+                            .addFormDataPart("keyVo", "上传医师资格证");
 
-                //上传医师资格证到服务器端
-//                File file = new File(imagePath);
-//                RequestBody body = RequestBody.create(MediaType.parse("image/*"),file);
-//                Request request = new Request.Builder().url(Connect.BASE_URL+"RegisterDoctorServlet")
-//                        .post(body)
-//                        .build();
-//                Call call = okHttpClient.newCall(request);
-//                call.enqueue(new Callback() {
-//                    @Override
-//                    public void onFailure(Call call, IOException e) {
-//                        e.printStackTrace();
-//                    }
-//
-//                    @Override
-//                    public void onResponse(Call call, Response response) throws IOException {
-//                        Log.e("上传头像",response.body().string());
-//                    }
-//                });
+                    File file = new File(imagePath);
+//                // 可使用for循环添加img file
+                    requestBodyBuilder.addFormDataPart("files", file.getName(),
+                            RequestBody.create(MutilPart_Form_Data, file));
+                    // 3.3 其余一致
+                    RequestBody requestBody = requestBodyBuilder.build();
+                    Request request = new Request.Builder().url(Connect.BASE_URL + "GetImageReverseServlet")
+                            .post(requestBody)
+                            .build();
+                    Call call = okHttpClient.newCall(request);
+                    call.enqueue(new Callback() {
+                        @Override
+                        public void onFailure(Call call, IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        @Override
+                        public void onResponse(Call call, Response response) throws IOException {
+                            Log.e("上传医师资格证：", response.body().string());
+                        }
+                    });
+                }
             }
         }
     }
 
     private void findViews() {
+        //1.创建OkHttpClient对象  入口
+        okHttpClient = new OkHttpClient();
         editName = findViewById(R.id.perfect_doctorname);
         editNum = findViewById(R.id.perfect_dnum);
         editHosptal = findViewById(R.id.perfect_hosptal);

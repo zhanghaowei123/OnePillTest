@@ -147,9 +147,10 @@ public class RegisterPatient extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.register_pa_back:
-                Intent intent = new Intent();
-                intent.setClass(RegisterPatient.this,LoginActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent();
+//                intent.setClass(RegisterPatient.this,LoginActivity.class);
+//                startActivity(intent);
+                finish();
                 break;
             case R.id.btn_send_verification_code:
                 if (!TextUtils.isEmpty(editPhone.getText())) {
