@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:layout_height="match_parent"
+<RelativeLayout android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android">
@@ -36,20 +36,20 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycle_cart"
+        android:layout_marginTop="40dp"
         android:layout_width="match_parent"
-        android:layout_height="490dp"/>
+        android:layout_height="match_parent"/>
 
     <LinearLayout
         android:paddingLeft="8dp"
         android:background="#FFFFFF"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="50dp">
 
         <CheckBox
             android:id="@+id/cb_allcheck"
             android:layout_gravity="center"
-
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -62,7 +62,7 @@
             android:layout_height="wrap_content" />
 
         <TextView
-            android:layout_marginLeft="70dp"
+            android:layout_marginLeft="60dp"
             android:textColor="#3C3C3C"
             android:textSize="15dp"
             android:text="合计："
@@ -85,7 +85,7 @@
             android:textSize="16dp"
             android:text="结算"
             android:layout_gravity="center"
-            android:layout_width="70dp"
+            android:layout_width="80dp"
             android:layout_height="50dp" />
         <Button
             android:id="@+id/sc_delete"
@@ -94,9 +94,9 @@
             android:textSize="16dp"
             android:layout_marginLeft="10dp"
             android:layout_gravity="center"
-            android:layout_width="70dp"
+            android:layout_width="80dp"
             android:layout_height="50dp" />
 
     </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>

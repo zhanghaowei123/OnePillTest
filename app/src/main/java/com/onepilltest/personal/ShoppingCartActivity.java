@@ -51,6 +51,7 @@ public class ShoppingCartActivity extends AppCompatActivity {
         btnpay = findViewById(R.id.sc_pay);
         btnpay.setOnClickListener(myListener);
         btndelete = findViewById(R.id.sc_delete);
+        btndelete.setOnClickListener(myListener);
     }
 
     private class MyListener implements View.OnClickListener {
