@@ -25,6 +25,7 @@ public class ShoppingCartActivity extends AppCompatActivity {
     private TextView tvprice;
     private ImageView ivback;
     private Button btnpay;
+    private Button btndelete;
     private CheckBox cb;
     private MyListener myListener;
 
@@ -49,6 +50,7 @@ public class ShoppingCartActivity extends AppCompatActivity {
         tvprice.setOnClickListener(myListener);
         btnpay = findViewById(R.id.sc_pay);
         btnpay.setOnClickListener(myListener);
+        btndelete = findViewById(R.id.sc_delete);
     }
 
     private class MyListener implements View.OnClickListener {
@@ -62,6 +64,9 @@ public class ShoppingCartActivity extends AppCompatActivity {
                 case R.id.sc_pay:
                     Intent intent1 = new Intent(ShoppingCartActivity.this, SweepActivity.class);
                     startActivity(intent1);
+                    break;
+                case R.id.sc_delete:
+
                     break;
             }
         }
