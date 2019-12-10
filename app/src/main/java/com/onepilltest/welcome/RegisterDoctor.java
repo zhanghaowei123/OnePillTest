@@ -34,6 +34,7 @@ public class RegisterDoctor extends AppCompatActivity implements View.OnClickLis
     private String phoneNumber;     // 电话号码
     private String verificationCode;  // 验证码
     private Button sendVerificationCode; // 发送验证码
+    private ImageView imgBack;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -123,6 +124,8 @@ public class RegisterDoctor extends AppCompatActivity implements View.OnClickLis
         imgResponse = findViewById(R.id.doctor_next);
         checkBox = findViewById(R.id.checkbox_doctor_agree);
         sendVerificationCode = findViewById(R.id.btn_send_verification_code_doctor);
+        imgBack  = findViewById(R.id.register_do_back);
+        imgBack.setOnClickListener(this);
         imgResponse.setOnClickListener(this);
         sendVerificationCode.setOnClickListener(this);
     }
@@ -130,6 +133,11 @@ public class RegisterDoctor extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.register_pa_back:
+                Intent intent = new Intent();
+                intent.setClass(RegisterDoctor.this,LoginDoctorActivity.class);
+                startActivity(intent);
+                break;
             case R.id.btn_send_verification_code_doctor:
                 if (!TextUtils.isEmpty(editPhone.getText())) {
                     if (editPhone.getText().length() == 11) {

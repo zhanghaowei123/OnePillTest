@@ -70,7 +70,6 @@
         <activity android:name=".welcome.PerfectInforPatientActivity" />
         <activity android:name=".welcome.UserSuccessActivity" />
         <activity android:name=".welcome.DoctorSuccessActivity" />
-        <activity android:name=".welcome.RegisteredActivity" />
         <activity android:name=".welcome.RegisterDoctor" />
         <activity android:name=".welcome.RegisterPatient" />
         <activity android:name=".personal.SettingActivity" />
