@@ -82,7 +82,7 @@
         android:layout_marginTop="8dp"
         android:paddingLeft="10dp"
         android:layout_width="match_parent"
-        android:layout_height="145dp"
+        android:layout_height="146dp"
         android:orientation="vertical">
 
         <LinearLayout
@@ -95,11 +95,14 @@
                 android:text="电话号码"
                 android:textSize="15dp"
                 android:textColor="#3C3C3C"
+                android:layout_gravity="center"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content" />
 
             <EditText
                 android:id="@+id/help_tel"
+                android:hint="请输入手机号"
+                android:textSize="13dp"
                 android:inputType="number"
                 android:layout_width="300dp"
                 android:layout_height="match_parent" />
@@ -115,11 +118,14 @@
                 android:text="问题概述"
                 android:textSize="15dp"
                 android:textColor="#3C3C3C"
+                android:layout_gravity="center"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content" />
 
             <EditText
                 android:id="@+id/help_question"
+                android:hint="请输入问题"
+                android:textSize="13dp"
                 android:layout_width="300dp"
                 android:layout_height="match_parent" />
 
@@ -134,11 +140,14 @@
                 android:text="QQ号"
                 android:textSize="15dp"
                 android:textColor="#3C3C3C"
+                android:layout_gravity="center"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content" />
 
             <EditText
                 android:id="@+id/help_QQ"
+                android:hint="请输入QQ号"
+                android:textSize="13dp"
                 android:inputType="number"
                 android:layout_width="300dp"
                 android:layout_height="match_parent" />

@@ -6,11 +6,14 @@ public class Cart {
     private int price;
     private String medicineSize;
     private int count;
+
     public String getMedicineSize() {
         return medicineSize;
     }
+
     public void setMedicineSize(String medicineSize) {
-        this.medicineSize = medicineSize; }
+        this.medicineSize = medicineSize;
+    }
 
     public int getCount() {
         return count;
