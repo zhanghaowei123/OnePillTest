@@ -20,7 +20,7 @@ public class FASPatientAdapter extends RecyclerView.Adapter {
     private Context context;
     private int itemId;
 
-    public FASPatientAdapter(Context context, List<SavePatient> articles, int itemId) {
+    public FASPatientAdapter(Context context, List<SavePatient> patients, int itemId) {
         this.context = context;
         this.patients = patients;
         this.itemId = itemId;
@@ -30,12 +30,12 @@ public class FASPatientAdapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(context).inflate(itemId,viewGroup,false);
-        return new FASPatientAdapter.MyItemViewHolder(view);
+        return new MyItemViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, final int i) {
-        FASPatientAdapter.MyItemViewHolder itemViewHolder = (FASPatientAdapter.MyItemViewHolder) viewHolder;
+        MyItemViewHolder itemViewHolder = (MyItemViewHolder) viewHolder;
         itemViewHolder.tvpatient.setText(patients.get(i).getName());
         itemViewHolder.tvtype.setText(patients.get(i).getType());
     }

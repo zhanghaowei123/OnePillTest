@@ -20,7 +20,7 @@ public class FASDoctorAdapter extends RecyclerView.Adapter {
     private Context context;
     private int itemId;
 
-    public FASDoctorAdapter(Context context, List<SaveDoctor> articles, int itemId) {
+    public FASDoctorAdapter(Context context, List<SaveDoctor> doctors, int itemId) {
         this.context = context;
         this.doctors = doctors;
         this.itemId = itemId;
