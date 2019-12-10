@@ -12,7 +12,7 @@
 
         <ImageView
             android:layout_marginLeft="10dp"
-            android:id="@+id/img_left1"
+            android:id="@+id/register_pa_back"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_gravity="center"

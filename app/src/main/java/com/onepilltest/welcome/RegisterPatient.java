@@ -45,6 +45,7 @@ public class RegisterPatient extends AppCompatActivity implements View.OnClickLi
     private SharedPreferences sharedPreferences;
     private boolean newFlag = false;
     private CheckBox checkBox;
+    private ImageView imgBack;
 
 
     @Override
@@ -136,13 +137,20 @@ public class RegisterPatient extends AppCompatActivity implements View.OnClickLi
         sendVerificationCode = findViewById(R.id.btn_send_verification_code);
         imgNext = findViewById(R.id.patient_next);
         checkBox = findViewById(R.id.checkbox_patient_agree);
+        imgBack = findViewById(R.id.register_pa_back);
         imgNext.setOnClickListener(this);
+        imgBack.setOnClickListener(this);
         sendVerificationCode.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.register_pa_back:
+                Intent intent = new Intent();
+                intent.setClass(RegisterPatient.this,LoginActivity.class);
+                startActivity(intent);
+                break;
             case R.id.btn_send_verification_code:
                 if (!TextUtils.isEmpty(editPhone.getText())) {
                     if (editPhone.getText().length() == 11) {

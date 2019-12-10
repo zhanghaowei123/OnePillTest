@@ -61,7 +61,7 @@ public class LoginDoctorActivity extends AppCompatActivity implements View.OnCli
         switch (v.getId()) {
             case R.id.text_register_doctor:
                 Intent intent = new Intent();
-                intent.setClass(LoginDoctorActivity.this, RegisteredActivity.class);
+                intent.setClass(LoginDoctorActivity.this, RegisterDoctor.class);
                 startActivity(intent);
                 break;
             case R.id.btn_login_doctor:
