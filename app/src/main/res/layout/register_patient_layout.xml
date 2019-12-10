@@ -55,6 +55,7 @@
                 android:id="@+id/edit_register_patient_phone"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
+                android:inputType="number"
                 android:hint="请输入您的手机号"
                 android:textSize="15dp" />
         </LinearLayout>
@@ -90,6 +91,7 @@
                 android:layout_width="215dp"
                 android:layout_height="wrap_content"
                 android:hint="验证码"
+                android:inputType="number"
                 android:textSize="15dp" />
 
             <Button

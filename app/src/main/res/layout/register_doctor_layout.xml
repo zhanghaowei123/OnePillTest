@@ -54,6 +54,7 @@
                 android:id="@+id/edit_register_doctor_phone"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
+                android:inputType="number"
                 android:hint="请输入您的手机号"
                 android:textSize="15dp" />
         </LinearLayout>
@@ -88,6 +89,7 @@
                 android:id="@+id/edit_register_doctor_checkword"
                 android:layout_width="215dp"
                 android:layout_height="wrap_content"
+                android:inputType="number"
                 android:hint="验证码"
                 android:textSize="15dp" />
 

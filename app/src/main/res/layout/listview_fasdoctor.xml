@@ -7,7 +7,7 @@
     <LinearLayout
         android:paddingLeft="20dp"
         android:layout_width="match_parent"
-        android:layout_height="90dp"
+        android:layout_height="80dp"
         android:orientation="horizontal"
         android:background="@drawable/underline">
 
@@ -20,15 +20,15 @@
             android:layout_height="60dp" />
 
         <LinearLayout
-            android:paddingTop="15dp"
-            android:layout_width="230dp"
+            android:paddingTop="8dp"
+            android:layout_width="240dp"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/fas_tv_doctor"
                 android:text=""
-                android:textSize="18dp"
+                android:textSize="17dp"
                 android:textColor="#3C3C3C"
                 android:layout_width="match_parent"
                 android:layout_height="35dp" />
@@ -36,7 +36,7 @@
             <TextView
                 android:id="@+id/fas_tv_type"
                 android:text=""
-                android:textSize="18dp"
+                android:textSize="17dp"
                 android:textColor="#3C3C3C"
                 android:layout_width="match_parent"
                 android:layout_height="30dp" />
@@ -46,8 +46,8 @@
         <ImageView
             android:src="@drawable/yes"
             android:layout_gravity="center"
-            android:layout_width="50dp"
-            android:layout_height="50dp" />
+            android:layout_width="40dp"
+            android:layout_height="40dp" />
 
     </LinearLayout>
 

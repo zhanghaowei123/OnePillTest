@@ -72,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:background="@null"
                 android:hint="请填写收货人姓名"
-                android:textSize="14dp" />
+                android:textSize="13dp" />
         </LinearLayout>
 
         <!--联系信息-->
@@ -94,9 +94,10 @@
                 android:id="@+id/edit_address_phoneNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="number"
                 android:background="@null"
                 android:hint="请填写收货人联系信息"
-                android:textSize="14dp" />
+                android:textSize="13dp" />
         </LinearLayout>
 
         <!--所在地区-->
@@ -120,7 +121,7 @@
                 android:layout_height="wrap_content"
                 android:background="@null"
                 android:hint="请填写收货人所在地区"
-                android:textSize="14dp" />
+                android:textSize="13dp" />
         </LinearLayout>
 
         <!--详细地址-->
@@ -144,7 +145,7 @@
                 android:layout_height="wrap_content"
                 android:background="@null"
                 android:hint="请填写收货人详细地址"
-                android:textSize="14dp" />
+                android:textSize="13dp" />
         </LinearLayout>
 
         <!--邮政编码-->
@@ -166,9 +167,10 @@
                 android:id="@+id/edit_address_postalCode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="number"
                 android:background="@null"
                 android:hint="请填写收货人详细地址"
-                android:textSize="14dp" />
+                android:textSize="13dp" />
         </LinearLayout>
 
     </LinearLayout>
