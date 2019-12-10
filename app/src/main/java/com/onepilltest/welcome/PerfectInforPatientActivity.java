@@ -48,9 +48,10 @@ public class PerfectInforPatientActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent();
-                        intent.setClass(PerfectInforPatientActivity.this, RegisterPatient.class);
-                        startActivity(intent);
+//                        Intent intent = new Intent();
+//                        intent.setClass(PerfectInforPatientActivity.this, RegisterPatient.class);
+//                        startActivity(intent);
+                        finish();
                         Toast.makeText(getApplicationContext(), "请完善个人信息", Toast.LENGTH_LONG).show();
                     }
                 }

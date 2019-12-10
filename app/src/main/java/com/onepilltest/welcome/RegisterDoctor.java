@@ -133,10 +133,11 @@ public class RegisterDoctor extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.register_pa_back:
-                Intent intent = new Intent();
-                intent.setClass(RegisterDoctor.this,LoginDoctorActivity.class);
-                startActivity(intent);
+            case R.id.register_do_back:
+//                Intent intent = new Intent();
+//                intent.setClass(RegisterDoctor.this,LoginDoctorActivity.class);
+//                startActivity(intent);
+                finish();
                 break;
             case R.id.btn_send_verification_code_doctor:
                 if (!TextUtils.isEmpty(editPhone.getText())) {
