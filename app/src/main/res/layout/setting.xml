@@ -101,6 +101,7 @@
 
             <!--姓名-->
             <LinearLayout
+                android:id="@+id/setting_lin_nickName"
                 android:layout_width="match_parent"
                 android:layout_height="47dp"
                 android:background="@drawable/underline"
@@ -113,7 +114,7 @@
                     android:layout_weight="2"
                     android:gravity="left"
                     android:paddingLeft="20dp"
-                    android:text="姓名"
+                    android:text="昵称"
                     android:textColor="#444"
                     android:textSize="14dp" />
 
@@ -123,6 +124,7 @@
                     android:layout_weight="2" />
 
                 <TextView
+                    android:id="@+id/setting_tv_nickName"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
@@ -142,6 +144,7 @@
 
             <!--绑定手机号-->
             <LinearLayout
+                android:id="@+id/setting_lin_phone"
                 android:layout_width="match_parent"
                 android:layout_height="47dp"
                 android:background="@drawable/underline"
@@ -164,6 +167,7 @@
                     android:layout_weight="2" />
 
                 <TextView
+                    android:id="@+id/setting_tv_phone"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
@@ -205,6 +209,7 @@
                     android:layout_weight="2" />
 
                 <TextView
+                    android:id="@+id/setting_tv_address"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
@@ -223,6 +228,7 @@
 
             <!--自动定位-->
             <LinearLayout
+                android:id="@+id/setting_lin_auto"
                 android:layout_width="match_parent"
                 android:layout_height="47dp"
                 android:background="@drawable/underline"
@@ -253,11 +259,15 @@
                     android:textColor="#999" />
 
                 <!--定位成功切换状态-->
-                <Button
+                <ImageButton
+                    android:id="@+id/setting_lin_auto_btn"
+                    android:background="#fff"
+                    android:padding="0dp"
+                    android:scaleType="fitXY"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="7"
-                    android:background="@drawable/on" />
+                    android:src="@drawable/on"/>
 
             </LinearLayout>
 
@@ -273,6 +283,7 @@
 
             <!--切换账号-->
             <LinearLayout
+                android:id="@+id/setting_lin_switchUser"
                 android:onClick="JumpAccount"
                 android:layout_width="match_parent"
                 android:layout_height="47dp"
@@ -281,6 +292,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
@@ -312,6 +324,7 @@
             </LinearLayout>
             <!--关于我们-->
             <LinearLayout
+                android:id="@+id/setting_lin_forUs"
                 android:layout_width="match_parent"
                 android:layout_height="47dp"
                 android:background="@drawable/underline"
@@ -319,6 +332,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
@@ -362,6 +376,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <Button
+            android:id="@+id/sign_out"
             android:text="退出登录"
             android:textColor="#f00"
             android:background="@android:color/transparent"

@@ -4,4 +4,5 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="doderBlue">#1E90FF</color>
+    <color name="colorGray">#eee</color>
 </resources>

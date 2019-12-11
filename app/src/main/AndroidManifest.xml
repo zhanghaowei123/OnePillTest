@@ -79,7 +79,6 @@
         <activity android:name=".personal.EditUserInfoActivity" />
         <activity android:name=".personal.EditAddressActivity" />
         <activity android:name=".personal.recordActivity"/>
-        <activity android:name=".personal.SweepActivity"/>
         <activity android:name=".message.QuestionActivity" />
         <activity android:name=".index.CommentActivity" />
         <activity android:name=".personal.AddAddressActivity" />
@@ -88,6 +87,8 @@
         <activity android:name=".personal.FocusAndSaveActivity"/>
         <activity android:name=".personal.ShoppingCartActivity"/>
         <activity android:name=".personal.HelpAndFeedBackActivity"/>
+        <activity android:name=".personal.switchActivity"></activity>
+        <activity android:name=".personal.UserList"></activity>
     </application>
 
 </manifest>

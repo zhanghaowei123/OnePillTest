@@ -17,7 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="医生登录"
+        android:text="医 生 登 录"
         android:textStyle="bold"
         android:textColor="#fff"
         android:textSize="20dp" />
