@@ -14,9 +14,8 @@
 
         <ImageView
             android:id="@+id/iv_commenterImg"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/buyer" />
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
 
         <TextView
             android:id="@+id/tv_commenter_name"
@@ -32,6 +31,6 @@
         android:id="@+id/tv_commenter_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="90dp"
+        android:layout_marginLeft="100dp"
         android:textSize="18sp" />
 </LinearLayout>
