@@ -54,6 +54,7 @@
             android:layout_weight="3">
 
             <com.onepilltest.others.RoundImageView
+                android:id="@+id/edit_user_info_Img"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:src="@drawable/user" />
@@ -68,7 +69,9 @@
             android:layout_weight="6">
 
             <TextView
-                android:text="上传头像"
+                android:id="@+id/edit_user_info_setImg"
+                android:padding="30dp"
+                android:text="点击上传头像"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>

@@ -2,6 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.onepilltest">
 
+    <!--和风天气-->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
     <!-- 读写SD卡权限 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -76,6 +82,8 @@
                 <action android:name="android.intent.action.USER_PRESENT" />
             </intent-filter>
         </receiver>
+        android:theme="@style/ThemeNoTitle"
+        android:usesCleartextTraffic="true">
 
         <!-- 配置访问百度地图的API_KEY -->
         <meta-data
@@ -116,7 +124,7 @@
         <activity android:name=".personal.QR_codeActivity" />
         <activity android:name=".personal.EditUserInfoActivity" />
         <activity android:name=".personal.EditAddressActivity" />
-        <activity android:name=".personal.recordActivity" />
+        <activity android:name=".personal.recordActivity"/>
         <activity android:name=".message.QuestionActivity" />
         <activity android:name=".index.CommentActivity" />
         <activity android:name=".personal.AddAddressActivity" />
@@ -125,8 +133,9 @@
         <activity android:name=".personal.FocusAndSaveActivity" />
         <activity android:name=".personal.ShoppingCartActivity" />
         <activity android:name=".personal.HelpAndFeedBackActivity" />
-        <activity android:name=".personal.switchActivity"></activity>
-        <activity android:name=".personal.UserList"></activity>
+        <activity android:name=".personal.switchActivity" />
+        <activity android:name=".personal.UserList" />
+        <activity android:name=".personal.SettingForUsActivity"></activity>
     </application>
 
 </manifest>

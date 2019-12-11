@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F1F1F1"
@@ -20,7 +21,21 @@
             android:text="每日提醒"
             android:textStyle="bold" />
 
-        <TextView
+        <com.onepilltest.others.CustomScrollBar
+            android:id="@+id/fragement_home_bar"
+            android:layout_width="250dp"
+            android:layout_height="30dp"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="center"
+            android:layout_marginBottom="0dp"
+            app:textColor="#555"
+            app:clickEnable="false"
+            app:isHorizontal="true"
+            app:speed="2"
+            app:text="今天天挺好啊"
+            app:textSize="16dp" />
+
+        <!--<TextView
             android:id="@+id/tv_remingimg"
             android:layout_width="match_parent"
             android:layout_height="30dp"
@@ -28,14 +43,14 @@
             android:paddingLeft="10dp"
             android:background="@drawable/bg_shape"
             android:gravity="center_vertical"
-            android:text="555" />
+            android:text="555" />-->
         <!--椭圆形提示框-->
     </LinearLayout>
     <!--找医生···-->
     <LinearLayout
-        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="90dp"
+        android:layout_marginTop="10dp"
         android:background="#fff"
         android:gravity="center"
         android:orientation="horizontal">
@@ -54,10 +69,10 @@
                 android:src="@drawable/find_doctors" />
 
             <TextView
-                android:layout_marginTop="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/iv_find_doctor"
+                android:layout_marginTop="5dp"
                 android:text="找医生" />
         </RelativeLayout>
 
@@ -75,10 +90,10 @@
                 android:src="@drawable/medical_box" />
 
             <TextView
-                android:layout_marginTop="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/iv_find_medicine"
+                android:layout_marginTop="5dp"
                 android:text="找药品" />
         </RelativeLayout>
 
@@ -108,7 +123,7 @@
     <!--文章-->
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycle_view"
-        android:background="#F1F1F1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:background="#F1F1F1" />
 </LinearLayout>

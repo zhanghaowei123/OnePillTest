@@ -149,7 +149,7 @@ public class SettingActivity extends AppCompatActivity {
                     startActivity();*/
                     break;
                 case R.id.setting_lin_forUs:
-                    Intent forUs_intent = new Intent(SettingActivity.this,EditUserInfoActivity.class);
+                    Intent forUs_intent = new Intent(SettingActivity.this,SettingForUsActivity.class);
                     startActivity(forUs_intent);
                     break;
                 case R.id.setting_lin_auto_btn:
@@ -169,6 +169,7 @@ public class SettingActivity extends AppCompatActivity {
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                     break;
+
             }
         }
     }

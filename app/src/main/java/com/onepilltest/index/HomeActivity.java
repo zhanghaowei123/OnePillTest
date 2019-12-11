@@ -11,9 +11,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.onepilltest.R;
+import com.onepilltest.entity.EventMessage;
 import com.onepilltest.message.MessageFragment;
 import com.onepilltest.nearby.NearFragment;
 import com.onepilltest.personal.PersonalFragment;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -81,6 +84,7 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
+    com.onepilltest.others.CustomScrollBar bar = null;
     private Map<String, MyTabSpec> map = new HashMap<>();
     private String[] tabStrId = {"首页", "附近", "消息", "个人"};
     // 用于记录当前正在显示的Fragment
@@ -90,6 +94,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initData();
+
         setListener();
         // 设置默认显示的TabSpec
         changeTab(tabStrId[0]);
@@ -98,18 +103,28 @@ public class HomeActivity extends AppCompatActivity {
     private class MyListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
+            EventMessage msg = new EventMessage();
+            msg.setCode("bar");
             switch (v.getId()) {
                 case R.id.tab_spec_home:
                     changeTab(tabStrId[0]);
+                    msg.setJson("0");
+                    EventBus.getDefault().post(msg);
                     break;
                 case R.id.tab_spec_near:
                     changeTab(tabStrId[1]);
+                    msg.setJson("1");
+                    EventBus.getDefault().post(msg);
                     break;
                 case R.id.tab_spec_msg:
                     changeTab(tabStrId[2]);
+                    msg.setJson("1");
+                    EventBus.getDefault().post(msg);
                     break;
                 case R.id.tab_spec_me:
                     changeTab(tabStrId[3]);
+                    msg.setJson("1");
+                    EventBus.getDefault().post(msg);
                     break;
             }
         }
@@ -208,6 +223,8 @@ public class HomeActivity extends AppCompatActivity {
         map.get(tabStrId[2]).setTextView(tv3);
         map.get(tabStrId[3]).setImageView(iv4);
         map.get(tabStrId[3]).setTextView(tv4);
+
+        bar = findViewById(R.id.fragement_home_bar);
     }
 
     // 将图片资源放入map的MyTabSpec对象中
