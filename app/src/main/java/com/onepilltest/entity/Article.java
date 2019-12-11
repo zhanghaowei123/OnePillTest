@@ -2,7 +2,7 @@ package com.onepilltest.entity;
 
 public class Article {
     private int id;
-    private String img;
+    private String headImg;
     private String writerName;
     private String content;
     private String tag;
@@ -35,12 +35,12 @@ public class Article {
         this.title = title;
     }
 
-    public String getImg() {
-        return img;
+    public String getHeadImg() {
+        return headImg;
     }
 
-    public void setImg(String img) {
-        this.img = img;
+    public void setHeadImg(String headImg) {
+        this.headImg = headImg;
     }
 
     public String getWriterName() {
