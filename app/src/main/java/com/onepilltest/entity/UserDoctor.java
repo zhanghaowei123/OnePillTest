@@ -1,8 +1,7 @@
 package com.onepilltest.entity;
 
 public class UserDoctor {
-    private String DoctorId;
-    private String nickName;
+    private int doctorId;
     private String name;
     private String phone;
     private String address;
@@ -13,16 +12,25 @@ public class UserDoctor {
     private String licence1;    //医师资格证的正面的地址，在手机上传
     private String licence2;    //医师资格证的反面的地址，在手机上传
     private String headImg;//系统有一个默认的头像在服务器端
+    private String resume;  //简历
 
-    public String getDoctorId() {
-        return DoctorId;
+    public int getDoctorId() {
+        return doctorId;
     }
 
-    public void setDoctorId(String doctorId) {
-        DoctorId = doctorId;
+    public void setDoctorId(int doctorId) {
+        doctorId = doctorId;
     }
 
     public UserDoctor() {
+    }
+
+    public String getResume() {
+        return resume;
+    }
+
+    public void setResume(String resume) {
+        this.resume = resume;
     }
 
     public String getTag() {

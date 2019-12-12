@@ -16,6 +16,7 @@ public class MessageFragment extends Fragment {
     private TextView tvAsk;
     private TextView tvInform;
 
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
