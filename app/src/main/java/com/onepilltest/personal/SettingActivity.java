@@ -61,6 +61,7 @@ public class SettingActivity extends AppCompatActivity {
         EventBus.getDefault().register(this);
         myListener = new MyListener();
         find();
+        init();
     }
 
     private void find() {
@@ -69,21 +70,21 @@ public class SettingActivity extends AppCompatActivity {
         btn = findViewById(R.id.setting_lin_auto_btn);
         btn.setOnClickListener(myListener);
         tv_nickName = findViewById(R.id.setting_tv_nickName);
-        tv_nickName.setText(UserBook.NowUser.getNickName());
+        //tv_nickName.setText(UserBook.NowUser.getNickName());
         tv_address = findViewById(R.id.setting_tv_address);
-        tv_address.setText(UserBook.NowUser.getAddress());
+        //tv_address.setText(UserBook.NowUser.getAddress());
         tv_phone = findViewById(R.id.setting_tv_phone);
-        tv_phone.setText(UserBook.NowUser.getPhone());
+        //tv_phone.setText(UserBook.NowUser.getPhone());
         user_img = findViewById(R.id.setting_user_img);
         user_img.setOnClickListener(myListener);
         nickName = findViewById(R.id.setting_user_nickname);
-        nickName.setText(UserBook.NowUser.getNickName());
+        //nickName.setText(UserBook.NowUser.getNickName());
         degree = findViewById(R.id.setting_user_degress);
-        if (UserBook.Code == UserBook.Patient){
+        /*if (UserBook.Code == UserBook.Patient){
             degree.setText("用户");
         }else if(UserBook.Code == UserBook.Doctor){
             degree.setText("医生");
-        }
+        }*/
 
         QR_code = findViewById(R.id.setting_user_QR_code);
         QR_code.setOnClickListener(myListener);
@@ -102,11 +103,11 @@ public class SettingActivity extends AppCompatActivity {
         lin_forUs = findViewById(R.id.setting_lin_forUs);
         lin_forUs.setOnClickListener(myListener);
 
-        RequestOptions requestOptions = new RequestOptions().circleCrop();
+        /*RequestOptions requestOptions = new RequestOptions().circleCrop();
         Glide.with(this)
                 .load(Connect.BASE_URL+UserBook.NowUser.getHeadImg())
                 .apply(requestOptions)
-                .into(user_img);
+                .into(user_img);*/
     }
 
     private class MyListener implements View.OnClickListener{
@@ -114,8 +115,14 @@ public class SettingActivity extends AppCompatActivity {
         public void onClick(View v) {
             switch (v.getId()){
                 case R.id.setting_user_address://用户地址
-                    Intent address_intent = new Intent(SettingActivity.this, AddressActivity.class);
-                    startActivity(address_intent);
+                    if (UserBook.Code == 1){//医生
+                        Intent address_intent = new Intent(SettingActivity.this, EditUserInfoActivity.class);
+                        startActivity(address_intent);
+                    }else if(UserBook.Code ==2){//用户
+                        Intent address_intent = new Intent(SettingActivity.this, AddressActivity.class);
+                        startActivity(address_intent);
+                    }
+
                     break;
                 case R.id.setting_back://返回
                     finish();
@@ -125,7 +132,7 @@ public class SettingActivity extends AppCompatActivity {
                     startActivity(user_img_intent);
                     break;
                 case R.id.setting_user_nickname://昵称
-                    Intent nickname_intent = new Intent(SettingActivity.this, changeNickActivity.class);
+                    Intent nickname_intent = new Intent(SettingActivity.this, EditUserInfoActivity.class);
                     startActivity(nickname_intent);
                     break;
                 case R.id.setting_user_degress://身份
@@ -151,11 +158,7 @@ public class SettingActivity extends AppCompatActivity {
                 case R.id.setting_lin_switchUser:
                     Log.e("UserList",UserBook.getList()+"");
                     Intent switch_intent = new Intent(SettingActivity.this, switchActivity.class);
-                    /*intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);*/
                     startActivity(switch_intent);
-                    /*Intent switch_intent = new Intent(SettingActivity.this,switchActivity.class);
-                    startActivity();*/
                     break;
                 case R.id.setting_lin_forUs:
                     Intent forUs_intent = new Intent(SettingActivity.this,SettingForUsActivity.class);
@@ -183,6 +186,46 @@ public class SettingActivity extends AppCompatActivity {
         }
     }
 
+    public void init(){
+        if (UserBook.Code == 1){//医生
+            initDoctor();
+        }else if(UserBook.Code ==2){//用户
+            initPatient();
+        }
+    }
+
+    //初始化用户信息
+    private void initPatient() {
+        //头像
+        RequestOptions requestOptions = new RequestOptions().circleCrop();
+        Glide.with(this)
+                .load(Connect.BASE_URL+UserBook.NowUser.getHeadImg())
+                .apply(requestOptions)
+                .into(user_img);
+        nickName.setText(UserBook.NowUser.getNickName());//昵称
+        degree.setText("用户");//身份
+        tv_nickName.setText(UserBook.NowUser.getNickName());//昵称
+        tv_address.setText(UserBook.NowUser.getAddress());//地址
+        tv_phone.setText(UserBook.NowUser.getPhone());//手机号
+
+
+    }
+
+    //初始化医生信息
+    private void initDoctor() {
+        //头像
+        RequestOptions requestOptions = new RequestOptions().circleCrop();
+        Glide.with(this)
+                .load(Connect.BASE_URL+UserBook.NowDoctor.getHeadImg())
+                .apply(requestOptions)
+                .into(user_img);
+        nickName.setText(UserBook.NowDoctor.getName());//昵称
+        degree.setText("医生");//身份
+        tv_nickName.setText(UserBook.NowDoctor.getName());//昵称
+        tv_address.setText(UserBook.NowDoctor.getAddress());//地址
+        tv_phone.setText(UserBook.NowDoctor.getPhone());//手机号
+    }
+
     public void JumpAccount(){
         Intent intent = new Intent(SettingActivity.this,switchActivity.class);
         startActivity(intent);
@@ -191,23 +234,45 @@ public class SettingActivity extends AppCompatActivity {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void updateUI(EventMessage msg){
 
-        Log.e("msg",msg.getCode()+msg.getJson());
-        if (msg.getCode() == "UserDao_update"){
-            if(msg.getJson()=="yes"){
-                Log.e("刷新",""+msg.getJson()+msg.getCode());
-                onCreate(null);
-            }else{
-                Toast.makeText(getApplicationContext(),"修改失败",Toast.LENGTH_SHORT);
+        if (UserBook.Code == 1){//医生
+            Log.e("msg",msg.getCode()+msg.getJson());
+            if (msg.getCode() == "DoctorDao_update"){
+                if(msg.getJson()=="yes"){
+                    Log.e("刷新",""+msg.getJson()+msg.getCode());
+                    onCreate(null);
+                }else{
+                    Toast.makeText(getApplicationContext(),"修改失败",Toast.LENGTH_SHORT);
+                }
+            }else if(msg.getCode() == "更新头像"){
+                if(msg.getJson() == "yes"){
+                        RequestOptions requestOptions = new RequestOptions().circleCrop();
+                        Glide.with(this)
+                                .load(Connect.BASE_URL+UserBook.NowDoctor.getHeadImg())
+                                .apply(requestOptions)
+                                .into(user_img);
+                }
             }
-        }else if(msg.getCode() == "更新头像"){
-            if(msg.getJson() == "yes"){
-                RequestOptions requestOptions = new RequestOptions().circleCrop();
-                Glide.with(this)
-                        .load(Connect.BASE_URL+UserBook.NowUser.getHeadImg())
-                        .apply(requestOptions)
-                        .into(user_img);
+        }else if(UserBook.Code ==2){//用户
+            Log.e("msg",msg.getCode()+msg.getJson());
+            if (msg.getCode() == "UserDao_update"){
+                if(msg.getJson()=="yes"){
+                    Log.e("刷新",""+msg.getJson()+msg.getCode());
+                    onCreate(null);
+                }else{
+                    Toast.makeText(getApplicationContext(),"修改失败",Toast.LENGTH_SHORT);
+                }
+            }else if(msg.getCode() == "更新头像"){
+                if(msg.getJson() == "yes"){
+
+                    RequestOptions requestOptions = new RequestOptions().circleCrop();
+                    Glide.with(this)
+                            .load(Connect.BASE_URL+UserBook.NowUser.getHeadImg())
+                            .apply(requestOptions)
+                            .into(user_img);
+                }
             }
         }
+
 
     }
 

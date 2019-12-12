@@ -4,10 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
 import com.onepilltest.R;
+import com.onepilltest.index.HomeFragment;
+import com.onepilltest.personal.UserBook;
 
 public class WelcomeActivity extends AppCompatActivity implements View.OnClickListener {
     private LinearLayout linearDoctor;
@@ -17,6 +20,12 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcome_login);
         initView();
+
+        /*if (UserBook.NowUser != null ){
+            Log.e("是否存在用户",UserBook.NowUser.getNickName());
+            startActivity(new Intent(WelcomeActivity.this, HomeFragment.class));
+
+        }*/
     }
     private void initView(){
         linearDoctor = findViewById(R.id.linear_doctor);

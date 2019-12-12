@@ -1,270 +1,431 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:layout_height="match_parent"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:background="#f0f0f0"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <!--标题栏-->
-    <LinearLayout
-        android:background="#808080"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/dc_details_back"
-            android:layout_width="0dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:background="@drawable/back_white_left" />
-
-        <TextView
-            android:gravity="center"
-            android:textColor="#fff"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="8"
-            android:text="医生简介"
-            android:textSize="16dp" />
-
-        <ImageView
-            android:layout_marginRight="3dp"
-            android:padding="3dp"
-            android:layout_weight="2"
-            android:src="@drawable/logo"
-            android:layout_width="0dp"
-            android:layout_height="40dp" />
-    </LinearLayout>
-    <!--<LinearLayout
-        android:paddingLeft="10dp"
-        android:background="#808080"
-        android:layout_width="match_parent"
-        android:layout_height="40dp">
-
-        <ImageView
-            android:id="@+id/dc_details_back"
-            android:src="@drawable/back_white_left"
-            android:layout_gravity="center"
-            android:layout_width="25dp"
-            android:layout_height="30dp" />
-
-        <TextView
-            android:text="医生简介"
-            android:textColor="#fff"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:textSize="17dp"
-            android:layout_width="270dp"
-            android:layout_height="match_parent" />
-
-        <ImageView
-            android:src="@drawable/logo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>-->
+    android:layout_height="match_parent">
 
     <LinearLayout
-        android:background="#808080"
-        android:paddingLeft="20dp"
         android:layout_width="match_parent"
-        android:layout_height="110dp"
-        android:orientation="horizontal">
-
-        <com.onepilltest.others.RoundImageView
-            android:src="@drawable/profilephoto"
-            android:layout_gravity="center"
-            android:layout_width="60dp"
-            android:layout_height="60dp" />
-        
-        <LinearLayout
-            android:padding="12dp"
-            android:layout_width="240dp"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-            
-            <TextView
-                android:id="@+id/dc_details_name"
-                android:text="XXXXX"
-                android:textSize="16dp"
-                android:textColor="#fff"
-                android:layout_marginTop="15dp"
-                android:layout_width="match_parent"
-                android:layout_height="25dp" />
-
-            <TextView
-                android:layout_marginBottom="3dp"
-                android:id="@+id/dc_details_hos"
-                android:text="hahahahaha"
-                android:textSize="15dp"
-                android:textColor="#fff"
-                android:layout_width="match_parent"
-                android:layout_height="20dp" />
-            
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/doctor_focus"
-            android:paddingTop="14dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_margin="6dp"
-                android:src="@drawable/share"
-                android:layout_gravity="center"
-                android:layout_width="24dp"
-                android:layout_height="24dp" />
-
-            <TextView
-                android:text="关注"
-                android:textColor="#fff"
-                android:layout_gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_marginTop="10dp"
-        android:background="#fff"
-        android:layout_width="match_parent"
-        android:layout_height="170dp"
+        android:layout_height="match_parent"
+        android:background="#f0f0f0"
         android:orientation="vertical">
 
+        <!--标题栏-->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:orientation="vertical"
-            android:background="@drawable/underline">
+            android:layout_height="40dp"
+            android:background="#808080"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/dc_details_back"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="@drawable/back_white_left" />
 
             <TextView
-                android:padding="10dp"
-                android:text="擅长疾病"
-                android:textSize="16dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="8"
+                android:gravity="center"
+                android:text="医生简介"
+                android:textColor="#fff"
+                android:textSize="16dp" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginRight="3dp"
+                android:layout_weight="2"
+                android:padding="3dp"
+                android:src="@drawable/logo" />
+        </LinearLayout>
+        <!--<LinearLayout
+            android:paddingLeft="10dp"
+            android:background="#808080"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+
+            <ImageView
+                android:id="@+id/dc_details_back"
+                android:src="@drawable/back_white_left"
+                android:layout_gravity="center"
+                android:layout_width="25dp"
+                android:layout_height="30dp" />
+
+            <TextView
+                android:text="医生简介"
+                android:textColor="#fff"
                 android:textStyle="bold"
-                android:textColor="#3C3C3C"
+                android:gravity="center"
+                android:textSize="17dp"
+                android:layout_width="270dp"
+                android:layout_height="match_parent" />
+
+            <ImageView
+                android:src="@drawable/logo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
+        </LinearLayout>-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="110dp"
+            android:background="#808080"
+            android:orientation="horizontal"
+            android:paddingLeft="20dp">
+
+            <com.onepilltest.others.RoundImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:src="@drawable/profilephoto" />
+
             <LinearLayout
+                android:layout_width="240dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="12dp">
+
+                <TextView
+                    android:id="@+id/dc_details_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="15dp"
+                    android:text="XXXXX"
+                    android:textColor="#fff"
+                    android:textSize="16dp" />
+
+                <TextView
+                    android:id="@+id/dc_details_hos"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_marginBottom="3dp"
+                    android:text="hahahahaha"
+                    android:textColor="#fff"
+                    android:textSize="15dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/doctor_focus"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:orientation="horizontal">
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingTop="14dp">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="6dp"
+                    android:src="@drawable/share" />
 
                 <TextView
-                    android:text="肺炎"
-                    android:textColor="#3C3C3C"
-                    android:textSize="14dp"
-                    android:gravity="center"
-                    android:background="@drawable/rightline"
-                    android:layout_width="96dp"
-                    android:layout_height="match_parent" />
-
-                <TextView
-                    android:text="咽喉炎"
-                    android:textColor="#3C3C3C"
-                    android:textSize="14dp"
-                    android:gravity="center"
-                    android:background="@drawable/rightline"
-                    android:layout_width="96dp"
-                    android:layout_height="match_parent"/>
-
-                <TextView
-                    android:text=""
-                    android:textColor="#3C3C3C"
-                    android:textSize="14dp"
-                    android:gravity="center"
-                    android:background="@drawable/rightline"
-                    android:layout_width="96dp"
-                    android:layout_height="match_parent"/>
-
-                <TextView
-                    android:text=""
-                    android:textColor="#3C3C3C"
-                    android:textSize="14dp"
-                    android:gravity="center"
-                    android:layout_width="96dp"
-                    android:layout_height="match_parent"/>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="关注"
+                    android:textColor="#fff" />
 
             </LinearLayout>
 
         </LinearLayout>
 
+        <!--第二块-->
         <LinearLayout
-            android:paddingLeft="10dp"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:background="@drawable/underline">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <ImageView
-                android:src="@drawable/phone"
-                android:layout_marginRight="10dp"
-                android:layout_gravity="center"
-                android:layout_width="30dp"
-                android:layout_height="30dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="@drawable/underline"
+                android:orientation="horizontal"
+                android:padding="10dp">
 
-            <TextView
-                android:text="联系电话"
-                android:textSize="15dp"
-                android:textColor="#3C3C3C"
-                android:gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="7dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:paddingLeft="18dp"
+                    android:paddingRight="20dp"
+                    android:text="11年         从业年限"
+                    android:textColor="#333"
+                    android:textSize="17dp" />
 
-            <TextView
-                android:id="@+id/dc_details_phone"
-                android:paddingLeft="140dp"
-                android:text=""
-                android:textSize="16dp"
-                android:layout_gravity="center"
-                android:layout_width="235dp"
-                android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="7dp"
+                    android:layout_weight="1"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:text="   2000        回答次数"
+                    android:textColor="#333"
+                    android:textSize="17dp" />
 
-            <ImageView
-                android:src="@drawable/yjt"
-                android:layout_gravity="center"
-                android:layout_width="35dp"
-                android:layout_height="35dp" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="7dp"
+                    android:layout_weight="1"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:text="  4.9分        * * * * *"
+                    android:textColor="#f80"
+                    android:textSize="18dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/underline"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="15dp">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ahh" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="专业医师认证"
+                    android:textColor="#000" />
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ahh" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="平均响应时长10分钟"
+                    android:textColor="#000" />
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/underline"
+                android:orientation="vertical"
+                android:paddingBottom="20dp"
+                android:paddingTop="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="擅长疾病"
+                    android:textColor="#777"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="96dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/rightline"
+                        android:gravity="center"
+                        android:text="肺炎"
+                        android:textColor="#777"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:layout_width="96dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/rightline"
+                        android:gravity="center"
+                        android:text="咽喉炎"
+                        android:textColor="#777"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:layout_width="96dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/rightline"
+                        android:gravity="center"
+                        android:text=""
+                        android:textColor="#3C3C3C"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:layout_width="96dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text=""
+                        android:textColor="#3C3C3C"
+                        android:textSize="14dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!--个人简介-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/underline"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="个人简介"
+                    android:textColor="#444"
+                    android:textSize="17dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="         微露点滴 沾衿落袖
+　　丽日绰约 轻解莲舟
+　　蒹葭荣茂 燕雀啁啾
+　　白石溪畔 斜阳逐流
+
+　　可嫌 金风玉露 兼程久
+　　灵犀心念 便相谋
+　　前路崎岖 躞蹀攀援
+　　亦同守
+         共你百年暮昏 到白昼
+　　依山临水 景看旧
+　　而你美胜 山水万筹
+　　尽入一人眸
+
+　　琴瑟愿与 共沐春秋
+　　滢溪潺潺 炊烟悠悠
+　　敢请东风 玉成双偶
+　　遥递佳信 知否知否
+
+　　为理云鬓 为簪银钩
+　　明月可鉴 情深亦寿
+　　此生相依 人间白首
+　　千金不易 清茶淡粥
+
+　　前缘既断 便再无求
+　　云泥之异 难越鸿沟
+　　相思不扫 久积弥厚
+　　他年君归 我葬南丘
+
+　　逢春 枯木忽生 花飞柳
+　　纷纷绵绵 结作愁
+　　随风四散 却又轻易 染眉头
+　　当时 一双鸳鸯 入深藕
+　　荷香绕水 乐同游
+　　月下花前 本来无酒
+　　对看竟忘忧
+
+　　何年何夕 两相执手
+　　蚀骨相思 风侵寒透
+　　仙人近侧 怕倚小楼
+　　金缕为笼 歌乐成囚
+         凉夜凄长 应怨更漏
+　　数得千枚 零落红豆
+　　遗君一心 一心怎收
+　　杳渺音讯 余我孤奏
+" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/underline"
+                android:paddingLeft="10dp">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/phone" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="联系电话"
+                    android:textColor="#333"
+                    android:textSize="15dp" />
+
+                <TextView
+
+                    android:id="@+id/dc_details_phone"
+                    android:layout_width="235dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingLeft="140dp"
+                    android:text=""
+                    android:textSize="16dp" />
+
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/yjt" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/underline"
+                android:paddingLeft="10dp">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/location" />
+
+                <TextView
+                    android:id="@+id/dc_details_location"
+                    android:layout_width="295dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="河北师范大学软件学院"
+                    android:textColor="#3C3C3C"
+                    android:textSize="15dp" />
+
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/yjt" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
-        <LinearLayout
-            android:paddingLeft="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:background="@drawable/underline">
-
-            <ImageView
-                android:src="@drawable/location"
-                android:layout_marginRight="10dp"
-                android:layout_gravity="center"
-                android:layout_width="30dp"
-                android:layout_height="30dp" />
-
-            <TextView
-                android:id="@+id/dc_details_location"
-                android:text=""
-                android:textSize="15dp"
-                android:textColor="#3C3C3C"
-                android:layout_gravity="center"
-                android:layout_width="295dp"
-                android:layout_height="wrap_content" />
-
-            <ImageView
-                android:src="@drawable/yjt"
-                android:layout_gravity="center"
-                android:layout_width="35dp"
-                android:layout_height="35dp" />
-
-        </LinearLayout>
 
     </LinearLayout>
-
-</LinearLayout>
+</ScrollView>

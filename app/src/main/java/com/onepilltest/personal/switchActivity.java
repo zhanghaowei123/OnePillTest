@@ -8,12 +8,15 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.onepilltest.R;
+import com.onepilltest.URL.Connect;
 
 
 public class switchActivity extends AppCompatActivity {
     MyListener myListener = new MyListener();
-    com.onepilltest.others.RoundImageView headImg = null;
+    ImageView headImg = null;
     TextView nickName = null;
     ImageButton button = null;
 
@@ -23,6 +26,38 @@ public class switchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_switch);
         find();
+        init();
+
+    }
+
+    public void init(){
+        if (UserBook.Code == 1){//医生
+            initDoctor();
+        }else if(UserBook.Code ==2){//用户
+            initPatient();
+        }
+    }
+
+    //初始化用户信息
+    private void initPatient() {
+        //头像
+        RequestOptions requestOptions = new RequestOptions().circleCrop();
+        Glide.with(this)
+                .load(Connect.BASE_URL+UserBook.NowUser.getHeadImg())
+                .apply(requestOptions)
+                .into(headImg);
+        nickName.setText(UserBook.NowUser.getPhone());
+    }
+
+    //初始化医生信息
+    private void initDoctor() {
+        //头像
+        RequestOptions requestOptions = new RequestOptions().circleCrop();
+        Glide.with(this)
+                .load(Connect.BASE_URL+UserBook.NowUser.getHeadImg())
+                .apply(requestOptions)
+                .into(headImg);
+        nickName.setText(UserBook.NowDoctor.getPhone());
 
     }
 
@@ -31,7 +66,6 @@ public class switchActivity extends AppCompatActivity {
         headImg.setOnClickListener(myListener);
         nickName = findViewById(R.id.activity_switch_nickName);
         nickName.setOnClickListener(myListener);
-        nickName.setText(UserBook.NowUser.getNickName());
         button = findViewById(R.id.activity_switch_button);
         button.setOnClickListener(myListener);
     }

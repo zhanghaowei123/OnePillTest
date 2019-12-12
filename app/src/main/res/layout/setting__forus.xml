@@ -44,4 +44,12 @@
         android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/thisisceshi"
+        android:layout_marginTop="100dp"
+        android:layout_gravity="center"
+        android:text="测试按钮"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 </LinearLayout>

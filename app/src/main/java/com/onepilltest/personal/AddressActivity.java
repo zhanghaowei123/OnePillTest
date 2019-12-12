@@ -1,7 +1,6 @@
 package com.onepilltest.personal;
 
 import android.content.Intent;
-import android.os.Messenger;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,7 +16,6 @@ import com.google.gson.reflect.TypeToken;
 import com.onepilltest.R;
 import com.onepilltest.entity.Address;
 import com.onepilltest.entity.EventMessage;
-import com.onepilltest.message.QuestionActivity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -42,16 +40,29 @@ public class AddressActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //去掉顶部标题
-        //getSupportActionBar().hide();
         setContentView(R.layout.user_address);
         myListener = new MyListener();
         find();
-        Log.e("用户"+UserBook.NowUser.getNickName(),"进入地址列表");
+        init();
         //将主线程注册成为订阅者
         EventBus.getDefault().register(this);
-        initBases();//初始化baseList数据
 
+    }
+
+    public void init(){
+        if (UserBook.Code == 1){//医生
+            initDoctor();
+        }else if(UserBook.Code ==2){//用户
+            initPatient();
+        }
+    }
+
+    //初始化用户信息
+    private void initPatient() {
+        Log.e("用户"+UserBook.NowUser.getNickName(),"进入地址列表");
+        AddressDao dao = new AddressDao();
+        dao.searchAll(UserBook.NowUser.getUserId());
+        Log.e("更新地址列表",""+baseList.toString());
         //创建ContentAdapter实例，传入上下文， 子布局id ,数据baseList
         adapter = new AddressAdapter(AddressActivity.this, R.layout.user_address_item, baseList);
 
@@ -77,6 +88,10 @@ public class AddressActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    //初始化医生信息
+    private void initDoctor() {
 
     }
 
@@ -128,13 +143,6 @@ public class AddressActivity extends AppCompatActivity {
         }
     }
 
-    private void initBases() {
-
-        Log.e("用户"+UserBook.NowUser.getNickName(),"进入initBases");
-        AddressDao dao = new AddressDao();
-        dao.searchAll(UserBook.NowUser.getUserId());
-        Log.e("更新地址列表",""+baseList.toString());
-    }
 
 
 

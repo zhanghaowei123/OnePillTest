@@ -64,7 +64,6 @@ public class PersonalFragment extends Fragment {
      */
     private void find(View view) {
         name = view.findViewById(R.id.personal_name);
-        name.setText(UserBook.NowUser.getNickName());
         degree = view.findViewById(R.id.personal_work);
         degree.setText(UserBook.getDegree());
         iv_personal = view.findViewById(R.id.iv_personal);
@@ -90,13 +89,25 @@ public class PersonalFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.personal, container, false);
         EventBus.getDefault().register(this);
-        initData();
         initView(view);
+        initData();
         return view;
     }
 
     private void initData() {
+        if (UserBook.Code == 1){//医生
+            initDoctor();
+        }else if(UserBook.Code ==2){//用户
+            initPatient();
+        }
+    }
 
+    private void initDoctor() {
+        name.setText(UserBook.NowDoctor.getName());
+    }
+
+    private void initPatient() {
+        name.setText(UserBook.NowUser.getNickName());
     }
 
     private void initView(View view) {
@@ -105,7 +116,7 @@ public class PersonalFragment extends Fragment {
         find(view);
         RequestOptions requestOptions = new RequestOptions().circleCrop();
         Glide.with(this)
-                .load(Connect.BASE_URL + UserBook.NowUser.getHeadImg())
+                .load(Connect.BASE_URL + UserBook.NowDoctor.getHeadImg())
                 .apply(requestOptions)
                 .into(iv_personal);
     }
@@ -113,16 +124,30 @@ public class PersonalFragment extends Fragment {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void updateUI(EventMessage msg) {
 
-        Log.e("person更新", msg.getCode() + msg.getJson());
-        if (msg.getCode() == "更新头像") {
-            if (msg.getJson() == "yes") {
-                RequestOptions requestOptions = new RequestOptions().circleCrop();
-                Glide.with(this)
-                        .load(Connect.BASE_URL + UserBook.NowUser.getHeadImg())
-                        .apply(requestOptions)
-                        .into(iv_personal);
+        if(UserBook.Code == 1){
+            Log.e("person更新", msg.getCode() + msg.getJson());
+            if (msg.getCode() == "更新头像") {
+                if (msg.getJson() == "yes") {
+                    RequestOptions requestOptions = new RequestOptions().circleCrop();
+                    Glide.with(this)
+                            .load(Connect.BASE_URL + UserBook.NowDoctor.getHeadImg())
+                            .apply(requestOptions)
+                            .into(iv_personal);
+                }
+            }
+        }else if(UserBook.Code == 2){
+            Log.e("person更新", msg.getCode() + msg.getJson());
+            if (msg.getCode() == "更新头像") {
+                if (msg.getJson() == "yes") {
+                    RequestOptions requestOptions = new RequestOptions().circleCrop();
+                    Glide.with(this)
+                            .load(Connect.BASE_URL + UserBook.NowUser.getHeadImg())
+                            .apply(requestOptions)
+                            .into(iv_personal);
+                }
             }
         }
+
 
     }
 
