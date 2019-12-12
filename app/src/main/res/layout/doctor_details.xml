@@ -9,7 +9,7 @@
         android:paddingLeft="10dp"
         android:background="#808080"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="40dp">
 
         <ImageView
             android:id="@+id/dc_details_back"
@@ -29,8 +29,8 @@
 
         <ImageView
             android:src="@drawable/logo"
-            android:layout_width="60dp"
-            android:layout_height="40dp" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 
@@ -190,7 +190,7 @@
                 android:text=""
                 android:textSize="16dp"
                 android:layout_gravity="center"
-                android:layout_width="245dp"
+                android:layout_width="235dp"
                 android:layout_height="wrap_content" />
 
             <ImageView
@@ -220,7 +220,7 @@
                 android:textSize="15dp"
                 android:textColor="#3C3C3C"
                 android:layout_gravity="center"
-                android:layout_width="305dp"
+                android:layout_width="295dp"
                 android:layout_height="wrap_content" />
 
             <ImageView

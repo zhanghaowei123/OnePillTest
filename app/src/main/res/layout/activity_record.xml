@@ -12,7 +12,7 @@
         android:orientation="horizontal">
         <Button
             android:id="@+id/btn_left"
-            android:layout_marginLeft="75dp"
+            android:layout_marginLeft="60dp"
             android:layout_marginRight="40dp"
             android:background="@drawable/arrow_left"
             android:layout_width="30dp"
