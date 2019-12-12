@@ -53,7 +53,7 @@
             android:gravity="center"
             android:layout_weight="3">
 
-            <com.onepilltest.others.RoundImageView
+            <ImageView
                 android:id="@+id/edit_user_info_Img"
                 android:layout_width="100dp"
                 android:layout_height="100dp"

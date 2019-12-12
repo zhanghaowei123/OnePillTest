@@ -2,9 +2,17 @@ package com.onepilltest.personal;
 
 import android.content.SharedPreferences;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.onepilltest.URL.Connect;
+import com.onepilltest.entity.EventMessage;
 import com.onepilltest.entity.UserDoctor;
 import com.onepilltest.entity.UserPatient;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,10 +27,21 @@ public class UserBook {
     private static List<UserPatient> UserList = new ArrayList<>();//用户列表
     private static List<UserDoctor> DoctorList = new ArrayList<>();//医生列表
 
-    public UserPatient getNowUser() {
+ /*   public UserPatient getNowUser() {
         return NowUser;
+    }*/
+    public Object getNowUser(){
+        if (Code == 1)
+            return NowDoctor;
+        else if (Code == 2){
+            return NowUser;
+        }else
+            return null;
     }
 
+    public UserDoctor getNowDocter() {
+        return NowDoctor;
+    }
     public void setNowUser(UserPatient nowUser) {
         NowUser = nowUser;
     }
@@ -53,8 +72,8 @@ public class UserBook {
         NowUser = userPatient;
     }
 
-    public static void addUser(UserDoctor userDoctor, int code) {
-        int size = UserList.size();
+    public static void addDocter(UserDoctor userDoctor, int code) {
+        int size = DoctorList.size();
         Code = code;
         boolean f = true;
         if(size ==0){
@@ -80,6 +99,14 @@ public class UserBook {
         }
         str+="UserList一共记录了"+UserList.size()+"个用户信息";
         return str;
+    }
+
+    public static String getDegree(){
+        if (Code == 1){
+            return "医生";
+        }else{
+            return "用户";
+        }
     }
 
 }

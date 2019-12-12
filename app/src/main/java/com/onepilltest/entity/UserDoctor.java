@@ -2,6 +2,7 @@ package com.onepilltest.entity;
 
 public class UserDoctor {
     private String DoctorId;
+    private String nickName;
     private String name;
     private String phone;
     private String address;

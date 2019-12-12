@@ -12,7 +12,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.onepilltest.R;
+import com.onepilltest.URL.Connect;
 import com.onepilltest.entity.EventMessage;
 import com.onepilltest.index.HomeActivity;
 import com.onepilltest.message.QuestionActivity;
@@ -40,7 +43,7 @@ public class SettingActivity extends AppCompatActivity {
 
     Button back = null;//返回键
     MyListener myListener = null;
-    com.onepilltest.others.RoundImageView user_img = null;//头像
+    ImageView user_img = null;//头像
     TextView nickName = null;//昵称
     TextView degree = null;//身份
     ImageView QR_code = null;//二维码
@@ -98,6 +101,12 @@ public class SettingActivity extends AppCompatActivity {
         lin_switchUser.setOnClickListener(myListener);
         lin_forUs = findViewById(R.id.setting_lin_forUs);
         lin_forUs.setOnClickListener(myListener);
+
+        RequestOptions requestOptions = new RequestOptions().circleCrop();
+        Glide.with(this)
+                .load(Connect.BASE_URL+UserBook.NowUser.getHeadImg())
+                .apply(requestOptions)
+                .into(user_img);
     }
 
     private class MyListener implements View.OnClickListener{
@@ -182,6 +191,7 @@ public class SettingActivity extends AppCompatActivity {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void updateUI(EventMessage msg){
 
+        Log.e("msg",msg.getCode()+msg.getJson());
         if (msg.getCode() == "UserDao_update"){
             if(msg.getJson()=="yes"){
                 Log.e("刷新",""+msg.getJson()+msg.getCode());
@@ -189,8 +199,21 @@ public class SettingActivity extends AppCompatActivity {
             }else{
                 Toast.makeText(getApplicationContext(),"修改失败",Toast.LENGTH_SHORT);
             }
+        }else if(msg.getCode() == "更新头像"){
+            if(msg.getJson() == "yes"){
+                RequestOptions requestOptions = new RequestOptions().circleCrop();
+                Glide.with(this)
+                        .load(Connect.BASE_URL+UserBook.NowUser.getHeadImg())
+                        .apply(requestOptions)
+                        .into(user_img);
+            }
         }
 
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
 }
