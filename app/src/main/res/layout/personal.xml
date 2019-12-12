@@ -37,7 +37,7 @@
         android:background="#FFFFFF"
         android:paddingLeft="15dp">
 
-        <ImageView
+        <com.onepilltest.others.RoundImageView
             android:id="@+id/iv_personal"
             android:layout_width="60dp"
             android:layout_height="60dp"
