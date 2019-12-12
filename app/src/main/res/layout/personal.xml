@@ -247,7 +247,7 @@
                 android:src="@drawable/tip" />
 
             <TextView
-                android:layout_width="270dp"
+                android:layout_width="260dp"
                 android:layout_height="match_parent"
                 android:paddingLeft="15dp"
                 android:paddingTop="13dp"
