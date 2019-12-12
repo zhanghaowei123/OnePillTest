@@ -4,9 +4,11 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.onepilltest.URL.Connect;
 import com.onepilltest.entity.Address;
 import com.onepilltest.entity.EventMessage;
+import com.onepilltest.entity.HeFeng;
 
 import org.greenrobot.eventbus.EventBus;
 

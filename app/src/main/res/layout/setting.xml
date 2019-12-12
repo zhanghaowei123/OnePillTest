@@ -52,13 +52,12 @@
                 android:background="@drawable/underline"
                 android:orientation="horizontal">
 
-                <com.onepilltest.others.RoundImageView
+                <ImageView
                     android:layout_width="0dp"
                     android:id="@+id/setting_user_img"
                     android:layout_height="80dp"
                     android:layout_margin="15dp"
-                    android:layout_weight="3"
-                    android:src="@drawable/user" />
+                    android:layout_weight="3" />
 
                 <LinearLayout
                     android:layout_width="0dp"
