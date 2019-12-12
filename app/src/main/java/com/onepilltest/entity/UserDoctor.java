@@ -1,7 +1,7 @@
 package com.onepilltest.entity;
 
 public class UserDoctor {
-    private int DoctorId;
+    private int doctorId;
     private String name;
     private String phone;
     private String address;
@@ -15,15 +15,14 @@ public class UserDoctor {
     private String resume;  //简历
 
     public int getDoctorId() {
-        return DoctorId;
+        return doctorId;
     }
 
     public void setDoctorId(int doctorId) {
-        DoctorId = doctorId;
+        this.doctorId = doctorId;
     }
 
     public UserDoctor(){
-
     }
 
     public String getResume() {

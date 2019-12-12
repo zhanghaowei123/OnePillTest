@@ -42,7 +42,7 @@ public class UserListAdapter extends ArrayAdapter<UserPatient> {
         //头像
         RequestOptions requestOptions = new RequestOptions().circleCrop();
         Glide.with(getContext())
-                .load(Connect.BASE_URL+UserBook.NowUser.getHeadImg())
+                .load(Connect.BASE_URL+base.getHeadImg())
                 .apply(requestOptions)
                 .into(headImg);
         nickName.setText(base.getNickName());

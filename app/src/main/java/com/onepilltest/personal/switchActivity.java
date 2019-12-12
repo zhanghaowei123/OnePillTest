@@ -54,7 +54,7 @@ public class switchActivity extends AppCompatActivity {
         //头像
         RequestOptions requestOptions = new RequestOptions().circleCrop();
         Glide.with(this)
-                .load(Connect.BASE_URL+UserBook.NowUser.getHeadImg())
+                .load(Connect.BASE_URL+UserBook.NowDoctor.getHeadImg())
                 .apply(requestOptions)
                 .into(headImg);
         nickName.setText(UserBook.NowDoctor.getPhone());

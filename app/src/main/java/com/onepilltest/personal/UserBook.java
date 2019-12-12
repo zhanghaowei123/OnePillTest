@@ -84,7 +84,7 @@ public class UserBook {
             if (DoctorList.get(i).getDoctorId() == userDoctor.getDoctorId())
                 f = false;
         }
-        if (f)
+        if (f && size !=0)
             DoctorList.add(userDoctor);
         NowDoctor = userDoctor;
     }
@@ -109,6 +109,7 @@ public class UserBook {
 
     public static String getDegree() {
         if (Code == 1) {
+
             return "医生";
         } else {
             return "用户";

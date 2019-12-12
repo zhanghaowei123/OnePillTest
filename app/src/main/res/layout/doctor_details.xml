@@ -78,7 +78,8 @@
             android:orientation="horizontal"
             android:paddingLeft="20dp">
 
-            <com.onepilltest.others.RoundImageView
+            <ImageView
+                android:id="@+id/dc_details_headImg"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_gravity="center"

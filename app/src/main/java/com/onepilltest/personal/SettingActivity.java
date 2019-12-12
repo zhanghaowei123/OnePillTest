@@ -20,6 +20,7 @@ import com.onepilltest.entity.EventMessage;
 import com.onepilltest.index.HomeActivity;
 import com.onepilltest.message.QuestionActivity;
 import com.onepilltest.welcome.LoginActivity;
+import com.onepilltest.welcome.WelcomeActivity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -118,9 +119,11 @@ public class SettingActivity extends AppCompatActivity {
                     if (UserBook.Code == 1){//医生
                         Intent address_intent = new Intent(SettingActivity.this, EditUserInfoActivity.class);
                         startActivity(address_intent);
+                        finish();
                     }else if(UserBook.Code ==2){//用户
                         Intent address_intent = new Intent(SettingActivity.this, AddressActivity.class);
                         startActivity(address_intent);
+                        finish();
                     }
 
                     break;
@@ -163,6 +166,7 @@ public class SettingActivity extends AppCompatActivity {
                 case R.id.setting_lin_forUs:
                     Intent forUs_intent = new Intent(SettingActivity.this,SettingForUsActivity.class);
                     startActivity(forUs_intent);
+                    finish();
                     break;
                 case R.id.setting_lin_auto_btn:
                     if(state ==0){
@@ -176,7 +180,7 @@ public class SettingActivity extends AppCompatActivity {
                     break;
                 case R.id.sign_out://退出登陆
                     UserBook.NowUser = null;
-                    Intent intent = new Intent(SettingActivity.this, LoginActivity.class);
+                    Intent intent = new Intent(SettingActivity.this, WelcomeActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);

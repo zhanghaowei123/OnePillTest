@@ -39,14 +39,15 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <!-- <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" /> -->
-    <!-- <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/> -->
+    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
 
 
     <application
+        android:name=".ECApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -55,10 +56,27 @@
         android:supportsRtl="true"
         android:theme="@style/ThemeNoTitle"
         android:usesCleartextTraffic="true">
+        <!-- 配置访问百度地图的API_KEY -->
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="r26pHuDLyGxHGZHEBLU5LMQHK64D0Z0j" />
 
-        <uses-library
-            android:name="org.apache.http.legacy"
-            android:required="false" />
+        <activity android:name=".welcome.WelcomeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <!-- 百度地图定位服务 -->
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote">
+            <intent-filter>
+                <action android:name="com.baidu.location.service_v5.0.0" />
+            </intent-filter>
+        </service>
         <!-- 设置环信应用的AppKey -->
         <meta-data
             android:name="EASEMOB_APPKEY"
@@ -83,30 +101,7 @@
                 <action android:name="android.intent.action.USER_PRESENT" />
             </intent-filter>
         </receiver>
-        android:theme="@style/ThemeNoTitle"
-        android:usesCleartextTraffic="true">
 
-        <!-- 配置访问百度地图的API_KEY -->
-        <meta-data
-            android:name="com.baidu.lbsapi.API_KEY"
-            android:value="r26pHuDLyGxHGZHEBLU5LMQHK64D0Z0j" />
-
-        <activity android:name=".welcome.WelcomeActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <!-- 百度地图定位服务 -->
-        <service
-            android:name="com.baidu.location.f"
-            android:enabled="true"
-            android:process=":remote">
-            <intent-filter>
-                <action android:name="com.baidu.location.service_v5.0.0" />
-            </intent-filter>
-        </service>
 
         <activity android:name=".index.HomeActivity" />
         <activity android:name=".index.FoundPatientActivity" />
@@ -125,7 +120,7 @@
         <activity android:name=".personal.QR_codeActivity" />
         <activity android:name=".personal.EditUserInfoActivity" />
         <activity android:name=".personal.EditAddressActivity" />
-        <activity android:name=".personal.recordActivity"/>
+        <activity android:name=".personal.recordActivity" />
         <activity android:name=".message.QuestionActivity" />
         <activity android:name=".index.CommentActivity" />
         <activity android:name=".personal.AddAddressActivity" />
