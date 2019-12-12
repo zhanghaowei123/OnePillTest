@@ -6,6 +6,7 @@
 
     <LinearLayout
         android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -19,10 +20,10 @@
 
         <TextView
             android:gravity="center"
-            android:textSize="16dp"
+            android:textSize="18dp"
             android:text="我的订单"
             android:textColor="#3C3C3C"
-            android:layout_width="290dp"
+            android:layout_width="300dp"
             android:layout_height="match_parent" />
 
         <ImageView
@@ -39,8 +40,7 @@
         <!--android:layout_height="match_parent"/>-->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="40dp"
         android:orientation="horizontal">
 
         <Button
@@ -50,8 +50,8 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="全部"
-            android:textSize="20dp"
-            android:background="#fff"/>
+            android:textSize="15dp"
+            android:background="@drawable/rightline"/>
         <Button
             android:id="@+id/btn_order_unsend_seller"
             android:layout_width="0dp"
@@ -59,8 +59,8 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="未发货"
-            android:textSize="20dp"
-            android:background="#fff"/>
+            android:textSize="15dp"
+            android:background="@drawable/rightline"/>
         <Button
             android:id="@+id/btn_order_waitget_seller"
             android:layout_width="0dp"
@@ -68,8 +68,8 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="待收货"
-            android:textSize="20dp"
-            android:background="#fff"/>
+            android:textSize="15dp"
+            android:background="@drawable/rightline"/>
         <Button
             android:id="@+id/btn_order_finish_seller"
             android:layout_width="0dp"
@@ -77,7 +77,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="已完成"
-            android:textSize="20dp"
+            android:textSize="15dp"
             android:background="#fff"/>
     </LinearLayout>
 
