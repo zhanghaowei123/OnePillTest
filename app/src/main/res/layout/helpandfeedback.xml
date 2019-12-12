@@ -7,6 +7,7 @@
 
     <LinearLayout
         android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:background="#FFFFFF"
         android:layout_width="match_parent"
         android:layout_height="40dp">
@@ -23,7 +24,7 @@
             android:textSize="16dp"
             android:textColor="#3C3C3C"
             android:gravity="center"
-            android:layout_width="290dp"
+            android:layout_width="300dp"
             android:layout_height="match_parent" />
 
         <ImageView
@@ -66,6 +67,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:paddingRight="10dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -114,7 +116,8 @@
                 android:hint="请输入手机号"
                 android:textSize="13dp"
                 android:inputType="number"
-                android:layout_width="280dp"
+                android:layout_marginRight="20dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
         </LinearLayout>
@@ -136,7 +139,8 @@
                 android:id="@+id/help_question"
                 android:hint="请输入问题"
                 android:textSize="13dp"
-                android:layout_width="280dp"
+                android:layout_marginRight="20dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
         </LinearLayout>
@@ -159,7 +163,8 @@
                 android:hint="请输入QQ号"
                 android:textSize="13dp"
                 android:inputType="number"
-                android:layout_width="280dp"
+                android:layout_marginRight="20dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
         </LinearLayout>

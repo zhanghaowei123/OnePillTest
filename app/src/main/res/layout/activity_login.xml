@@ -16,12 +16,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="病 人 登 录"
+        android:text="病人登录"
         android:textColor="#fff"
         android:textSize="20dp"
         android:textStyle="bold" />
     <!--登录-->
     <LinearLayout
+        android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -34,6 +35,7 @@
             android:src="@drawable/shoujihao" />
 
         <EditText
+            android:layout_marginLeft="5dp"
             android:id="@+id/edit_phone"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
@@ -62,6 +64,7 @@
             android:layout_height="wrap_content">
 
             <EditText
+                android:layout_marginLeft="5dp"
                 android:id="@+id/edit_password"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
@@ -81,7 +84,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="260dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="50dp"
@@ -91,7 +94,7 @@
             android:id="@+id/btn_login"
             android:layout_width="wrap_content"
             android:layout_height="45dp"
-            android:layout_marginLeft="60dp"
+            android:layout_marginLeft="90dp"
             android:background="@drawable/button_circle_shape"
             android:text="登录"
             android:textColor="#fff"
@@ -102,7 +105,7 @@
             android:id="@+id/text_register"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:text="点我注册"
             android:textColor="#fff"

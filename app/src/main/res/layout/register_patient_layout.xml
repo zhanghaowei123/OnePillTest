@@ -5,6 +5,7 @@
     android:orientation="vertical">
     <!--header-->
     <LinearLayout
+        android:paddingRight="10dp"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:background="#56ced4"
@@ -19,7 +20,7 @@
             android:src="@drawable/left" />
 
         <TextView
-            android:layout_width="290dp"
+            android:layout_width="300dp"
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="用户注册"

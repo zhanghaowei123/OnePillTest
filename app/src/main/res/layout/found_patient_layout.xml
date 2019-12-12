@@ -22,7 +22,7 @@
             android:textSize="18dp"
             android:textColor="#3C3C3C"
             android:gravity="center"
-            android:layout_width="290dp"
+            android:layout_width="300dp"
             android:layout_height="match_parent" />
         <ImageView
             android:src="@drawable/logo"
@@ -196,27 +196,32 @@
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
             android:layout_marginTop="10dp">
 
             <TableRow>
 
                 <Button
+                    android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="布洛芬" />
 
                 <Button
+                    android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="百服宁" />
 
                 <Button
+                    android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="泰诺林" />
 
                 <Button
+                    android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="速效救心" />
@@ -226,26 +231,31 @@
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp">
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp">
 
             <TableRow>
 
                 <Button
+                    android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="芬必达" />
 
                 <Button
+                    android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="西瓜霜" />
 
                 <Button
+                    android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="银翘片" />
 
                 <Button
+                    android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="云南白药" />
@@ -255,26 +265,31 @@
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp">
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp">
 
             <TableRow>
 
                 <Button
+                    android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="枇杷膏" />
 
                 <Button
+                    android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="藿香正气" />
 
                 <Button
+                    android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="夏桑菊" />
 
                 <Button
+                    android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="健胃消食" />
