@@ -57,6 +57,25 @@ public class LoginActivity extends AppCompatActivity {
                 login();
             }
         });
+        //密码可视或不可视
+        imgEye.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //当当前密码为明文形式
+                if (editPassword.getInputType()==128){
+                    //1.将密码的输入框变为密码形式
+                    editPassword.setInputType(129);
+                    //将图片变为close
+                    imgEye.setImageResource(R.drawable.eyeclose);
+                }else if(editPassword.getInputType() == 129){
+                    //此时为密码形式
+                    //1.变为文本格式
+                    editPassword.setInputType(128);
+                    //2.修改图片
+                    imgEye.setImageResource(R.drawable.eye);
+                }
+            }
+        });
     }
 
     private void login() {
