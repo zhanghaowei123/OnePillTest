@@ -27,21 +27,22 @@ public class UserBook {
     private static List<UserPatient> UserList = new ArrayList<>();//用户列表
     private static List<UserDoctor> DoctorList = new ArrayList<>();//医生列表
 
- /*   public UserPatient getNowUser() {
-        return NowUser;
-    }*/
-    public Object getNowUser(){
+    /*   public UserPatient getNowUser() {
+           return NowUser;
+       }*/
+    public Object getNowUser() {
         if (Code == 1)
             return NowDoctor;
-        else if (Code == 2){
+        else if (Code == 2) {
             return NowUser;
-        }else
+        } else
             return null;
     }
 
     public UserDoctor getNowDocter() {
         return NowDoctor;
     }
+
     public void setNowUser(UserPatient nowUser) {
         NowUser = nowUser;
     }
@@ -56,18 +57,18 @@ public class UserBook {
 
     public static void addUser(UserPatient userPatient, int code) {
         int size = UserList.size();
-        Log.e("UserList","size"+size);
+        Log.e("UserList", "size" + size);
         Code = code;
         boolean f = true;
-        if(size ==0){
+        if (size == 0) {
             UserList.add(userPatient);
         }
         for (int i = 0; i < size; i++) {
-            Log.e("UserList","比较"+UserList.get(i).getUserId()+"\n"+userPatient.getUserId());
+            Log.e("UserList", "比较" + UserList.get(i).getUserId() + "\n" + userPatient.getUserId());
             if (UserList.get(i).getUserId() == userPatient.getUserId())
                 f = false;
         }
-        if (f && size!=0)
+        if (f && size != 0)
             UserList.add(userPatient);
         NowUser = userPatient;
     }
@@ -76,7 +77,7 @@ public class UserBook {
         int size = DoctorList.size();
         Code = code;
         boolean f = true;
-        if(size ==0){
+        if (size == 0) {
             DoctorList.add(userDoctor);
         }
         for (int i = 0; i < size; i++) {
@@ -88,23 +89,28 @@ public class UserBook {
         NowDoctor = userDoctor;
     }
 
-    public static List<UserPatient> getList (){
+    public static List<UserPatient> getList() {
         return UserList;
     }
-    public static String print(){
+
+    public static List<UserDoctor> getDoctorList() {
+        return DoctorList;
+    }
+
+    public static String print() {
         String str = "";
-        for(int i = 0;i<UserList.size();i++){
-            str += "\n"+UserList.get(i).getNickName();
+        for (int i = 0; i < UserList.size(); i++) {
+            str += "\n" + UserList.get(i).getNickName();
 
         }
-        str+="UserList一共记录了"+UserList.size()+"个用户信息";
+        str += "UserList一共记录了" + UserList.size() + "个用户信息";
         return str;
     }
 
-    public static String getDegree(){
-        if (Code == 1){
+    public static String getDegree() {
+        if (Code == 1) {
             return "医生";
-        }else{
+        } else {
             return "用户";
         }
     }

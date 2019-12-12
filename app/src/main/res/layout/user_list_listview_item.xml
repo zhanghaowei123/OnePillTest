@@ -10,7 +10,7 @@
         android:orientation="horizontal"
         android:padding="10dp">
 
-        <com.onepilltest.others.RoundImageView
+        <ImageView
             android:id="@+id/user_list_listview_item_headImg"
             android:layout_width="70dp"
             android:layout_height="70dp"

@@ -14,15 +14,15 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.onepilltest.R;
 import com.onepilltest.URL.Connect;
-import com.onepilltest.entity.Address;
+import com.onepilltest.entity.UserDoctor;
 import com.onepilltest.entity.UserPatient;
 
 import java.util.List;
 
-public class UserListAdapter extends ArrayAdapter<UserPatient> {
+public class DoctorListAdapter extends ArrayAdapter<UserDoctor> {
     private int itemId;
 
-    public UserListAdapter(@NonNull Context context, int resource, @NonNull List<UserPatient> objects) {
+    public DoctorListAdapter(@NonNull Context context, int resource, @NonNull List<UserDoctor> objects) {
         super(context, resource, objects);
         itemId = resource;
     }
@@ -30,7 +30,7 @@ public class UserListAdapter extends ArrayAdapter<UserPatient> {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        UserPatient base = getItem(position);//获取当前项 Base 实例
+        UserDoctor base = getItem(position);//获取当前项 Base 实例
 
         View view = LayoutInflater.from(getContext()).inflate(itemId,parent,false);
 
@@ -45,9 +45,9 @@ public class UserListAdapter extends ArrayAdapter<UserPatient> {
                 .load(Connect.BASE_URL+UserBook.NowUser.getHeadImg())
                 .apply(requestOptions)
                 .into(headImg);
-        nickName.setText(base.getNickName());
+        nickName.setText(base.getName());
         phone.setText(base.getPhone());
-        if (base.getUserId() == UserBook.NowUser.getUserId()){
+        if (base.getDoctorId() == UserBook.NowDoctor.getDoctorId()){
             btn.setImageResource(R.drawable.ahh);
         }
 

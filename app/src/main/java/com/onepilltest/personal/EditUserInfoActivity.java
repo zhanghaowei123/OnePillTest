@@ -56,6 +56,7 @@ public class EditUserInfoActivity extends AppCompatActivity {
     boolean isBack = false;
 
     UserDao dao = new UserDao();
+    DoctorDao doctorDao = new DoctorDao();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,27 +67,49 @@ public class EditUserInfoActivity extends AppCompatActivity {
         myListener = new MyListener();
         okHttpClient = new OkHttpClient();
         find();
-        initdate();
+        init();
     }
 
-    private void initdate() {
+    public void init(){
+        if (UserBook.Code == 1){//医生
+            initDoctor();
+        }else if(UserBook.Code ==2){//用户
+            initPatient();
+        }
+    }
+
+    private void initPatient() {
         RequestOptions requestOptions = new RequestOptions().circleCrop();
         Glide.with(this)
                 .load(Connect.BASE_URL+UserBook.NowUser.getHeadImg())//本地图片的File对象
                 .apply(requestOptions)
                 .into(Img);
+        et_nickName.setText(UserBook.NowUser.getNickName());
+        et_PID.setText(UserBook.NowUser.getPID());
+        et_password.setText(UserBook.NowUser.getPassword());
+        et_phone.setText(UserBook.NowUser.getPhone());
     }
+
+    private void initDoctor() {
+        RequestOptions requestOptions = new RequestOptions().circleCrop();
+        Glide.with(this)
+                .load(Connect.BASE_URL+UserBook.NowDoctor.getHeadImg())//本地图片的File对象
+                .apply(requestOptions)
+                .into(Img);
+        et_nickName.setText(UserBook.NowDoctor.getName());
+        et_PID.setText(UserBook.NowDoctor.getPID());
+        et_password.setText(UserBook.NowDoctor.getPassword());
+        et_phone.setText(UserBook.NowDoctor.getPhone());
+    }
+
+
 
     private void find() {
         Img = findViewById(R.id.edit_user_info_Img);
         et_nickName = findViewById(R.id.edit_user_info_nickName);
-        et_nickName.setText(UserBook.NowUser.getNickName());
         et_PID = findViewById(R.id.edit_user_info_PID);
-        et_PID.setText(UserBook.NowUser.getPID());
         et_password = findViewById(R.id.edit_user_info_password);
-        et_password.setText(UserBook.NowUser.getPassword());
         et_phone = findViewById(R.id.edit_user_info_phone);
-        et_phone.setText(UserBook.NowUser.getPhone());
         back = findViewById(R.id.edit_user_info_back);
         back.setOnClickListener(myListener);
         save = findViewById(R.id.edit_user_info_save);
@@ -163,7 +186,7 @@ public class EditUserInfoActivity extends AppCompatActivity {
                     MediaType MutilPart_Form_Data = MediaType.parse("multipart/form-data; charset=utf-8");
                     MultipartBody.Builder requestBodyBuilder = new MultipartBody.Builder()
                             .setType(MultipartBody.FORM)
-                            .addFormDataPart("keyVo", "上传医师资格证");
+                            .addFormDataPart("keyVo", "上传头像");
 
                     File file = new File(imagePath);
 //                // 可使用for循环添加img file
@@ -171,7 +194,13 @@ public class EditUserInfoActivity extends AppCompatActivity {
                             RequestBody.create(MutilPart_Form_Data, file));
                     // 3.3 其余一致
                     RequestBody requestBody = requestBodyBuilder.build();
-                    Request request = new Request.Builder().url(Connect.BASE_URL + "EditHeadImgServlet?UserId="+UserBook.NowUser.getUserId())
+                    String postmsg = null;
+                    if (UserBook.Code == 1){//医生
+                        postmsg = "?DoctorId="+UserBook.NowDoctor.getDoctorId()+"&Code=Doctor";
+                    }else if(UserBook.Code ==2){//用户
+                        postmsg = "?UserId="+UserBook.NowUser.getUserId()+"&Code=Patient";
+                    }
+                    Request request = new Request.Builder().url(Connect.BASE_URL + "EditHeadImgServlet"+postmsg)
                             .post(requestBody)
                             .build();
                     Call call = okHttpClient.newCall(request);
@@ -184,12 +213,15 @@ public class EditUserInfoActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(Call call, Response response) throws IOException {
                             String json = response.body().string();
-                            UserBook.NowUser.setHeadImg(json);
+                            if (UserBook.Code == 1){//医生
+                                UserBook.NowDoctor.setHeadImg(json);
+                            }else if(UserBook.Code ==2){//用户
+                                UserBook.NowUser.setHeadImg(json);
+                            }
                             EventMessage msg = new EventMessage();
                             msg.setCode("更新头像");
                             msg.setJson("yes");
                             EventBus.getDefault().post(msg);
-                            Log.e("上传头像：","上传成功"+json+UserBook.NowUser.getHeadImg());
                         }
                     });
                 }
@@ -199,15 +231,26 @@ public class EditUserInfoActivity extends AppCompatActivity {
 
     //保存
     private void save() {
-        String nickName = et_nickName.getText().toString();
-        String PID = et_PID.getText().toString();
-        String password = et_password.getText().toString();
-        String phone = et_phone.getText().toString();
-        int UserId = UserBook.NowUser.getUserId();
-        dao.update("nickName",nickName);
-        dao.update("password",password);
-        dao.update("phone",phone);
-        dao.update("PID",PID);
+        if (UserBook.Code == 1){//医生
+            String nickName = et_nickName.getText().toString();
+            String PID = et_PID.getText().toString();
+            String password = et_password.getText().toString();
+            String phone = et_phone.getText().toString();
+            doctorDao.update("nickName",nickName);
+            doctorDao.update("password",password);
+            doctorDao.update("phone",phone);
+            doctorDao.update("PID",PID);
+        }else if(UserBook.Code ==2){//用户
+            String nickName = et_nickName.getText().toString();
+            String PID = et_PID.getText().toString();
+            String password = et_password.getText().toString();
+            String phone = et_phone.getText().toString();
+            dao.update("nickName",nickName);
+            dao.update("password",password);
+            dao.update("phone",phone);
+            dao.update("PID",PID);
+        }
+
 
     }
 
