@@ -28,6 +28,8 @@ public class Address {
         this.more = more;
         this.postalCode = postalCode;
     }
+    public Address(){
+    }
 
     public int getUserId() {
         return UserId;

@@ -1,4 +1,4 @@
-package com.onepilltest.personal;
+package com.onepilltest.personal.cart;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,14 +8,12 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -24,6 +22,7 @@ import com.onepilltest.R;
 import com.onepilltest.URL.ConUtil;
 import com.onepilltest.URL.Connect;
 import com.onepilltest.entity.Cart;
+import com.onepilltest.personal.ProductActivity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

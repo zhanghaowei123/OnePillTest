@@ -1,6 +1,5 @@
-package com.onepilltest.personal;
+package com.onepilltest.personal.oder;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -16,7 +15,7 @@ public class MyOrdersActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.myorders);
+        setContentView(R.layout.doctor_order);
 
         myListener = new MyListener();
         find();
