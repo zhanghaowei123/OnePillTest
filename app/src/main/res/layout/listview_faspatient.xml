@@ -7,7 +7,7 @@
     <LinearLayout
         android:paddingLeft="20dp"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="70dp"
         android:orientation="horizontal"
         android:background="@drawable/underline">
 
@@ -15,14 +15,15 @@
             android:id="@+id/fas_iv_patient"
             android:src="@drawable/pill1"
             android:layout_gravity="center"
-            android:layout_marginRight="30dp"
-            android:layout_width="60dp"
-            android:layout_height="60dp" />
+            android:layout_marginRight="20dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
 
         <LinearLayout
             android:paddingTop="8dp"
-            android:layout_width="240dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:orientation="vertical">
 
             <TextView
@@ -31,7 +32,7 @@
                 android:textSize="17dp"
                 android:textColor="#3C3C3C"
                 android:layout_width="match_parent"
-                android:layout_height="35dp" />
+                android:layout_height="30dp" />
 
             <TextView
                 android:id="@+id/fas_tv_type"

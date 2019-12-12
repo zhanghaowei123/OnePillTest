@@ -29,7 +29,7 @@
         <ImageView
             android:src="@drawable/logo"
             android:layout_gravity="center"
-            android:layout_width="60dp"
+            android:layout_width="match_parent"
             android:layout_height="40dp" />
 
     </LinearLayout>
@@ -65,15 +65,25 @@
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/help_submit"
-            android:background="@drawable/button_circle_shape1"
-            android:text="提交"
-            android:textSize="16dp"
-            android:textColor="#FFFFFF"
-            android:layout_marginLeft="310dp"
-            android:layout_width="80dp"
-            android:layout_height="40dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/help_submit"
+                android:background="@drawable/button_circle_shape1"
+                android:text="提交"
+                android:textColor="#FFFFFF"
+                android:layout_weight="4.5"
+                android:layout_width="match_parent"
+                android:layout_height="40dp" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
@@ -104,7 +114,7 @@
                 android:hint="请输入手机号"
                 android:textSize="13dp"
                 android:inputType="number"
-                android:layout_width="300dp"
+                android:layout_width="290dp"
                 android:layout_height="match_parent" />
 
         </LinearLayout>
@@ -126,7 +136,7 @@
                 android:id="@+id/help_question"
                 android:hint="请输入问题"
                 android:textSize="13dp"
-                android:layout_width="300dp"
+                android:layout_width="290dp"
                 android:layout_height="match_parent" />
 
         </LinearLayout>
@@ -149,7 +159,7 @@
                 android:hint="请输入QQ号"
                 android:textSize="13dp"
                 android:inputType="number"
-                android:layout_width="300dp"
+                android:layout_width="290dp"
                 android:layout_height="match_parent" />
 
         </LinearLayout>

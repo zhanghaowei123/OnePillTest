@@ -54,7 +54,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:text="MO酱平井桃"
+                android:text=""
                 android:textColor="#3C3C3C"
                 android:textSize="16dp" />
 
@@ -63,7 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
-                android:text="医生"
+                android:text=""
                 android:textColor="#3C3C3C"
                 android:textSize="16dp" />
 
@@ -247,7 +247,7 @@
                 android:src="@drawable/tip" />
 
             <TextView
-                android:layout_width="280dp"
+                android:layout_width="270dp"
                 android:layout_height="match_parent"
                 android:paddingLeft="15dp"
                 android:paddingTop="13dp"

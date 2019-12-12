@@ -30,7 +30,7 @@
 
         <TextView
             android:id="@+id/fas_patient"
-            android:text="病人"
+            android:text="药品"
             android:textSize="17dp"
             android:textColor="#3C3C3C"
             android:gravity="center"

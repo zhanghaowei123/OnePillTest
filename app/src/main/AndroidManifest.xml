@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.onepilltest">
 
-    <!--和风天气-->
+    <!-- 和风天气 -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
@@ -34,16 +34,15 @@
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.GET_TASKS" />
 
-    <!--聊天室权限-->
+    <!-- 聊天室权限 -->
     <!-- Required -->
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <!--<uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />-->
-    <!--<uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>-->
+    <!-- <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" /> -->
+    <!-- <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/> -->
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-
 
     <application
         android:allowBackup="true"
@@ -54,7 +53,6 @@
         android:supportsRtl="true"
         android:theme="@style/ThemeNoTitle"
         android:usesCleartextTraffic="true">
-
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
@@ -62,7 +60,7 @@
         <meta-data
             android:name="EASEMOB_APPKEY"
             android:value="1106191028157045#onepill" />
-        <!-- 声明SDK所需的service SDK核心功能-->
+        <!-- 声明SDK所需的service SDK核心功能 -->
         <service
             android:name="com.hyphenate.chat.EMChatService"
             android:exported="true" />
@@ -74,6 +72,7 @@
         <receiver android:name="com.hyphenate.chat.EMMonitorReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.PACKAGE_REMOVED" />
+
                 <data android:scheme="package" />
             </intent-filter>
             <!-- 可选filter -->
@@ -124,7 +123,7 @@
         <activity android:name=".personal.QR_codeActivity" />
         <activity android:name=".personal.EditUserInfoActivity" />
         <activity android:name=".personal.EditAddressActivity" />
-        <activity android:name=".personal.recordActivity"/>
+        <activity android:name=".personal.recordActivity" />
         <activity android:name=".message.QuestionActivity" />
         <activity android:name=".index.CommentActivity" />
         <activity android:name=".personal.AddAddressActivity" />
@@ -135,7 +134,8 @@
         <activity android:name=".personal.HelpAndFeedBackActivity" />
         <activity android:name=".personal.switchActivity" />
         <activity android:name=".personal.UserList" />
-        <activity android:name=".personal.SettingForUsActivity"></activity>
+        <activity android:name=".personal.SettingForUsActivity" />
+        <activity android:name=".index.DoctorDetailsActivity"></activity>
     </application>
 
 </manifest>
