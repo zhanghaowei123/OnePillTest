@@ -15,8 +15,8 @@
             android:id="@+id/img_left_yd"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:layout_marginLeft="10dp"
             android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
             android:src="@drawable/left" />
 
         <TextView
@@ -55,8 +55,8 @@
                 android:id="@+id/perfect_doctorname"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:textSize="15dp"
-                android:hint="请输入您的姓名" />
+                android:hint="请输入您的姓名"
+                android:textSize="15dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -75,9 +75,9 @@
                 android:id="@+id/perfect_dnum"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
+                android:hint="请输入您的身份证号"
                 android:inputType="number"
-                android:textSize="15dp"
-                android:hint="请输入您的身份证号" />
+                android:textSize="15dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -96,8 +96,28 @@
                 android:id="@+id/perfect_hosptal"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:textSize="15dp"
-                android:hint="请输入您的医疗机构" />
+                android:hint="请输入您的医疗机构"
+                android:textSize="15dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="76dp"
+                android:layout_height="wrap_content"
+                android:text="科 室:"
+                android:textSize="16dp" />
+
+            <EditText
+                android:id="@+id/perfect_tag"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:hint="请输入您的科室"
+                android:textSize="15dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -116,8 +136,8 @@
                 android:id="@+id/perfect_address"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:textSize="15dp"
-                android:hint="请输入您的的现居住地" />
+                android:hint="请输入您的的现居住地"
+                android:textSize="15dp" />
         </LinearLayout>
 
         <LinearLayout

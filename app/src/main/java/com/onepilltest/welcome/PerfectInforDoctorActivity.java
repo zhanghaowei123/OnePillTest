@@ -42,6 +42,7 @@ public class PerfectInforDoctorActivity extends AppCompatActivity {
     private EditText editNum;
     private EditText editHosptal;
     private EditText editAddress;
+    private EditText editTag;
     private ImageView imgPhoto;
     private ImageView imgPhotoback;
     private Button btnSucceed;
@@ -63,9 +64,6 @@ public class PerfectInforDoctorActivity extends AppCompatActivity {
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent();
-//                intent.setClass(PerfectInforDoctorActivity.this, RegisterDoctor.class);
-//                startActivity(intent);
                 finish();
                 Toast.makeText(getApplicationContext(), "请完善个人信息", Toast.LENGTH_LONG).show();
             }
@@ -127,7 +125,7 @@ public class PerfectInforDoctorActivity extends AppCompatActivity {
                 if (isSuccessful.equals("true")) {
                     Log.e("successful", isSuccessful);
                     Intent intent = new Intent(PerfectInforDoctorActivity.this,
-                            UserSuccessActivity.class);
+                            DoctorSuccessActivity.class);
                     startActivity(intent);
                 }
             }
@@ -142,6 +140,7 @@ public class PerfectInforDoctorActivity extends AppCompatActivity {
         userDoctor.setHospital(editHosptal.getText().toString());
         userDoctor.setName(editName.getText().toString());
         userDoctor.setPID(editNum.getText().toString());
+        userDoctor.setTag(editTag.getText().toString());
         if (!userDoctor.getAddress().equals("")
                 && !userDoctor.getHospital().equals("")
                 && !userDoctor.getName().equals("")
@@ -261,6 +260,7 @@ public class PerfectInforDoctorActivity extends AppCompatActivity {
         editNum = findViewById(R.id.perfect_dnum);
         editHosptal = findViewById(R.id.perfect_hosptal);
         editAddress = findViewById(R.id.perfect_address);
+        editTag = findViewById(R.id.perfect_tag);
         imgBack = findViewById(R.id.img_left_yd);
         imgPhoto = findViewById(R.id.img_photo);
         imgPhotoback = findViewById(R.id.img_photoback);

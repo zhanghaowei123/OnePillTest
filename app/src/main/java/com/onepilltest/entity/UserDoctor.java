@@ -9,6 +9,7 @@ public class UserDoctor {
     private String password;
     private String PID;
     private String hospital;
+    private String tag;
     private String licence1;    //医师资格证的正面的地址，在手机上传
     private String licence2;    //医师资格证的反面的地址，在手机上传
     private String headImg;//系统有一个默认的头像在服务器端
@@ -22,6 +23,14 @@ public class UserDoctor {
     }
 
     public UserDoctor() {
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 
     public String getName() {
