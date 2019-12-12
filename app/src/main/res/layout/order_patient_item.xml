@@ -41,7 +41,7 @@
             android:layout_height="105dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:background="#6ee6aa"
+            android:background="#c9d8d0"
             android:orientation="vertical"
             android:minHeight="150dp">
 
