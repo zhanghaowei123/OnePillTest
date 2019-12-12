@@ -8,10 +8,29 @@ public class Order {
     private int id;
     private int medicineId;
     private int userId;
-
+    private int type;
     private int count;
     private int price;
     private String medicineName;
+
+    private Medicine medicine;
+    private Address address;
+
+    public Medicine getMedicine() {
+        return medicine;
+    }
+
+    public void setMedicine(Medicine medicine) {
+        this.medicine = medicine;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
 
     public int getId() {
         return id;
@@ -61,5 +80,12 @@ public class Order {
         this.medicineName = medicineName;
     }
 
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
 
 }

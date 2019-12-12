@@ -124,10 +124,10 @@
         <activity android:name=".message.QuestionActivity" />
         <activity android:name=".index.CommentActivity" />
         <activity android:name=".personal.AddAddressActivity" />
-        <activity android:name=".personal.BuyerOrdersActivity" />
-        <activity android:name=".personal.MyOrdersActivity" />
+        <activity android:name=".personal.oder.BuyerOrdersActivity" />
+        <activity android:name=".personal.oder.MyOrdersActivity" />
         <activity android:name=".personal.FocusAndSaveActivity" />
-        <activity android:name=".personal.ShoppingCartActivity" />
+        <activity android:name=".personal.cart.ShoppingCartActivity" />
         <activity android:name=".personal.HelpAndFeedBackActivity" />
         <activity android:name=".personal.switchActivity" />
         <activity android:name=".personal.UserList" />

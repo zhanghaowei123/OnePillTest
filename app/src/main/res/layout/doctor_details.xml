@@ -11,6 +11,7 @@
 
         <!--标题栏-->
         <LinearLayout
+            android:paddingLeft="10dp"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:background="#808080"
@@ -95,7 +96,7 @@
                     android:id="@+id/dc_details_name"
                     android:layout_width="match_parent"
                     android:layout_height="25dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="20dp"
                     android:text="XXXXX"
                     android:textColor="#fff"
                     android:textSize="16dp" />
@@ -116,7 +117,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:paddingTop="14dp">
+                android:paddingTop="18dp">
 
                 <ImageView
                     android:layout_width="24dp"
@@ -190,7 +191,7 @@
                 android:background="@drawable/underline"
                 android:orientation="horizontal"
                 android:paddingBottom="10dp"
-                android:paddingLeft="10dp"
+                android:paddingLeft="20dp"
                 android:paddingTop="15dp">
 
                 <ImageView

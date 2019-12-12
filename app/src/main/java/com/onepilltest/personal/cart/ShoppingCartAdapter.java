@@ -1,4 +1,4 @@
-package com.onepilltest.personal;
+package com.onepilltest.personal.cart;
 
 import android.content.Context;
 import android.content.Intent;

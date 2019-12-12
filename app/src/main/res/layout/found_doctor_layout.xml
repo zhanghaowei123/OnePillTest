@@ -21,7 +21,7 @@
             android:text="找医生"
             android:textSize="18dp"
             android:gravity="center"
-            android:layout_width="290dp"
+            android:layout_width="300dp"
             android:layout_height="match_parent" />
         <ImageView
             android:src="@drawable/logo"
@@ -66,7 +66,8 @@
             android:layout_height="wrap_content" />
         <TableLayout
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TableRow>
@@ -74,30 +75,35 @@
                     android:id="@+id/tb_one"
                     android:text="流感"
                     android:onClick="buttonClick"
+                    android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <Button
                     android:id="@+id/tb_two"
                     android:text="头痛"
                     android:onClick="buttonClick"
+                    android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <Button
                     android:id="@+id/tb_three"
                     android:text="伤寒"
                     android:onClick="buttonClick"
+                    android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <Button
                     android:id="@+id/tb_four"
                     android:text="宝宝健康"
                     android:onClick="buttonClick"
+                    android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </TableRow>
         </TableLayout>
         <TableLayout
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TableRow>
@@ -106,6 +112,7 @@
                     android:id="@+id/tb_five"
                     android:text="肠胃"
                     android:onClick="buttonClick"
+                    android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -113,6 +120,7 @@
                     android:id="@+id/tb_six"
                     android:text="皮肤"
                     android:onClick="buttonClick"
+                    android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -120,6 +128,7 @@
                     android:id="@+id/tb_seven"
                     android:text="肥胖"
                     android:onClick="buttonClick"
+                    android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -127,12 +136,14 @@
                     android:id="@+id/tb_eight"
                     android:text="月经不调"
                     android:onClick="buttonClick"
+                    android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </TableRow>
         </TableLayout>
         <TableLayout
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -142,6 +153,7 @@
                     android:id="@+id/tb_nine"
                     android:text="心血管"
                     android:onClick="buttonClick"
+                    android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -149,6 +161,7 @@
                     android:id="@+id/tb_ten"
                     android:text="鼻炎"
                     android:onClick="buttonClick"
+                    android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -156,6 +169,7 @@
                     android:id="@+id/tb_eleven"
                     android:text="焦虑"
                     android:onClick="buttonClick"
+                    android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -163,6 +177,7 @@
                     android:id="@+id/tb_twelve"
                     android:text="口腔问题"
                     android:onClick="buttonClick"
+                    android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </TableRow>
@@ -173,7 +188,7 @@
             <TextView
                 android:text="......"
                 android:textSize="25dp"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="30dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>

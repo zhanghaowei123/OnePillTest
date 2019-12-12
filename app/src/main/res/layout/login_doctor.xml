@@ -17,7 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="医 生 登 录"
+        android:text="医生登录"
         android:textStyle="bold"
         android:textColor="#fff"
         android:textSize="20dp" />
@@ -36,6 +36,7 @@
             android:layout_height="wrap_content" />
 
         <EditText
+            android:layout_marginLeft="5dp"
             android:id="@+id/edit_phone_doctor"
             android:inputType="number"
             android:layout_width="250dp"
@@ -60,6 +61,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <EditText
+                android:layout_marginLeft="5dp"
                 android:id="@+id/edit_password_doctor"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
@@ -77,7 +79,7 @@
         </RelativeLayout>
     </LinearLayout>
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="260dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="50dp"
@@ -88,7 +90,7 @@
             android:layout_width="wrap_content"
             android:layout_height="45dp"
             android:text="登录"
-            android:layout_marginLeft="60dp"
+            android:layout_marginLeft="90dp"
             android:textColor="#fff"
             android:textSize="18dp"
             android:textStyle="bold"
@@ -101,7 +103,7 @@
             android:textColor="#fff"
             android:textSize="15dp"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
