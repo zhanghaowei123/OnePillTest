@@ -14,7 +14,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.onepilltest.R;
+import com.onepilltest.URL.Connect;
 import com.onepilltest.entity.Article;
 
 import java.util.ArrayList;
@@ -58,6 +61,12 @@ public class IndexAdapter extends RecyclerView.Adapter {
         itemViewHolder.articleContent.setText(articles.get(i).getContent());
         itemViewHolder.title.setText(articles.get(i).getTitle());
         itemViewHolder.tag.setText(articles.get(i).getTag());
+        Article article = articles.get(i);
+        RequestOptions requestOptions = new RequestOptions().circleCrop();
+        Glide.with(context)
+                .load(Connect.BASE_URL + article.getHeadImg())
+                .apply(requestOptions)
+                .into(itemViewHolder.imgHeadImg);
         //设置每一项的点击事件监听器
         itemViewHolder.root.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,7 +79,7 @@ public class IndexAdapter extends RecyclerView.Adapter {
             public void onClick(View v) {
                 Intent intent = new Intent(context, CommentActivity.class);
                 int num = i + 1;
-                intent.putExtra("articleId",num+"");
+                intent.putExtra("articleId", num + "");
                 context.startActivity(intent);
             }
         });
@@ -91,6 +100,7 @@ public class IndexAdapter extends RecyclerView.Adapter {
         public TextView title;
         public LinearLayout root;//每一个Item的根视图
         public ImageView imgComment;
+        public ImageView imgHeadImg;
 
         public MyItemViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -100,6 +110,7 @@ public class IndexAdapter extends RecyclerView.Adapter {
             title = itemView.findViewById(R.id.tv_article_title);
             root = itemView.findViewById(R.id.ll_article);
             imgComment = itemView.findViewById(R.id.iv_commentImg);
+            imgHeadImg = itemView.findViewById(R.id.iv_article_headimg);
         }
     }
 }

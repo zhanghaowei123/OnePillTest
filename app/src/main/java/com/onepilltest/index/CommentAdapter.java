@@ -1,5 +1,6 @@
 package com.onepilltest.index;
 
+import android.app.DownloadManager;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +10,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.onepilltest.R;
+import com.onepilltest.URL.Connect;
 import com.onepilltest.entity.Article;
 import com.onepilltest.entity.Comment;
 
@@ -64,8 +67,11 @@ public class CommentAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         Comment comment = comments.get(position);
+        //加载评论头像
+        RequestOptions requestOptions = new RequestOptions().circleCrop();
         Glide.with(context)
-                .load(R.drawable.doctor)
+                .load(Connect.BASE_URL + comment.getHeadImg())
+                .apply(requestOptions)
                 .into(viewHolder.ivCommenterImg);
         viewHolder.tvCommenterName.setText(comment.getName());
         viewHolder.tvCommenterCotent.setText(comment.getCcomment());

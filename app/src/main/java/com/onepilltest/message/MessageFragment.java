@@ -29,6 +29,7 @@ public class MessageFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_message, container, false);
         myListener = new MyListener();
         findViews(view);
+
         return view;
     }
 

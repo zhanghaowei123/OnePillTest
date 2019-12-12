@@ -79,8 +79,7 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
                 //定义他的派生类调用getType，真实对象
                 Type type = new TypeToken<List<Comment>>() {
                 }.getType();
-                comments.addAll((List<Comment>) new Gson().fromJson(commentListStr, type));
-                Log.e("comment", commentListStr.toString());
+                comments.addAll(new Gson().fromJson(commentListStr, type));
                 //在onResponse里面不能直接更新界面
                 //接收到之后发送消息  通知给主线程
                 EventBus.getDefault().post("评论");
@@ -128,6 +127,8 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
                 Log.e("hahah", UserBook.NowUser.getNickName());
                 comment.setCcomment(etComment.getText().toString());
                 comment.setArticleId(Integer.parseInt(id));
+                comment.setHeadImg(UserBook.NowUser.getHeadImg());
+                Log.e("head",UserBook.NowUser.getHeadImg());
                 comments.add(comment);
                 //更新到数据库
                 insertComment();
@@ -135,6 +136,8 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
                 etComment.clearComposingText();
                 etComment.clearFocus();
                 etComment.setText("");
+                comment = new Comment();
+                comment.setArticleId(Integer.parseInt(id));
                 commentAdapter.notifyDataSetChanged();
                 break;
         }

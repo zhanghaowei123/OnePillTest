@@ -47,6 +47,7 @@ public class NearFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         SDKInitializer.initialize(getActivity().getApplicationContext());
         View view = inflater.inflate(R.layout.fragment_near, container, false);
+
         mapView = (MapView) view.findViewById(R.id.map_view);
         //地图控制器
         baiduMap = mapView.getMap();

@@ -72,6 +72,8 @@ public class PersonalFragment extends Fragment{
         View view = inflater.inflate(R.layout.personal, container, false);
 
         initData();
+
+
         initView(view);
         return view;
     }

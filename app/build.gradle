@@ -18,7 +18,6 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-
     sourceSets {
         main {
             jniLibs.srcDirs = ['libs']
@@ -35,7 +34,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.onepilltest"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -48,6 +47,8 @@ android {
         }
     }
     buildToolsVersion '28.0.2'
+    productFlavors {
+    }
 }
 
 dependencies {
@@ -68,11 +69,11 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation files('libs/BaiduLBS_Android.jar')
-    /**聊天IM*/
+    /** 聊天IM */
     api 'com.android.support:appcompat-v7:28.0.0-alpha1'
     // Google firebase cloud messaging
     implementation 'com.google.android.gms:play-services-base:11.4.0'
     implementation 'com.google.firebase:firebase-messaging:11.4.0'
     api 'com.hyphenate:hyphenate-sdk:3.6.1'
-
+    implementation files('libs/HeWeather_Public_Android_V3.1.jar')
 }
