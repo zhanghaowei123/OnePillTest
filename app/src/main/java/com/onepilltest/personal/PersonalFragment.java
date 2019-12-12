@@ -114,11 +114,21 @@ public class PersonalFragment extends Fragment {
 
         myListener = new MyListener();
         find(view);
-        RequestOptions requestOptions = new RequestOptions().circleCrop();
-        Glide.with(this)
-                .load(Connect.BASE_URL + UserBook.NowDoctor.getHeadImg())
-                .apply(requestOptions)
-                .into(iv_personal);
+
+        if(UserBook.Code == 1){
+            RequestOptions requestOptions = new RequestOptions().circleCrop();
+            Glide.with(this)
+                    .load(Connect.BASE_URL + UserBook.NowDoctor.getHeadImg())
+                    .apply(requestOptions)
+                    .into(iv_personal);
+        }else if(UserBook.Code == 2){
+            RequestOptions requestOptions = new RequestOptions().circleCrop();
+            Glide.with(this)
+                    .load(Connect.BASE_URL + UserBook.NowUser.getHeadImg())
+                    .apply(requestOptions)
+                    .into(iv_personal);
+        }
+
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
