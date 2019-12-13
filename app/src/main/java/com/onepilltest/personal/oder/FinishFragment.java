@@ -96,8 +96,8 @@ public class FinishFragment extends Fragment {
                 address.setPostalCode(object.getString("addressType"));
                 address.setUserId(getActivity().getSharedPreferences("买家登陆", Context.MODE_PRIVATE).getInt("account", 0));
                 order.setAddress(address);
-                medicine.setId(object.getInt("medicinId"));
-                medicine.setMedicineName(object.getString("medicinName"));
+                medicine.setId(object.getInt("medicineId"));
+                medicine.setMedicineName(object.getString("medicineName"));
                 medicine.setIntrodution(object.getString("medicineIntrodution"));
                 medicine.setPrice(object.getInt("medicinePrice"));
                 medicine.setStocks(object.getInt("medicineStock"));
