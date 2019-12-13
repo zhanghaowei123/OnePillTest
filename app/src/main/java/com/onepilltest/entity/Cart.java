@@ -2,7 +2,7 @@ package com.onepilltest.entity;
 
 import java.io.Serializable;
 
-public class Cart {
+public class Cart implements Serializable{
 
 
     private int id;
@@ -13,8 +13,8 @@ public class Cart {
     private int count;
     private Medicine medicine;
 
-    public Serializable getMedicine() {
-        return (Serializable) medicine;
+    public Medicine getMedicine() {
+        return medicine;
     }
 
     public void setMedicine(Medicine medicine) {

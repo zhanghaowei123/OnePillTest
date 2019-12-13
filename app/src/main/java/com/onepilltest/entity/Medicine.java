@@ -1,9 +1,10 @@
 package com.onepilltest.entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Medicine {
+public class Medicine implements Serializable {
     private List<Integer> ids = new ArrayList<>();
     //通用名
     private List<String> generaNames=new ArrayList<>();

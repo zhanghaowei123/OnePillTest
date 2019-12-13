@@ -82,16 +82,16 @@ public class ShoppingCartAdapter extends BaseAdapter{
         this.llEmptyCart = llEmptyCart;
         this.lvCart = lvCart;
     }
-//    public int getTotalPrice() {
-//        int totalPrice = 0;
-//        for (int key : selectCartItemMap.keySet()) {
-//            if (selectCartItemMap.get(key).isSelected()) {
-//                SelectCartItem item = selectCartItemMap.get(key);
-//                totalPrice += item.getCart().getCount() * item.getCart().getMedicine().toString().get(0);
-//            }
-//        }
-//        return totalPrice;
-//    }
+    public int getTotalPrice() {
+        int totalPrice = 0;
+        for (int key : selectCartItemMap.keySet()) {
+            if (selectCartItemMap.get(key).isSelected()) {
+                SelectCartItem item = selectCartItemMap.get(key);
+                totalPrice += item.getCart().getCount()*item.getCart().getMedicine().getPrice().get(0);
+            }
+        }
+        return totalPrice;
+    }
 
     public int getCount() {
         return dataSource.size();
@@ -173,7 +173,7 @@ public class ShoppingCartAdapter extends BaseAdapter{
                     }
                 }
 //                //获取当前选中的总额 显示在页面上
-//                tvSettlementPrice.setText(getTotalPrice()+"");
+                tvSettlementPrice.setText(getTotalPrice()+"");
             }
         });
         //给button绑定事件
@@ -223,7 +223,7 @@ public class ShoppingCartAdapter extends BaseAdapter{
                 notifyDataSetChanged();
                 if (cbChooseOne.isChecked()){
                     //如果现在改变的item被选中，则更改totalPrice
-//                    tvSettlementPrice.setText(getTotalPrice()+"");
+                    tvSettlementPrice.setText(getTotalPrice()+"");
                 }
             }
         });
@@ -268,7 +268,7 @@ public class ShoppingCartAdapter extends BaseAdapter{
                 notifyDataSetChanged();
                 if (cbChooseOne.isChecked()) {
                     // 如果现在改变的item被选中，则更改totalPrice
-//                    tvSettlementPrice.setText(getTotalPrice() + "");
+                    tvSettlementPrice.setText(getTotalPrice() + "");
                 }
             }
         });
