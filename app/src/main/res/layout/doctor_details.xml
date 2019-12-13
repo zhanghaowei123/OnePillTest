@@ -31,6 +31,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="8"
                 android:gravity="center"
+                android:textStyle="bold"
                 android:text="医生简介"
                 android:textColor="#fff"
                 android:textSize="16dp" />
@@ -150,39 +151,115 @@
                 android:orientation="horizontal"
                 android:padding="10dp">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="7dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:paddingLeft="18dp"
-                    android:paddingRight="20dp"
-                    android:text="11年         从业年限"
-                    android:textColor="#333"
-                    android:textSize="17dp" />
+                    android:background="@drawable/rightline"
+                    android:orientation="vertical"
+                    android:layout_weight="1">
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="7dp"
-                    android:layout_weight="1"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="20dp"
-                    android:text="   2000        回答次数"
-                    android:textColor="#333"
-                    android:textSize="17dp" />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_gravity="center">
 
-                <TextView
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="11"
+                            android:textColor="#333"
+                            android:textSize="20dp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="年"
+                            android:textSize="15dp" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="从业年限"
+                        android:gravity="center"
+                        android:paddingLeft="18dp"
+                        android:paddingRight="20dp"
+                        android:textSize="14dp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="7dp"
+                    android:background="@drawable/rightline"
+                    android:orientation="vertical"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:text="2000"
+                        android:textColor="#333"
+                        android:textSize="20dp" />
+
+                    <TextView
+                        android:layout_marginTop="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="回答次数"
+                        android:textSize="14dp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="20dp"
-                    android:text="  4.9分        * * * * *"
-                    android:textColor="#f80"
-                    android:textSize="18dp" />
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="4.9"
+                            android:textColor="#f80"
+                            android:textSize="20dp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="分"
+                            android:textColor="#f80"
+                            android:textSize="15dp" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="★★★★★"
+                        android:textColor="#f80"
+                        android:textSize="20dp" />
+
+                </LinearLayout>
+
+
             </LinearLayout>
 
             <LinearLayout
