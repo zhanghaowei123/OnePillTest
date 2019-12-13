@@ -50,7 +50,6 @@
                 android:layout_height="36dp" />
             <TextView
                 android:id="@+id/tv_nickname"
-                android:text="乃见狂且"
                 android:textSize="16dp"
                 android:paddingLeft="33dp"
                 android:layout_width="wrap_content"

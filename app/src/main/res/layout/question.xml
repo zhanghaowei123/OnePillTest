@@ -34,7 +34,6 @@
             android:background="@android:color/transparent" />
     </LinearLayout>
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -46,7 +45,6 @@
             android:layout_weight="5"
             android:gravity="center"
             android:orientation="vertical">
-
 
             <EditText
                 android:id="@+id/et_kswz_title"
@@ -98,8 +96,6 @@
                     android:text="否"
                     android:textColor="#777"
                     android:textSize="10dp" />
-
-
             </LinearLayout>
         </LinearLayout>
 
@@ -128,12 +124,12 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/btn_upimg"
+            android:id="@+id/iv_upimg"
             android:layout_width="150dp"
             android:layout_height="100dp"
             android:layout_margin="10dp"
             android:background="#f4f4f4"
-            android:text="添加照片/视频" />
+            android:src="@drawable/add" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -141,8 +137,6 @@
             android:padding="10dp"
             android:text="你上传的附件仅队解答问题的医生可见"
             android:textSize="12dp" />
-
-
     </LinearLayout>
 
     <Button

@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,9 +17,27 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.gson.Gson;
 import com.onepilltest.R;
+import com.onepilltest.URL.Connect;
+import com.onepilltest.entity.Inquiry;
 import com.onepilltest.index.HomeFragment;
+import com.onepilltest.personal.UserBook;
 import com.onepilltest.welcome.PerfectInforDoctorActivity;
+
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 /**
  * 首页_快速问诊
@@ -35,12 +54,16 @@ public class QuestionActivity extends AppCompatActivity {
     private EditText main;
     private static final int REQUEST_IMAGE = 1;
     private static final int REQUEST_DCIM = 2;
+    private OkHttpClient okHttpClient;
+    private Request request, request1;
+    private Inquiry inquiry;
+    private String imagePath;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //去掉顶部标题
         setContentView(R.layout.question);
+        okHttpClient = new OkHttpClient();
         myListener = new MyListener();
         find();
     }
@@ -51,7 +74,8 @@ public class QuestionActivity extends AppCompatActivity {
         finish = findViewById(R.id.question_finish);
         finish.setOnClickListener(myListener);
         title = findViewById(R.id.et_kswz_title);
-        upImg = findViewById(R.id.btn_upimg);
+        upImg = findViewById(R.id.iv_upimg);
+        upImg.setOnClickListener(myListener);
         yes = findViewById(R.id.kswz_outline_yes);
         yes.setOnClickListener(myListener);
         no = findViewById(R.id.kswz_outline_no);
@@ -67,6 +91,7 @@ public class QuestionActivity extends AppCompatActivity {
                     finish();
                     break;
                 case R.id.question_finish:
+                    save();
                     finish();
                     break;
                 case R.id.kswz_outline_yes:
@@ -77,7 +102,7 @@ public class QuestionActivity extends AppCompatActivity {
                     no.setBackgroundColor(getResources().getColor(R.color.doderBlue));
                     yes.setBackgroundColor(getResources().getColor(R.color.colorGray));
                     break;
-                case R.id.btn_upimg:
+                case R.id.iv_upimg:
                     //动态申请权限
                     ActivityCompat.requestPermissions(QuestionActivity.this,
                             new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_IMAGE);
@@ -103,6 +128,7 @@ public class QuestionActivity extends AppCompatActivity {
 
     /**
      * 手机相册界面返回之后回调
+     *
      * @param requestCode
      * @param resultCode
      * @param data
@@ -115,16 +141,81 @@ public class QuestionActivity extends AppCompatActivity {
             Uri uri = data.getData();//图片的Uri对象
             Cursor cursor = getContentResolver().query(uri, null, null,
                     null, null);
-            RequestOptions requestOptions = new RequestOptions().fitCenter().override(100, 100);
+            RequestOptions requestOptions = new RequestOptions().fitCenter();
             if (cursor.moveToFirst()) {
                 //获取图片的路径
-                String imagePath = cursor.getString(cursor.getColumnIndex("_data"));
-//                    imgPhoto.setBackgroundResource(0);
-//                    Glide.with(this)
-//                            .load(imagePath)//本地图片的File对象
-//                            .apply(requestOptions)
-//                            .into(imgPhoto);
+                imagePath = cursor.getString(cursor.getColumnIndex("_data"));
+                upImg.setBackgroundResource(0);
+                Glide.with(this)
+                        .load(imagePath)//本地图片的File对象
+                        .apply(requestOptions)
+                        .into(upImg);
+                /**
+                 * 上传到服务器
+                 */
+                // 3.1 获取 OkHttpClient 对象
+                // 3.2 Post 请求，创建 RequestBody 对象 指定上传类型：图片；指定上传内容
+                MediaType MutilPart_Form_Data = MediaType.parse("multipart/form-data;charset=utf-8");
+                MultipartBody.Builder requestBodyBuilder = new MultipartBody.Builder()
+                        .setType(MultipartBody.FORM)
+                        .addFormDataPart("keyVo", "上传病情图片");
+
+
+                File file = new File(imagePath);
+                requestBodyBuilder.addFormDataPart("files", file.getName(), RequestBody.create(MutilPart_Form_Data, file));
+
+                RequestBody requestBody = requestBodyBuilder.build();
+                request1 = new Request.Builder().url(Connect.BASE_URL + "ImageServlet")
+                        .post(requestBody)
+                        .build();
+                okHttpClient = new OkHttpClient();
+                Call call = okHttpClient.newCall(request1);
+                call.enqueue(new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+                        Log.e("上传失败", "" + e.getMessage());
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        Log.e("上传图片：", response.body().string());
+                    }
+                });
             }
         }
+    }
+
+    private void save() {
+        int userId = UserBook.NowUser.getUserId();
+        String content = main.getText().toString();
+        String title1 = title.getText().toString();
+        Date date = new Date(System.currentTimeMillis());
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String time = simpleDateFormat.format(date);
+        inquiry = new Inquiry();
+        inquiry.setUserId(userId);
+        inquiry.setContent(content);
+        inquiry.setTitle(title1);
+        inquiry.setTime(time);
+        String jsonStr = null;
+        jsonStr = new Gson().toJson(inquiry);
+        RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain;charset=utf-8"),
+                jsonStr);
+        request = new Request.Builder()
+                .post(requestBody)
+                .url(Connect.BASE_URL + "InquiryServlet")
+                .build();
+        Call call = okHttpClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.e("上传问诊记录失败", "" + e.getMessage());
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                Log.e("上传问诊记录：", response.body().string());
+            }
+        });
     }
 }
