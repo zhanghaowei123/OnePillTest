@@ -1,6 +1,5 @@
 package com.onepilltest.personal;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -139,7 +138,7 @@ public class FocusAndSaveActivity extends AppCompatActivity{
 
     private void setFragment() {
         map.get(tabStrId[0]).setFragment(new DoctorFragment());
-        map.get(tabStrId[1]).setFragment(new PatientFragment());
+        map.get(tabStrId[1]).setFragment(new MedicineFragment());
     }
 
     private void findView() {

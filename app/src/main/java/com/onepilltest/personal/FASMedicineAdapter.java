@@ -9,20 +9,20 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.onepilltest.R;
-import com.onepilltest.entity.SavePatient;
+import com.onepilltest.entity.SaveMedicine;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class FASPatientAdapter extends RecyclerView.Adapter {
+public class FASMedicineAdapter extends RecyclerView.Adapter {
 
-    private List<SavePatient> patients = new ArrayList<>();
+    private List<SaveMedicine> medicines = new ArrayList<>();
     private Context context;
     private int itemId;
 
-    public FASPatientAdapter(Context context, List<SavePatient> patients, int itemId) {
+    public FASMedicineAdapter(Context context, List<SaveMedicine> medicines, int itemId) {
         this.context = context;
-        this.patients = patients;
+        this.medicines = medicines;
         this.itemId = itemId;
     }
 
@@ -36,14 +36,14 @@ public class FASPatientAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, final int i) {
         MyItemViewHolder itemViewHolder = (MyItemViewHolder) viewHolder;
-        itemViewHolder.tvpatient.setText(patients.get(i).getName());
-        itemViewHolder.tvtype.setText(patients.get(i).getType());
+        itemViewHolder.tvpatient.setText(medicines.get(i).getName());
+        itemViewHolder.tvtype.setText(medicines.get(i).getType());
     }
 
     @Override
     public int getItemCount() {
-        if (patients != null)
-            return patients.size();
+        if (medicines != null)
+            return medicines.size();
         return 0;
     }
 

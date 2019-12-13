@@ -1,13 +1,13 @@
 package com.onepilltest.entity;
 
-public class SavePatient {
+public class SaveMedicine {
     private String name;
     private String type;
 
-    public SavePatient() {
+    public SaveMedicine() {
     }
 
-    public SavePatient(String name, String type) {
+    public SaveMedicine(String name, String type) {
         this.name = name;
         this.type = type;
     }
