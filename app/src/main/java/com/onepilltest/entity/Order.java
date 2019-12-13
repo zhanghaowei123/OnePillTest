@@ -13,8 +13,26 @@ public class Order {
     private int price;
     private String medicineName;
 
+    private int doctorId;
+    private int patientId;
+
     private Medicine medicine;
     private Address address;
+    public int getDoctorId() {
+        return doctorId;
+    }
+
+    public void setDoctorId(int doctorId) {
+        this.doctorId = doctorId;
+    }
+
+    public int getPatientId() {
+        return patientId;
+    }
+
+    public void setPatientId(int patientId) {
+        this.patientId = patientId;
+    }
 
     public Medicine getMedicine() {
         return medicine;
