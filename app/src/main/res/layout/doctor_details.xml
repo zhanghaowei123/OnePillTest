@@ -282,7 +282,7 @@
                     android:layout_marginLeft="10dp"
                     android:paddingRight="10dp"
                     android:text="专业医师认证"
-                    android:textColor="#000" />
+                    android:textColor="#3C3C3C" />
 
                 <ImageView
                     android:layout_width="20dp"
@@ -295,7 +295,7 @@
                     android:layout_marginLeft="10dp"
                     android:paddingRight="10dp"
                     android:text="平均响应时长10分钟"
-                    android:textColor="#000" />
+                    android:textColor="#3C3C3C" />
             </LinearLayout>
         </LinearLayout>
 
@@ -320,7 +320,7 @@
                     android:layout_height="wrap_content"
                     android:padding="10dp"
                     android:text="擅长疾病"
-                    android:textColor="#777"
+                    android:textColor="#444"
                     android:textSize="16dp"
                     android:textStyle="bold" />
 
@@ -353,7 +353,7 @@
                         android:background="@drawable/rightline"
                         android:gravity="center"
                         android:text=""
-                        android:textColor="#3C3C3C"
+                        android:textColor="#777"
                         android:textSize="14dp" />
 
                     <TextView
@@ -361,7 +361,7 @@
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:text=""
-                        android:textColor="#3C3C3C"
+                        android:textColor="#777"
                         android:textSize="14dp" />
 
                 </LinearLayout>
@@ -374,7 +374,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/underline"
                 android:orientation="vertical"
-                android:padding="20dp">
+                android:padding="10dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -385,8 +385,9 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="个人简介"
+                        android:textStyle="bold"
                         android:textColor="#444"
-                        android:textSize="17dp" />
+                        android:textSize="16dp" />
 
                     <Button
                         android:id="@+id/dc_details_editResume"
@@ -398,10 +399,11 @@
                         />
                 </LinearLayout>
 
-
                 <EditText
                     android:id="@+id/dc_details_resume"
                     android:inputType="textMultiLine"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="16dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="杳渺音讯 余我孤奏" />
@@ -429,17 +431,19 @@
                     android:textSize="15dp" />
 
                 <TextView
-
                     android:id="@+id/dc_details_phone"
-                    android:layout_width="235dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:gravity="right"
+                    android:layout_weight="7"
                     android:paddingLeft="140dp"
                     android:text=""
                     android:textSize="16dp" />
 
                 <ImageView
-                    android:layout_width="35dp"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
                     android:layout_height="35dp"
                     android:layout_gravity="center"
                     android:src="@drawable/yjt" />
@@ -461,15 +465,17 @@
 
                 <TextView
                     android:id="@+id/dc_details_location"
-                    android:layout_width="295dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_weight="17"
                     android:text="河北师范大学软件学院"
                     android:textColor="#3C3C3C"
                     android:textSize="15dp" />
 
                 <ImageView
-                    android:layout_width="35dp"
+                    android:layout_weight="2"
+                    android:layout_width="0dp"
                     android:layout_height="35dp"
                     android:layout_gravity="center"
                     android:src="@drawable/yjt" />
