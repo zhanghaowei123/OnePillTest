@@ -57,32 +57,6 @@ public class MedicineFragment extends Fragment{
         medicines.add(saveMedicine1);
     }
 
-    private void setPatients() {
-        Request request = new Request.Builder()
-                .url(Connect.BASE_URL + "ArticleServlet")
-                .build();
-        Call call = okHttpClient.newCall(request);
-        call.enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                String medicinelistStr = response.body().string();
-                //定义他的派生类调用getType，真实对象
-                Type type = new TypeToken<List<SaveMedicine>>() {
-                }.getType();
-                medicines.addAll((List<SaveMedicine>) new Gson().fromJson(medicinelistStr, type));
-
-                //在onResponse里面不能直接更新界面
-                //接收到之后发送消息  通知给主线程
-                EventBus.getDefault().post("文章");
-            }
-        });
-    }
-
     private void initView(View view) {
         recyclerView = view.findViewById(R.id.fas_rv_patient);
         medicineAdapter = new FASMedicineAdapter(getContext(), medicines, R.layout.listview_faspatient);
