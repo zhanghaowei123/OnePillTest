@@ -27,9 +27,8 @@ public class DoctorDao {
         int DoctorId = UserBook.NowDoctor.getDoctorId();
 
         OkHttpClient okHttpClient = new OkHttpClient();
-        Request request = new Request.Builder().url(Connect.BASE_URL+"EditUserServlet?UserId="+DoctorId+"&Code="+code+"&"+code+"="+str).build();
+        Request request = new Request.Builder().url(Connect.BASE_URL+"EditDoctorServlet?doctorId="+DoctorId+"&Code="+code+"&"+code+"="+str).build();
         Call call = okHttpClient.newCall(request);
-        Log.e("医生","Code"+code+"DoctorId"+DoctorId+"str"+str);
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -53,7 +52,7 @@ public class DoctorDao {
      * 通过doctorId查询医生
      */
 
-    public void searchDoctorById(int doctorId){
+    /*public void searchDoctorById(int doctorId){
         OkHttpClient okHttpClient1 = new OkHttpClient();
         Request request = new Request.Builder().url(Connect.BASE_URL+"GetUserServlet?doctorId="+doctorId+"&Code=searchDoctorById").build();
         Call call = okHttpClient1.newCall(request);
@@ -72,6 +71,30 @@ public class DoctorDao {
                 Log.e("update返回结果",re+"");
                 msg.setCode("DoctorDao_searchDoctorById");
                 msg.setJson(re);
+                EventBus.getDefault().post(msg);
+            }
+        });
+    }*/
+
+    public void searchDoctorById(int doctorId){
+
+
+        OkHttpClient okHttpClient = new OkHttpClient();
+        Request request = new Request.Builder().url(Connect.BASE_URL+"GetUserServlet?doctorId="+doctorId+"&Code=searchDoctorById").build();
+        Call call = okHttpClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                Log.e("!!!!!!!!!!","yees");
+                String json = response.body().string();
+                EventMessage msg = new EventMessage();
+                msg.setJson(json);
+                msg.setCode("DoctorDao_searchDoctorById");
                 EventBus.getDefault().post(msg);
             }
         });

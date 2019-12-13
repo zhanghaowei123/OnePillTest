@@ -9,11 +9,13 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,6 +56,10 @@ public class EditUserInfoActivity extends AppCompatActivity {
     EditText et_password = null;
     EditText et_phone = null;
     boolean isBack = false;
+    LinearLayout my_layout = null;
+    LinearLayout item_layout = null;
+    TextView itemname = null;
+    EditText itemtext = null;
 
     UserDao dao = new UserDao();
     DoctorDao doctorDao = new DoctorDao();
@@ -100,8 +106,8 @@ public class EditUserInfoActivity extends AppCompatActivity {
         et_PID.setText(UserBook.NowDoctor.getPID());
         et_password.setText(UserBook.NowDoctor.getPassword());
         et_phone.setText(UserBook.NowDoctor.getPhone());
-    }
 
+    }
 
 
     private void find() {
@@ -200,6 +206,7 @@ public class EditUserInfoActivity extends AppCompatActivity {
                     }else if(UserBook.Code ==2){//用户
                         postmsg = "?UserId="+UserBook.NowUser.getUserId()+"&Code=Patient";
                     }
+
                     Request request = new Request.Builder().url(Connect.BASE_URL + "EditHeadImgServlet"+postmsg)
                             .post(requestBody)
                             .build();
@@ -213,6 +220,7 @@ public class EditUserInfoActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(Call call, Response response) throws IOException {
                             String json = response.body().string();
+                            Log.e("头像地址",json);
                             if (UserBook.Code == 1){//医生
                                 UserBook.NowDoctor.setHeadImg(json);
                             }else if(UserBook.Code ==2){//用户
@@ -232,11 +240,11 @@ public class EditUserInfoActivity extends AppCompatActivity {
     //保存
     private void save() {
         if (UserBook.Code == 1){//医生
-            String nickName = et_nickName.getText().toString();
+            String name = et_nickName.getText().toString();
             String PID = et_PID.getText().toString();
             String password = et_password.getText().toString();
             String phone = et_phone.getText().toString();
-            doctorDao.update("nickName",nickName);
+            doctorDao.update("name",name);
             doctorDao.update("password",password);
             doctorDao.update("phone",phone);
             doctorDao.update("PID",PID);
