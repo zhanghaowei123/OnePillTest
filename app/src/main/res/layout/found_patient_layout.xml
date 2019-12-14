@@ -19,7 +19,7 @@
             android:layout_height="25dp" />
         <TextView
             android:text="找药品"
-            android:textSize="18dp"
+            android:textSize="17dp"
             android:textColor="#3C3C3C"
             android:gravity="center"
             android:layout_width="300dp"
