@@ -52,6 +52,9 @@ android {
 }
 
 dependencies {
+    //ZXing
+    implementation 'com.google.zxing:core:3.3.3'
+    implementation('com.journeyapps:zxing-android-embedded:3.6.0') { transitive = false }
     //OkHttp框架
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
     //Gson
@@ -69,7 +72,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation files('libs/BaiduLBS_Android.jar')
-
     // Google firebase cloud messaging
     implementation 'com.google.android.gms:play-services-base:11.4.0'
     implementation 'com.google.firebase:firebase-messaging:11.4.0'

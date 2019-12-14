@@ -1,8 +1,10 @@
 package com.onepilltest.index;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,10 +17,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 import com.onepilltest.R;
 import com.onepilltest.URL.Connect;
 import com.onepilltest.entity.Article;
@@ -55,6 +61,7 @@ public class HomeFragment extends Fragment {
     private List<Article> articles = new ArrayList<>();
     private RecyclerView recyclerView;
     private IndexAdapter indexAdapter;
+    Button zxing = null;
     /*滚动字幕条*/
     com.onepilltest.others.CustomScrollBar bar = null;
 
@@ -86,6 +93,7 @@ public class HomeFragment extends Fragment {
         find(view);
         initView(view);
         setArticles();
+        initZxing();
         initHe();
         HeConfig.switchToFreeServerNode();
         HeConfig.init("HE1912110956121206", "828403b14fc24867bccb4494b3228294");
@@ -118,6 +126,15 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
+    private void initZxing() {
+        //6.0版本或以上需请求权限
+        String[] permissions=new String[]{Manifest.permission.
+                WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {
+            requestPermissions(permissions,1);
+        }
+    }
+
     private void initHe() {
         //动态申请权限
         ActivityCompat.requestPermissions(getActivity(),
@@ -139,6 +156,8 @@ public class HomeFragment extends Fragment {
     }
 
     private void find(View view) {
+        zxing = view.findViewById(R.id.home_zxing);
+        zxing.setOnClickListener(myListener);
         bar = view.findViewById(R.id.fragement_home_bar);
         Question = view.findViewById(R.id.iv_inquiry);
         Question.setOnClickListener(myListener);
@@ -242,10 +261,17 @@ public class HomeFragment extends Fragment {
                     Intent inent_findoctor = new Intent();
                     inent_findoctor.setClass(getContext(), FoundDoctorActivity.class);
                     startActivity(inent_findoctor);
+                    break;
                 case R.id.iv_find_medicine:
                     Intent intent_findpatient = new Intent();
                     intent_findpatient.setClass(getContext(), FoundPatientActivity.class);
                     startActivity(intent_findpatient);
+                    break;
+                case R.id.home_zxing:
+                    //new IntentIntegrator(getActivity()).initiateScan();
+                    new IntentIntegrator(getActivity()).setCaptureActivity(ZxingActivity.class).initiateScan();
+                    break;
+
 
             }
         }
@@ -257,6 +283,21 @@ public class HomeFragment extends Fragment {
         Log.e("Home","Destroy");
         //bar.setVisibility(View.GONE);//不可见
         EventBus.getDefault().unregister(this);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.e("扫码结果分析", "Cancelled");
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if(result != null) {
+            if(result.getContents() == null) {
+                Log.e("扫码", "Cancelled");
+                Toast.makeText(getActivity(), "扫描结果为空", Toast.LENGTH_LONG).show();
+            } else {
+                Log.e("扫码", "Scanned: " + result.getContents());
+                Toast.makeText(getActivity(), result.getContents(), Toast.LENGTH_LONG).show();
+            }
+        }
     }
 }
 

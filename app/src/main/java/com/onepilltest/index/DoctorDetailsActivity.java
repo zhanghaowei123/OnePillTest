@@ -1,6 +1,8 @@
 package com.onepilltest.index;
 
+import android.app.Activity;
 import android.content.Context;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
 import com.onepilltest.R;
@@ -26,30 +29,37 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 public class DoctorDetailsActivity extends AppCompatActivity {
-    private ImageView headImg = null;
+    private ImageView headImg = null;//头像
     UserDoctor doctor = null;
     MyListener myListener = null;
-    TextView name = null;
-    TextView hos = null;
+    TextView name = null;//名字
+    TextView hos = null;//所在医院
     DoctorDao dao = new DoctorDao();
-    Button editResume = null;
-    EditText resume = null;
+    Button editResume = null;//提交按钮
+    EditText resume = null;//简介
     Context context = null;
-
+    //设置DoctorId来显示不同的医生详情页
+    int DoctorId = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.doctor_details);
-        EventBus.getDefault().register(
-                this);
-        dao.searchDoctorById(18);
-        find();
+        EventBus.getDefault().register(this);
+        setId();
+        dao.searchDoctorById(DoctorId);
         myListener = new MyListener();
+        find();
         context = getBaseContext();
         //init();
     }
 
+    public void setId(){
+        /*使用putExtra（）方法传递数据
+        intent.putExtra("name","从mainActivity传过来的数据");*/
+        int id = getIntent().getIntExtra("id",19);
+        this.DoctorId = id;
+    }
     private void find() {
         resume = findViewById(R.id.dc_details_resume);
         resume.setOnClickListener(myListener);
@@ -61,17 +71,22 @@ public class DoctorDetailsActivity extends AppCompatActivity {
     }
 
     private void init(){
-        //头像
-        RequestOptions requestOptions = new RequestOptions().circleCrop();
-        Glide.with(this)
-                .load(Connect.BASE_URL+ doctor.getHeadImg())
-                .apply(requestOptions)
-                .into(headImg);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            if(!isDestroyed()){
+                //头像
+                RequestOptions requestOptions = new RequestOptions().circleCrop();
+                Glide.with(this)
+                        .load(Connect.BASE_URL+ doctor.getHeadImg())
+                        .apply(requestOptions)
+                        .into(headImg);
+            }
+        }
+
 
         name.setText(doctor.getName());
         hos.setText(doctor.getHospital());
         if (doctor.getResume() == null){
-            resume.setHint("这个人很懒，什么都没写");
+            resume.setHint("查无此人！");
         }else
         resume.setText(doctor.getResume());
 
@@ -87,7 +102,7 @@ public class DoctorDetailsActivity extends AppCompatActivity {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getdate(EventMessage msg){
-        Log.e("查询医生","100"+msg.getJson());
+        Log.e("查询医生","json"+msg.getJson());
         if(msg.getCode() == "DoctorDao_searchDoctorById"){
             Gson gson = new Gson();
             doctor = gson.fromJson(msg.getJson(),UserDoctor.class);
@@ -102,9 +117,11 @@ public class DoctorDetailsActivity extends AppCompatActivity {
                 case R.id.dc_details_editResume:
                     if (UserBook.Code == 1 && UserBook.NowDoctor.getDoctorId() == doctor.getDoctorId()){
                         DoctorDao dao = new DoctorDao();
-                        Log.e("修改resume","yes");
+                        Log.e("正在修改resume","yes");
+                        Toast.makeText(context,"正在提交修改",Toast.LENGTH_SHORT).show();
                         dao.update("resume",resume.getText().toString());
                     }else{
+                        Log.e("无权修改resume","no");
                         Toast.makeText(context,"无权修改",Toast.LENGTH_SHORT).show();
                     }
                     break;

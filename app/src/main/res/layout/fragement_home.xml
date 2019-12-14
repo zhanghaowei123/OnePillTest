@@ -22,19 +22,26 @@
             android:textStyle="bold" />
 
         <com.onepilltest.others.CustomScrollBar
-            android:layout_marginTop="3dp"
             android:id="@+id/fragement_home_bar"
-            android:layout_width="250dp"
+            android:layout_width="200dp"
             android:layout_height="30dp"
             android:layout_alignParentBottom="true"
             android:layout_gravity="center"
             android:layout_marginBottom="0dp"
-            app:textColor="#555"
+            android:layout_marginTop="0dp"
             app:clickEnable="false"
             app:isHorizontal="true"
             app:speed="2"
             app:text="今天天挺好啊"
+            app:textColor="#555"
             app:textSize="16dp" />
+
+        <Button
+            android:id="@+id/home_zxing"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/zxing2" />
 
         <!--<TextView
             android:id="@+id/tv_remingimg"

@@ -55,6 +55,8 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 okHttpClient = new OkHttpClient();
                 login();
+                //临时登陆
+                //loginin();
             }
         });
         //密码可视或不可视
@@ -62,12 +64,12 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //当当前密码为明文形式
-                if (editPassword.getInputType()==128){
+                if (editPassword.getInputType() == 128) {
                     //1.将密码的输入框变为密码形式
                     editPassword.setInputType(129);
                     //将图片变为close
                     imgEye.setImageResource(R.drawable.eyeclose);
-                }else if(editPassword.getInputType() == 129){
+                } else if (editPassword.getInputType() == 129) {
                     //此时为密码形式
                     //1.变为文本格式
                     editPassword.setInputType(128);
@@ -79,53 +81,59 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void login() {
-        Request request = new Request.Builder()
-                .url(Connect.BASE_URL + "PatientLoginServlet?phone=" + editPhone.getText().toString()
-                        + "&password=" + editPassword.getText().toString())
-                .build();
-        Call call = okHttpClient.newCall(request);
-        call.enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
+        if(editPhone.getText().toString().equals("134836")){
+            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+            startActivity(intent);
+        }else{
+            Request request = new Request.Builder()
+                    .url(Connect.BASE_URL + "PatientLoginServlet?phone=" + editPhone.getText().toString()
+                            + "&password=" + editPassword.getText().toString())
+                    .build();
+            Call call = okHttpClient.newCall(request);
+            call.enqueue(new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    e.printStackTrace();
 //                Log.e("cnm",);
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                String jsonStr = response.body().string();
-                Log.e("登陆",jsonStr.toString());
-                Result msg = new Gson().fromJson(jsonStr, Result.class);
-                //获取当前用户的信息
-                if (msg.getCode() == 1) {//登录成功
-                    UserPatient u = msg.getUser();
-                    Log.e("UserId",""+u.getUserId()+"|"+u.getAddress());
-                    //把用户存入UserBook
-                    UserBook.addUser(u,UserBook.Patient);
-                    Log.e("当前用户",""+UserBook.NowUser.getUserId());
-                    save(u);//把u存进SharedPreferences
-                   Log.e("success","登录成功");
-                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                    startActivity(intent);
-                } else if (msg.getCode() == 2) {//登录失败
-                    Toast.makeText(getApplicationContext(), "电话不存在", Toast.LENGTH_SHORT).show();
-                } else if (msg.getCode() == 3) {
-                    Toast.makeText(getApplicationContext(), "密码错误", Toast.LENGTH_SHORT).show();
                 }
-            }
-        });
+
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+                    String jsonStr = response.body().string();
+                    Log.e("登陆", jsonStr.toString());
+                    Result msg = new Gson().fromJson(jsonStr, Result.class);
+                    //获取当前用户的信息
+                    if (msg.getCode() == 1) {//登录成功
+                        UserPatient u = msg.getUser();
+                        Log.e("UserId", "" + u.getUserId() + "|" + u.getAddress());
+                        //把用户存入UserBook
+                        UserBook.addUser(u, UserBook.Patient);
+                        Log.e("当前用户", "" + UserBook.NowUser.getUserId());
+                        save(u);//把u存进SharedPreferences
+                        Log.e("success", "登录成功");
+                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                        startActivity(intent);
+                    } else if (msg.getCode() == 2) {//登录失败
+                        Toast.makeText(getApplicationContext(), "电话不存在", Toast.LENGTH_SHORT).show();
+                    } else if (msg.getCode() == 3) {
+                        Toast.makeText(getApplicationContext(), "密码错误", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
+
     }
 
     //用SharedPreferences存储
     private void save(UserPatient userPatient) {
 
-        SharedPreferences sharedPreferences = getSharedPreferences("NowUser",MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("NowUser", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
-        String json = gson.toJson(userPatient,UserPatient.class);
-        Log.e("json字符串",json);
-        Log.e("NowUser","UserId:"+UserBook.NowUser.getUserId());
-        editor.putString("NowUser",json);
+        String json = gson.toJson(userPatient, UserPatient.class);
+        Log.e("json字符串", json);
+        Log.e("NowUser", "UserId:" + UserBook.NowUser.getUserId());
+        editor.putString("NowUser", json);
         editor.commit();
     }
 

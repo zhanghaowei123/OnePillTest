@@ -1,15 +1,17 @@
 package com.onepilltest.index;
 
+import android.content.Intent;
 import android.graphics.Color;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.onepilltest.R;
 import com.onepilltest.entity.EventMessage;
 import com.onepilltest.message.MessageFragment;
@@ -89,6 +91,7 @@ public class HomeActivity extends AppCompatActivity {
     private String[] tabStrId = {"首页", "附近", "消息", "个人"};
     // 用于记录当前正在显示的Fragment
     private Fragment curFragment = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,6 +102,7 @@ public class HomeActivity extends AppCompatActivity {
         // 设置默认显示的TabSpec
         changeTab(tabStrId[0]);
     }
+
     // 自定义的监听器类，完成Tab页面切换及图表转化
     private class MyListener implements View.OnClickListener {
         @Override
@@ -238,4 +242,5 @@ public class HomeActivity extends AppCompatActivity {
         map.get(tabStrId[3]).setNormalImage(R.drawable.personal_normal);
         map.get(tabStrId[3]).setSelectImage(R.drawable.personal_select);
     }
+
 }

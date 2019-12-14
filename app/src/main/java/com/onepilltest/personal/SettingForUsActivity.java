@@ -39,7 +39,9 @@ public class SettingForUsActivity extends AppCompatActivity {
                     finish();
                     break;
                 case R.id.thisisceshi:
-                    startActivity(new Intent(SettingForUsActivity.this, DoctorDetailsActivity.class));
+                    Intent intent = new Intent(SettingForUsActivity.this, DoctorDetailsActivity.class);
+                    intent.putExtra("id",18);
+                    startActivity(intent);
             }
         }
     }

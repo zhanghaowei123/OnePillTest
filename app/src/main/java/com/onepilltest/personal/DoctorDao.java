@@ -27,7 +27,7 @@ public class DoctorDao {
         int DoctorId = UserBook.NowDoctor.getDoctorId();
 
         OkHttpClient okHttpClient = new OkHttpClient();
-        Request request = new Request.Builder().url(Connect.BASE_URL+"EditDoctorServlet?doctorId="+DoctorId+"&Code="+code+"&"+code+"="+str).build();
+        Request request = new Request.Builder().url(Connect.BASE_URL+"EditDoctorServlet?doctorId="+DoctorId+"&Code="+code+"&"+code+"="+str+"").build();
         Call call = okHttpClient.newCall(request);
         call.enqueue(new Callback() {
             @Override

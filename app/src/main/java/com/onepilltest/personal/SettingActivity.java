@@ -125,7 +125,6 @@ public class SettingActivity extends AppCompatActivity {
                         startActivity(address_intent);
                         finish();
                     }
-
                     break;
                 case R.id.setting_back://返回
                     finish();

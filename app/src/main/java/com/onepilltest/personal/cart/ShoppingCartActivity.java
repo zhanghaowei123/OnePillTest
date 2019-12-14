@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,6 +51,12 @@ public class ShoppingCartActivity extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     private ShoppingCartAdapter adapter = null;
     public static final String FROM_CART = "fromCart";
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
     @Nullable
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.shoppingcart, container, false);
@@ -59,6 +66,7 @@ public class ShoppingCartActivity extends AppCompatActivity {
         tvCartManage = view.findViewById(R.id.tv_cart_manage);
         tvCartFinish = view.findViewById(R.id.tv_cart_finish);
         btnDelete = view.findViewById(R.id.btn_delete);
+        Log.e("box","box初始化");
         cbChooseAll = view.findViewById(R.id.cb_choose_all);
         btnSettlement = view.findViewById(R.id.btn_settlement);
         tvSettlementPrice = view.findViewById(R.id.tv_settlement_price);
@@ -163,7 +171,9 @@ public class ShoppingCartActivity extends AppCompatActivity {
 
     @Override
     public void onResume() {
+        Log.e("box","onResume方法执行");
         super.onResume();
+        if (cbChooseAll!=null)
         cbChooseAll.setChecked(false);
         GetCartListTask task = new GetCartListTask();
         task.execute();
