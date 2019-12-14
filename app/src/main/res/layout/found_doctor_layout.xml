@@ -22,7 +22,7 @@
             android:text="找医生"
             android:textSize="17dp"
             android:gravity="center"
-            android:layout_weight="8"
+            android:layout_weight="10"
             android:layout_width="0dp"
             android:layout_height="match_parent" />
         <ImageView
