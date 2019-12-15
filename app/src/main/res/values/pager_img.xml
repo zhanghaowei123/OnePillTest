@@ -3,6 +3,6 @@
     <item name="pager_img1" type="id"></item>
     <item name="pager_img2" type="id"></item>
     <item name="pager_img3" type="id"></item>
-    <item name="pager_img4" type="id"></item>
-    <item name="pager_img5" type="id"></item>
+    <!--<item name="pager_img4" type="id"></item>-->
+    <!--<item name="pager_img5" type="id"></item>-->
 </resources>

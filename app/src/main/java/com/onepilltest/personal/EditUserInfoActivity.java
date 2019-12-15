@@ -70,6 +70,7 @@ public class EditUserInfoActivity extends AppCompatActivity {
         //去掉顶部标题
         //getSupportActionBar().hide();
         setContentView(R.layout._edit_user_info);
+        EventBus.getDefault().register(this);
         myListener = new MyListener();
         okHttpClient = new OkHttpClient();
         find();
@@ -134,7 +135,6 @@ public class EditUserInfoActivity extends AppCompatActivity {
                     break;
                 case R.id.edit_user_info_save://跳转到修改成功界面
                     save();
-                    finish();
                     break;
                 case R.id.edit_user_info_setImg:
                     setImage();
@@ -265,21 +265,54 @@ public class EditUserInfoActivity extends AppCompatActivity {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void updateUI(EventMessage msg){
 
-        Log.e("msg",msg.getCode()+msg.getJson());
-        if (msg.getCode() == "UserDao_update"){
-            if(msg.getJson()=="yes"){
-                Log.e("刷新",""+msg.getJson()+msg.getCode());
-                onCreate(null);
+        Log.e("EditUser",msg.getCode()+msg.getJson());
+        if (msg.getCode().equals("UserDao_update")){
+            if(msg.getJson().equals("yes")){
+                Log.e("更改NowUser",""+msg.getJson()+msg.getCode());
+
+                String nickName = et_nickName.getText().toString();
+                String PID = et_PID.getText().toString();
+                String password = et_password.getText().toString();
+                String phone = et_phone.getText().toString();
+
+                UserBook.NowUser.setNickName(nickName);
+                UserBook.NowUser.setPID(PID);
+                UserBook.NowUser.setPassword(password);
+                UserBook.NowUser.setPhone(phone);
+                EventMessage msg2 = new EventMessage();
+                msg2.setCode("用户信息已更新");
+                EventBus.getDefault().post(msg2);
+                finish();
             }else{
                 Toast.makeText(getApplicationContext(),"修改失败",Toast.LENGTH_SHORT);
             }
-        }else if(msg.getCode() == "更新头像"){
-            if(msg.getJson() == "yes"){
+        }else if(msg.getCode().equals("更新头像")){
+            if(msg.getJson().equals("yes")){
                 RequestOptions requestOptions = new RequestOptions().circleCrop();
                 Glide.with(this)
                         .load(Connect.BASE_URL+UserBook.NowUser.getHeadImg())
                         .apply(requestOptions)
                         .into(Img);
+            }
+        }else if(msg.getCode().equals("DoctorDao_update")){
+            if(msg.getJson().equals("yes")){
+                Log.e("更改NowDoctor",""+msg.getJson()+msg.getCode());
+
+                String name = et_nickName.getText().toString();
+                String PID = et_PID.getText().toString();
+                String password = et_password.getText().toString();
+                String phone = et_phone.getText().toString();
+
+                UserBook.NowDoctor.setName(name);
+                UserBook.NowDoctor.setPID(PID);
+                UserBook.NowDoctor.setPassword(password);
+                UserBook.NowDoctor.setPhone(phone);
+                finish();
+                EventMessage msg2 = new EventMessage();
+                msg2.setCode("医生信息已更新");
+                EventBus.getDefault().post(msg2);
+            }else{
+                Toast.makeText(getApplicationContext(),"修改失败",Toast.LENGTH_SHORT);
             }
         }
 

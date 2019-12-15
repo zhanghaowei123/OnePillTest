@@ -53,7 +53,7 @@
             android:hint="搜索药品"
             android:textSize="14dp"
             android:layout_height="35dp"
-            android:inputType="textPassword"
+
             android:gravity="center"
             android:textColor="#fefefe"
             android:background="@drawable/translucent"/>
@@ -208,24 +208,28 @@
             <TableRow>
 
                 <Button
+                    android:id="@+id/btn_1"
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="布洛芬" />
 
                 <Button
+                    android:id="@+id/btn_2"
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="百服宁" />
 
                 <Button
+                    android:id="@+id/btn_3"
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="泰诺林" />
 
                 <Button
+                    android:id="@+id/btn_4"
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -242,24 +246,28 @@
             <TableRow>
 
                 <Button
+                    android:id="@+id/btn_5"
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="芬必达" />
 
                 <Button
+                    android:id="@+id/btn_6"
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="西瓜霜" />
 
                 <Button
+                    android:id="@+id/btn_7"
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="银翘片" />
 
                 <Button
+                    android:id="@+id/btn_8"
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -276,24 +284,28 @@
             <TableRow>
 
                 <Button
+                    android:id="@+id/btn_9"
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="枇杷膏" />
 
                 <Button
+                    android:id="@+id/btn_10"
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="藿香正气" />
 
                 <Button
+                    android:id="@+id/btn_11"
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="夏桑菊" />
 
                 <Button
+                    android:id="@+id/btn_12"
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

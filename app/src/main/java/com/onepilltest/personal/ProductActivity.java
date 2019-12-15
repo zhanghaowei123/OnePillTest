@@ -3,6 +3,7 @@ package com.onepilltest.personal;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -34,21 +35,27 @@ public class ProductActivity extends Activity {
     private Button btnAddCart;
     private int previousSelectedPosition = 0;
     boolean isRunning = false;
-    medicine_ med = null;
+    private medicine_ med = new medicine_();
     TextView product_name;
     TextView product_type;
     TextView tabHost1, tabHost2, tabHost3, tabHost4;
+//    private String img1;
+//    private String img2;
+//    private String img3;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product);
+        find();
+        String product = getIntent().getStringExtra("product");
 
         btnAddCart = findViewById(R.id.btn_addcart);
         EventBus.getDefault().register(this);
         MedicineDao dao = new MedicineDao();
-        String name = "";
+        String name = product;
+        Log.e("搜索",""+name);
         dao.searchMedicineByName(name);
         initLoopView();  //实现轮播图
         //1.获取TabHost控件
@@ -77,26 +84,35 @@ public class ProductActivity extends Activity {
     }
 
     public void init() {
+        Log.e("json搜索",""+med.getMedicine());
         product_name.setText(med.getMedicine());
         product_type.setText(med.getGeneralName());
         tabHost1.setText(med.getOverview());
         tabHost2.setText(med.getFunction());
         tabHost3.setText(med.getSide_effect());
         tabHost4.setText(med.getIntrodutions());
-//        Glide.with(getApplicationContext())
-//                .load(Connect.BASE_URL + med.getImg1())
-//
-//                .into();
+
+
+
 //        mImg = new int[]{
 //                Integer.parseInt(med.getImg1()),
 //                Integer.parseInt(med.getImg2()),
 //                Integer.parseInt(med.getImg3())
 ////                R.drawable.text1,
-////                R.drawable.text2,
-////                R.drawable.text3,
-//                /*R.drawable.text4,
+//////                R.drawable.text2,
+//////                R.drawable.text3,
+////                /*R.drawable.text4,
 //                R.drawable.text5*/
 //        };
+//        Glide.with(getApplicationContext())
+//                .load(Connect.BASE_URL + med.getImg1())
+//                .into(imageView);
+//        Glide.with(getApplicationContext())
+//                .load(Connect.BASE_URL + med.getImg2())
+//                .into(imageView);
+//        Glide.with(getApplicationContext())
+//                .load(Connect.BASE_URL + med.getImg3())
+//                .into(imageView);
 
     }
 
@@ -106,9 +122,11 @@ public class ProductActivity extends Activity {
         smallpoint = findViewById(R.id.smallpoint);
 
         mImg = new int[]{
-                Integer.parseInt(med.getImg1()),
-                Integer.parseInt(med.getImg2()),
-                Integer.parseInt(med.getImg3())};
+                R.drawable.text1,
+                R.drawable.text2,
+                R.drawable.text3
+        };
+        med.getImg1();
         mImg_id = new int[]{
                 R.id.pager_img1,
                 R.id.pager_img2,
@@ -126,6 +144,7 @@ public class ProductActivity extends Activity {
         for (int i = 0; i < mImg.length; i++) {
             //初始化要显示的图片
             imageView = new ImageView(this);
+            Glide.with(this).load(mImg[i]).into(imageView);
             imageView.setBackgroundResource(mImg[i]);
             imageView.setId(mImg_id[i]);
             imageView.setOnClickListener(new pagerOnClickListener(getApplicationContext()));
@@ -197,9 +216,11 @@ public class ProductActivity extends Activity {
     public void getMedicine(EventMessage msg) {
         if (msg.getCode().equals("MedicineDao_searchMedicine")) {
             Gson gson = new Gson();
+            Log.e("搜索json",""+msg.getJson());
             medicine_ product = null;
             product = gson.fromJson(msg.getJson(), medicine_.class);
             med = product;
+
         }
         init();
     }

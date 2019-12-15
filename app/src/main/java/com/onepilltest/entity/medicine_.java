@@ -16,7 +16,10 @@ public class medicine_ {
     private String img3;
     private String standard;
 
-    public medicine_(int id, String generalName, String medicine, String price, String overview, String function, String introdutions, String side_effect, String forbiddance, int doctor_id, String img1, String img2 , String img3,String standard) {
+    public medicine_() {
+    }
+
+    public medicine_(int id, String generalName, String medicine, String price, String overview, String function, String introdutions, String side_effect, String forbiddance, int doctor_id, String img1, String img2 , String img3, String standard) {
         this.id = id;
         this.generalName = generalName;
         this.medicine = medicine;

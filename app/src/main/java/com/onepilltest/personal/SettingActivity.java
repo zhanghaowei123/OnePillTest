@@ -165,7 +165,6 @@ public class SettingActivity extends AppCompatActivity {
                 case R.id.setting_lin_forUs:
                     Intent forUs_intent = new Intent(SettingActivity.this,SettingForUsActivity.class);
                     startActivity(forUs_intent);
-                    finish();
                     break;
                 case R.id.setting_lin_auto_btn:
                     if(state ==0){
@@ -238,16 +237,12 @@ public class SettingActivity extends AppCompatActivity {
     public void updateUI(EventMessage msg){
 
         if (UserBook.Code == 1){//医生
-            Log.e("msg",msg.getCode()+msg.getJson());
-            if (msg.getCode() == "DoctorDao_update"){
-                if(msg.getJson()=="yes"){
+            Log.e("Setting",msg.getCode()+msg.getJson());
+            if (msg.getCode().equals("医生信息已更新")){
                     Log.e("刷新",""+msg.getJson()+msg.getCode());
-                    onCreate(null);
-                }else{
-                    Toast.makeText(getApplicationContext(),"修改失败",Toast.LENGTH_SHORT);
-                }
-            }else if(msg.getCode() == "更新头像"){
-                if(msg.getJson() == "yes"){
+                    init();
+            }else if(msg.getCode().equals("更新头像")){
+                if(msg.getJson().equals("yes")){
                         RequestOptions requestOptions = new RequestOptions().circleCrop();
                         Glide.with(this)
                                 .load(Connect.BASE_URL+UserBook.NowDoctor.getHeadImg())
@@ -256,16 +251,12 @@ public class SettingActivity extends AppCompatActivity {
                 }
             }
         }else if(UserBook.Code ==2){//用户
-            Log.e("msg",msg.getCode()+msg.getJson());
-            if (msg.getCode() == "UserDao_update"){
-                if(msg.getJson()=="yes"){
+            Log.e("Setting",msg.getCode()+msg.getJson());
+            if (msg.getCode().equals("用户信息已更新")){
                     Log.e("刷新",""+msg.getJson()+msg.getCode());
-                    onCreate(null);
-                }else{
-                    Toast.makeText(getApplicationContext(),"修改失败",Toast.LENGTH_SHORT);
-                }
-            }else if(msg.getCode() == "更新头像"){
-                if(msg.getJson() == "yes"){
+                    init();
+            }else if(msg.getCode().equals("更新头像")){
+                if(msg.getJson().equals("yes")){
 
                     RequestOptions requestOptions = new RequestOptions().circleCrop();
                     Glide.with(this)
