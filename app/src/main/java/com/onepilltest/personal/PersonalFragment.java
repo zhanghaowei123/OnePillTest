@@ -137,7 +137,7 @@ public class PersonalFragment extends Fragment {
     public void updateUI(EventMessage msg) {
 
         if(UserBook.Code == 1){
-            Log.e("person更新", msg.getCode() + msg.getJson());
+            //Log.e("person更新", msg.getCode() + msg.getJson());
             if (msg.getCode() == "更新头像") {
                 if (msg.getJson() == "yes") {
                     RequestOptions requestOptions = new RequestOptions().circleCrop();
@@ -148,7 +148,7 @@ public class PersonalFragment extends Fragment {
                 }
             }
         }else if(UserBook.Code == 2){
-            Log.e("person更新", msg.getCode() + msg.getJson());
+            //Log.e("person更新", msg.getCode() + msg.getJson());
             if (msg.getCode() == "更新头像") {
                 if (msg.getJson() == "yes") {
                     RequestOptions requestOptions = new RequestOptions().circleCrop();

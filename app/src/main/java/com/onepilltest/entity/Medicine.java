@@ -30,6 +30,24 @@ public class Medicine implements Serializable {
     private List<String> kinds = new ArrayList<>();
     //库存
     private List<Integer> stocks = new ArrayList<>();
+
+ /*   //构造方法
+    public Medicine(List<Integer> ids, List<String> generaNames, List<String> medicineNames, List<Integer> prices, List<String> overViews, List<String> functions, List<String> introdutions, List<String> side_effects, List<String> forbiddancets, int doctorID, List<String> standards, List<String> kinds, List<Integer> stocks) {
+        this.ids = ids;
+        this.generaNames = generaNames;
+        this.medicineNames = medicineNames;
+        this.prices = prices;
+        this.overViews = overViews;
+        this.functions = functions;
+        this.introdutions = introdutions;
+        this.side_effects = side_effects;
+        this.forbiddancets = forbiddancets;
+        this.doctorID = doctorID;
+        this.standards = standards;
+        this.kinds = kinds;
+        this.stocks = stocks;
+    }
+*/
     public int getDoctorID() {
         return doctorID;
     }

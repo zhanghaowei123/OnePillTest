@@ -29,12 +29,12 @@ public class pagerOnClickListener implements View.OnClickListener {
             case R.id.pager_img3:
                 Toast.makeText(Context, "图片3被点击", Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.pager_img4:
+            /*case R.id.pager_img4:
                 Toast.makeText(Context, "图片4被点击", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.pager_img5:
                 Toast.makeText(Context, "图片5被点击", Toast.LENGTH_SHORT).show();
-                break;
+                break;*/
         }
     }
 }

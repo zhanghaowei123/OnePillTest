@@ -8,6 +8,7 @@ import android.widget.Button;
 
 import com.onepilltest.R;
 import com.onepilltest.index.DoctorDetailsActivity;
+import com.onepilltest.index.MedicineDao;
 
 public class SettingForUsActivity extends AppCompatActivity {
 
@@ -39,9 +40,11 @@ public class SettingForUsActivity extends AppCompatActivity {
                     finish();
                     break;
                 case R.id.thisisceshi:
-                    Intent intent = new Intent(SettingForUsActivity.this, DoctorDetailsActivity.class);
+                    /*Intent intent = new Intent(SettingForUsActivity.this, DoctorDetailsActivity.class);
                     intent.putExtra("id",18);
-                    startActivity(intent);
+                    startActivity(intent);*/
+                    MedicineDao dao = new MedicineDao();
+                    dao.searchMedicineByName("布洛芬");
             }
         }
     }

@@ -52,30 +52,6 @@ public class DoctorDao {
      * 通过doctorId查询医生
      */
 
-    /*public void searchDoctorById(int doctorId){
-        OkHttpClient okHttpClient1 = new OkHttpClient();
-        Request request = new Request.Builder().url(Connect.BASE_URL+"GetUserServlet?doctorId="+doctorId+"&Code=searchDoctorById").build();
-        Call call = okHttpClient1.newCall(request);
-        Log.e("医生","DoctorId"+doctorId);
-        call.enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                Log.e("testDoctor",","+e.getMessage());
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                EventMessage msg = new EventMessage();
-                Log.e("返回结果","发送成功");
-                String re = response.body().string();
-                Log.e("update返回结果",re+"");
-                msg.setCode("DoctorDao_searchDoctorById");
-                msg.setJson(re);
-                EventBus.getDefault().post(msg);
-            }
-        });
-    }*/
-
     public void searchDoctorById(int doctorId){
 
 
