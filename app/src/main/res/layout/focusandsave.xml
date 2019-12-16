@@ -5,17 +5,17 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
-        android:paddingLeft="20dp"
-        android:layout_marginRight="50dp"
+        android:paddingLeft="15dp"
         android:layout_width="match_parent"
         android:layout_height="50dp">
 
         <ImageView
             android:id="@+id/focus_back"
-            android:layout_marginRight="40dp"
             android:src="@drawable/left"
             android:layout_gravity="center"
-            android:layout_width="25dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
             android:layout_height="25dp" />
 
         <TextView
@@ -24,9 +24,9 @@
             android:textSize="17dp"
             android:textColor="#3C3C3C"
             android:gravity="center"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_weight="3"/>
 
         <TextView
             android:id="@+id/fas_patient"
@@ -34,9 +34,14 @@
             android:textSize="17dp"
             android:textColor="#3C3C3C"
             android:gravity="center"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_weight="3"/>
+
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 

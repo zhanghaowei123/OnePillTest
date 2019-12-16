@@ -72,7 +72,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="60dp"
         android:layout_marginTop="10dp"
         android:background="#FFFFFF">
 
@@ -91,8 +91,8 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
                     android:layout_margin="5dp"
                     android:src="@drawable/order" />
 
@@ -114,8 +114,8 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
                     android:layout_margin="2dp"
                     android:src="@drawable/cart" />
 
@@ -137,8 +137,8 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
                     android:layout_margin="5dp"
                     android:src="@drawable/wallet" />
 
@@ -160,8 +160,8 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
                     android:layout_margin="5dp"
                     android:src="@drawable/ask" />
 
@@ -180,7 +180,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="140dp"
+        android:layout_height="120dp"
         android:layout_marginTop="10dp"
         android:background="#FFFFFF"
         android:orientation="vertical">
@@ -188,21 +188,21 @@
         <LinearLayout
             android:id="@+id/ll_help"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="40dp"
             android:background="@drawable/underline"
             android:paddingLeft="15dp">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_margin="8dp"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_margin="6dp"
                 android:src="@drawable/help" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:paddingLeft="15dp"
-                android:paddingTop="13dp"
+                android:paddingTop="10dp"
                 android:text="帮助与反馈"
                 android:textColor="#000000"
                 android:textSize="15dp" />
@@ -212,21 +212,21 @@
         <LinearLayout
             android:id="@+id/ll_sc"
             android:layout_width="match_parent"
-            android:layout_height="47dp"
+            android:layout_height="40dp"
             android:background="@drawable/underline"
             android:paddingLeft="15dp">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_margin="8dp"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_margin="6dp"
                 android:src="@drawable/sc" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:paddingLeft="15dp"
-                android:paddingTop="13dp"
+                android:paddingTop="10dp"
                 android:text="关注和收藏"
                 android:textColor="#000000"
                 android:textSize="15dp" />
@@ -235,14 +235,14 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="47dp"
+            android:layout_height="40dp"
             android:orientation="horizontal"
             android:paddingLeft="15dp">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_margin="8dp"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_margin="6dp"
                 android:src="@drawable/tip" />
 
             <TextView
@@ -250,7 +250,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:paddingLeft="15dp"
-                android:paddingTop="13dp"
+                android:paddingTop="10dp"
                 android:text="设置提醒"
                 android:textColor="#000000"
                 android:textSize="15dp" />
