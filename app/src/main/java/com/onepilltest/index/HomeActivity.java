@@ -13,6 +13,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 import com.onepilltest.R;
 import com.onepilltest.entity.EventMessage;
 import com.onepilltest.message.MessageFragment;
@@ -247,4 +251,18 @@ public class HomeActivity extends AppCompatActivity {
         map.get(tabStrId[3]).setSelectImage(R.drawable.personal_select);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        Log.e("扫码结果分析", "Cancelled");
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if(result != null) {
+            if(result.getContents() == null) {
+                Log.e("扫码", "Cancelled");
+                Toast.makeText(this, "扫描结果为空", Toast.LENGTH_LONG).show();
+            } else {
+                Log.e("扫码", "Scanned: " + result.getContents());
+                Toast.makeText(this, result.getContents()+"扫描结果不为空", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
 }

@@ -285,20 +285,7 @@ public class HomeFragment extends Fragment {
         EventBus.getDefault().unregister(this);
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.e("扫码结果分析", "Cancelled");
-        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        if(result != null) {
-            if(result.getContents() == null) {
-                Log.e("扫码", "Cancelled");
-                Toast.makeText(getActivity(), "扫描结果为空", Toast.LENGTH_LONG).show();
-            } else {
-                Log.e("扫码", "Scanned: " + result.getContents());
-                Toast.makeText(getActivity(), result.getContents(), Toast.LENGTH_LONG).show();
-            }
-        }
-    }
+    
 }
 
 
