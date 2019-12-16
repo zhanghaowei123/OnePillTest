@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/ceshi_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="0dp"
+        android:text="点击显示二维码"
+        android:textSize="20sp" />
+
+    <ImageView
+        android:id="@+id/ceshi_img"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_launcher_background" />
+
+    <EditText
+        android:id="@+id/ceshi_text"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:hint="请输入要加载成二维码的内容" />
+</LinearLayout>
