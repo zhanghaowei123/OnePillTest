@@ -6,6 +6,7 @@
 
 
     <ListView
+        android:layout_marginTop="30dp"
         android:layout_gravity="center"
         android:id="@+id/user_list_listview"
         android:layout_width="match_parent"

@@ -145,8 +145,9 @@
         <activity android:name=".index.DoctorDetailsActivity" />
         <!-- <activity android:name=".index.ZxingActivity"></activity> -->
         <!-- 二维码扫码 -->
-        <activity android:name=".index.ZxingActivity"></activity>
-        <activity android:name=".personal.ProductActivity"></activity>
+        <activity android:name=".index.ZxingActivity" />
+        <activity android:name=".personal.ProductActivity" />
+        <activity android:name=".personal.thisIsCeShiActivity"></activity>
     </application>
 
 </manifest>

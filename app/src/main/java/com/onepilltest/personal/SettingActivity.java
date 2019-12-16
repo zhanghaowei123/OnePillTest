@@ -1,6 +1,7 @@
 package com.onepilltest.personal;
 
 import android.content.Intent;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +18,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.onepilltest.R;
 import com.onepilltest.URL.Connect;
 import com.onepilltest.entity.EventMessage;
+import com.onepilltest.entity.QR;
 import com.onepilltest.index.HomeActivity;
 import com.onepilltest.message.QuestionActivity;
 import com.onepilltest.welcome.LoginActivity;
@@ -56,8 +58,10 @@ public class SettingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //去掉顶部标题
-        //getSupportActionBar().hide();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(0xffffffff );
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        }
         setContentView(R.layout.setting);
         EventBus.getDefault().register(this);
         myListener = new MyListener();
@@ -70,6 +74,7 @@ public class SettingActivity extends AppCompatActivity {
         sign_out.setOnClickListener(myListener);
         btn = findViewById(R.id.setting_lin_auto_btn);
         btn.setOnClickListener(myListener);
+        /*QR_code.setOnClickListener(myListener);*/
         tv_nickName = findViewById(R.id.setting_tv_nickName);
         //tv_nickName.setText(UserBook.NowUser.getNickName());
         tv_address = findViewById(R.id.setting_tv_address);
@@ -209,7 +214,7 @@ public class SettingActivity extends AppCompatActivity {
         tv_nickName.setText(UserBook.NowUser.getNickName());//昵称
         tv_address.setText(UserBook.NowUser.getAddress());//地址
         tv_phone.setText(UserBook.NowUser.getPhone());//手机号
-
+        QR_code.setImageBitmap(QR.getQR(100,100,"想和你做朋友"));
 
     }
 
@@ -226,6 +231,7 @@ public class SettingActivity extends AppCompatActivity {
         tv_nickName.setText(UserBook.NowDoctor.getName());//昵称
         tv_address.setText(UserBook.NowDoctor.getAddress());//地址
         tv_phone.setText(UserBook.NowDoctor.getPhone());//手机号
+        QR_code.setImageBitmap(QR.getQR(100,100,"想和你做朋友"));
     }
 
     public void JumpAccount(){

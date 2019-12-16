@@ -72,7 +72,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="80dp"
         android:layout_marginTop="10dp"
         android:background="#FFFFFF">
 
@@ -151,7 +151,7 @@
 
             </LinearLayout>
 
-            <LinearLayout
+            <!--<LinearLayout
                 android:id="@+id/ll_ask"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -172,7 +172,7 @@
                     android:textColor="#3C3C3C"
                     android:textSize="14dp" />
 
-            </LinearLayout>
+            </LinearLayout>-->
 
         </LinearLayout>
 
@@ -180,17 +180,17 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="140dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:background="#FFFFFF"
         android:orientation="vertical">
 
         <LinearLayout
-            android:gravity="center"
             android:id="@+id/ll_help"
             android:layout_width="match_parent"
-            android:layout_height="46dp"
+            android:layout_height="60dp"
             android:background="@drawable/underline"
+            android:gravity="center"
             android:paddingLeft="15dp">
 
             <ImageView
@@ -203,7 +203,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:paddingLeft="15dp"
-                android:paddingTop="13dp"
+                android:paddingTop="20dp"
                 android:text="帮助与反馈"
                 android:textColor="#000000"
                 android:textSize="15dp" />
@@ -212,10 +212,10 @@
 
         <LinearLayout
             android:id="@+id/ll_sc"
-            android:gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="47dp"
+            android:layout_height="60dp"
             android:background="@drawable/underline"
+            android:gravity="center"
             android:paddingLeft="15dp">
 
             <ImageView
@@ -228,21 +228,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:paddingLeft="15dp"
-                android:paddingTop="13dp"
+                android:paddingTop="20dp"
                 android:text="关注和收藏"
                 android:textColor="#000000"
                 android:textSize="15dp" />
 
         </LinearLayout>
 
-        <LinearLayout
+        <!--<LinearLayout
+            android:id="@+id/ll_tip"
             android:layout_width="match_parent"
-            android:layout_height="47dp"
+            android:layout_height="60dp"
+            android:background="@drawable/underline"
             android:gravity="center"
-            android:orientation="horizontal"
             android:paddingLeft="15dp">
 
-            <ImageView
+            &lt;!&ndash;<ImageView
                 android:layout_width="28dp"
                 android:layout_height="28dp"
                 android:layout_margin="6dp"
@@ -250,24 +251,23 @@
 
             <TextView
                 android:layout_width="0dp"
-                android:gravity="center"
                 android:layout_height="match_parent"
-                android:layout_weight="3"
+                android:layout_weight="7"
+                android:paddingLeft="15dp"
+                android:paddingTop="20dp"
                 android:text="设置提醒"
                 android:textColor="#000000"
                 android:textSize="15dp" />
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="6" />
-
             <Switch
+                android:id="@+id/ll_tip_btn"
                 android:layout_width="20dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
 
-        </LinearLayout>
+
+        </LinearLayout>&ndash;&gt;-->
+
 
     </LinearLayout>
 

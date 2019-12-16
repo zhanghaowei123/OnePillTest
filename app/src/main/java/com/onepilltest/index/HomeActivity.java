@@ -260,8 +260,9 @@ public class HomeActivity extends AppCompatActivity {
                 Log.e("扫码", "Cancelled");
                 Toast.makeText(this, "扫描结果为空", Toast.LENGTH_LONG).show();
             } else {
-                Log.e("扫码", "Scanned: " + result.getContents());
-                Toast.makeText(this, result.getContents()+"扫描结果不为空", Toast.LENGTH_LONG).show();
+                String str = result.getContents();
+                Log.e("扫码", "Scanned: " + str);
+                Toast.makeText(this, str+"\n扫描结果不为空", Toast.LENGTH_LONG).show();
             }
         }
     }

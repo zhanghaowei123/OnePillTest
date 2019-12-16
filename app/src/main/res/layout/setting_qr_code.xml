@@ -57,6 +57,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <ImageView
+                    android:id="@+id/setting_qr_code_userImg"
                     android:src="@drawable/user"
                     android:layout_width="50dp"
                     android:layout_height="50dp" />
@@ -67,6 +68,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                     <TextView
+                        android:id="@+id/setting_qr_code_userName"
                         android:textColor="#000"
                         android:textSize="16dp"
                         android:gravity="center"
@@ -75,6 +77,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="0dp" />
                     <TextView
+                        android:id="@+id/setting_qr_code_address"
                         android:textColor="#555"
                         android:textSize="14dp"
                         android:gravity="center"
@@ -91,10 +94,12 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+
                 <ImageView
-                    android:src="@drawable/erweima"
+                    android:id="@+id/setting_qr_code_img"
                     android:layout_width="230dp"
-                    android:layout_height="230dp" />
+                    android:layout_height="230dp"
+                    android:src="@drawable/erweima" />
                 <TextView
                     android:textColor="#555"
                     android:paddingTop="25dp"
