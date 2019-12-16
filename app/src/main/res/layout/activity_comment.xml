@@ -35,11 +35,13 @@
         android:id="@+id/lv_comment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@id/ll_send"
         android:layout_below="@id/ll_detial"
         android:layout_marginTop="10dp"
         android:background="#fff" />
 
     <LinearLayout
+        android:id="@+id/ll_send"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -55,7 +57,7 @@
             android:layout_weight="4"
             android:background="@drawable/comment_shape"
             android:hint="说点什么吧"
-            android:textSize="16dp"/>
+            android:textSize="16dp" />
 
         <Button
             android:id="@+id/btn_send_comment"

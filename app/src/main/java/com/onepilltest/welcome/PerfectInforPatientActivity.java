@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.exceptions.HyphenateException;
 import com.onepilltest.R;
 import com.onepilltest.URL.Connect;
 import com.onepilltest.entity.UserPatient;
@@ -48,9 +50,6 @@ public class PerfectInforPatientActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-//                        Intent intent = new Intent();
-//                        intent.setClass(PerfectInforPatientActivity.this, RegisterPatient.class);
-//                        startActivity(intent);
                         finish();
                         Toast.makeText(getApplicationContext(), "请完善个人信息", Toast.LENGTH_LONG).show();
                     }
@@ -64,11 +63,28 @@ public class PerfectInforPatientActivity extends AppCompatActivity {
                 registerInfo();
                 if (flag) {
                     postUserPatient();
+                    signup();
                 } else {
                     Toast.makeText(getApplicationContext(), "请完善个人信息", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+    }
+
+    private void signup() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    EMClient.getInstance().createAccount(userPatient.getPhone().trim(),
+                            userPatient.getPassword().trim());
+                    Log.e("ECtest", "注册成功");
+                } catch (HyphenateException e) {
+                    e.printStackTrace();
+                    Log.e("ECtest", "注册失败" + "," + e.getErrorCode() + "," + e.getMessage());
+                }
+            }
+        }).start();
     }
 
     private void postUserPatient() {

@@ -31,6 +31,8 @@ import com.onepilltest.entity.Article;
 import com.onepilltest.entity.EventMessage;
 import com.onepilltest.entity.HeFeng;
 import com.onepilltest.message.QuestionActivity;
+import com.onepilltest.message.QuestionListActivity;
+import com.onepilltest.personal.UserBook;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -93,7 +95,7 @@ public class HomeFragment extends Fragment {
         find(view);
         initView(view);
         setArticles();
-        initZxing();
+       // initZxing();
         initHe();
         HeConfig.switchToFreeServerNode();
         HeConfig.init("HE1912110956121206", "828403b14fc24867bccb4494b3228294");
@@ -111,9 +113,7 @@ public class HomeFragment extends Fragment {
                 if (Code.OK.getCode().equalsIgnoreCase(date.getStatus())) {
                     //此时返回数据
                     NowBase now = date.getNow();
-                    setText(new HeFeng(now.getTmp(),now.getCond_txt()));
-
-
+                    setText(new HeFeng(now.getTmp(), now.getCond_txt()));
                 } else {
                     //在此查看返回数据失败的原因
                     String status = date.getStatus();
@@ -126,14 +126,14 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
-    private void initZxing() {
-          //6.0版本或以上需请求权限
-        String[] permissions=new String[]{Manifest.permission.
-                WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {
-            requestPermissions(permissions,1);
-        }
-    }
+//    private void initZxing() {
+//          //6.0版本或以上需请求权限
+//        String[] permissions=new String[]{Manifest.permission.
+//                WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
+//        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {
+//            requestPermissions(permissions,1);
+//        }
+//    }
 
     private void initHe() {
         //动态申请权限
@@ -150,7 +150,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == 1){
+        if (requestCode == 1) {
 
         }
     }
@@ -207,33 +207,34 @@ public class HomeFragment extends Fragment {
 
     public void setText(HeFeng heFeng) {
         String str = null;
-        if(Integer.valueOf(heFeng.getTem())<0){
-            str = "温度很低，请注意保暖";
-        }else if(Integer.valueOf(heFeng.getTem())<10){
+        if (Integer.valueOf(heFeng.getTem()) < 0) {
+            str = "温度很低，请注意添衣，小心生病";
+        } else if (Integer.valueOf(heFeng.getTem()) < 10) {
             str = "温度较低，请注意保暖";
-        }else if (Integer.valueOf(heFeng.getTem())<20){
+        } else if (Integer.valueOf(heFeng.getTem()) < 20) {
             str = "气温舒适，玩的开心";
-        }else if (Integer.valueOf(heFeng.getTem())<50){
+        } else if (Integer.valueOf(heFeng.getTem()) < 50) {
             str = "热死个人！！";
-        }else{
+        } else {
 
         }
-        text = "今天温度："+heFeng.getTem()+"----->"+str;
-            bar.setText(text);
-            Log.e("获取到天气数据",heFeng.getLife()+heFeng.getTem());
+        text = "今天温度：" + heFeng.getTem() + "°C----->" + str;
+        bar.setText(text);
+        Log.e("获取到天气数据", heFeng.getLife() + heFeng.getTem());
 
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void setBar(EventMessage msg){
-        if (msg.getCode() == "bar"){
-            if (msg.getJson() == "0"){
+    public void setBar(EventMessage msg) {
+        if (msg.getCode() == "bar") {
+            if (msg.getJson() == "0") {
                 bar.setVisibility(View.VISIBLE);//可见
-            }else if (msg.getJson() == "1"){
+            } else if (msg.getJson() == "1") {
                 bar.setVisibility(View.INVISIBLE);//可见
             }
         }
     }
+
     private void initView(View view) {
         recyclerView = view.findViewById(R.id.recycle_view);
         indexAdapter = new IndexAdapter(getContext(), articles, R.layout.recycle_home_item);
@@ -250,16 +251,20 @@ public class HomeFragment extends Fragment {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.iv_inquiry:
-                    Intent question_intent = new Intent(getContext(), QuestionActivity.class);
-                    startActivity(question_intent);
+                    if (UserBook.Code == 2) {//用户
+                        Intent question_intent = new Intent(getContext(), QuestionActivity.class);
+                        startActivity(question_intent);
+                    } else if (UserBook.Code == 1) {//医生
+                        Intent intent = new Intent(getContext(), QuestionListActivity.class);
+                        startActivity(intent);
+                    }
                     break;
                 case R.id.iv_commentImg:
                     Intent intent = new Intent(getContext(), CommentActivity.class);
                     startActivity(intent);
                     break;
                 case R.id.iv_find_doctor:
-                    Intent inent_findoctor = new Intent();
-                    inent_findoctor.setClass(getContext(), FoundDoctorActivity.class);
+                    Intent inent_findoctor = new Intent(getContext(), FoundDoctorActivity.class);
                     startActivity(inent_findoctor);
                     break;
                 case R.id.iv_find_medicine:
@@ -280,12 +285,12 @@ public class HomeFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.e("Home","Destroy");
+        Log.e("Home", "Destroy");
         //bar.setVisibility(View.GONE);//不可见
         EventBus.getDefault().unregister(this);
     }
 
-    
+
 }
 
 

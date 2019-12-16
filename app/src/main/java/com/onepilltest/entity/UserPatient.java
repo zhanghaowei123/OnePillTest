@@ -28,7 +28,7 @@ public class UserPatient {
     }
 
     public void setUserId(int userId) {
-        userId = userId;
+        this.userId = userId;
     }
 
     public String getNickName() {

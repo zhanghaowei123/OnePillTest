@@ -9,6 +9,9 @@ public class Inquiry {
     private String img;
     private String time;
     private int flag;
+    private String headImg;
+    private String name;
+    private String phone;
 
     public Inquiry() {
     }
@@ -19,6 +22,30 @@ public class Inquiry {
         this.content = content;
         this.img = img;
         this.time = time;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getHeadImg() {
+        return headImg;
+    }
+
+    public void setHeadImg(String headImg) {
+        this.headImg = headImg;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getId() {

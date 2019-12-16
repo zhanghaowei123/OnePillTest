@@ -14,6 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.hyphenate.EMCallBack;
+import com.hyphenate.chat.EMClient;
 import com.onepilltest.R;
 import com.onepilltest.URL.Connect;
 import com.onepilltest.entity.Result;
@@ -41,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(0xff56ced4 );
+            getWindow().setStatusBarColor(0xff56ced4);
         }
         setContentView(R.layout.activity_login);
 
@@ -61,6 +63,24 @@ public class LoginActivity extends AppCompatActivity {
                 login();
                 //临时登陆
                 //loginin();
+                EMClient.getInstance().login(editPhone.getText().toString(),
+                        editPassword.getText().toString(), new EMCallBack() {
+                            @Override
+                            public void onSuccess() {
+                                Log.e("环信登录账号:", "成功");
+                                login();
+                            }
+
+                            @Override
+                            public void onError(int i, String s) {
+                                Log.e("环信登录账号:", "失败," + i + "" + s);
+                            }
+
+                            @Override
+                            public void onProgress(int i, String s) {
+
+                            }
+                        });
             }
         });
         //密码可视或不可视
@@ -85,10 +105,10 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void login() {
-        if(editPhone.getText().toString().equals("134836")){
+        if (editPhone.getText().toString().equals("134836")) {
             Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
             startActivity(intent);
-        }else{
+        } else {
             Request request = new Request.Builder()
                     .url(Connect.BASE_URL + "PatientLoginServlet?phone=" + editPhone.getText().toString()
                             + "&password=" + editPassword.getText().toString())
@@ -125,7 +145,6 @@ public class LoginActivity extends AppCompatActivity {
                 }
             });
         }
-
     }
 
     //用SharedPreferences存储

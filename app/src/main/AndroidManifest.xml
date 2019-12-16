@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.onepilltest">
 
+    <!-- 和风天气 -->
     <!-- Zxing -->
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.VIBRATE" />
@@ -39,6 +40,7 @@
     <!-- 用于读取手机当前的状态 -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.GET_TASKS" />
@@ -46,13 +48,11 @@
     <!-- 聊天室权限 -->
     <!-- Required -->
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:name=".ECApplication"
@@ -66,6 +66,15 @@
         android:theme="@style/ThemeNoTitle"
         android:usesCleartextTraffic="true">
 
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.fileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
         <!-- 配置访问百度地图的API_KEY -->
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
@@ -87,11 +96,12 @@
                 <action android:name="com.baidu.location.service_v5.0.0" />
             </intent-filter>
         </service>
+
         <!-- 设置环信应用的AppKey -->
         <meta-data
             android:name="EASEMOB_APPKEY"
-            android:value="1106191028157045#onepill" />
-        <!-- 声明SDK所需的service SDK核心功能 -->
+            android:value="1106191028157045#onepilltest" />
+        <!-- 声明SDK所需的service SDK核心功能-->
         <service
             android:name="com.hyphenate.chat.EMChatService"
             android:exported="true" />
@@ -113,6 +123,7 @@
             </intent-filter>
         </receiver>
 
+
         <activity android:name=".index.HomeActivity" />
         <activity android:name=".index.FoundPatientActivity" />
         <activity android:name=".index.FoundDoctorActivity" />
@@ -132,6 +143,8 @@
         <activity android:name=".personal.EditAddressActivity" />
         <activity android:name=".personal.recordActivity" />
         <activity android:name=".message.QuestionActivity" />
+        <activity android:name=".message.QuestionListActivity" />
+        <activity android:name=".message.ListActivity" />
         <activity android:name=".index.CommentActivity" />
         <activity android:name=".personal.AddAddressActivity" />
         <activity android:name=".personal.oder.BuyerOrdersActivity" />
@@ -143,10 +156,40 @@
         <activity android:name=".personal.UserList" />
         <activity android:name=".personal.SettingForUsActivity" />
         <activity android:name=".index.DoctorDetailsActivity" />
+        <activity android:name=".personal.ProductActivity" />
+        <activity
+            android:name=".message.ChatActivity" />
+        <activity
+            android:name="com.hyphenate.easeui.ui.EaseShowBigImageActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide" />
+        <activity android:name="com.hyphenate.easeui.ui.EaseBaseActivity" />
+        <!-- Ding msg send activity -->
+        <activity
+            android:name="com.hyphenate.easeui.ui.EaseDingMsgSendActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <!-- Ding ack user list activity -->
+        <activity
+            android:name="com.hyphenate.easeui.ui.EaseDingAckUserListActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <!-- 下载文件 -->
+        <activity
+            android:name="com.hyphenate.easeui.ui.EaseShowNormalFileActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide" />
+        <activity
+            android:name="com.hyphenate.easeui.ui.EaseShowVideoActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <!-- <activity android:name=".index.ZxingActivity"></activity> -->
         <!-- 二维码扫码 -->
         <activity android:name=".index.ZxingActivity"></activity>
-        <activity android:name=".personal.ProductActivity"></activity>
+
     </application>
 
 </manifest>

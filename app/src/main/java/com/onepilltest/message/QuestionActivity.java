@@ -58,6 +58,7 @@ public class QuestionActivity extends AppCompatActivity {
     private Request request, request1;
     private Inquiry inquiry;
     private String imagePath;
+    private int mFlag = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -97,10 +98,12 @@ public class QuestionActivity extends AppCompatActivity {
                 case R.id.kswz_outline_yes:
                     yes.setBackgroundColor(getResources().getColor(R.color.doderBlue));
                     no.setBackgroundColor(getResources().getColor(R.color.colorGray));
+                    mFlag = 1;
                     break;
                 case R.id.kswz_outline_no:
                     no.setBackgroundColor(getResources().getColor(R.color.doderBlue));
                     yes.setBackgroundColor(getResources().getColor(R.color.colorGray));
+                    mFlag = 0;
                     break;
                 case R.id.iv_upimg:
                     //动态申请权限
@@ -197,6 +200,10 @@ public class QuestionActivity extends AppCompatActivity {
         inquiry.setContent(content);
         inquiry.setTitle(title1);
         inquiry.setTime(time);
+        inquiry.setFlag(mFlag);
+        inquiry.setHeadImg(UserBook.NowUser.getHeadImg());
+        inquiry.setName(UserBook.NowUser.getNickName());
+        inquiry.setPhone(UserBook.NowUser.getPhone());
         String jsonStr = null;
         jsonStr = new Gson().toJson(inquiry);
         RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain;charset=utf-8"),

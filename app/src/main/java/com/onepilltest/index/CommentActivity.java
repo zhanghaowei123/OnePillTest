@@ -123,17 +123,20 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
                 startActivity(intent);
                 break;
             case R.id.btn_send_comment:
-                comment.setName(UserBook.NowUser.getNickName());
-                Log.e("hahah", UserBook.NowUser.getNickName());
-                comment.setCcomment(etComment.getText().toString());
-                comment.setArticleId(Integer.parseInt(id));
-                comment.setHeadImg(UserBook.NowUser.getHeadImg());
-                Log.e("head",UserBook.NowUser.getHeadImg());
-                comments.add(comment);
-                //更新到数据库
-                insertComment();
+                if (!etComment.getText().toString().equals("")) {
+                    comment.setName(UserBook.NowUser.getNickName());
+                    Log.e("hahah", UserBook.NowUser.getNickName());
+                    comment.setCcomment(etComment.getText().toString());
+                    comment.setArticleId(Integer.parseInt(id));
+                    comment.setHeadImg(UserBook.NowUser.getHeadImg());
+                    Log.e("head", UserBook.NowUser.getHeadImg());
+                    comments.add(comment);
+                    //更新到数据库
+                    insertComment();
+                } else {
+                    break;
+                }
                 Log.e("comment", comment.toString());
-                etComment.clearComposingText();
                 etComment.clearFocus();
                 etComment.setText("");
                 comment = new Comment();
@@ -158,7 +161,7 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
             @Override
             public void onFailure(Call call, IOException e) {
                 e.printStackTrace();
-                Log.e("false", e.toString());
+                Log.e("Comment_false", e.getMessage());
             }
 
             @Override
@@ -166,7 +169,7 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
                 //成功时回调
                 String isSuccessful = response.body().string();
                 if (isSuccessful.equals("true")) {
-                    Log.e("successful", isSuccessful);
+                    Log.e("Comment_successful", isSuccessful);
                 }
             }
         });
