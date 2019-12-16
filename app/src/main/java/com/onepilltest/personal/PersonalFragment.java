@@ -77,8 +77,8 @@ public class PersonalFragment extends Fragment {
         cart.setOnClickListener(myListener);
         wallet = view.findViewById(R.id.ll_wallet);
         wallet.setOnClickListener(myListener);
-        ask = view.findViewById(R.id.ll_ask);
-        ask.setOnClickListener(myListener);
+        /*ask = view.findViewById(R.id.ll_ask);
+        ask.setOnClickListener(myListener);*/
         help = view.findViewById(R.id.ll_help);
         help.setOnClickListener(myListener);
         focus = view.findViewById(R.id.ll_sc);
@@ -187,10 +187,10 @@ public class PersonalFragment extends Fragment {
                     Intent intent3 = new Intent(getContext(), WalletActivity.class);
                     startActivity(intent3);
                     break;
-                case R.id.ll_ask:
+                /*case R.id.ll_ask:
                     Intent intent4 = new Intent(getContext(), recordActivity.class);
                     startActivity(intent4);
-                    break;
+                    break;*/
                 case R.id.ll_help:
                     Intent intent5 = new Intent(getContext(), HelpAndFeedBackActivity.class);
                     startActivity(intent5);

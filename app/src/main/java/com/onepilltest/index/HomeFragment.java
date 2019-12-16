@@ -285,7 +285,7 @@ public class HomeFragment extends Fragment {
         EventBus.getDefault().unregister(this);
     }
 
-    
+
 }
 
 
