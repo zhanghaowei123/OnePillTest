@@ -23,7 +23,7 @@
         android:textSize="20dp" />
     <!--登录-->
     <LinearLayout
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -41,7 +41,6 @@
             android:inputType="number"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:hint="请输入您的手机号"
             android:textColorHint="#fff"
             android:textColor="#fff"
@@ -52,7 +51,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_gravity="center"
-        android:layout_marginTop="50dp">
+        android:layout_marginTop="40dp">
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

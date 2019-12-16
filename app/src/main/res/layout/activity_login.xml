@@ -22,7 +22,7 @@
         android:textStyle="bold" />
     <!--登录-->
     <LinearLayout
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -31,7 +31,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
             android:src="@drawable/shoujihao" />
 
         <EditText
@@ -39,7 +39,6 @@
             android:id="@+id/edit_phone"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:hint="请输入您的手机号"
             android:inputType="number"
             android:textColor="#fff"
@@ -51,12 +50,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         android:orientation="horizontal">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:src="@drawable/suo" />
 
         <RelativeLayout
