@@ -10,10 +10,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TabHost;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
+import com.hacknife.carouselbanner.interfaces.CarouselImageFactory;
 import com.onepilltest.R;
 import com.onepilltest.URL.Connect;
 import com.onepilltest.entity.EventMessage;
@@ -23,8 +25,12 @@ import com.onepilltest.index.MedicineDao;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-
+import com.hacknife.carouselbanner.Banner;
+import com.hacknife.carouselbanner.CoolCarouselBanner;
+import com.hacknife.carouselbanner.interfaces.OnCarouselItemChangeListener;
+import com.hacknife.carouselbanner.interfaces.OnCarouselItemClickListener;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ProductActivity extends Activity {
     private ViewPager viewPager;  //轮播图模块
@@ -39,10 +45,8 @@ public class ProductActivity extends Activity {
     TextView product_name;
     TextView product_type;
     TextView tabHost1, tabHost2, tabHost3, tabHost4;
-//    private String img1;
-//    private String img2;
-//    private String img3;
-
+    String img1,img2,img3;
+    CoolCarouselBanner banner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +61,7 @@ public class ProductActivity extends Activity {
         String name = product;
         Log.e("搜索",""+name);
         dao.searchMedicineByName(name);
-        initLoopView();  //实现轮播图
+//        initLoopView();  //实现轮播图
         //1.获取TabHost控件
         TabHost tabHost = findViewById(android.R.id.tabhost);
         //2.对TabHost控件进行初始化
@@ -67,6 +71,8 @@ public class ProductActivity extends Activity {
         tabHost.addTab(tabHost.newTabSpec("function").setIndicator("功能主治").setContent(R.id.tab_2));
         tabHost.addTab(tabHost.newTabSpec("sideEffect").setIndicator("副作用").setContent(R.id.tab_3));
         tabHost.addTab(tabHost.newTabSpec("explain").setIndicator("使用说明").setContent(R.id.tab_4));
+
+
 
         //添加购物车
 
@@ -91,125 +97,133 @@ public class ProductActivity extends Activity {
         tabHost2.setText(med.getFunction());
         tabHost3.setText(med.getSide_effect());
         tabHost4.setText(med.getIntrodutions());
+        img1=med.getImg1();
+        img2=med.getImg2();
+        img3=med.getImg3();
 
+        banner = findViewById(R.id.pc_product);
+        //添加轮播图：
+        List<String> list = new ArrayList<>();
+        Banner.init(new ImageFactory());
+        list.add(Connect.BASE_URL+img1);
+        Log.e("111",""+Connect.BASE_URL+img1);
+        list.add(Connect.BASE_URL+img2);
+        list.add(Connect.BASE_URL+img3);
 
-
-//        mImg = new int[]{
-//                Integer.parseInt(med.getImg1()),
-//                Integer.parseInt(med.getImg2()),
-//                Integer.parseInt(med.getImg3())
-////                R.drawable.text1,
-//////                R.drawable.text2,
-//////                R.drawable.text3,
-////                /*R.drawable.text4,
-//                R.drawable.text5*/
-//        };
-//        Glide.with(getApplicationContext())
-//                .load(Connect.BASE_URL + med.getImg1())
-//                .into(imageView);
-//        Glide.with(getApplicationContext())
-//                .load(Connect.BASE_URL + med.getImg2())
-//                .into(imageView);
-//        Glide.with(getApplicationContext())
-//                .load(Connect.BASE_URL + med.getImg3())
-//                .into(imageView);
-
-    }
-
-
-    public void initLoopView() {
-        viewPager = findViewById(R.id.pc_product);
-        smallpoint = findViewById(R.id.smallpoint);
-
-        mImg = new int[]{
-                R.drawable.text1,
-                R.drawable.text2,
-                R.drawable.text3
-        };
-        med.getImg1();
-        mImg_id = new int[]{
-                R.id.pager_img1,
-                R.id.pager_img2,
-                R.id.pager_img3,
-                /*R.id.pager_img4,
-                R.id.pager_img5*/
-        };
-
-
-        // 初始化要展示的5个ImageView
-        mImgList = new ArrayList<ImageView>();
-        ImageView imageView;
-        View pointView;
-        LinearLayout.LayoutParams layoutParams;
-        for (int i = 0; i < mImg.length; i++) {
-            //初始化要显示的图片
-            imageView = new ImageView(this);
-            Glide.with(this).load(mImg[i]).into(imageView);
-            imageView.setBackgroundResource(mImg[i]);
-            imageView.setId(mImg_id[i]);
-            imageView.setOnClickListener(new pagerOnClickListener(getApplicationContext()));
-            mImgList.add(imageView);
-            //加引导点
-            pointView = new View(this);
-            pointView.setBackgroundResource(R.drawable.dot);
-            layoutParams = new LinearLayout.LayoutParams(50, 50);
-            if (i != 0) {
-                layoutParams.leftMargin = 10;
-            }
-            //设置默认所有都不可用
-            pointView.setEnabled(false);
-            smallpoint.addView(pointView, layoutParams);
-        }
-        smallpoint.getChildAt(0).setEnabled(true);
-        previousSelectedPosition = 0;
-        //设置配置器
-        viewPager.setAdapter(new LoopViewAdapter(mImgList));
-        //把viewPager设置为默认选中Integer.MAX_VALUE/T2,从十几亿此开始轮播图片，实现无限循环
-        int m = (Integer.MAX_VALUE / 2) % mImgList.size();
-        int currentPosition = Integer.MAX_VALUE / 2 - m;
-        viewPager.setCurrentItem(currentPosition);
-
-        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        banner.setOnCarouselItemChangeListener(new OnCarouselItemChangeListener() {
             @Override
-            public void onPageScrolled(int i, float v, int i1) {
-
-            }
-
-            @Override
-            public void onPageSelected(int i) {
-                int newPosition = i % mImgList.size();
-                smallpoint.getChildAt(previousSelectedPosition).setEnabled(false);
-                smallpoint.getChildAt(newPosition).setEnabled(true);
-                previousSelectedPosition = newPosition;
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int i) {
-
+            public void onItemChange(int position) {
+//                Toast.makeText(MainActivity.this, String.valueOf(position), Toast.LENGTH_LONG).show();
             }
         });
-
-        new Thread() {
-            public void run() {
-                isRunning = true;
-                while (isRunning) {
-                    try {
-                        Thread.sleep(4000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    //下一条
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
-                        }
-                    });
-                }
+        banner.setOnCarouselItemClickListener(new OnCarouselItemClickListener() {
+            @Override
+            public void onItemClick(int position, String url) {
+                Toast.makeText(ProductActivity.this, url, Toast.LENGTH_LONG).show();
             }
-        }.start();
-
+        });
+        banner.initBanner(list);
     }
+
+    public class ImageFactory implements CarouselImageFactory {
+        @Override
+        public void onLoadFactory(String url, ImageView view) {
+            Glide.with(view).load(url).into(view);
+        }
+    }
+//    public void initLoopView() {
+//        viewPager = findViewById(R.id.pc_product);
+//        smallpoint = findViewById(R.id.smallpoint);
+//
+//        mImg = new int[]{
+//                R.drawable.text1,
+//                R.drawable.text2,
+//                R.drawable.text3
+//        };
+//        med.getImg1();
+//        mImg_id = new int[]{
+//                R.id.pager_img1,
+//                R.id.pager_img2,
+//                R.id.pager_img3,
+//                /*R.id.pager_img4,
+//                R.id.pager_img5*/
+//        };
+//
+//
+//        // 初始化要展示的5个ImageView
+//        mImgList = new ArrayList<ImageView>();
+//        ImageView imageView;
+//        View pointView;
+//        LinearLayout.LayoutParams layoutParams;
+//        for (int i = 0; i < mImg.length; i++) {
+//            //初始化要显示的图片
+//            imageView = new ImageView(this);
+//            Glide.with(this).load(mImg[i]).into(imageView);
+//            imageView.setBackgroundResource(mImg[i]);
+//            imageView.setId(mImg_id[i]);
+//            imageView.setOnClickListener(new pagerOnClickListener(getApplicationContext()));
+//            mImgList.add(imageView);
+//            //加引导点
+//            pointView = new View(this);
+//            pointView.setBackgroundResource(R.drawable.dot);
+//            layoutParams = new LinearLayout.LayoutParams(50, 50);
+//            if (i != 0) {
+//                layoutParams.leftMargin = 10;
+//            }
+//            //设置默认所有都不可用
+//            pointView.setEnabled(false);
+//            smallpoint.addView(pointView, layoutParams);
+//        }
+//        smallpoint.getChildAt(0).setEnabled(true);
+//        previousSelectedPosition = 0;
+//        //设置配置器
+//        viewPager.setAdapter(new LoopViewAdapter(mImgList));
+//        //把viewPager设置为默认选中Integer.MAX_VALUE/T2,从十几亿此开始轮播图片，实现无限循环
+//        int m = (Integer.MAX_VALUE / 2) % mImgList.size();
+//        int currentPosition = Integer.MAX_VALUE / 2 - m;
+//        viewPager.setCurrentItem(currentPosition);
+//
+//        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+//            @Override
+//            public void onPageScrolled(int i, float v, int i1) {
+//
+//            }
+//
+//            @Override
+//            public void onPageSelected(int i) {
+//                int newPosition = i % mImgList.size();
+//                smallpoint.getChildAt(previousSelectedPosition).setEnabled(false);
+//                smallpoint.getChildAt(newPosition).setEnabled(true);
+//                previousSelectedPosition = newPosition;
+//            }
+//
+//            @Override
+//            public void onPageScrollStateChanged(int i) {
+//
+//            }
+//        });
+//
+//        new Thread() {
+//            public void run() {
+//                isRunning = true;
+//                while (isRunning) {
+//                    try {
+//                        Thread.sleep(4000);
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+//                    //下一条
+//                    runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
+//                        }
+//                    });
+//                }
+//            }
+//        }.start();
+//
+//    }
 
     //获取药品对象
     @Subscribe(threadMode = ThreadMode.MAIN)

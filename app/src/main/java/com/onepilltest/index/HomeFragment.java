@@ -127,7 +127,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void initZxing() {
-        //6.0版本或以上需请求权限
+          //6.0版本或以上需请求权限
         String[] permissions=new String[]{Manifest.permission.
                 WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {

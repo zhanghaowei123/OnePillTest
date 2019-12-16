@@ -75,4 +75,30 @@ public class DoctorDao {
             }
         });
     }
+
+    /**
+     * 通过Name查询医生
+     */
+
+    public void searchDoctorByName(String name){
+        OkHttpClient okHttpClient = new OkHttpClient();
+        Request request = new Request.Builder().url(Connect.BASE_URL+"GetUserServlet?name="+name+"&Code=searchDoctorByName").build();
+        Call call = okHttpClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String json = response.body().string();
+                EventMessage msg = new EventMessage();
+                Log.e("找医生","连接服务器");
+                msg.setJson(json);
+                msg.setCode("DoctorDao_searchDoctorByName");
+                EventBus.getDefault().post(msg);
+            }
+        });
+    }
 }

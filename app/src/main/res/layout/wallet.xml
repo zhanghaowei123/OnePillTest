@@ -34,75 +34,79 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:orientation="vertical"
         android:layout_weight="3"
-        android:background="#0a7">
+        android:background="#0a7"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2">
+
             <TextView
                 android:id="@+id/wallet_cash"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="￥3000.0"
                 android:textColor="#f1f1f1"
-                android:textSize="30dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:textSize="30dp" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginLeft="100dp"
-            android:layout_marginRight="100dp"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginLeft="100dp"
+            android:layout_marginRight="100dp"
             android:layout_weight="1">
+
             <LinearLayout
-                android:layout_marginBottom="10dp"
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+
                 <Button
                     android:id="@+id/wallet_out"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"
                     android:background="#00000000"
                     android:gravity="center"
-                    android:textColor="#f1f1f1"
                     android:text="提现"
-                    android:layout_weight="5"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent" />
+                    android:textColor="#f1f1f1" />
 
                 <Button
                     android:id="@+id/wallet_in"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"
                     android:background="#00000000"
                     android:gravity="center"
-                    android:textColor="#f1f1f1"
                     android:text="充值"
-                    android:layout_weight="5"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent" />
+                    android:textColor="#f1f1f1" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:padding="30dp"
-        android:orientation="vertical"
         android:layout_height="0dp"
-        android:layout_weight="10">
+        android:layout_weight="10"
+        android:orientation="vertical"
+        android:padding="30dp">
 
         <TextView
-            android:textSize="17dp"
-            android:text="交易记录"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="交易记录"
+            android:textSize="17dp" />
 
         <ListView
             android:id="@+id/wallet_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"></ListView>
+            android:layout_height="match_parent"
+            android:scrollbars="none"></ListView>
 
     </LinearLayout>
 </LinearLayout>

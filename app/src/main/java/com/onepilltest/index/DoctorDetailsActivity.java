@@ -44,6 +44,9 @@ public class DoctorDetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(0xff808080 );
+        }
         setContentView(R.layout.doctor_details);
         EventBus.getDefault().register(this);
         setId();
@@ -102,7 +105,7 @@ public class DoctorDetailsActivity extends AppCompatActivity {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getdate(EventMessage msg){
-        Log.e("查询医生","json"+msg.getJson());
+        Log.e("找医生","跳转到医生详情页");
         if(msg.getCode() == "DoctorDao_searchDoctorById"){
             Gson gson = new Gson();
             doctor = gson.fromJson(msg.getJson(),UserDoctor.class);

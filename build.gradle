@@ -30,6 +30,8 @@ allprojects {
             url 'https://maven.google.com/'
             name 'Google'
         }
+        //轮播图
+        maven { url 'https://jitpack.io' }
     }
 }
 
