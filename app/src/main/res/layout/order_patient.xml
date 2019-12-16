@@ -50,7 +50,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="全部"
-            android:textSize="20dp"
+            android:textSize="15dp"
             android:background="#fff"/>
         <Button
             android:id="@+id/btn_order_unpay"
@@ -59,7 +59,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="未付款"
-            android:textSize="20dp"
+            android:textSize="15dp"
             android:background="#fff"/>
         <Button
             android:id="@+id/btn_order_unsend"
@@ -68,7 +68,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="未发货"
-            android:textSize="20dp"
+            android:textSize="15dp"
             android:background="#fff"/>
         <Button
             android:id="@+id/btn_order_waitget"
@@ -77,7 +77,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="待收货"
-            android:textSize="20dp"
+            android:textSize="15dp"
             android:background="#fff"/>
         <Button
             android:id="@+id/btn_order_finish"
@@ -86,14 +86,14 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="已完成"
-            android:textSize="20dp"
+            android:textSize="15dp"
             android:background="#fff"/>
     </LinearLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="10"
+        android:layout_weight="12"
         android:id="@+id/order_tab_widget">
 
     </FrameLayout>
