@@ -1,6 +1,7 @@
 package com.onepilltest.index;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +16,8 @@ import com.onepilltest.R;
 import com.onepilltest.message.QuestionActivity;
 import com.onepilltest.personal.ProductActivity;
 
+import org.greenrobot.eventbus.EventBus;
+
 public class FoundPatientActivity extends AppCompatActivity {
     FoundPatientActivity.MyListener myListener = null;
     private ImageView imgBack;
@@ -28,6 +31,9 @@ public class FoundPatientActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate ( savedInstanceState );
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(0xff56ced4);
+        }
         setContentView ( R.layout.found_patient_layout );
         imgBack = findViewById ( R.id.findpatient_left );
         imgSelect = findViewById ( R.id.img_findpa_select );
@@ -39,9 +45,7 @@ public class FoundPatientActivity extends AppCompatActivity {
         imgBack.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent ();
-                intent.setClass ( FoundPatientActivity.this,HomeFragment.class);
-                startActivity(intent);
+                finish();
             }
         } );
         imgSelect.setOnClickListener ( new View.OnClickListener () {
@@ -137,5 +141,11 @@ public class FoundPatientActivity extends AppCompatActivity {
                     break;
             }
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }

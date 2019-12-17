@@ -91,7 +91,7 @@ public class LoginDoctorActivity extends AppCompatActivity implements View.OnCli
                             }
                         });
                 break;
-            case R.id.img_eye:
+            case R.id.img_eye_doctor:
                 //当当前密码为明文形式
                 if (editPassword.getInputType() == 128) {
                     //1.将密码的输入框变为密码形式

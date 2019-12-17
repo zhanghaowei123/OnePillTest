@@ -8,9 +8,9 @@ public class medicine_ {
     private String overview;
     private String function;
     private String introdutions;
-    private String side_effect;
+    private String sideEffect;
     private String forbiddance;
-    private int doctor_id;
+    private int doctorId;
     private String img1;
     private String img2;
     private String img3;
@@ -28,9 +28,9 @@ public class medicine_ {
         this.overview = overview;
         this.function = function;
         this.introdutions = introdutions;
-        this.side_effect = side_effect;
+        this.sideEffect = side_effect;
         this.forbiddance = forbiddance;
-        this.doctor_id = doctor_id;
+        this.doctorId = doctor_id;
         this.img1 = img1;
         this.img2 = img2;
         this.img3 = img3;
@@ -110,14 +110,6 @@ public class medicine_ {
         this.introdutions = introdutions;
     }
 
-    public String getSide_effect() {
-        return side_effect;
-    }
-
-    public void setSide_effect(String side_effect) {
-        this.side_effect = side_effect;
-    }
-
     public String getForbiddance() {
         return forbiddance;
     }
@@ -126,13 +118,7 @@ public class medicine_ {
         this.forbiddance = forbiddance;
     }
 
-    public int getDoctor_id() {
-        return doctor_id;
-    }
 
-    public void setDoctor_id(int doctor_id) {
-        this.doctor_id = doctor_id;
-    }
 
     public String getImg1() {
         return img1;
@@ -156,5 +142,21 @@ public class medicine_ {
 
     public void setStock(int stock) {
         this.stock = stock;
+    }
+
+    public int getDoctorId() {
+        return doctorId;
+    }
+
+    public void setDoctorId(int doctorId) {
+        this.doctorId = doctorId;
+    }
+
+    public String getSideEffect() {
+        return sideEffect;
+    }
+
+    public void setSideEffect(String sideEffect) {
+        this.sideEffect = sideEffect;
     }
 }

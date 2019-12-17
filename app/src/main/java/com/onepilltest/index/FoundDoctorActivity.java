@@ -40,9 +40,6 @@ public class FoundDoctorActivity extends AppCompatActivity {
         imgBack.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent ();
-                intent.setClass(FoundDoctorActivity.this,HomeFragment.class);
-                startActivity(intent);
                 finish();
             }
         } );
@@ -146,5 +143,11 @@ public class FoundDoctorActivity extends AppCompatActivity {
             intent.putExtra("id",doctor.getDoctorId());
             startActivity(intent);
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }

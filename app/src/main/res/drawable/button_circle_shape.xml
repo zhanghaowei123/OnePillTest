@@ -15,7 +15,7 @@
     <!-- android:bottomRightRadius="10dp"-->
     <!--  android:bottomLeftRadius="10dp"-->
     <!--   />  -->
-    **设置文字padding**
+    <!--**设置文字padding**-->
     <!-- padding：Button里面的文字与Button边界的间隔 -->
     <padding
         android:left="10dp"

@@ -15,13 +15,14 @@ import com.bumptech.glide.request.RequestOptions;
 import com.onepilltest.R;
 import com.onepilltest.URL.Connect;
 import com.onepilltest.entity.Address;
+import com.onepilltest.entity.focus;
 
 import java.util.List;
 
-public class AddressAdapter extends ArrayAdapter<Address>{
+public class FocusListAdapter extends ArrayAdapter<focus> {
     private int itemId;
 
-    public AddressAdapter(@NonNull Context context, int resource, @NonNull List<Address> objects) {
+    public FocusListAdapter(@NonNull Context context, int resource, @NonNull List<focus> objects) {
         super(context, resource, objects);
         itemId = resource;
     }
@@ -29,23 +30,21 @@ public class AddressAdapter extends ArrayAdapter<Address>{
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        Address base = getItem(position);//获取当前项 Base 实例
+        focus f = getItem(position);//获取当前项 Base 实例
 
         View view = LayoutInflater.from(getContext()).inflate(itemId,parent,false);
 
-        ImageView img = (ImageView) view.findViewById(R.id.user_address_item_img);
-        TextView name = (TextView) view.findViewById(R.id.user_address_item_name);
-        TextView address = (TextView) view.findViewById(R.id.user_address_item_address);
+        ImageView img = (ImageView) view.findViewById(R.id.focus_list_item_img);
+        TextView name = (TextView) view.findViewById(R.id.focus_list_item_name);
+        TextView tag = (TextView) view.findViewById(R.id.focus_list_item_tag);
 
-        //img.setImageResource(R.drawable.user);
         RequestOptions requestOptions = new RequestOptions().circleCrop();
         Glide.with(getContext())
-                .load(Connect.BASE_URL+UserBook.NowUser.getHeadImg())
+                .load(Connect.BASE_URL+f.getImg())
                 .apply(requestOptions)
                 .into(img);
-        name.setText(base.getName());
-        address.setText(base.getMore());
+        name.setText(f.getName());
+        tag.setText(f.getMore());
         return view;
-
     }
 }

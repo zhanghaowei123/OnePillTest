@@ -30,6 +30,16 @@ public class Medicine implements Serializable {
     private List<String> kinds = new ArrayList<>();
     //库存
     private List<Integer> stocks = new ArrayList<>();
+    private List<String> img1s = new ArrayList<>();
+    public List<String> getImg1s() {
+        return img1s;
+    }
+
+    public void setImg1(String img1) {
+        img1s.add(img1);
+    }
+
+
 
  /*   //构造方法
     public Medicine(List<Integer> ids, List<String> generaNames, List<String> medicineNames, List<Integer> prices, List<String> overViews, List<String> functions, List<String> introdutions, List<String> side_effects, List<String> forbiddancets, int doctorID, List<String> standards, List<String> kinds, List<Integer> stocks) {

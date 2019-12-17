@@ -15,15 +15,21 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.onepilltest.R;
 import com.onepilltest.URL.ConUtil;
 import com.onepilltest.URL.Connect;
 import com.onepilltest.entity.Cart;
+import com.onepilltest.entity.Medicine;
+import com.onepilltest.entity.medicine_;
+import com.onepilltest.personal.PersonalFragment;
 import com.onepilltest.personal.ProductActivity;
+import com.onepilltest.personal.UserBook;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -37,11 +43,12 @@ import static com.mob.MobSDK.getContext;
 
 public class ShoppingCartActivity extends AppCompatActivity {
     private LinearLayout llEmptyCart = null;
+    private ImageView imgCartBack= null;
     private ListView lvCart = null;
     private CheckBox cbChooseAll = null;
     private Button btnSettlement = null;
     private Button btnDelete = null;
-
+    private View view;
     private TextView tvCartManage = null;
     private TextView tvCartFinish = null;
     private TextView tvSettlementPrice = null;
@@ -55,43 +62,49 @@ public class ShoppingCartActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    }
-
-    @Nullable
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.shoppingcart, container, false);
-        // 1. 寻找控件
-        llEmptyCart = view.findViewById(R.id.ll_cake_empty);
-        lvCart = view.findViewById(R.id.lv_cart);
-        tvCartManage = view.findViewById(R.id.tv_cart_manage);
-        tvCartFinish = view.findViewById(R.id.tv_cart_finish);
-        btnDelete = view.findViewById(R.id.btn_delete);
-        Log.e("box","box初始化");
-        cbChooseAll = view.findViewById(R.id.cb_choose_all);
-        btnSettlement = view.findViewById(R.id.btn_settlement);
-        tvSettlementPrice = view.findViewById(R.id.tv_settlement_price);
-        llTotalPrice = view.findViewById(R.id.ll_cart_total_price);
-
-        sharedPreferences = getBaseContext().getSharedPreferences("买家登陆", Context.MODE_PRIVATE);
+        setContentView(R.layout.shoppingcart);
+        initViews();
         // 2. 获取cart数据
         GetCartListTask task = new GetCartListTask();
         task.execute();
-
-        return view;
+    }
+    private void initViews() {
+        // 1. 寻找控件
+        imgCartBack=findViewById(R.id.cart_back);
+        llEmptyCart = findViewById(R.id.ll_cake_empty);
+        lvCart = findViewById(R.id.lv_cart);
+        tvCartManage = findViewById(R.id.tv_cart_manage);
+        tvCartFinish = findViewById(R.id.tv_cart_finish);
+        btnDelete = findViewById(R.id.btn_delete);
+        Log.e("box","box初始化");
+        cbChooseAll = findViewById(R.id.cb_choose_all);
+        btnSettlement = findViewById(R.id.btn_settlement);
+        tvSettlementPrice = findViewById(R.id.tv_settlement_price);
+        llTotalPrice = findViewById(R.id.ll_cart_total_price);
     }
 
     private void setViewListener() {
         UseListener listener = new UseListener();
+        imgCartBack.setOnClickListener(listener);
         tvCartFinish.setOnClickListener(listener);
         tvCartManage.setOnClickListener(listener);
     }
 
+
+    //获取medicine
+    public medicine_ getMedicine(){
+        medicine_ med = new Gson().fromJson(getIntent().getStringExtra("info"),medicine_.class) ;
+        return med;
+    }
 
     private class UseListener implements View.OnClickListener {
 
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
+                case R.id.cart_back:
+                   finish();
+                   break;
                 case R.id.tv_cart_manage:   // 当管理按钮被点下时，可进行删除操作
                     tvCartManage.setVisibility(View.GONE);
                     tvCartFinish.setVisibility(View.VISIBLE);
@@ -113,14 +126,22 @@ public class ShoppingCartActivity extends AppCompatActivity {
     private class GetCartListTask extends AsyncTask {
         @Override
         protected void onPostExecute(Object o) {
+//            sharedPreferences = getBaseContext().getSharedPreferences("NowUser",MODE_PRIVATE);
+            initViews();
             if (carts.size() > 0) {
                 // 若收到购物车数据，则显示购物车列表
                 llEmptyCart.setVisibility(View.GONE);
+                Log.e("View,GONE",View.GONE+"");
                 lvCart.setVisibility(View.VISIBLE);
             }
             // 3. 配置 listview
             adapter = new ShoppingCartAdapter(carts, getContext(), R.layout.recycler_item,
-                    btnSettlement, btnDelete, cbChooseAll, tvSettlementPrice,llEmptyCart,lvCart);
+                    btnSettlement,
+                    btnDelete,
+                    cbChooseAll,
+                    tvSettlementPrice,
+                    llEmptyCart,
+                    lvCart);
             lvCart.setAdapter(adapter);
             adapter.setSelectCartItems();
             adapter.setCbChooseAllListener();
@@ -152,7 +173,8 @@ public class ShoppingCartActivity extends AppCompatActivity {
                 con.setRequestMethod("POST");
                 // 先发送 用户信息，用于查询登录用户对应的cart
                 JSONObject send = new JSONObject();
-                int buyerId = sharedPreferences.getInt("account", 0);
+//                int buyerId = sharedPreferences.getInt("NowUser", 0);
+                int buyerId= UserBook.NowUser.getUserId();
                 send.put("buyerId", buyerId);
                 ConUtil.setOutputStream(con, send.toString());
                 // 获取 返回的用户所对应的 cart列表
@@ -161,6 +183,26 @@ public class ShoppingCartActivity extends AppCompatActivity {
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
                     Cart cart = new Cart();
+                    cart.setBuyerId(buyerId);
+                    cart.setCount(jsonObject.getInt("count"));
+                    cart.setMedicineId(jsonObject.getInt("medicineId"));
+                    cart.setId(jsonObject.getInt("id"));
+                    cart.setType(jsonObject.getString("status"));
+                    Medicine medicine = new Medicine();
+                    medicine.setId(jsonObject.getInt("medicineId"));
+                    medicine.setGeneraName(jsonObject.getString("generaname"));
+                    medicine.setMedicineName(jsonObject.getString("medicineName"));
+                    medicine.setPrice(jsonObject.getInt("price"));
+                    Log.e("price",""+jsonObject.getInt("price"));
+                    medicine.setOverView(jsonObject.getString("overView"));
+                    medicine.setIntrodution(jsonObject.getString("introdution"));
+                    medicine.setForbiddancet(jsonObject.getString("forbiddancet"));
+                    medicine.setSide_effect(jsonObject.getString("sideeffect"));
+                    medicine.setStandard(jsonObject.getString("size"));
+                    medicine.setStocks(jsonObject.getInt("stock"));
+                    medicine.setImg1(jsonObject.getString("img1"));
+                    cart.setMedicine(medicine);
+                    carts.add(cart);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -179,67 +221,4 @@ public class ShoppingCartActivity extends AppCompatActivity {
         task.execute();
     }
 
-//    private List<Cart> cart = new ArrayList<>();
-//    private RecyclerView recyclerView;
-//    private ShoppingCartAdapter shoppingCartAdapter = null;
-//    private TextView tvprice;
-//    private ImageView ivback;
-//    private Button btnpay;
-//    private CheckBox cb;
-//    private MyListener myListener;
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.shoppingcart);
-//
-//        myListener = new MyListener();
-//        find();
-//        // 2. 获取cart数据
-//        GetCartListTask task = new GetCartListTask();
-//        task.execute();
-//    }
-//
-//    private void find() {
-//        ivback = findViewById(R.id.cart_back);
-//        ivback.setOnClickListener(myListener);
-//        cb = findViewById(R.id.cb_allcheck);
-//        cb.setOnClickListener(myListener);
-//        tvprice = findViewById(R.id.tv_allprice);
-//        tvprice.setOnClickListener(myListener);
-//        btnpay = findViewById(R.id.sc_pay);
-//        btnpay.setOnClickListener(myListener);
-//    }
-//
-//    private class MyListener implements View.OnClickListener {
-//
-//        @Override
-//        public void onClick(View v) {
-//            switch (v.getId()) {
-//                case R.id.cart_back:
-//                    finish();
-//                    break;
-//                case R.id.sc_pay:
-//                    Intent intent1 = new Intent(ShoppingCartActivity.this, SweepActivity.class);
-//                    startActivity(intent1);
-//                    break;
-//            }
-//        }
-//    }
-//
-//    private class GetCartListTask extends AsyncTask {
-//        @Override
-//        protected Object doInBackground(Object[] objects) {
-//            if (cart.size()>0){
-//                //若收到购物车数据，则显示购物车列表
-//
-//            }
-//            return null;
-//        }
-//
-//        @Override
-//        protected void onPostExecute(Object o) {
-//
-//        }
-//    }
 }

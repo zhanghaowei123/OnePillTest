@@ -189,6 +189,8 @@
         <!-- <activity android:name=".index.ZxingActivity"></activity> -->
         <!-- 二维码扫码 -->
         <activity android:name=".index.ZxingActivity" />
+        <activity android:name=".message.DoctorChatActivity"></activity>
+        <activity android:name=".personal.FocusListActivity"></activity>
     </application>
 
 </manifest>

@@ -1,6 +1,8 @@
 package com.onepilltest.personal;
 
 import android.app.Activity;
+import android.os.Build;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -18,17 +20,23 @@ import com.google.gson.Gson;
 import com.hacknife.carouselbanner.interfaces.CarouselImageFactory;
 import com.onepilltest.R;
 import com.onepilltest.URL.Connect;
+import com.onepilltest.entity.Address;
 import com.onepilltest.entity.EventMessage;
 import com.onepilltest.entity.medicine_;
+import com.onepilltest.index.DoctorDetailsActivity;
 import com.onepilltest.index.MedicineDao;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
 import com.hacknife.carouselbanner.Banner;
 import com.hacknife.carouselbanner.CoolCarouselBanner;
 import com.hacknife.carouselbanner.interfaces.OnCarouselItemChangeListener;
 import com.hacknife.carouselbanner.interfaces.OnCarouselItemClickListener;
+import com.onepilltest.personal.cart.ShoppingCartActivity;
+
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,7 +53,7 @@ public class ProductActivity extends Activity {
     TextView product_name;
     TextView product_type;
     TextView tabHost1, tabHost2, tabHost3, tabHost4;
-    String img1,img2,img3;
+    String img1, img2, img3;
     Button btn = null;
     MyListener myListener = null;
     boolean isFocus = false;
@@ -56,6 +64,10 @@ public class ProductActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(0xffffffff);
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        }
         myListener = new MyListener();
         find();
         String product = getIntent().getStringExtra("product");
@@ -63,7 +75,7 @@ public class ProductActivity extends Activity {
         EventBus.getDefault().register(this);
         MedicineDao dao = new MedicineDao();
         String name = product;
-        Log.e("搜索",""+name);
+        Log.e("搜索", "" + name);
         dao.searchMedicineByName(name);
 //        initLoopView();  //实现轮播图
         //1.获取TabHost控件
@@ -77,13 +89,16 @@ public class ProductActivity extends Activity {
         tabHost.addTab(tabHost.newTabSpec("explain").setIndicator("使用说明").setContent(R.id.tab_4));
 
 
-
         //添加购物车
 
 
     }
 
     private void find() {
+        addCurt = findViewById(R.id.btn_addcart);
+        addCurt.setOnClickListener(myListener);
+        btn2 = findViewById(R.id.btn_cons);
+        btn2.setOnClickListener(myListener);
         btn = findViewById(R.id.btn_coll);
         btn.setOnClickListener(myListener);
         product_name = findViewById(R.id.tv_productName);
@@ -98,31 +113,31 @@ public class ProductActivity extends Activity {
     public void init() {
 
         //查询是否关注
-        if (UserBook.Code ==1){
-            dao.isHave(UserBook.NowDoctor.getDoctorId(),1,2,med.getId());
-        }else{
-            dao.isHave(UserBook.NowUser.getUserId(),2,2,med.getId());
+        if (UserBook.Code == 1) {
+            dao.isHave(UserBook.NowDoctor.getDoctorId(), 1, 2, med.getId());
+        } else {
+            dao.isHave(UserBook.NowUser.getUserId(), 2, 2, med.getId());
         }
 
-        Log.e("json搜索",""+med.getMedicine());
+        Log.e("json搜索", "" + med.getMedicine());
         product_name.setText(med.getMedicine());
         product_type.setText(med.getGeneralName());
         tabHost1.setText(med.getOverview());
         tabHost2.setText(med.getFunction());
-        tabHost3.setText(med.getSide_effect());
+        tabHost3.setText(med.getSideEffect());
         tabHost4.setText(med.getIntrodutions());
-        img1=med.getImg1();
-        img2=med.getImg2();
-        img3=med.getImg3();
+        img1 = med.getImg1();
+        img2 = med.getImg2();
+        img3 = med.getImg3();
 
         banner = findViewById(R.id.pc_product);
         //添加轮播图：
         List<String> list = new ArrayList<>();
         Banner.init(new ImageFactory());
-        list.add(Connect.BASE_URL+img1);
-        Log.e("111",""+Connect.BASE_URL+img1);
-        list.add(Connect.BASE_URL+img2);
-        list.add(Connect.BASE_URL+img3);
+        list.add(Connect.BASE_URL + img1);
+        Log.e("111", "" + Connect.BASE_URL + img1);
+        list.add(Connect.BASE_URL + img2);
+        list.add(Connect.BASE_URL + img3);
 
         banner.setOnCarouselItemChangeListener(new OnCarouselItemChangeListener() {
             @Override
@@ -145,103 +160,12 @@ public class ProductActivity extends Activity {
             Glide.with(view).load(url).into(view);
         }
     }
-//    public void initLoopView() {
-//        viewPager = findViewById(R.id.pc_product);
-//        smallpoint = findViewById(R.id.smallpoint);
-//
-//        mImg = new int[]{
-//                R.drawable.text1,
-//                R.drawable.text2,
-//                R.drawable.text3
-//        };
-//        med.getImg1();
-//        mImg_id = new int[]{
-//                R.id.pager_img1,
-//                R.id.pager_img2,
-//                R.id.pager_img3,
-//                /*R.id.pager_img4,
-//                R.id.pager_img5*/
-//        };
-//
-//
-//        // 初始化要展示的5个ImageView
-//        mImgList = new ArrayList<ImageView>();
-//        ImageView imageView;
-//        View pointView;
-//        LinearLayout.LayoutParams layoutParams;
-//        for (int i = 0; i < mImg.length; i++) {
-//            //初始化要显示的图片
-//            imageView = new ImageView(this);
-//            Glide.with(this).load(mImg[i]).into(imageView);
-//            imageView.setBackgroundResource(mImg[i]);
-//            imageView.setId(mImg_id[i]);
-//            imageView.setOnClickListener(new pagerOnClickListener(getApplicationContext()));
-//            mImgList.add(imageView);
-//            //加引导点
-//            pointView = new View(this);
-//            pointView.setBackgroundResource(R.drawable.dot);
-//            layoutParams = new LinearLayout.LayoutParams(50, 50);
-//            if (i != 0) {
-//                layoutParams.leftMargin = 10;
-//            }
-//            //设置默认所有都不可用
-//            pointView.setEnabled(false);
-//            smallpoint.addView(pointView, layoutParams);
-//        }
-//        smallpoint.getChildAt(0).setEnabled(true);
-//        previousSelectedPosition = 0;
-//        //设置配置器
-//        viewPager.setAdapter(new LoopViewAdapter(mImgList));
-//        //把viewPager设置为默认选中Integer.MAX_VALUE/T2,从十几亿此开始轮播图片，实现无限循环
-//        int m = (Integer.MAX_VALUE / 2) % mImgList.size();
-//        int currentPosition = Integer.MAX_VALUE / 2 - m;
-//        viewPager.setCurrentItem(currentPosition);
-//
-//        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-//            @Override
-//            public void onPageScrolled(int i, float v, int i1) {
-//
-//            }
-//
-//            @Override
-//            public void onPageSelected(int i) {
-//                int newPosition = i % mImgList.size();
-//                smallpoint.getChildAt(previousSelectedPosition).setEnabled(false);
-//                smallpoint.getChildAt(newPosition).setEnabled(true);
-//                previousSelectedPosition = newPosition;
-//            }
-//
-//            @Override
-//            public void onPageScrollStateChanged(int i) {
-//
-//            }
-//        });
-//
-//        new Thread() {
-//            public void run() {
-//                isRunning = true;
-//                while (isRunning) {
-//                    try {
-//                        Thread.sleep(4000);
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
-//                    //下一条
-//                    runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
-//                        }
-//                    });
-//                }
-//            }
-//        }.start();
-//
-//    }
+
 
     //获取药品对象
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getMedicine(EventMessage msg) {
+        Log.e("focusCode",""+msg.getCode());
         if (msg.getCode().equals("MedicineDao_searchMedicine")) {
             Gson gson = new Gson();
             Log.e("搜索json",""+msg.getJson());
@@ -251,57 +175,80 @@ public class ProductActivity extends Activity {
             //初始化
             init();
         }else if(msg.getCode().equals("focusDao_isHave")){
+
             if (msg.getJson().equals("yes")){
+                Log.e("focus","跳进来了!");
+        } else if (msg.getCode().equals("focusDao_isHave")) {
+            if (msg.getJson().equals("yes")) {
                 isFocus = true;
+                Log.e("focuse","更改字体！！！！！！");
                 btn.setText("已关注");
-            }else{
+            } else {
                 isFocus = false;
                 btn.setText("关注");
             }
-        }else if (msg.getCode().equals("focusDao_del")){
-            if (msg.getJson().equals("yes")){
+        } else if (msg.getCode().equals("focusDao_del")) {
+            if (msg.getJson().equals("yes")) {
                 isFocus = false;
-                Toast.makeText(getApplicationContext(),"已取消",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "已取消", Toast.LENGTH_SHORT).show();
                 btn.setText("关注");
-            }else{
+            } else {
                 isFocus = true;
-                Toast.makeText(getApplicationContext(),"请检查网络连接",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "请检查网络连接", Toast.LENGTH_SHORT).show();
 
             }
-        }else if (msg.getCode().equals("focusDao_add")){
-            if (msg.getJson().equals("yes")){
+        } else if (msg.getCode().equals("focusDao_add")) {
+            if (msg.getJson().equals("yes")) {
                 isFocus = true;
-                Toast.makeText(getApplicationContext(),"已关注",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "已关注", Toast.LENGTH_SHORT).show();
                 btn.setText("已关注");
-            }else{
+            } else {
                 isFocus = false;
-                Toast.makeText(getApplicationContext(),"请检查网络连接",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "请检查网络连接", Toast.LENGTH_SHORT).show();
 
             }
         }
 
     }
 
-    private class MyListener implements View.OnClickListener{
+    private class MyListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            switch (v.getId()){
+            switch (v.getId()) {
                 case R.id.btn_coll://收藏
-                    if (isFocus){
-                        if (UserBook.Code ==1){
-                            dao.del(UserBook.NowDoctor.getDoctorId(),1,2,med.getId());
-                        }else{
-                            dao.del(UserBook.NowUser.getUserId(),2,2,med.getId());
+                    if (isFocus) {
+                        if (UserBook.Code == 1) {
+                            dao.del(UserBook.NowDoctor.getDoctorId(), 1, 2, med.getId());
+                        } else {
+                            dao.del(UserBook.NowUser.getUserId(), 2, 2, med.getId());
                         }
-                    }else{
-                        if (UserBook.Code ==1){
-                            dao.add(UserBook.NowDoctor.getDoctorId(),1,2,med.getId());
-                        }else{
-                            dao.add(UserBook.NowUser.getUserId(),2,2,med.getId());
+                    } else {
+                        if (UserBook.Code == 1) {
+                            dao.add(UserBook.NowDoctor.getDoctorId(), 1, 2, med.getId());
+                        } else {
+                            dao.add(UserBook.NowUser.getUserId(), 2, 2, med.getId());
                         }
                     }
                     break;
+                case R.id.btn_cons:
+                    Intent intent = new Intent(ProductActivity.this, DoctorDetailsActivity.class);
+                    intent.putExtra("id",med.getDoctorId());
+                    startActivity(intent);
+                    break;
+                case R.id.btn_addcart:
+                    medicine_ info = med;
+                    Bundle bundle = new Bundle();
+                    Gson gson = new Gson();
+                    bundle.putString("info", gson.toJson(info));
+                    Intent intent1 = new Intent(ProductActivity.this, ShoppingCartActivity.class);
+                    startActivity(intent1);
             }
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }

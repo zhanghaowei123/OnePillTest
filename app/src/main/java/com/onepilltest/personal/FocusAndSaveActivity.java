@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import com.onepilltest.R;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -151,5 +153,11 @@ public class FocusAndSaveActivity extends AppCompatActivity{
         TextView tv2 = findViewById(R.id.fas_patient);
         map.get(tabStrId[0]).setTextView(tv1);
         map.get(tabStrId[1]).setTextView(tv2);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }
