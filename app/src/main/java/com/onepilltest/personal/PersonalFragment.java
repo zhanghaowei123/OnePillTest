@@ -6,15 +6,12 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -23,9 +20,8 @@ import com.onepilltest.URL.Connect;
 import com.onepilltest.entity.Article;
 import com.onepilltest.entity.EventMessage;
 import com.onepilltest.index.IndexAdapter;
-import com.onepilltest.message.QuestionActivity;
 import com.onepilltest.personal.cart.ShoppingCartActivity;
-import com.onepilltest.personal.oder.MyOrdersActivity;
+import com.onepilltest.personal.oder.PatientOrderActivity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -159,8 +155,6 @@ public class PersonalFragment extends Fragment {
                 }
             }
         }
-
-
     }
 
     /**
@@ -176,7 +170,7 @@ public class PersonalFragment extends Fragment {
                     startActivity(intent);
                     break;
                 case R.id.ll_order:
-                    Intent intent1 = new Intent(getContext(), MyOrdersActivity.class);
+                    Intent intent1 = new Intent(getContext(), PatientOrderActivity.class);
                     startActivity(intent1);
                     break;
                 case R.id.ll_cart:
