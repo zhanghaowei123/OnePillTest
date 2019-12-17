@@ -3,10 +3,12 @@ package com.onepilltest.personal;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -35,6 +37,7 @@ public class FocusListActivity extends AppCompatActivity {
     MyListener myListener = null;
     BaseAdapter adapter = null;
     Gson gson = new Gson();
+    focus fs = null;
     private List<focus> baseList = new ArrayList<>();
     private List<focus> baseList1 = new ArrayList<>();
     private List<focus> baseList2 = new ArrayList<>();
@@ -65,7 +68,7 @@ public class FocusListActivity extends AppCompatActivity {
         medicineTag = findViewById(R.id.focus_list_tab2);
         medicineTag.setOnClickListener(myListener);
         focusList = findViewById(R.id.focus_list_list);
-        
+
     }
 
     public void init() {
@@ -73,8 +76,8 @@ public class FocusListActivity extends AppCompatActivity {
             fDao.searchDoctor(UserBook.NowDoctor.getDoctorId(), 1);
             fDao.searchMedicine(UserBook.NowDoctor.getDoctorId(), 1);
         } else {
-            fDao.searchDoctor(UserBook.NowUser.getUserId(), 1);
-            fDao.searchMedicine(UserBook.NowUser.getUserId(), 1);
+            fDao.searchDoctor(UserBook.NowUser.getUserId(), 2);
+            fDao.searchMedicine(UserBook.NowUser.getUserId(), 2);
         }
     }
 
@@ -98,12 +101,17 @@ public class FocusListActivity extends AppCompatActivity {
     }
 
     private void initTag2() {
-        baseList = baseList2;
+        Toast.makeText(getApplicationContext(),"获取药品列表",Toast.LENGTH_SHORT).show();
+        baseList.clear();
+        baseList.addAll(baseList2);
+        //doctorTag.setTextColor();
         adapter.notifyDataSetChanged();
     }
 
     private void initTag1() {
-        baseList = baseList2;
+        Toast.makeText(getApplicationContext(),"获取医生列表",Toast.LENGTH_SHORT).show();
+        baseList.clear();
+        baseList.addAll(baseList1);
         adapter.notifyDataSetChanged();
     }
 
@@ -121,14 +129,15 @@ public class FocusListActivity extends AppCompatActivity {
         //创建ContentAdapter实例，传入上下文， 子布局id ,数据baseList
         adapter = new FocusListAdapter(FocusListActivity.this, R.layout.focus_liste_item, baseList);
 
-        addressList = (ListView) findViewById(R.id.user_address_list);
-        addressList.setAdapter(adapter);//绑定适配器
+        focusList = (ListView) findViewById(R.id.focus_list_list);
+        focusList.setAdapter(adapter);//绑定适配器
         initTag1();
     }
 
     private void setBaseList1() {
-        focus fs = null;
+
         for (int i = 0; i < doctorList.size(); i++) {
+            fs = new focus();
             fs.setImg(doctorList.get(i).getHeadImg());
             fs.setName(doctorList.get(i).getName());
             fs.setMore(doctorList.get(i).getTag());
@@ -145,10 +154,12 @@ public class FocusListActivity extends AppCompatActivity {
     }
 
     private void setBaseList2() {
-        focus fs = null;
+
         for (int i = 0; i < medicineList.size(); i++) {
+            fs = new focus();
+            //Log.e("BaseList",""+medicineList.get(i).getMedicine());
             fs.setImg(medicineList.get(i).getImg1());
-            fs.setName(medicineList.get(i).getGeneralName());
+            fs.setName(medicineList.get(i).getMedicine());
             fs.setMore(medicineList.get(i).getStandard());
             if (UserBook.Code == 1)
                 fs.setUserId(UserBook.NowDoctor.getDoctorId());
@@ -157,6 +168,7 @@ public class FocusListActivity extends AppCompatActivity {
             fs.setUserType(UserBook.Code);
             fs.setType(2);
             fs.setTypeId(medicineList.get(i).getId());
+            Log.e("BaseList",""+fs.getName());
             baseList2.add(fs);
         }
     }

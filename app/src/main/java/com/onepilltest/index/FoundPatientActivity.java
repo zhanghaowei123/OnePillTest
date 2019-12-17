@@ -1,6 +1,7 @@
 package com.onepilltest.index;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -30,6 +31,9 @@ public class FoundPatientActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate ( savedInstanceState );
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(0xff56ced4);
+        }
         setContentView ( R.layout.found_patient_layout );
         imgBack = findViewById ( R.id.findpatient_left );
         imgSelect = findViewById ( R.id.img_findpa_select );

@@ -121,7 +121,7 @@ public class DoctorDetailsActivity extends AppCompatActivity {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getdate(EventMessage msg){
-        Log.e("找医生","跳转到医生详情页");
+        Log.e("找医生",""+msg.getCode()+msg.getJson());
         if(msg.getCode().equals("DoctorDao_searchDoctorById")){
             Gson gson = new Gson();
             doctor = gson.fromJson(msg.getJson(),UserDoctor.class);

@@ -19,6 +19,7 @@ import com.google.gson.Gson;
 import com.hacknife.carouselbanner.interfaces.CarouselImageFactory;
 import com.onepilltest.R;
 import com.onepilltest.URL.Connect;
+import com.onepilltest.entity.Address;
 import com.onepilltest.entity.EventMessage;
 import com.onepilltest.entity.medicine_;
 import com.onepilltest.index.DoctorDetailsActivity;
@@ -31,6 +32,8 @@ import com.hacknife.carouselbanner.Banner;
 import com.hacknife.carouselbanner.CoolCarouselBanner;
 import com.hacknife.carouselbanner.interfaces.OnCarouselItemChangeListener;
 import com.hacknife.carouselbanner.interfaces.OnCarouselItemClickListener;
+import com.onepilltest.personal.cart.ShoppingCartActivity;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,6 +54,7 @@ public class ProductActivity extends Activity {
     Button btn = null;
     Button btn2 = null;
     MyListener myListener = null;
+    Button addCurt = null;
     boolean isFocus = false;
     focusDao dao = new focusDao();
     CoolCarouselBanner banner;
@@ -87,6 +91,8 @@ public class ProductActivity extends Activity {
     }
 
     private void find() {
+        addCurt = findViewById(R.id.btn_addcart);
+        addCurt.setOnClickListener(myListener);
         btn2 = findViewById(R.id.btn_cons);
         btn2.setOnClickListener(myListener);
         btn = findViewById(R.id.btn_coll);
@@ -150,103 +156,12 @@ public class ProductActivity extends Activity {
             Glide.with(view).load(url).into(view);
         }
     }
-//    public void initLoopView() {
-//        viewPager = findViewById(R.id.pc_product);
-//        smallpoint = findViewById(R.id.smallpoint);
-//
-//        mImg = new int[]{
-//                R.drawable.text1,
-//                R.drawable.text2,
-//                R.drawable.text3
-//        };
-//        med.getImg1();
-//        mImg_id = new int[]{
-//                R.id.pager_img1,
-//                R.id.pager_img2,
-//                R.id.pager_img3,
-//                /*R.id.pager_img4,
-//                R.id.pager_img5*/
-//        };
-//
-//
-//        // 初始化要展示的5个ImageView
-//        mImgList = new ArrayList<ImageView>();
-//        ImageView imageView;
-//        View pointView;
-//        LinearLayout.LayoutParams layoutParams;
-//        for (int i = 0; i < mImg.length; i++) {
-//            //初始化要显示的图片
-//            imageView = new ImageView(this);
-//            Glide.with(this).load(mImg[i]).into(imageView);
-//            imageView.setBackgroundResource(mImg[i]);
-//            imageView.setId(mImg_id[i]);
-//            imageView.setOnClickListener(new pagerOnClickListener(getApplicationContext()));
-//            mImgList.add(imageView);
-//            //加引导点
-//            pointView = new View(this);
-//            pointView.setBackgroundResource(R.drawable.dot);
-//            layoutParams = new LinearLayout.LayoutParams(50, 50);
-//            if (i != 0) {
-//                layoutParams.leftMargin = 10;
-//            }
-//            //设置默认所有都不可用
-//            pointView.setEnabled(false);
-//            smallpoint.addView(pointView, layoutParams);
-//        }
-//        smallpoint.getChildAt(0).setEnabled(true);
-//        previousSelectedPosition = 0;
-//        //设置配置器
-//        viewPager.setAdapter(new LoopViewAdapter(mImgList));
-//        //把viewPager设置为默认选中Integer.MAX_VALUE/T2,从十几亿此开始轮播图片，实现无限循环
-//        int m = (Integer.MAX_VALUE / 2) % mImgList.size();
-//        int currentPosition = Integer.MAX_VALUE / 2 - m;
-//        viewPager.setCurrentItem(currentPosition);
-//
-//        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-//            @Override
-//            public void onPageScrolled(int i, float v, int i1) {
-//
-//            }
-//
-//            @Override
-//            public void onPageSelected(int i) {
-//                int newPosition = i % mImgList.size();
-//                smallpoint.getChildAt(previousSelectedPosition).setEnabled(false);
-//                smallpoint.getChildAt(newPosition).setEnabled(true);
-//                previousSelectedPosition = newPosition;
-//            }
-//
-//            @Override
-//            public void onPageScrollStateChanged(int i) {
-//
-//            }
-//        });
-//
-//        new Thread() {
-//            public void run() {
-//                isRunning = true;
-//                while (isRunning) {
-//                    try {
-//                        Thread.sleep(4000);
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
-//                    //下一条
-//                    runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
-//                        }
-//                    });
-//                }
-//            }
-//        }.start();
-//
-//    }
+
 
     //获取药品对象
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getMedicine(EventMessage msg) {
+        Log.e("focusCode",""+msg.getCode());
         if (msg.getCode().equals("MedicineDao_searchMedicine")) {
             Gson gson = new Gson();
             Log.e("搜索json",""+msg.getJson());
@@ -256,8 +171,11 @@ public class ProductActivity extends Activity {
             //初始化
             init();
         }else if(msg.getCode().equals("focusDao_isHave")){
+
             if (msg.getJson().equals("yes")){
+                Log.e("focus","跳进来了!");
                 isFocus = true;
+                Log.e("focuse","更改字体！！！！！！");
                 btn.setText("已关注");
             }else{
                 isFocus = false;
@@ -311,6 +229,13 @@ public class ProductActivity extends Activity {
                     intent.putExtra("id",med.getDoctorId());
                     startActivity(intent);
                     break;
+                case R.id.btn_addcart:
+                    medicine_ info = med;
+                    Bundle bundle = new Bundle();
+                    Gson gson = new Gson();
+                    bundle.putString("info", gson.toJson(info));
+                    Intent intent1 = new Intent(ProductActivity.this, ShoppingCartActivity.class);
+                    startActivity(intent1);
             }
         }
     }
