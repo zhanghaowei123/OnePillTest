@@ -39,7 +39,7 @@ public class MedicineDao {
             public void onResponse(Call call, Response response) throws IOException {
                 Log.e("药品查找成功No.0","yees");
                 String json = response.body().string();
-                //Log.e("药品详情",""+json);
+                Log.e("药品详情",""+json);
                 EventMessage msg = new EventMessage();
                 msg.setJson(json);
                 msg.setCode("MedicineDao_searchMedicine");
@@ -47,15 +47,4 @@ public class MedicineDao {
             }
         });
     }
-
-    /*//获取药品对象
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void getMedicine(EventMessage msg){
-        if (msg.getCode().equals("MedicineDao_searchMedicine")){
-            Gson gson = new Gson();
-            medicine_ medicines_ = null;
-            medicines_ = gson.fromJson(msg.getJson(),medicine_.class);
-        }
-        //init();
-    }*/
 }
