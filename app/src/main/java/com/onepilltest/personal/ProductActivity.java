@@ -1,6 +1,7 @@
 package com.onepilltest.personal;
 
 import android.app.Activity;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -25,10 +26,12 @@ import com.onepilltest.index.MedicineDao;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
 import com.hacknife.carouselbanner.Banner;
 import com.hacknife.carouselbanner.CoolCarouselBanner;
 import com.hacknife.carouselbanner.interfaces.OnCarouselItemChangeListener;
 import com.hacknife.carouselbanner.interfaces.OnCarouselItemClickListener;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,7 +48,7 @@ public class ProductActivity extends Activity {
     TextView product_name;
     TextView product_type;
     TextView tabHost1, tabHost2, tabHost3, tabHost4;
-    String img1,img2,img3;
+    String img1, img2, img3;
     Button btn = null;
     MyListener myListener = null;
     boolean isFocus = false;
@@ -56,6 +59,10 @@ public class ProductActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(0xffffffff);
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        }
         myListener = new MyListener();
         find();
         String product = getIntent().getStringExtra("product");
@@ -63,7 +70,7 @@ public class ProductActivity extends Activity {
         EventBus.getDefault().register(this);
         MedicineDao dao = new MedicineDao();
         String name = product;
-        Log.e("搜索",""+name);
+        Log.e("搜索", "" + name);
         dao.searchMedicineByName(name);
 //        initLoopView();  //实现轮播图
         //1.获取TabHost控件
@@ -75,7 +82,6 @@ public class ProductActivity extends Activity {
         tabHost.addTab(tabHost.newTabSpec("function").setIndicator("功能主治").setContent(R.id.tab_2));
         tabHost.addTab(tabHost.newTabSpec("sideEffect").setIndicator("副作用").setContent(R.id.tab_3));
         tabHost.addTab(tabHost.newTabSpec("explain").setIndicator("使用说明").setContent(R.id.tab_4));
-
 
 
         //添加购物车
@@ -98,31 +104,31 @@ public class ProductActivity extends Activity {
     public void init() {
 
         //查询是否关注
-        if (UserBook.Code ==1){
-            dao.isHave(UserBook.NowDoctor.getDoctorId(),1,2,med.getId());
-        }else{
-            dao.isHave(UserBook.NowUser.getUserId(),2,2,med.getId());
+        if (UserBook.Code == 1) {
+            dao.isHave(UserBook.NowDoctor.getDoctorId(), 1, 2, med.getId());
+        } else {
+            dao.isHave(UserBook.NowUser.getUserId(), 2, 2, med.getId());
         }
 
-        Log.e("json搜索",""+med.getMedicine());
+        Log.e("json搜索", "" + med.getMedicine());
         product_name.setText(med.getMedicine());
         product_type.setText(med.getGeneralName());
         tabHost1.setText(med.getOverview());
         tabHost2.setText(med.getFunction());
         tabHost3.setText(med.getSide_effect());
         tabHost4.setText(med.getIntrodutions());
-        img1=med.getImg1();
-        img2=med.getImg2();
-        img3=med.getImg3();
+        img1 = med.getImg1();
+        img2 = med.getImg2();
+        img3 = med.getImg3();
 
         banner = findViewById(R.id.pc_product);
         //添加轮播图：
         List<String> list = new ArrayList<>();
         Banner.init(new ImageFactory());
-        list.add(Connect.BASE_URL+img1);
-        Log.e("111",""+Connect.BASE_URL+img1);
-        list.add(Connect.BASE_URL+img2);
-        list.add(Connect.BASE_URL+img3);
+        list.add(Connect.BASE_URL + img1);
+        Log.e("111", "" + Connect.BASE_URL + img1);
+        list.add(Connect.BASE_URL + img2);
+        list.add(Connect.BASE_URL + img3);
 
         banner.setOnCarouselItemChangeListener(new OnCarouselItemChangeListener() {
             @Override
@@ -244,60 +250,60 @@ public class ProductActivity extends Activity {
     public void getMedicine(EventMessage msg) {
         if (msg.getCode().equals("MedicineDao_searchMedicine")) {
             Gson gson = new Gson();
-            Log.e("搜索json",""+msg.getJson());
+            Log.e("搜索json", "" + msg.getJson());
             medicine_ product = null;
             product = gson.fromJson(msg.getJson(), medicine_.class);
             med = product;
             //初始化
             init();
-        }else if(msg.getCode().equals("focusDao_isHave")){
-            if (msg.getJson().equals("yes")){
+        } else if (msg.getCode().equals("focusDao_isHave")) {
+            if (msg.getJson().equals("yes")) {
                 isFocus = true;
                 btn.setText("已关注");
-            }else{
+            } else {
                 isFocus = false;
                 btn.setText("关注");
             }
-        }else if (msg.getCode().equals("focusDao_del")){
-            if (msg.getJson().equals("yes")){
+        } else if (msg.getCode().equals("focusDao_del")) {
+            if (msg.getJson().equals("yes")) {
                 isFocus = false;
-                Toast.makeText(getApplicationContext(),"已取消",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "已取消", Toast.LENGTH_SHORT).show();
                 btn.setText("关注");
-            }else{
+            } else {
                 isFocus = true;
-                Toast.makeText(getApplicationContext(),"请检查网络连接",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "请检查网络连接", Toast.LENGTH_SHORT).show();
 
             }
-        }else if (msg.getCode().equals("focusDao_add")){
-            if (msg.getJson().equals("yes")){
+        } else if (msg.getCode().equals("focusDao_add")) {
+            if (msg.getJson().equals("yes")) {
                 isFocus = true;
-                Toast.makeText(getApplicationContext(),"已关注",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "已关注", Toast.LENGTH_SHORT).show();
                 btn.setText("已关注");
-            }else{
+            } else {
                 isFocus = false;
-                Toast.makeText(getApplicationContext(),"请检查网络连接",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "请检查网络连接", Toast.LENGTH_SHORT).show();
 
             }
         }
 
     }
 
-    private class MyListener implements View.OnClickListener{
+    private class MyListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            switch (v.getId()){
+            switch (v.getId()) {
                 case R.id.btn_coll://收藏
-                    if (isFocus){
-                        if (UserBook.Code ==1){
-                            dao.del(UserBook.NowDoctor.getDoctorId(),1,2,med.getId());
-                        }else{
-                            dao.del(UserBook.NowUser.getUserId(),2,2,med.getId());
+                    if (isFocus) {
+                        if (UserBook.Code == 1) {
+                            dao.del(UserBook.NowDoctor.getDoctorId(), 1, 2, med.getId());
+                        } else {
+                            dao.del(UserBook.NowUser.getUserId(), 2, 2, med.getId());
                         }
-                    }else{
-                        if (UserBook.Code ==1){
-                            dao.add(UserBook.NowDoctor.getDoctorId(),1,2,med.getId());
-                        }else{
-                            dao.add(UserBook.NowUser.getUserId(),2,2,med.getId());
+                    } else {
+                        if (UserBook.Code == 1) {
+                            dao.add(UserBook.NowDoctor.getDoctorId(), 1, 2, med.getId());
+                        } else {
+                            dao.add(UserBook.NowUser.getUserId(), 2, 2, med.getId());
                         }
                     }
                     break;

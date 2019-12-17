@@ -33,7 +33,7 @@ public class MessageFragment extends EaseConversationListFragment {
             }
 
         });
-        conversationList.clear();
+//        conversationList.clear();
         //监听会话消息
         EMClient.getInstance().chatManager().addMessageListener(emMessageListener);
     }
