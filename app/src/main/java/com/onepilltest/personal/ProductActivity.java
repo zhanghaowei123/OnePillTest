@@ -50,6 +50,8 @@ public class ProductActivity extends Activity {
     private int previousSelectedPosition = 0;
     boolean isRunning = false;
     private medicine_ med = new medicine_();
+    private Button btn2;
+    private Button addCurt;
     TextView product_name;
     TextView product_type;
     TextView tabHost1, tabHost2, tabHost3, tabHost4;
@@ -87,11 +89,7 @@ public class ProductActivity extends Activity {
         tabHost.addTab(tabHost.newTabSpec("function").setIndicator("功能主治").setContent(R.id.tab_2));
         tabHost.addTab(tabHost.newTabSpec("sideEffect").setIndicator("副作用").setContent(R.id.tab_3));
         tabHost.addTab(tabHost.newTabSpec("explain").setIndicator("使用说明").setContent(R.id.tab_4));
-
-
         //添加购物车
-
-
     }
 
     private void find() {
@@ -165,50 +163,51 @@ public class ProductActivity extends Activity {
     //获取药品对象
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getMedicine(EventMessage msg) {
-        Log.e("focusCode",""+msg.getCode());
+        Log.e("focusCode", "" + msg.getCode());
         if (msg.getCode().equals("MedicineDao_searchMedicine")) {
             Gson gson = new Gson();
-            Log.e("搜索json",""+msg.getJson());
+            Log.e("搜索json", "" + msg.getJson());
             medicine_ product = null;
             product = gson.fromJson(msg.getJson(), medicine_.class);
             med = product;
             //初始化
             init();
-        }else if(msg.getCode().equals("focusDao_isHave")){
-
-            if (msg.getJson().equals("yes")){
-                Log.e("focus","跳进来了!");
         } else if (msg.getCode().equals("focusDao_isHave")) {
-            if (msg.getJson().equals("yes")) {
-                isFocus = true;
-                Log.e("focuse","更改字体！！！！！！");
-                btn.setText("已关注");
-            } else {
-                isFocus = false;
-                btn.setText("关注");
-            }
-        } else if (msg.getCode().equals("focusDao_del")) {
-            if (msg.getJson().equals("yes")) {
-                isFocus = false;
-                Toast.makeText(getApplicationContext(), "已取消", Toast.LENGTH_SHORT).show();
-                btn.setText("关注");
-            } else {
-                isFocus = true;
-                Toast.makeText(getApplicationContext(), "请检查网络连接", Toast.LENGTH_SHORT).show();
 
-            }
-        } else if (msg.getCode().equals("focusDao_add")) {
             if (msg.getJson().equals("yes")) {
-                isFocus = true;
-                Toast.makeText(getApplicationContext(), "已关注", Toast.LENGTH_SHORT).show();
-                btn.setText("已关注");
-            } else {
-                isFocus = false;
-                Toast.makeText(getApplicationContext(), "请检查网络连接", Toast.LENGTH_SHORT).show();
+                Log.e("focus", "跳进来了!");
+            } else if (msg.getCode().equals("focusDao_isHave")) {
+                if (msg.getJson().equals("yes")) {
+                    isFocus = true;
+                    Log.e("focuse", "更改字体！！！！！！");
+                    btn.setText("已关注");
+                } else {
+                    isFocus = false;
+                    btn.setText("关注");
+                }
+            } else if (msg.getCode().equals("focusDao_del")) {
+                if (msg.getJson().equals("yes")) {
+                    isFocus = false;
+                    Toast.makeText(getApplicationContext(), "已取消", Toast.LENGTH_SHORT).show();
+                    btn.setText("关注");
+                } else {
+                    isFocus = true;
+                    Toast.makeText(getApplicationContext(), "请检查网络连接", Toast.LENGTH_SHORT).show();
 
+                }
+            } else if (msg.getCode().equals("focusDao_add")) {
+                if (msg.getJson().equals("yes")) {
+                    isFocus = true;
+                    Toast.makeText(getApplicationContext(), "已关注", Toast.LENGTH_SHORT).show();
+                    btn.setText("已关注");
+                } else {
+                    isFocus = false;
+                    Toast.makeText(getApplicationContext(), "请检查网络连接", Toast.LENGTH_SHORT).show();
+
+                }
             }
+
         }
-
     }
 
     private class MyListener implements View.OnClickListener {
@@ -232,7 +231,7 @@ public class ProductActivity extends Activity {
                     break;
                 case R.id.btn_cons:
                     Intent intent = new Intent(ProductActivity.this, DoctorDetailsActivity.class);
-                    intent.putExtra("id",med.getDoctorId());
+                    intent.putExtra("id", med.getDoctorId());
                     startActivity(intent);
                     break;
                 case R.id.btn_addcart:
@@ -245,6 +244,7 @@ public class ProductActivity extends Activity {
             }
         }
     }
+
 
     @Override
     protected void onDestroy() {
