@@ -19,6 +19,7 @@
 
     <ImageView
         android:id="@+id/img_Medicine"
+        android:src="@drawable/kid1"
         android:layout_margin="10dp"
         android:layout_width="100dp"
         android:layout_height="100dp" />
@@ -54,7 +55,7 @@
                 android:textSize="14dp"
                 android:textColor="#FF0000"
                 android:paddingTop="8dp"
-                android:layout_width="140dp"
+                android:layout_width="100dp"
                 android:layout_height="match_parent" />
 
             <Button

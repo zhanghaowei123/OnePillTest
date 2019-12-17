@@ -1,6 +1,8 @@
 package com.onepilltest.entity;
 
-public class Order {
+import java.io.Serializable;
+
+public class Order implements Serializable {
     public static final int TYPE_UNPAY = 0;         // 订单状态为 0 未付款
     public static final int TYPE_UNSEND = 1;    // 订单状态为 1 未发货
     public static final int TYPE_WAITGET = 2;     // 订单状态为 2 已发货
@@ -12,12 +14,30 @@ public class Order {
     private int count;
     private int price;
     private String medicineName;
-
+    private String size;
+    private String status;
     private int doctorId;
-    private int patientId;
-
+    private int addressId;
     private Medicine medicine;
     private Address address;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
+
+
     public int getDoctorId() {
         return doctorId;
     }
@@ -26,13 +46,6 @@ public class Order {
         this.doctorId = doctorId;
     }
 
-    public int getPatientId() {
-        return patientId;
-    }
-
-    public void setPatientId(int patientId) {
-        this.patientId = patientId;
-    }
 
     public Medicine getMedicine() {
         return medicine;
@@ -106,4 +119,11 @@ public class Order {
         this.type = type;
     }
 
+    public int getAddressId() {
+        return addressId;
+    }
+
+    public void setAddressId(int addressId) {
+        this.addressId = addressId;
+    }
 }
