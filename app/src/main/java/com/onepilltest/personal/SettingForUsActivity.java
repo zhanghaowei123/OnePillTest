@@ -15,7 +15,7 @@ public class SettingForUsActivity extends AppCompatActivity {
 
     Button back = null;
     MyListener myListener = null;
-    Button ceshi = null;
+    /*Button ceshi = null;*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +33,8 @@ public class SettingForUsActivity extends AppCompatActivity {
     private void find() {
         back = findViewById(R.id.setting_forUs_back);
         back.setOnClickListener(myListener);
-        ceshi = findViewById(R.id.thisisceshi);
-        ceshi.setOnClickListener(myListener);
+        /*ceshi = findViewById(R.id.thisisceshi);
+        ceshi.setOnClickListener(myListener);*/
     }
 
     private class MyListener implements View.OnClickListener{
@@ -44,12 +44,10 @@ public class SettingForUsActivity extends AppCompatActivity {
                 case R.id.setting_forUs_back:
                     finish();
                     break;
-                case R.id.thisisceshi:
+                /*case R.id.thisisceshi:
                     Intent intent = new Intent(SettingForUsActivity.this, thisIsCeShiActivity.class);
-                    /*intent.putExtra("id",18);*/
-                    startActivity(intent);
-                    /*MedicineDao dao = new MedicineDao();
-                    dao.searchMedicineByName("布洛芬");*/
+                    startActivity(intent);*/
+
             }
         }
     }

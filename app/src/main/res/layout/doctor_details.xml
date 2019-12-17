@@ -122,6 +122,7 @@
                 android:paddingTop="18dp">
 
                 <ImageView
+                    android:id="@+id/doctor_focus_img"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_gravity="center"

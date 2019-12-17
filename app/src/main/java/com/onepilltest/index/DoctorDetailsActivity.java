@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +24,7 @@ import com.onepilltest.entity.EventMessage;
 import com.onepilltest.entity.UserDoctor;
 import com.onepilltest.personal.DoctorDao;
 import com.onepilltest.personal.UserBook;
+import com.onepilltest.personal.focusDao;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -38,6 +40,10 @@ public class DoctorDetailsActivity extends AppCompatActivity {
     Button editResume = null;//提交按钮
     EditText resume = null;//简介
     Context context = null;
+    LinearLayout li_focus = null;
+    focusDao fDao = new focusDao();
+    ImageView img = null;
+    boolean isFocus = false;
     //设置DoctorId来显示不同的医生详情页
     int DoctorId = 1;
 
@@ -64,6 +70,9 @@ public class DoctorDetailsActivity extends AppCompatActivity {
         this.DoctorId = id;
     }
     private void find() {
+        img = findViewById(R.id.doctor_focus_img);
+        li_focus = findViewById(R.id.doctor_focus);
+        li_focus.setOnClickListener(myListener);
         resume = findViewById(R.id.dc_details_resume);
         resume.setOnClickListener(myListener);
         editResume = findViewById(R.id.dc_details_editResume);
@@ -101,15 +110,50 @@ public class DoctorDetailsActivity extends AppCompatActivity {
             resume.setFocusable(false);
             resume.setFocusableInTouchMode(false);
         }
+
+        if (UserBook.Code ==1){
+            fDao.isHave(UserBook.NowDoctor.getDoctorId(),1,1,doctor.getDoctorId());
+        }else{
+            fDao.isHave(UserBook.NowUser.getUserId(),2,1,doctor.getDoctorId());
+        }
+
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getdate(EventMessage msg){
         Log.e("找医生","跳转到医生详情页");
-        if(msg.getCode() == "DoctorDao_searchDoctorById"){
+        if(msg.getCode().equals("DoctorDao_searchDoctorById")){
             Gson gson = new Gson();
             doctor = gson.fromJson(msg.getJson(),UserDoctor.class);
             init();
+        }else if(msg.getCode().equals("focusDao_isHave")){
+            if (msg.getJson().equals("yes")){
+                isFocus = true;
+                img.setImageResource(R.drawable.isfocus);
+            }else{
+                isFocus = false;
+                img.setImageResource(R.drawable.notfocus);
+            }
+        }else if (msg.getCode().equals("focusDao_del")){
+            if (msg.getJson().equals("yes")){
+                isFocus = false;
+                Toast.makeText(getApplicationContext(),"已取消",Toast.LENGTH_SHORT).show();
+                img.setImageResource(R.drawable.notfocus);
+            }else{
+                isFocus = true;
+                Toast.makeText(getApplicationContext(),"请检查网络连接",Toast.LENGTH_SHORT).show();
+
+            }
+        }else if (msg.getCode().equals("focusDao_add")){
+            if (msg.getJson().equals("yes")){
+                isFocus = true;
+                Toast.makeText(getApplicationContext(),"已关注",Toast.LENGTH_SHORT).show();
+                img.setImageResource(R.drawable.isfocus);
+            }else{
+                isFocus = false;
+                Toast.makeText(getApplicationContext(),"请检查网络连接",Toast.LENGTH_SHORT).show();
+
+            }
         }
     }
 
@@ -134,6 +178,28 @@ public class DoctorDetailsActivity extends AppCompatActivity {
                     }else{
                         Toast.makeText(context,"无权修改",Toast.LENGTH_SHORT).show();
                     }
+                    break;
+                case R.id.doctor_focus://关注医生
+                    if (isFocus){
+                        if (UserBook.Code ==1){
+                            fDao.del(UserBook.NowDoctor.getDoctorId(),1,1,doctor.getDoctorId());
+                        }else{
+                            fDao.del(UserBook.NowUser.getUserId(),2,1,doctor.getDoctorId());
+                        }
+                    }else{
+                        if (UserBook.Code ==1){
+                            fDao.add(UserBook.NowDoctor.getDoctorId(),1,1,doctor.getDoctorId());
+                        }else{
+                            fDao.add(UserBook.NowUser.getUserId(),2,1,doctor.getDoctorId());
+                        }
+                    }
+                    /*if (UserBook.Code ==1){
+                        fDao.add(UserBook.NowDoctor.getDoctorId(),1,1,doctor.getDoctorId());
+                    }else{
+                        fDao.add(UserBook.NowUser.getUserId(),2,1,doctor.getDoctorId());
+                    }*/
+
+
                     break;
             }
         }

@@ -15,11 +15,12 @@ public class medicine_ {
     private String img2;
     private String img3;
     private String standard;
+    private int stock;
 
     public medicine_() {
     }
 
-    public medicine_(int id, String generalName, String medicine, String price, String overview, String function, String introdutions, String side_effect, String forbiddance, int doctor_id, String img1, String img2 , String img3, String standard) {
+    public medicine_(int id, String generalName, String medicine, String price, String overview, String function, String introdutions, String side_effect, String forbiddance, int doctor_id, String img1, String img2 , String img3, String standard,int stock) {
         this.id = id;
         this.generalName = generalName;
         this.medicine = medicine;
@@ -34,6 +35,7 @@ public class medicine_ {
         this.img2 = img2;
         this.img3 = img3;
         this.standard = standard;
+        this.stock = stock;
     }
 
     public String getImg2() {
@@ -146,5 +148,13 @@ public class medicine_ {
 
     public void setStandard(String standard) {
         this.standard = standard;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
     }
 }
