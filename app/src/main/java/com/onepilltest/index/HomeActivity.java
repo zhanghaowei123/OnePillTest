@@ -25,7 +25,6 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.onepilltest.R;
 import com.onepilltest.entity.EventMessage;
-import com.onepilltest.message.DoctorChatFragment;
 import com.onepilltest.message.MessageFragment;
 import com.onepilltest.nearby.NearFragment;
 import com.onepilltest.personal.PersonalFragment;
@@ -240,11 +239,7 @@ public class HomeActivity extends AppCompatActivity {
     private void setFragment() {
         map.get(tabStrId[0]).setFragment(new HomeFragment());
         map.get(tabStrId[1]).setFragment(new NearFragment());
-        if (UserBook.Code == 2) {
-            map.get(tabStrId[2]).setFragment(new MessageFragment());
-        } else if (UserBook.Code == 1) {
-            map.get(tabStrId[2]).setFragment(new DoctorChatFragment());
-        }
+        map.get(tabStrId[2]).setFragment(new MessageFragment());
         map.get(tabStrId[3]).setFragment(new PersonalFragment());
     }
 

@@ -15,6 +15,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.hyphenate.EMCallBack;
+import com.hyphenate.chat.EMClient;
 import com.onepilltest.R;
 import com.onepilltest.URL.Connect;
 import com.onepilltest.entity.Result;
@@ -43,7 +45,7 @@ public class LoginDoctorActivity extends AppCompatActivity implements View.OnCli
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(0xff56ced4 );
+            getWindow().setStatusBarColor(0xff56ced4);
         }
         setContentView(R.layout.login_doctor);
         findViews();
@@ -70,16 +72,33 @@ public class LoginDoctorActivity extends AppCompatActivity implements View.OnCli
                 break;
             case R.id.btn_login_doctor:
                 okHttpClient = new OkHttpClient();
-                login();
+                EMClient.getInstance().login(editPhone.getText().toString(),
+                        editPassword.getText().toString(), new EMCallBack() {
+                            @Override
+                            public void onSuccess() {
+                                Log.e("环信登录账号:", "成功");
+                                login();
+                            }
+
+                            @Override
+                            public void onError(int i, String s) {
+                                Log.e("环信登录账号:", "失败," + i + "" + s);
+                            }
+
+                            @Override
+                            public void onProgress(int i, String s) {
+
+                            }
+                        });
                 break;
             case R.id.img_eye:
                 //当当前密码为明文形式
-                if (editPassword.getInputType()==128){
+                if (editPassword.getInputType() == 128) {
                     //1.将密码的输入框变为密码形式
                     editPassword.setInputType(129);
                     //将图片变为close
                     imgEye.setImageResource(R.drawable.eyeclose);
-                }else if(editPassword.getInputType() == 129){
+                } else if (editPassword.getInputType() == 129) {
                     //此时为密码形式
                     //1.变为文本格式
                     editPassword.setInputType(128);
@@ -110,10 +129,10 @@ public class LoginDoctorActivity extends AppCompatActivity implements View.OnCli
                 //获取当前医生的信息
                 if (msg.getCode() == 1) {//登录成功
                     UserDoctor u = msg.getDoctor();
-                    Log.e("DoctorId", "" + u.getDoctorId()+ "|" + u.getAddress());
+                    Log.e("DoctorId", "" + u.getDoctorId() + "|" + u.getAddress());
                     //把用户存入UserBook
-                    UserBook.addUser(u,UserBook.Doctor);
-                   save(u);//把u存进SharedPreferences
+                    UserBook.addUser(u, UserBook.Doctor);
+                    save(u);//把u存进SharedPreferences
                     Log.e("success", "登录成功");
                     Intent intent = new Intent(LoginDoctorActivity.this, HomeActivity.class);
                     startActivity(intent);
@@ -125,15 +144,16 @@ public class LoginDoctorActivity extends AppCompatActivity implements View.OnCli
             }
         });
     }
+
     //用SharedPreferences存储
     private void save(UserDoctor userDoctor) {
 
-        SharedPreferences sharedPreferences = getSharedPreferences("NowDoctor",MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("NowDoctor", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
-        String json = gson.toJson(userDoctor,UserDoctor.class);
-        Log.e("json字符串",json);
-        editor.putString("NowDoctor",json);
+        String json = gson.toJson(userDoctor, UserDoctor.class);
+        Log.e("json字符串", json);
+        editor.putString("NowDoctor", json);
         editor.commit();
     }
 }

@@ -18,13 +18,13 @@ public class MessageFragment extends EaseConversationListFragment {
     @Override
     protected void initView() {
         super.initView();
-        Log.e("ChatTest", "这是病人的聊天会话列表");
         //跳转到会话详情页
         setConversationListItemClickListener(new EaseConversationListItemClickListener() {
             @Override
             public void onListItemClicked(EMConversation conversation) {
                 Intent intent = new Intent(getContext(), ChatActivity.class);
                 //传递参数
+                Log.e("嘿嘿", conversation.conversationId().toString());
                 intent.putExtra(EaseConstant.EXTRA_USER_ID, conversation.conversationId());
                 if (conversation.getType() == EMConversation.EMConversationType.GroupChat) {
                     intent.putExtra(EaseConstant.EXTRA_CHAT_TYPE, EaseConstant.CHATTYPE_GROUP);

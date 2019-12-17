@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.hyphenate.EMCallBack;
+import com.hyphenate.chat.EMClient;
 import com.onepilltest.R;
 import com.onepilltest.URL.Connect;
 import com.onepilltest.entity.EventMessage;
@@ -59,7 +61,7 @@ public class SettingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(0xffffffff );
+            getWindow().setStatusBarColor(0xffffffff);
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
         setContentView(R.layout.setting);
@@ -116,16 +118,16 @@ public class SettingActivity extends AppCompatActivity {
                 .into(user_img);*/
     }
 
-    private class MyListener implements View.OnClickListener{
+    private class MyListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            switch (v.getId()){
+            switch (v.getId()) {
                 case R.id.setting_user_address://用户地址
-                    if (UserBook.Code == 1){//医生
+                    if (UserBook.Code == 1) {//医生
                         Intent address_intent = new Intent(SettingActivity.this, EditUserInfoActivity.class);
                         startActivity(address_intent);
                         finish();
-                    }else if(UserBook.Code ==2){//用户
+                    } else if (UserBook.Code == 2) {//用户
                         Intent address_intent = new Intent(SettingActivity.this, AddressActivity.class);
                         startActivity(address_intent);
                         finish();
@@ -151,52 +153,69 @@ public class SettingActivity extends AppCompatActivity {
                     startActivity(QR_code_intent);
                     break;
                 case R.id.setting_lin_nickName:
-                    Intent nickName_intent = new Intent(SettingActivity.this,EditUserInfoActivity.class);
+                    Intent nickName_intent = new Intent(SettingActivity.this, EditUserInfoActivity.class);
                     startActivity(nickName_intent);
                     break;
                 case R.id.setting_lin_phone:
-                    Intent phone_intent = new Intent(SettingActivity.this,EditUserInfoActivity.class);
+                    Intent phone_intent = new Intent(SettingActivity.this, EditUserInfoActivity.class);
                     startActivity(phone_intent);
                     break;
                 case R.id.setting_lin_auto:
-                    Intent auto_intent = new Intent(SettingActivity.this,EditUserInfoActivity.class);
+                    Intent auto_intent = new Intent(SettingActivity.this, EditUserInfoActivity.class);
                     startActivity(auto_intent);
                     break;
                 case R.id.setting_lin_switchUser:
-                    Log.e("UserList",UserBook.getList()+"");
+                    Log.e("UserList", UserBook.getList() + "");
                     Intent switch_intent = new Intent(SettingActivity.this, switchActivity.class);
                     startActivity(switch_intent);
                     break;
                 case R.id.setting_lin_forUs:
-                    Intent forUs_intent = new Intent(SettingActivity.this,SettingForUsActivity.class);
+                    Intent forUs_intent = new Intent(SettingActivity.this, SettingForUsActivity.class);
                     startActivity(forUs_intent);
                     break;
                 case R.id.setting_lin_auto_btn:
-                    if(state ==0){
+                    if (state == 0) {
                         btn.setImageResource(R.drawable.off);
                         state = 1;
-                    }else{
+                    } else {
                         btn.setImageResource(R.drawable.on);
                         state = 0;
                     }
 
                     break;
                 case R.id.sign_out://退出登陆
-                    UserBook.NowUser = null;
-                    Intent intent = new Intent(SettingActivity.this, WelcomeActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
+                    EMClient.getInstance().logout(false, new EMCallBack() {
+                        @Override
+                        public void onSuccess() {
+                            UserBook.NowUser = null;
+                            Intent intent = new Intent(SettingActivity.this, WelcomeActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            Log.e("退出登录", "成功");
+                            startActivity(intent);
+                            finish();
+                        }
+
+                        @Override
+                        public void onError(int i, String s) {
+                            Log.e("退出失败", i + "," + s);
+                        }
+
+                        @Override
+                        public void onProgress(int i, String s) {
+
+                        }
+                    });
                     break;
 
             }
         }
     }
 
-    public void init(){
-        if (UserBook.Code == 1){//医生
+    public void init() {
+        if (UserBook.Code == 1) {//医生
             initDoctor();
-        }else if(UserBook.Code ==2){//用户
+        } else if (UserBook.Code == 2) {//用户
             initPatient();
         }
     }
@@ -206,7 +225,7 @@ public class SettingActivity extends AppCompatActivity {
         //头像
         RequestOptions requestOptions = new RequestOptions().circleCrop();
         Glide.with(this)
-                .load(Connect.BASE_URL+UserBook.NowUser.getHeadImg())
+                .load(Connect.BASE_URL + UserBook.NowUser.getHeadImg())
                 .apply(requestOptions)
                 .into(user_img);
         nickName.setText(UserBook.NowUser.getNickName());//昵称
@@ -214,7 +233,7 @@ public class SettingActivity extends AppCompatActivity {
         tv_nickName.setText(UserBook.NowUser.getNickName());//昵称
         tv_address.setText(UserBook.NowUser.getAddress());//地址
         tv_phone.setText(UserBook.NowUser.getPhone());//手机号
-        QR_code.setImageBitmap(QR.getQR(100,100,"想和你做朋友"));
+        QR_code.setImageBitmap(QR.getQR(100, 100, "想和你做朋友"));
 
     }
 
@@ -223,7 +242,7 @@ public class SettingActivity extends AppCompatActivity {
         //头像
         RequestOptions requestOptions = new RequestOptions().circleCrop();
         Glide.with(this)
-                .load(Connect.BASE_URL+UserBook.NowDoctor.getHeadImg())
+                .load(Connect.BASE_URL + UserBook.NowDoctor.getHeadImg())
                 .apply(requestOptions)
                 .into(user_img);
         nickName.setText(UserBook.NowDoctor.getName());//昵称
@@ -231,42 +250,42 @@ public class SettingActivity extends AppCompatActivity {
         tv_nickName.setText(UserBook.NowDoctor.getName());//昵称
         tv_address.setText(UserBook.NowDoctor.getAddress());//地址
         tv_phone.setText(UserBook.NowDoctor.getPhone());//手机号
-        QR_code.setImageBitmap(QR.getQR(100,100,"想和你做朋友"));
+        QR_code.setImageBitmap(QR.getQR(100, 100, "想和你做朋友"));
     }
 
-    public void JumpAccount(){
-        Intent intent = new Intent(SettingActivity.this,switchActivity.class);
+    public void JumpAccount() {
+        Intent intent = new Intent(SettingActivity.this, switchActivity.class);
         startActivity(intent);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void updateUI(EventMessage msg){
+    public void updateUI(EventMessage msg) {
 
-        if (UserBook.Code == 1){//医生
-            Log.e("Setting",msg.getCode()+msg.getJson());
-            if (msg.getCode().equals("医生信息已更新")){
-                    Log.e("刷新",""+msg.getJson()+msg.getCode());
-                    init();
-            }else if(msg.getCode().equals("更新头像")){
-                if(msg.getJson().equals("yes")){
-                        RequestOptions requestOptions = new RequestOptions().circleCrop();
-                        Glide.with(this)
-                                .load(Connect.BASE_URL+UserBook.NowDoctor.getHeadImg())
-                                .apply(requestOptions)
-                                .into(user_img);
+        if (UserBook.Code == 1) {//医生
+            Log.e("Setting", msg.getCode() + msg.getJson());
+            if (msg.getCode().equals("医生信息已更新")) {
+                Log.e("刷新", "" + msg.getJson() + msg.getCode());
+                init();
+            } else if (msg.getCode().equals("更新头像")) {
+                if (msg.getJson().equals("yes")) {
+                    RequestOptions requestOptions = new RequestOptions().circleCrop();
+                    Glide.with(this)
+                            .load(Connect.BASE_URL + UserBook.NowDoctor.getHeadImg())
+                            .apply(requestOptions)
+                            .into(user_img);
                 }
             }
-        }else if(UserBook.Code ==2){//用户
-            Log.e("Setting",msg.getCode()+msg.getJson());
-            if (msg.getCode().equals("用户信息已更新")){
-                    Log.e("刷新",""+msg.getJson()+msg.getCode());
-                    init();
-            }else if(msg.getCode().equals("更新头像")){
-                if(msg.getJson().equals("yes")){
+        } else if (UserBook.Code == 2) {//用户
+            Log.e("Setting", msg.getCode() + msg.getJson());
+            if (msg.getCode().equals("用户信息已更新")) {
+                Log.e("刷新", "" + msg.getJson() + msg.getCode());
+                init();
+            } else if (msg.getCode().equals("更新头像")) {
+                if (msg.getJson().equals("yes")) {
 
                     RequestOptions requestOptions = new RequestOptions().circleCrop();
                     Glide.with(this)
-                            .load(Connect.BASE_URL+UserBook.NowUser.getHeadImg())
+                            .load(Connect.BASE_URL + UserBook.NowUser.getHeadImg())
                             .apply(requestOptions)
                             .into(user_img);
                 }
