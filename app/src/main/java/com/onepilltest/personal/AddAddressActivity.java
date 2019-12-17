@@ -20,6 +20,7 @@ import com.onepilltest.entity.Address;
 import com.onepilltest.entity.UserPatient;
 import com.onepilltest.welcome.LoginActivity;
 
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
@@ -139,4 +140,5 @@ public class AddAddressActivity extends AppCompatActivity {
 
 
     }
+
 }

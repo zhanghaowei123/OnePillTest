@@ -1,6 +1,7 @@
 package com.onepilltest.personal;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -20,6 +21,7 @@ import com.onepilltest.R;
 import com.onepilltest.URL.Connect;
 import com.onepilltest.entity.EventMessage;
 import com.onepilltest.entity.medicine_;
+import com.onepilltest.index.DoctorDetailsActivity;
 import com.onepilltest.index.MedicineDao;
 
 import org.greenrobot.eventbus.EventBus;
@@ -47,6 +49,7 @@ public class ProductActivity extends Activity {
     TextView tabHost1, tabHost2, tabHost3, tabHost4;
     String img1,img2,img3;
     Button btn = null;
+    Button btn2 = null;
     MyListener myListener = null;
     boolean isFocus = false;
     focusDao dao = new focusDao();
@@ -84,6 +87,8 @@ public class ProductActivity extends Activity {
     }
 
     private void find() {
+        btn2 = findViewById(R.id.btn_cons);
+        btn2.setOnClickListener(myListener);
         btn = findViewById(R.id.btn_coll);
         btn.setOnClickListener(myListener);
         product_name = findViewById(R.id.tv_productName);
@@ -109,7 +114,7 @@ public class ProductActivity extends Activity {
         product_type.setText(med.getGeneralName());
         tabHost1.setText(med.getOverview());
         tabHost2.setText(med.getFunction());
-        tabHost3.setText(med.getSide_effect());
+        tabHost3.setText(med.getSideEffect());
         tabHost4.setText(med.getIntrodutions());
         img1=med.getImg1();
         img2=med.getImg2();
@@ -301,7 +306,18 @@ public class ProductActivity extends Activity {
                         }
                     }
                     break;
+                case R.id.btn_cons:
+                    Intent intent = new Intent(ProductActivity.this, DoctorDetailsActivity.class);
+                    intent.putExtra("id",med.getDoctorId());
+                    startActivity(intent);
+                    break;
             }
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }

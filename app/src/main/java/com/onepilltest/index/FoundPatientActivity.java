@@ -15,6 +15,8 @@ import com.onepilltest.R;
 import com.onepilltest.message.QuestionActivity;
 import com.onepilltest.personal.ProductActivity;
 
+import org.greenrobot.eventbus.EventBus;
+
 public class FoundPatientActivity extends AppCompatActivity {
     FoundPatientActivity.MyListener myListener = null;
     private ImageView imgBack;
@@ -137,5 +139,11 @@ public class FoundPatientActivity extends AppCompatActivity {
                     break;
             }
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }

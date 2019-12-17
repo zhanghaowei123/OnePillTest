@@ -90,6 +90,33 @@ public class AddressDao {
 
     }
 
+    public void searchDoctorAll(int UserId){
+        OkHttpClient okHttpClient = new OkHttpClient();
+        String code = "searchDoctorAll";
+        Request request = new Request.Builder().url(Connect.BASE_URL+"AddressServlet?UserId="+UserId+"&Code="+code).build();
+        Call call = okHttpClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String re = response.body().string();
+                EventMessage msg = new EventMessage();
+                msg.setCode("AddressDao_searchDoctorAll");
+                msg.setJson(re);
+                EventBus.getDefault().post(msg);
+                Log.e("查询全部",""+msg.getJson());
+
+            }
+        });
+
+
+    }
+
+
     /**
      * 查询
      */
