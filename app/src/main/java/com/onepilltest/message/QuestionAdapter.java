@@ -102,7 +102,7 @@ public class QuestionAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, DoctorChatActivity.class);
-                intent.putExtra(EaseConstant.EXTRA_USER_ID, inquiry.getName());
+                intent.putExtra(EaseConstant.EXTRA_USER_ID, inquiry.getPhone());
                 intent.putExtra(EaseConstant.EXTRA_CHAT_TYPE, EMMessage.ChatType.Chat);
                 context.startActivity(intent);
             }
