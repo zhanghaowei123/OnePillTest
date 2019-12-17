@@ -1,0 +1,20 @@
+package com.onepilltest.message;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+
+import com.hyphenate.easeui.ui.EaseChatFragment;
+import com.onepilltest.R;
+
+public class DoctorChatActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_doctor_chat);
+
+        EaseChatFragment chatFragment = new EaseChatFragment();
+        chatFragment.setArguments(getIntent().getExtras());
+        getSupportFragmentManager().beginTransaction().add(R.id.doctor_container, chatFragment).commit();
+    }
+}
