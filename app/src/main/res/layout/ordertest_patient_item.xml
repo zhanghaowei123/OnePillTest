@@ -55,56 +55,54 @@
                 android:layout_height="80dp">
 
                 <ImageView
-                    android:id="@+id/img_order_pa"
+                    android:id="@+id/ordertest_medicine_headerimg"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:layout_margin="5dp" />
                 <TextView
-                    android:id="@+id/tv_order_type"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_marginLeft="290dp"
-                    android:gravity="center_vertical"
+                    android:id="@+id/ordertest_btn_type"
+                    android:layout_width="80dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="250dp"
+                    android:gravity="center"
                     android:text="订单完成"
                     android:textColor="#000"
                     android:textSize="15dp" />
 
                 <TextView
-                    android:id="@+id/tv_order_name"
+                    android:id="@+id/ordertest_text_name"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="18dp"
                     android:layout_marginLeft="80dp"
                     android:layout_marginTop="5dp"
                     android:maxEms="9"
                     android:maxLines="1"
-                    android:text="小儿止咳糖浆"
+                    android:text=""
                     android:textColor="#000"
-                    android:textSize="18dp" />
+                    android:textSize="15dp" />
 
                 <TextView
-                    android:id="@+id/tv_order_size"
+                    android:id="@+id/ordertest_text_size"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/tv_order_name"
                     android:layout_marginLeft="80dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="28dp"
                     android:maxEms="9"
                     android:maxLines="1"
-                    android:text="100ml"
+                    android:text=""
                     android:textColor="#000"
                     android:textSize="13dp" />
 
                 <TextView
-                    android:id="@+id/tv_order_count"
+                    android:id="@+id/ordertest_text_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/tv_order_size"
                     android:layout_marginLeft="80dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="45dp"
                     android:maxEms="9"
                     android:maxLines="1"
-                    android:text="已购买3件"
-                    android:textSize="12dp" />
+                    android:text="aaasf "
+                    android:textSize="15dp" />
             </RelativeLayout>
 
             <TextView
@@ -117,12 +115,12 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/tv_order_pay"
+                    android:id="@+id/ordertest_text_pay"
                     android:layout_width="180dp"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:maxLines="1"
-                    android:text="应支付：￥ 250"
+                    android:text=""
                     android:textColor="#000"
                     android:textSize="15dp" />
                 <ImageView

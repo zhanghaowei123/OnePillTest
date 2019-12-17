@@ -3,6 +3,7 @@ package com.onepilltest.personal.cart;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,12 +17,15 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.onepilltest.R;
 import com.onepilltest.URL.ConUtil;
 import com.onepilltest.URL.Connect;
 import com.onepilltest.entity.Cart;
 import com.onepilltest.entity.Medicine;
 import com.onepilltest.entity.SelectCartItem;
+import com.onepilltest.index.CommentAdapter;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,6 +39,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import cn.smssdk.gui.DefaultContactViewItem;
 
 public class ShoppingCartAdapter extends BaseAdapter{
     private String updateIp = Connect.BASE_URL+ "/CartUpdateServlet";
@@ -51,9 +57,6 @@ public class ShoppingCartAdapter extends BaseAdapter{
     private LinearLayout llEmptyCart = null;
     private ListView lvCart = null;
     private List<Integer> deleteIds = new ArrayList<>();
-
-
-
     private List<Cart> dataSource = null;
     private Context context;
     private int item_layout_id;
@@ -82,6 +85,7 @@ public class ShoppingCartAdapter extends BaseAdapter{
         this.llEmptyCart = llEmptyCart;
         this.lvCart = lvCart;
     }
+    //计算count总价
     public int getTotalPrice() {
         int totalPrice = 0;
         for (int key : selectCartItemMap.keySet()) {
@@ -108,12 +112,14 @@ public class ShoppingCartAdapter extends BaseAdapter{
     public View getView(final int position,
                         View convertView,
                         ViewGroup parent) {
+        ViewHolder viewHolder= null;
         if(null == convertView) {
             LayoutInflater inflater = LayoutInflater.from(context);
             convertView = inflater.inflate(item_layout_id, null);
+            viewHolder = new ViewHolder();
+            viewHolder.ivCommenterImg = convertView.findViewById(R.id.img_Medicine);
         }
         final CheckBox cbChooseOne = convertView.findViewById(R.id.cb_check);
-        imgView = convertView.findViewById(R.id.img_Medicine);
         TextView name = convertView.findViewById(R.id.sc_tv_name);
         TextView type = convertView.findViewById(R.id.sc_tv_type);
         TextView price = convertView.findViewById(R.id.sc_tv_price);
@@ -126,9 +132,11 @@ public class ShoppingCartAdapter extends BaseAdapter{
         final int maxCount = medicine.getStocks().get(0);
         final int minCount =1;
         cbChooseOne.setText(cart.getId()+"");
-        name.setText(cart.getName().toString());
-        type.setText(cart.getType().toString());
-        price.setText(cart.getMedicinePrice());
+        name.setText(medicine.getMedicineName().toString());
+        type.setText(medicine.getStandard().toString());
+        price.setText(medicine.getPrice().get(0)+"");
+        tvCartCount.setText(cart.getCount()+"");
+        cbChooseOne.setText(cart.getId()+"");
         final int cartId = Integer.parseInt(cbChooseOne.getText().toString());
         //根据SelectCartItems中的选中位，设置是否全选
         if (selectCartItemMap.get(cartId).isSelected()){
@@ -190,7 +198,7 @@ public class ShoppingCartAdapter extends BaseAdapter{
                     btnMinus.setClickable(true);
                     Toast.makeText(context,"对不起，您所购买的药品已超过购买上限",Toast.LENGTH_SHORT).show();
                 }else {
-                    //添加
+                    //添加,当前值小于库存
                     btnAdd.setClickable(true);
                     tvCartCount.setText(nowCount+1+"");
                     btnMinus.setClickable(true);
@@ -272,16 +280,62 @@ public class ShoppingCartAdapter extends BaseAdapter{
                 }
             }
         });
+        //获取药品图片
+//        Cart cart1 = dataSource.get(position);
+//        RequestOptions requestOptions = new RequestOptions().circleCrop();
+//        Glide.with(context)
+//                .load(Connect.BASE_URL + cart1.getMedicine().getImg1s())
+//                .apply(requestOptions)
+//                .into(viewHolder.ivCommenterImg);
         return convertView;
+    }
+    private class ViewHolder {
+        public ImageView ivCommenterImg;
     }
 
     public void setSelectCartItems() {
+        //显示购物车列表
+        for (Cart cart : dataSource){
+            SelectCartItem item  = new SelectCartItem();
+            item.setSelected(false);
+            item.setCart(cart);
+            selectCartItemMap.put(cart.getId(),item);
+        }
     }
 
     public void setCbChooseAllListener() {
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    selectAll = true;
+                    changeSelectCartItem();
+                    tvSettlementPrice.setText(getTotalPrice()+"");
+                }else {
+                    //取消全选状态时
+                    selectAll = false;
+                    changeSelectCartItem();
+                    tvSettlementPrice.setText("0");
+                }
+                notifyDataSetChanged();
+            }
+        });
     }
-    //点击删除按钮时
+    private void changeSelectCartItem(){
+        Map<Integer,SelectCartItem> keep = selectCartItemMap;
+        for (int key:selectCartItemMap.keySet()){
+            selectCartItemMap.get(key).setSelected(selectAll);
+        }
+        if (nowIsAllSelect){
+            for (int key:selectCartItemMap.keySet()){
+                selectCartItemMap.get(key).setSelected(keep.get(key).isSelected());
+            }
+            nowIsAllSelect =false;
+        }
+    }
+
     public void setButtonListener() {
+        //点击删除按钮时
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -304,8 +358,8 @@ public class ShoppingCartAdapter extends BaseAdapter{
                        }
                    }
                    //获取现在更新后的总价值，放入totalPrice中
-//                   int nowPrice = getTotalPrice();
-//                   tvSettlementPrice.setText(nowPrice+"");
+                   int nowPrice = getTotalPrice();
+                   tvSettlementPrice.setText(nowPrice+"");
                    //将删除的cartId发送到服务器中
                  for (final int id:deleteIds){
                      new Thread(){
@@ -346,15 +400,16 @@ public class ShoppingCartAdapter extends BaseAdapter{
                         haveShop = true;
                     }
                 }
-//                if (haveShop) { // 有商品时可以进入结算界面
-//                    Intent intent = new Intent(context, PlaceOrderActivity.class);
-//                    Bundle bundle = new Bundle();
-//                    bundle.putSerializable("buyCart", (Serializable) buyCart);
-//                    intent.putExtra("fromWhere", ShoppingCartActivity.FROM_CART);
-//                    intent.putExtras(bundle);
-//                    context.startActivity(intent);
-//                }else
-//                    Toast.makeText(context,"请选择要购买的商品",Toast.LENGTH_SHORT).show();
+                if (haveShop) { // 有商品时可以进入结算界面
+                    Intent intent = new Intent(context, PlaceOrderActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("buyCart", (Serializable) buyCart);
+                    intent.putExtra("fromWhere", ShoppingCartActivity.FROM_CART);
+                    intent.putExtras(bundle);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent);
+                }else
+                    Toast.makeText(context,"请选择要购买的商品",Toast.LENGTH_SHORT).show();
             }
         });
     }
