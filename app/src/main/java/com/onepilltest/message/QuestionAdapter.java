@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.hyphenate.chat.EMConversation;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.easeui.EaseConstant;
 import com.hyphenate.easeui.ui.EaseChatFragment;
@@ -100,8 +101,8 @@ public class QuestionAdapter extends BaseAdapter {
         viewHolder.ivQuestionHeadImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, ChatActivity.class);
-                intent.putExtra(EaseConstant.EXTRA_USER_ID, inquiry.getName());
+                Intent intent = new Intent(context, NewChatActivity.class);
+                intent.putExtra(EaseConstant.EXTRA_USER_ID, inquiry.getPhone());
                 intent.putExtra(EaseConstant.EXTRA_CHAT_TYPE, EMMessage.ChatType.Chat);
                 context.startActivity(intent);
             }

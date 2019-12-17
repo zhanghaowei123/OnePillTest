@@ -25,9 +25,11 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.onepilltest.R;
 import com.onepilltest.entity.EventMessage;
+import com.onepilltest.message.DoctorChatFragment;
 import com.onepilltest.message.MessageFragment;
 import com.onepilltest.nearby.NearFragment;
 import com.onepilltest.personal.PersonalFragment;
+import com.onepilltest.personal.UserBook;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -123,7 +125,7 @@ public class HomeActivity extends AppCompatActivity {
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(0xff56ced4 );
+            getWindow().setStatusBarColor(0xff56ced4);
         }
         setContentView(R.layout.activity_main);
 
@@ -238,7 +240,11 @@ public class HomeActivity extends AppCompatActivity {
     private void setFragment() {
         map.get(tabStrId[0]).setFragment(new HomeFragment());
         map.get(tabStrId[1]).setFragment(new NearFragment());
-        map.get(tabStrId[2]).setFragment(new MessageFragment());
+        if (UserBook.Code == 2) {
+            map.get(tabStrId[2]).setFragment(new MessageFragment());
+        } else if (UserBook.Code == 1) {
+            map.get(tabStrId[2]).setFragment(new DoctorChatFragment());
+        }
         map.get(tabStrId[3]).setFragment(new PersonalFragment());
     }
 
@@ -280,14 +286,14 @@ public class HomeActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         Log.e("扫码结果分析", "Cancelled");
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        if(result != null) {
-            if(result.getContents() == null) {
+        if (result != null) {
+            if (result.getContents() == null) {
                 Log.e("扫码", "Cancelled");
                 Toast.makeText(this, "扫描结果为空", Toast.LENGTH_LONG).show();
             } else {
                 String str = result.getContents();
                 Log.e("扫码", "Scanned: " + str);
-                Toast.makeText(this, str+"\n扫描结果不为空", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, str + "\n扫描结果不为空", Toast.LENGTH_LONG).show();
             }
         }
     }

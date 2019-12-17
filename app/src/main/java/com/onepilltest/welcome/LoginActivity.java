@@ -60,9 +60,6 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 okHttpClient = new OkHttpClient();
-                login();
-                //临时登陆
-                //loginin();
                 EMClient.getInstance().login(editPhone.getText().toString(),
                         editPassword.getText().toString(), new EMCallBack() {
                             @Override

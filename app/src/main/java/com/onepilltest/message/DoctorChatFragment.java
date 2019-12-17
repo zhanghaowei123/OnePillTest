@@ -13,17 +13,17 @@ import com.hyphenate.easeui.ui.EaseConversationListFragment;
 
 import java.util.List;
 
-public class MessageFragment extends EaseConversationListFragment {
+public class DoctorChatFragment extends EaseConversationListFragment {
 
     @Override
-    protected void initView() {
+    protected void setUpView() {
         super.initView();
-        Log.e("ChatTest", "这是病人的聊天会话列表");
+        Log.e("ChatTest", "这是医生的聊天会话列表");
         //跳转到会话详情页
         setConversationListItemClickListener(new EaseConversationListItemClickListener() {
             @Override
             public void onListItemClicked(EMConversation conversation) {
-                Intent intent = new Intent(getContext(), ChatActivity.class);
+                Intent intent = new Intent(getContext(), NewChatActivity.class);
                 //传递参数
                 intent.putExtra(EaseConstant.EXTRA_USER_ID, conversation.conversationId());
                 if (conversation.getType() == EMConversation.EMConversationType.GroupChat) {
@@ -31,7 +31,6 @@ public class MessageFragment extends EaseConversationListFragment {
                 }
                 startActivity(intent);
             }
-
         });
         conversationList.clear();
         //监听会话消息
@@ -72,4 +71,5 @@ public class MessageFragment extends EaseConversationListFragment {
 
         }
     };
+
 }

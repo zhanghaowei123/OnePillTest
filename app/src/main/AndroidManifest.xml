@@ -64,10 +64,13 @@
         android:supportsRtl="true"
         android:theme="@style/ThemeNoTitle"
         android:usesCleartextTraffic="true">
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="${applicationId}.fileProvider"
+            android:authorities="com.onepilltest.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
@@ -100,7 +103,7 @@
         <meta-data
             android:name="EASEMOB_APPKEY"
             android:value="1106191028157045#onepilltest" />
-        <!-- 声明SDK所需的service SDK核心功能-->
+        <!-- 声明SDK所需的service SDK核心功能 -->
         <service
             android:name="com.hyphenate.chat.EMChatService"
             android:exported="true" />
@@ -121,7 +124,6 @@
                 <action android:name="android.intent.action.USER_PRESENT" />
             </intent-filter>
         </receiver>
-
 
         <activity android:name=".index.HomeActivity" />
         <activity android:name=".index.FoundPatientActivity" />
@@ -156,8 +158,7 @@
         <activity android:name=".personal.SettingForUsActivity" />
         <activity android:name=".index.DoctorDetailsActivity" />
         <activity android:name=".personal.ProductActivity" />
-        <activity
-            android:name=".message.ChatActivity" />
+        <activity android:name=".message.ChatActivity" />
         <activity
             android:name="com.hyphenate.easeui.ui.EaseShowBigImageActivity"
             android:screenOrientation="portrait"
@@ -187,8 +188,8 @@
             android:windowSoftInputMode="stateAlwaysHidden" />
         <!-- <activity android:name=".index.ZxingActivity"></activity> -->
         <!-- 二维码扫码 -->
-        <activity android:name=".index.ZxingActivity"></activity>
-
+        <activity android:name=".index.ZxingActivity" />
+        <activity android:name=".message.NewChatActivity"></activity>
     </application>
 
 </manifest>
