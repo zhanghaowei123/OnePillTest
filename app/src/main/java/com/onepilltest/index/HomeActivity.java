@@ -28,7 +28,6 @@ import com.onepilltest.entity.EventMessage;
 import com.onepilltest.message.MessageFragment;
 import com.onepilltest.nearby.NearFragment;
 import com.onepilltest.personal.PersonalFragment;
-import com.onepilltest.personal.UserBook;
 
 import org.greenrobot.eventbus.EventBus;
 

@@ -45,9 +45,7 @@ public class FoundPatientActivity extends AppCompatActivity {
         imgBack.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent ();
-                intent.setClass ( FoundPatientActivity.this,HomeFragment.class);
-                startActivity(intent);
+                finish();
             }
         } );
         imgSelect.setOnClickListener ( new View.OnClickListener () {
