@@ -147,4 +147,10 @@ public class FoundDoctorActivity extends AppCompatActivity {
             startActivity(intent);
         }
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
 }

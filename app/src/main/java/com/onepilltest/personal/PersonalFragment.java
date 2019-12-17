@@ -190,7 +190,7 @@ public class PersonalFragment extends Fragment {
                     startActivity(intent5);
                     break;
                 case R.id.ll_sc:
-                    Intent intent6 = new Intent(getContext(), FocusAndSaveActivity.class);
+                    Intent intent6 = new Intent(getContext(), FocusListActivity.class);
                     startActivity(intent6);
                     break;
             }

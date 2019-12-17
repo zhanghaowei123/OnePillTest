@@ -20,11 +20,13 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.onepilltest.R;
 import com.onepilltest.URL.ConUtil;
 import com.onepilltest.URL.Connect;
 import com.onepilltest.entity.Cart;
 import com.onepilltest.entity.Medicine;
+import com.onepilltest.entity.medicine_;
 import com.onepilltest.personal.PersonalFragment;
 import com.onepilltest.personal.ProductActivity;
 import com.onepilltest.personal.UserBook;
@@ -88,6 +90,12 @@ public class ShoppingCartActivity extends AppCompatActivity {
         tvCartManage.setOnClickListener(listener);
     }
 
+
+    //获取medicine
+    public medicine_ getMedicine(){
+        medicine_ med = new Gson().fromJson(getIntent().getStringExtra("info"),medicine_.class) ;
+        return med;
+    }
 
     private class UseListener implements View.OnClickListener {
 

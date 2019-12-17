@@ -23,7 +23,7 @@ public class focusDao {
      */
     public void searchDoctor(int userId,int userType){
         OkHttpClient okHttpClient = new OkHttpClient();
-        String code = "searchDoctor";
+        String code = "searchDoctorList";
         Request request = new Request.Builder().url(Connect.BASE_URL+"focusServlet?userId="+userId+"&userType="+userType+"&Code="+code).build();
         Call call = okHttpClient.newCall(request);
         call.enqueue(new Callback() {
@@ -35,7 +35,7 @@ public class focusDao {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String re = response.body().string();
-                Log.e("focusDao","获取关注医生列表");
+                Log.e("focusDao","获取关注医生列表!!\n"+re);
                 EventMessage msg = new EventMessage();
                 msg.setCode("focusDao_searchDoctor");
                 msg.setJson(re);
@@ -54,7 +54,7 @@ public class focusDao {
      */
     public void searchMedicine(int userId,int userType){
         OkHttpClient okHttpClient = new OkHttpClient();
-        String code = "searchMedicine";
+        String code = "searchMedicineList";
         Request request = new Request.Builder().url(Connect.BASE_URL+"focusServlet?userId="+userId+"&userType="+userType+"&Code="+code).build();
         Call call = okHttpClient.newCall(request);
         call.enqueue(new Callback() {
@@ -66,7 +66,7 @@ public class focusDao {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String re = response.body().string();
-                Log.e("focusDao","查询收藏药品列表");
+                Log.e("focusDao","查询收藏药品列表!!\n"+re);
                 EventMessage msg = new EventMessage();
                 msg.setCode("focusDao_searchMedicine");
                 msg.setJson(re);
