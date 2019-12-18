@@ -47,6 +47,7 @@
             android:id="@+id/img_select"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:layout_marginRight="5dp"
             android:layout_gravity="center"
             android:src="@drawable/found" />
 
@@ -70,9 +71,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="10dp"
             android:text="快速匹配医生"
-            android:textColor="#40e848"
+            android:textColor="#56CED4"
             android:textSize="16dp"
             android:textStyle="bold" />
 
