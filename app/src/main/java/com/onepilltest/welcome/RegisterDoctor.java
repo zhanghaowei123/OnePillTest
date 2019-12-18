@@ -3,6 +3,7 @@ package com.onepilltest.welcome;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -39,6 +40,9 @@ public class RegisterDoctor extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(0xff56ced4);
+        }
         setContentView(R.layout.register_doctor_layout);
         sharedPreferences = getSharedPreferences("doctorRegister", MODE_PRIVATE);
         findViews();
@@ -81,9 +85,10 @@ public class RegisterDoctor extends AppCompatActivity implements View.OnClickLis
                                 intent.setClass(RegisterDoctor.this,
                                         PerfectInforDoctorActivity.class);
                                 registerDoctor();
-                                if (flag)
+                                if (flag) {
                                     startActivity(intent);
-                                else
+                                    finish();
+                                } else
                                     Toast.makeText(getApplicationContext(),
                                             "请完善个人信息并同意用户协议", Toast.LENGTH_SHORT).show();
                             } else {
@@ -124,7 +129,7 @@ public class RegisterDoctor extends AppCompatActivity implements View.OnClickLis
         imgResponse = findViewById(R.id.doctor_next);
         checkBox = findViewById(R.id.checkbox_doctor_agree);
         sendVerificationCode = findViewById(R.id.btn_send_verification_code_doctor);
-        imgBack  = findViewById(R.id.register_do_back);
+        imgBack = findViewById(R.id.register_do_back);
         imgBack.setOnClickListener(this);
         imgResponse.setOnClickListener(this);
         sendVerificationCode.setOnClickListener(this);

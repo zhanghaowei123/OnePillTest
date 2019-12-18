@@ -2,6 +2,7 @@ package com.onepilltest.message;
 
 import android.app.ListActivity;
 import android.content.Intent;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -45,6 +46,9 @@ public class QuestionListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(0xff56ced4);
+        }
         setContentView(R.layout.activity_question_list);
 
         //注册成主线程

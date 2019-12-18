@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -51,6 +52,9 @@ public class RegisterPatient extends AppCompatActivity implements View.OnClickLi
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(0xff56ced4);
+        }
         setContentView(R.layout.register_patient_layout);
         sharedPreferences = getSharedPreferences("patientRegister", MODE_PRIVATE);
 
@@ -94,9 +98,10 @@ public class RegisterPatient extends AppCompatActivity implements View.OnClickLi
                                 intent.setClass(RegisterPatient.this,
                                         PerfectInforPatientActivity.class);
                                 register();
-                                if (newFlag)
+                                if (newFlag) {
                                     startActivity(intent);
-                                else
+                                    finish();
+                                } else
                                     Toast.makeText(getApplicationContext(),
                                             "请完善个人信息并同意用户协议", Toast.LENGTH_SHORT).show();
                             } else {
