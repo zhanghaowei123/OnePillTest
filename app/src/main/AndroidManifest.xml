@@ -191,6 +191,11 @@
         <activity android:name=".index.ZxingActivity" />
         <activity android:name=".message.DoctorChatActivity" />
         <activity android:name=".personal.FocusListActivity" />
+        <activity android:name=".personal.cart.PlaceOrderActivity" />
+        <activity android:name=".personal.oder.PatientOrderActivity" />
+        <activity android:name=".personal.OrderActivity"></activity>
+        <activity android:name=".message.DoctorChatActivity" />
+        <activity android:name=".personal.FocusListActivity" />
         <activity android:name=".personal.cart.CartActivity"></activity>
     </application>
 

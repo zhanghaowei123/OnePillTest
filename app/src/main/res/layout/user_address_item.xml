@@ -13,7 +13,7 @@
         android:layout_weight="3"
         android:gravity="right">
 
-        <com.onepilltest.others.RoundImageView
+        <ImageView
             android:id="@+id/user_address_item_img"
             android:layout_width="50dp"
             android:layout_height="50dp"
@@ -22,7 +22,7 @@
             android:scaleType="centerCrop"
             android:src="@drawable/user">
 
-        </com.onepilltest.others.RoundImageView>
+        </ImageView>
 
     </LinearLayout>
 

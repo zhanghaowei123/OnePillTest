@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#fff"
+    android:orientation="vertical"
+    android:paddingBottom="4dp"
+    android:paddingTop="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/underline">
+
+        <TextView
+            android:id="@+id/setting_order_list_item_where"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_weight="10"
+            android:padding="10dp"
+            android:text="OnePill" />
+
+        <TextView
+            android:id="@+id/setting_order_list_isPay"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:text="已付款" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/underline"
+        android:paddingBottom="20dp"
+        android:paddingLeft="30dp"
+        android:paddingTop="10dp">
+
+        <ImageView
+            android:id="@+id/setting_order_list_item_img1"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/user" />
+
+        <ImageView
+            android:id="@+id/setting_order_list_item_img2"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginRight="20dp" />
+
+        <ImageView
+            android:id="@+id/setting_order_list_item_img3"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginRight="20dp" />
+
+        <TextView
+            android:id="@+id/setting_order_list_item_money"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="right"
+            android:paddingRight="25dp"
+            android:text="￥12333" />
+
+    </LinearLayout>
+
+</LinearLayout>

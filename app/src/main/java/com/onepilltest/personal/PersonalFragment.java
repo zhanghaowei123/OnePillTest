@@ -171,7 +171,7 @@ public class PersonalFragment extends Fragment {
                     startActivity(intent);
                     break;
                 case R.id.ll_order:
-                    Intent intent1 = new Intent(getContext(), PatientOrderActivity.class);
+                    Intent intent1 = new Intent(getContext(), OrderActivity.class);
                     startActivity(intent1);
                     break;
                 case R.id.ll_cart:
