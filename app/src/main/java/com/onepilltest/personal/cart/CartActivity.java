@@ -1,6 +1,7 @@
 package com.onepilltest.personal.cart;
 
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -51,8 +52,12 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cart);
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(0xff56ced4);
+        }
+
+        setContentView(R.layout.activity_cart);
         okHttpClient = new OkHttpClient();
         EventBus.getDefault().register(this);
         sharedPreferences = getSharedPreferences("addToCart", MODE_PRIVATE);
