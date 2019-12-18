@@ -3,16 +3,25 @@ package com.onepilltest.personal;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.onepilltest.R;
+import com.onepilltest.entity.EventMessage;
 import com.onepilltest.entity.WalletBase;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,8 +31,12 @@ public class WalletActivity extends AppCompatActivity {
 
     MyListener myListener = null;
     Button back = null;
+    TextView cash = null;
     ListView walletList = null;
-    List<WalletBase> baseList = null;
+    BaseAdapter adapter = null;
+    static List<WalletBase> baseList = null;
+    Date date = new Date(System.currentTimeMillis());
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,12 +44,13 @@ public class WalletActivity extends AppCompatActivity {
             getWindow().setStatusBarColor(0xff00aa77 );
         }
         setContentView(R.layout.wallet);
+        EventBus.getDefault().register(this);
         myListener = new MyListener();
         find();
         baseList = new ArrayList<>();
         
         initDate();
-        BaseAdapter adapter = new WalletAdapter(WalletActivity.this,R.layout.wallet_list,baseList);
+        adapter = new WalletAdapter(WalletActivity.this,R.layout.wallet_list,baseList);
         
         walletList.setAdapter(adapter);
         walletList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -48,8 +62,9 @@ public class WalletActivity extends AppCompatActivity {
     }
 
     private void initDate() {
-        WalletBase base = new WalletBase("测试时间2019","300",true);
-        WalletBase base2 = new WalletBase("测试时间2017","50",false);
+        cash.setText("￥"+UserBook.money);
+        WalletBase base = new WalletBase(simpleDateFormat.format(date),"300",true);
+        WalletBase base2 = new WalletBase(simpleDateFormat.format(date),"50",false);
         for(int i = 0;i<10;i++){
             baseList.add(base);
             baseList.add(base);
@@ -60,6 +75,7 @@ public class WalletActivity extends AppCompatActivity {
 
     private void find() {
         walletList = findViewById(R.id.wallet_list);
+        cash = findViewById(R.id.wallet_cash);
         back = findViewById(R.id.wallet_back);
         back.setOnClickListener(myListener);
     }
@@ -73,6 +89,18 @@ public class WalletActivity extends AppCompatActivity {
                     finish();
                     break;
             }
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void updateUI(EventMessage msg){
+        if(msg.getCode().equals("update_wallet")){
+            Log.e("付款",""+msg.getJson());
+            int price = Integer.valueOf(msg.getJson());
+            WalletBase base = new WalletBase(simpleDateFormat.format(date),price+"",false);
+            baseList.add(base);
+            adapter.notifyDataSetChanged();
+
         }
     }
 }

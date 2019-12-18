@@ -26,6 +26,7 @@ public class UserBook {
     public static UserDoctor NowDoctor;//当前医生
     private static List<UserPatient> UserList = new ArrayList<>();//用户列表
     private static List<UserDoctor> DoctorList = new ArrayList<>();//医生列表
+    public static int money = 1000;
 
     /*   public UserPatient getNowUser() {
            return NowUser;

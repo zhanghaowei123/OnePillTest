@@ -147,6 +147,12 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
                     dao.add(orders);
                 }
                 Toast.makeText(getApplicationContext(),"订单结算成功",Toast.LENGTH_SHORT).show();
+                EventMessage msg = new EventMessage();
+                msg.setCode("update_wallet");
+                msg.setJson(""+price);
+                int all = UserBook.money;
+                UserBook.money = all-price;
+                EventBus.getDefault().post(msg);
                 medicines.clear();
                 cartAdapter.notifyDataSetChanged();
                 break;
