@@ -34,16 +34,25 @@ import com.onepilltest.personal.UserBook;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
 import static com.mob.MobSDK.getContext;
 
 public class ShoppingCartActivity extends AppCompatActivity {
     private LinearLayout llEmptyCart = null;
-    private ImageView imgCartBack= null;
+    private ImageView imgCartBack = null;
     private ListView lvCart = null;
     private CheckBox cbChooseAll = null;
     private Button btnSettlement = null;
@@ -58,25 +67,28 @@ public class ShoppingCartActivity extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     private ShoppingCartAdapter adapter = null;
     public static final String FROM_CART = "fromCart";
+    private OkHttpClient okHttpClient;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.shoppingcart);
         initViews();
+        getMedicine();
         // 2. 获取cart数据
         GetCartListTask task = new GetCartListTask();
         task.execute();
     }
+
     private void initViews() {
         // 1. 寻找控件
-        imgCartBack=findViewById(R.id.cart_back);
+        imgCartBack = findViewById(R.id.cart_back);
         llEmptyCart = findViewById(R.id.ll_cake_empty);
         lvCart = findViewById(R.id.lv_cart);
         tvCartManage = findViewById(R.id.tv_cart_manage);
         tvCartFinish = findViewById(R.id.tv_cart_finish);
         btnDelete = findViewById(R.id.btn_delete);
-        Log.e("box","box初始化");
+        Log.e("box", "box初始化");
         cbChooseAll = findViewById(R.id.cb_choose_all);
         btnSettlement = findViewById(R.id.btn_settlement);
         tvSettlementPrice = findViewById(R.id.tv_settlement_price);
@@ -92,9 +104,26 @@ public class ShoppingCartActivity extends AppCompatActivity {
 
 
     //获取medicine
-    public medicine_ getMedicine(){
-        medicine_ med = new Gson().fromJson(getIntent().getStringExtra("info"),medicine_.class) ;
-        return med;
+    public void getMedicine() {
+        medicine_ med = new Gson().fromJson(getIntent().getStringExtra("info"), medicine_.class);
+//        String strMedicine = new Gson().toJson(med);
+        okHttpClient = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(Connect.BASE_URL + "CurtServlet?userId=" + UserBook.NowUser.getUserId()
+                        + "&medicineId=" + med.getId() + "&price=" + med.getPrice() + "&Code=add")
+                .build();
+        Call call = okHttpClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                Log.e("加入购物车成功", "yes");
+            }
+        });
     }
 
     private class UseListener implements View.OnClickListener {
@@ -103,8 +132,8 @@ public class ShoppingCartActivity extends AppCompatActivity {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.cart_back:
-                   finish();
-                   break;
+                    finish();
+                    break;
                 case R.id.tv_cart_manage:   // 当管理按钮被点下时，可进行删除操作
                     tvCartManage.setVisibility(View.GONE);
                     tvCartFinish.setVisibility(View.VISIBLE);
@@ -131,7 +160,7 @@ public class ShoppingCartActivity extends AppCompatActivity {
             if (carts.size() > 0) {
                 // 若收到购物车数据，则显示购物车列表
                 llEmptyCart.setVisibility(View.GONE);
-                Log.e("View,GONE",View.GONE+"");
+                Log.e("View,GONE", View.GONE + "");
                 lvCart.setVisibility(View.VISIBLE);
             }
             // 3. 配置 listview
@@ -174,7 +203,7 @@ public class ShoppingCartActivity extends AppCompatActivity {
                 // 先发送 用户信息，用于查询登录用户对应的cart
                 JSONObject send = new JSONObject();
 //                int buyerId = sharedPreferences.getInt("NowUser", 0);
-                int buyerId= UserBook.NowUser.getUserId();
+                int buyerId = UserBook.NowUser.getUserId();
                 send.put("buyerId", buyerId);
                 ConUtil.setOutputStream(con, send.toString());
                 // 获取 返回的用户所对应的 cart列表
@@ -189,11 +218,12 @@ public class ShoppingCartActivity extends AppCompatActivity {
                     cart.setId(jsonObject.getInt("id"));
                     cart.setType(jsonObject.getString("status"));
                     Medicine medicine = new Medicine();
+                    // medicine_ medicines = new medicine_();
                     medicine.setId(jsonObject.getInt("medicineId"));
                     medicine.setGeneraName(jsonObject.getString("generaname"));
                     medicine.setMedicineName(jsonObject.getString("medicineName"));
                     medicine.setPrice(jsonObject.getInt("price"));
-                    Log.e("price",""+jsonObject.getInt("price"));
+                    Log.e("price", "" + jsonObject.getInt("price"));
                     medicine.setOverView(jsonObject.getString("overView"));
                     medicine.setIntrodution(jsonObject.getString("introdution"));
                     medicine.setForbiddancet(jsonObject.getString("forbiddancet"));
@@ -213,10 +243,10 @@ public class ShoppingCartActivity extends AppCompatActivity {
 
     @Override
     public void onResume() {
-        Log.e("box","onResume方法执行");
+        Log.e("box", "onResume方法执行");
         super.onResume();
-        if (cbChooseAll!=null)
-        cbChooseAll.setChecked(false);
+        if (cbChooseAll != null)
+            cbChooseAll.setChecked(false);
         GetCartListTask task = new GetCartListTask();
         task.execute();
     }

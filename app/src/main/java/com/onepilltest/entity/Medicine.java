@@ -34,7 +34,6 @@ public class Medicine implements Serializable {
     public List<String> getImg1s() {
         return img1s;
     }
-
     public void setImg1(String img1) {
         img1s.add(img1);
     }

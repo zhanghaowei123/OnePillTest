@@ -19,7 +19,6 @@
 
     <ImageView
         android:id="@+id/img_Medicine"
-        android:src="@drawable/kid1"
         android:layout_margin="10dp"
         android:layout_width="100dp"
         android:layout_height="100dp" />

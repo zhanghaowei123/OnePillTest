@@ -1,8 +1,10 @@
 package com.onepilltest.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Cart implements Serializable{
+public class Cart implements Serializable {
 
 
     private int id;
@@ -14,7 +16,9 @@ public class Cart implements Serializable{
     private String medicineSize;
     private int count;
     private Medicine medicine;
+    private medicine_ medicines;
     private int buyerId;
+    public static List<Integer> medicineList = new ArrayList<>();
 
     public int getBuyerId() {
         return buyerId;
@@ -24,7 +28,13 @@ public class Cart implements Serializable{
         this.buyerId = buyerId;
     }
 
+    public medicine_ getMedicines() {
+        return medicines;
+    }
 
+    public void setMedicines(medicine_ medicines) {
+        this.medicines = medicines;
+    }
 
     public Medicine getMedicine() {
         return medicine;
@@ -47,7 +57,8 @@ public class Cart implements Serializable{
     }
 
     public void setMedicineSize(String medicineSize) {
-        this.medicineSize = medicineSize; }
+        this.medicineSize = medicineSize;
+    }
 
     public int getCount() {
         return count;
@@ -80,6 +91,7 @@ public class Cart implements Serializable{
     public void setMedicinePrice(int price) {
         this.medicinePrice = price;
     }
+
     public int getMedicineId() {
         return medicineId;
     }

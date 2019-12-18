@@ -20,6 +20,7 @@ import com.onepilltest.URL.Connect;
 import com.onepilltest.entity.Article;
 import com.onepilltest.entity.EventMessage;
 import com.onepilltest.index.IndexAdapter;
+import com.onepilltest.personal.cart.CartActivity;
 import com.onepilltest.personal.cart.ShoppingCartActivity;
 import com.onepilltest.personal.oder.PatientOrderActivity;
 
@@ -93,9 +94,9 @@ public class PersonalFragment extends Fragment {
     }
 
     private void initData() {
-        if (UserBook.Code == 1){//医生
+        if (UserBook.Code == 1) {//医生
             initDoctor();
-        }else if(UserBook.Code ==2){//用户
+        } else if (UserBook.Code == 2) {//用户
             initPatient();
         }
     }
@@ -113,13 +114,13 @@ public class PersonalFragment extends Fragment {
         myListener = new MyListener();
         find(view);
 
-        if(UserBook.Code == 1){
+        if (UserBook.Code == 1) {
             RequestOptions requestOptions = new RequestOptions().circleCrop();
             Glide.with(this)
                     .load(Connect.BASE_URL + UserBook.NowDoctor.getHeadImg())
                     .apply(requestOptions)
                     .into(iv_personal);
-        }else if(UserBook.Code == 2){
+        } else if (UserBook.Code == 2) {
             RequestOptions requestOptions = new RequestOptions().circleCrop();
             Glide.with(this)
                     .load(Connect.BASE_URL + UserBook.NowUser.getHeadImg())
@@ -132,7 +133,7 @@ public class PersonalFragment extends Fragment {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void updateUI(EventMessage msg) {
 
-        if(UserBook.Code == 1){
+        if (UserBook.Code == 1) {
             //Log.e("person更新", msg.getCode() + msg.getJson());
             if (msg.getCode() == "更新头像") {
                 if (msg.getJson() == "yes") {
@@ -143,7 +144,7 @@ public class PersonalFragment extends Fragment {
                             .into(iv_personal);
                 }
             }
-        }else if(UserBook.Code == 2){
+        } else if (UserBook.Code == 2) {
             //Log.e("person更新", msg.getCode() + msg.getJson());
             if (msg.getCode() == "更新头像") {
                 if (msg.getJson() == "yes") {
@@ -174,7 +175,7 @@ public class PersonalFragment extends Fragment {
                     startActivity(intent1);
                     break;
                 case R.id.ll_cart:
-                    Intent intent2 = new Intent(getContext(), ShoppingCartActivity.class);
+                    Intent intent2 = new Intent(getContext(), CartActivity.class);
                     startActivity(intent2);
                     break;
                 case R.id.ll_wallet:

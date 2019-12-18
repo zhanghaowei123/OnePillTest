@@ -1,6 +1,7 @@
 package com.onepilltest.personal;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ import com.hacknife.carouselbanner.interfaces.CarouselImageFactory;
 import com.onepilltest.R;
 import com.onepilltest.URL.Connect;
 import com.onepilltest.entity.Address;
+import com.onepilltest.entity.Cart;
 import com.onepilltest.entity.EventMessage;
 import com.onepilltest.entity.medicine_;
 import com.onepilltest.index.DoctorDetailsActivity;
@@ -34,11 +36,19 @@ import com.hacknife.carouselbanner.Banner;
 import com.hacknife.carouselbanner.CoolCarouselBanner;
 import com.hacknife.carouselbanner.interfaces.OnCarouselItemChangeListener;
 import com.hacknife.carouselbanner.interfaces.OnCarouselItemClickListener;
+import com.onepilltest.personal.cart.CartActivity;
 import com.onepilltest.personal.cart.ShoppingCartActivity;
 
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class ProductActivity extends Activity {
     private ViewPager viewPager;  //轮播图模块
@@ -52,6 +62,7 @@ public class ProductActivity extends Activity {
     private medicine_ med = new medicine_();
     private Button btn2;
     private Button addCurt;
+    private SharedPreferences sharedPreferences;
     TextView product_name;
     TextView product_type;
     TextView tabHost1, tabHost2, tabHost3, tabHost4;
@@ -70,6 +81,7 @@ public class ProductActivity extends Activity {
             getWindow().setStatusBarColor(0xffffffff);
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
+        sharedPreferences = getSharedPreferences("addToCart", MODE_PRIVATE);
         myListener = new MyListener();
         find();
         String product = getIntent().getStringExtra("product");
@@ -89,7 +101,6 @@ public class ProductActivity extends Activity {
         tabHost.addTab(tabHost.newTabSpec("function").setIndicator("功能主治").setContent(R.id.tab_2));
         tabHost.addTab(tabHost.newTabSpec("sideEffect").setIndicator("副作用").setContent(R.id.tab_3));
         tabHost.addTab(tabHost.newTabSpec("explain").setIndicator("使用说明").setContent(R.id.tab_4));
-        //添加购物车
     }
 
     private void find() {
@@ -235,16 +246,43 @@ public class ProductActivity extends Activity {
                     startActivity(intent);
                     break;
                 case R.id.btn_addcart:
-                    medicine_ info = med;
-                    Bundle bundle = new Bundle();
-                    Gson gson = new Gson();
-                    bundle.putString("info", gson.toJson(info));
-                    Intent intent1 = new Intent(ProductActivity.this, ShoppingCartActivity.class);
-                    startActivity(intent1);
+                    Cart.medicineList.add(med.getId());
+                    saveMedicines();
+                    Toast.makeText(getApplicationContext(), "加入购物车成功", Toast.LENGTH_SHORT).show();
+                    /*Gson gson = new Gson();
+                    EventMessage msg = new EventMessage();
+                    msg.setCode("addToCart");
+                    msg.setJson(gson.toJson(med));
+                    EventBus.getDefault().post(msg);*/
             }
         }
     }
 
+    private void saveMedicines() {
+        OkHttpClient okHttpClient = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(Connect.BASE_URL + "CurtServlet?userId=" + UserBook.NowUser.getUserId()
+                        + "&medicineId=" + med.getId() + "&price=" + med.getPrice() + "&Code=add")
+                .build();
+        Call call = okHttpClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+                e.printStackTrace();
+                Log.e("袁康", e.getMessage());
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String str = response.body().string();
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putInt("medicineId", med.getId());
+                Log.e("ceshi", "" + med.getId());
+                editor.commit();
+            }
+        });
+    }
 
     @Override
     protected void onDestroy() {
