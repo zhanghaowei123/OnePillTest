@@ -20,6 +20,7 @@ import com.onepilltest.URL.Connect;
 import com.onepilltest.entity.Address;
 import com.onepilltest.entity.Orders;
 import com.onepilltest.entity.focus;
+import com.onepilltest.index.MedicineDao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,15 +44,15 @@ public class orderAdapter extends ArrayAdapter<Orders> {
         TextView money = (TextView) view.findViewById(R.id.setting_order_list_item_money);
         TextView isPay = (TextView) view.findViewById(R.id.setting_order_list_isPay);
 
+
         //img.setImageResource(R.drawable.user);
-        RequestOptions requestOptions = new RequestOptions().circleCrop();
         Glide.with(getContext())
-                .load(Connect.BASE_URL+UserBook.NowUser.getHeadImg())
-                .apply(requestOptions)
+                .load(Connect.BASE_URL+base.getImg())
                 .into(img);
         money.setText("￥"+base.getCount()*base.getPrice());
         if (base.getStatus() == 0)
             isPay.setText("已付款");
+
         else if (base.getStatus() == 1)
             isPay.setText("未付款");
         return view;

@@ -9,6 +9,12 @@ public class Orders {
     private int price;
     private int status;
 
+
+    public Orders() {
+
+    }
+
+
     public Orders(int id, int userId, int medicineId, int count, String img, int price, int status) {
         this.id = id;
         this.userId = userId;

@@ -101,7 +101,7 @@ public class FocusListActivity extends AppCompatActivity {
     }
 
     private void initTag2() {
-        Toast.makeText(getApplicationContext(),"获取药品列表",Toast.LENGTH_SHORT).show();
+
         baseList.clear();
         baseList.addAll(baseList2);
         //doctorTag.setTextColor();
@@ -109,7 +109,7 @@ public class FocusListActivity extends AppCompatActivity {
     }
 
     private void initTag1() {
-        Toast.makeText(getApplicationContext(),"获取医生列表",Toast.LENGTH_SHORT).show();
+
         baseList.clear();
         baseList.addAll(baseList1);
         adapter.notifyDataSetChanged();

@@ -123,7 +123,7 @@ public class OrderActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
-        Log.e("用户" + UserBook.NowUser.getNickName(), "退出地址列表");
+
     }
 
 

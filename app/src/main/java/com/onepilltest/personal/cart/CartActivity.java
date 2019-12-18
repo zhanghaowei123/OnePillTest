@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -17,8 +18,10 @@ import com.onepilltest.URL.Connect;
 import com.onepilltest.entity.Cart;
 import com.onepilltest.entity.Comment;
 import com.onepilltest.entity.EventMessage;
+import com.onepilltest.entity.Orders;
 import com.onepilltest.entity.medicine_;
 import com.onepilltest.index.CommentAdapter;
+import com.onepilltest.personal.OrdersDao;
 import com.onepilltest.personal.UserBook;
 
 import org.greenrobot.eventbus.EventBus;
@@ -44,9 +47,11 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
     private OkHttpClient okHttpClient;
     private ListView cartsListView;
     private CartAdapter cartAdapter;
+    private Button settlement;
     private List<medicine_> medicines = new ArrayList<>();
     private medicine_ medicine;
     private SharedPreferences sharedPreferences;
+    private int price = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,10 +65,14 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
         initView();
         for (int i = 0; i < Cart.medicineList.size(); i++) {
             requestData(Cart.medicineList.get(i));
+
         }
+
+
     }
 
     private void findViews() {
+        settlement = findViewById(R.id.btn_cart_settlement);
         ivCommentLeft = findViewById(R.id.cart_back);
         ivCommentLeft.setOnClickListener(this);
         tvSettlementPrice = findViewById(R.id.tv_settlement_price);
@@ -108,7 +117,10 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
         if (msg.equals("toCart")) {
             //添加到数据库
             //更新视图
+            Log.e("price", medicines.get(medicines.size() - 1).getPrice());
+            price += Integer.valueOf(medicines.get(medicines.size() - 1).getPrice());
             cartAdapter.notifyDataSetChanged();
+            tvSettlementPrice.setText("￥" + price);
         }
     }
 
@@ -117,6 +129,21 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.cart_back:
                 finish();
+                break;
+            case R.id.btn_cart_settlement:
+                OrdersDao dao = new OrdersDao();
+                Orders orders = new Orders();
+                for(int i=0;i<medicines.size();i++){
+                    orders.setUserId(UserBook.NowUser.getUserId());
+                    orders.setMedicineId(medicines.get(i).getId());
+                    orders.setImg(medicines.get(i).getImg1());
+                    orders.setCount(2);
+                    orders.setStatus(1);
+                    dao.add(orders);
+                }
+                Toast.makeText(getApplicationContext(),"订单结算成功",Toast.LENGTH_SHORT).show();
+                medicines.clear();
+                cartAdapter.notifyDataSetChanged();
                 break;
         }
     }

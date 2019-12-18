@@ -194,7 +194,7 @@
         <activity android:name=".personal.cart.PlaceOrderActivity" />
         <activity android:name=".personal.oder.PatientOrderActivity" />
         <activity android:name=".personal.OrderActivity"></activity>
-        
+
 
         <activity android:name=".personal.cart.CartActivity"></activity>
     </application>
