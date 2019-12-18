@@ -126,15 +126,6 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
-//    private void initZxing() {
-//          //6.0版本或以上需请求权限
-//        String[] permissions=new String[]{Manifest.permission.
-//                WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
-//        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {
-//            requestPermissions(permissions,1);
-//        }
-//    }
-
     private void initHe() {
         //动态申请权限
         ActivityCompat.requestPermissions(getActivity(),

@@ -28,7 +28,7 @@ public class QR_codeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(0xfff8f8f8 );
+            getWindow().setStatusBarColor(0xfff8f8f8);
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
         setContentView(R.layout.setting_qr_code);
@@ -48,24 +48,25 @@ public class QR_codeActivity extends AppCompatActivity {
         img.setOnClickListener(myListener);
 
     }
-    public void init(){
+
+    public void init() {
         String str = "想加好友";
-        if (UserBook.Code == 1){
+        if (UserBook.Code == 1) {
             name.setText(UserBook.NowDoctor.getName());
             address.setText(UserBook.NowDoctor.getAddress());
-            str = UserBook.NowDoctor.getName()+str;
+            str = UserBook.NowDoctor.getName() + str;
             Glide.with(this)
-                    .load(Connect.BASE_URL+UserBook.NowDoctor.getHeadImg())
+                    .load(Connect.BASE_URL + UserBook.NowDoctor.getHeadImg())
                     .into(userImg);
-            img.setImageBitmap(QR.getQR(300,300,UserBook.NowDoctor.getDoctorId()+""));
-        }else{
+            img.setImageBitmap(QR.getQR(300, 300, UserBook.NowDoctor.toString()));
+        } else {
             name.setText(UserBook.NowUser.getNickName());
             address.setText(UserBook.NowUser.getAddress());
-            str = UserBook.NowUser.getNickName()+str;
+            str = UserBook.NowUser.getNickName() + str;
             Glide.with(this)
-                    .load(Connect.BASE_URL+UserBook.NowUser.getHeadImg())
+                    .load(Connect.BASE_URL + UserBook.NowUser.getHeadImg())
                     .into(userImg);
-            img.setImageBitmap(QR.getQR(300,300,UserBook.NowUser.getUserId()+""));
+            img.setImageBitmap(QR.getQR(300, 300, UserBook.NowUser.toString()));
         }
         //img.setImageBitmap(QR.getQR(300,300,str));
     }
@@ -79,9 +80,12 @@ public class QR_codeActivity extends AppCompatActivity {
                     startActivity(address_intent);
                     break;
                 case R.id.setting_qr_code_img:
-                    Toast.makeText(getApplicationContext(),UserBook.NowUser.getNickName()+"想和你做朋友",Toast.LENGTH_SHORT).show();
+                    if (UserBook.Code == 1) {
+                        Toast.makeText(getApplicationContext(), UserBook.NowDoctor.getName() + "想和你做朋友", Toast.LENGTH_SHORT).show();
+                    } else if (UserBook.Code == 2) {
+                        Toast.makeText(getApplicationContext(), UserBook.NowUser.getNickName() + "想和你做朋友", Toast.LENGTH_SHORT).show();
+                    }
                     break;
-
             }
         }
     }

@@ -88,7 +88,6 @@ public class UserPatient {
                 ", password='" + password + '\'' +
                 ", PID='" + PID + '\'' +
                 ", address='" + address + '\'' +
-                ", headImg='" + headImg + '\'' +
                 '}';
     }
 }
