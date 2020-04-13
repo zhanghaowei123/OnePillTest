@@ -152,7 +152,7 @@ public class focusDao {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String re = response.body().string();
-                Log.e("focusDao","查询是否收藏");
+                Log.e("focusDao","查询是否收藏"+re);
                 EventMessage msg = new EventMessage();
                 msg.setCode("focusDao_isHave");
                 msg.setJson(re);

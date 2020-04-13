@@ -186,39 +186,37 @@ public class ProductActivity extends Activity {
             init();
         } else if (msg.getCode().equals("focusDao_isHave")) {
 
-            if (msg.getJson().equals("yes")) {
+            /*if (msg.getJson().equals("yes")) {
                 Log.e("focus", "跳进来了!");
-            } else if (msg.getCode().equals("focusDao_isHave")) {
-                if (msg.getJson().equals("yes")) {
-                    isFocus = true;
-                    Log.e("focuse", "更改字体！！！！！！");
-                    btn.setText("已关注");
-                } else {
-                    isFocus = false;
-                    btn.setText("关注");
-                }
-            } else if (msg.getCode().equals("focusDao_del")) {
-                if (msg.getJson().equals("yes")) {
-                    isFocus = false;
-                    Toast.makeText(getApplicationContext(), "已取消", Toast.LENGTH_SHORT).show();
-                    btn.setText("关注");
-                } else {
-                    isFocus = true;
-                    Toast.makeText(getApplicationContext(), "请检查网络连接", Toast.LENGTH_SHORT).show();
-
-                }
-            } else if (msg.getCode().equals("focusDao_add")) {
-                if (msg.getJson().equals("yes")) {
-                    isFocus = true;
-                    Toast.makeText(getApplicationContext(), "已关注", Toast.LENGTH_SHORT).show();
-                    btn.setText("已关注");
-                } else {
-                    isFocus = false;
-                    Toast.makeText(getApplicationContext(), "请检查网络连接", Toast.LENGTH_SHORT).show();
-
-                }
+            } else if (msg.getCode().equals("focusDao_isHave")) {*/
+            if (msg.getJson().equals("yes")) {
+                isFocus = true;
+                Log.e("focuse", "更改字体！！！！！！");
+                btn.setText("已关注");
+            } else {
+                isFocus = false;
+                btn.setText("关注");
             }
+        } else if (msg.getCode().equals("focusDao_del")) {
+            if (msg.getJson().equals("yes")) {
+                isFocus = false;
+                Toast.makeText(getApplicationContext(), "已取消", Toast.LENGTH_SHORT).show();
+                btn.setText("关注");
+            } else {
+                isFocus = true;
+                Toast.makeText(getApplicationContext(), "请检查网络连接", Toast.LENGTH_SHORT).show();
 
+            }
+        } else if (msg.getCode().equals("focusDao_add")) {
+            if (msg.getJson().equals("yes")) {
+                isFocus = true;
+                Toast.makeText(getApplicationContext(), "已关注", Toast.LENGTH_SHORT).show();
+                btn.setText("已关注");
+            } else {
+                isFocus = false;
+                Toast.makeText(getApplicationContext(), "请检查网络连接", Toast.LENGTH_SHORT).show();
+
+            }
         }
     }
 

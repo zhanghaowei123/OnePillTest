@@ -11,6 +11,16 @@ MobSDK {
 }
 
 android {
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
+    //关闭AS校验我们的资源文件，或者说是PNG等图片
+    /*aaptOptions.cruncherEnabled = false
+    aaptOptions.useNewCruncher = false*/
+
 //    //use legacy for android 6.0
     useLibrary 'org.apache.http.legacy'
     //自3.6.0开始需要java8的支持
@@ -43,6 +53,9 @@ android {
     }
     buildTypes {
         release {
+
+            aaptOptions.cruncherEnabled = false
+            aaptOptions.useNewCruncher = false
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }

@@ -24,12 +24,16 @@ buildscript {
 
 allprojects {
     repositories {
-        google()
+        /*google()
         jcenter()
         maven {
             url 'https://maven.google.com/'
             name 'Google'
-        }
+        }*/
+
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        jcenter { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter' }
+
         //轮播图
         maven { url 'https://jitpack.io' }
     }

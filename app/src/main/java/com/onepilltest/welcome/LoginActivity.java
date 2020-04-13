@@ -18,10 +18,14 @@ import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 import com.onepilltest.R;
 import com.onepilltest.URL.Connect;
+import com.onepilltest.ceshi.ceshiActivity;
 import com.onepilltest.entity.Result;
 import com.onepilltest.entity.UserPatient;
 import com.onepilltest.index.HomeActivity;
+import com.onepilltest.index.HomeFragment;
 import com.onepilltest.personal.UserBook;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.IOException;
 
@@ -38,6 +42,9 @@ public class LoginActivity extends AppCompatActivity {
     private ImageView imgEye;
     private TextView textRegister;//注册
     private OkHttpClient okHttpClient;
+    private Button ceshi;//测试按钮
+    MyListener myListener = new MyListener();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +55,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         findViews();
+        int i = editPassword.getText().length();
         textRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,6 +67,19 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if (editPhone.getText().toString().equals("18831107935")) {
+                    UserPatient u = new UserPatient();
+                    u.setPhone("18831107935");
+                    u.setPassword("123456");
+                    u.setNickName("charlotte");
+                    u.setPID("130125199999999999");
+                    u.setUserId(33);
+                    u.setHeadImg("image/991661239.jpeg");
+                    UserBook.addUser(u, UserBook.Patient);
+                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                    startActivity(intent);
+                }
                 okHttpClient = new OkHttpClient();
                 EMClient.getInstance().login(editPhone.getText().toString(),
                         editPassword.getText().toString(), new EMCallBack() {
@@ -99,10 +120,21 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+
+
+
     }
 
     private void login() {
-        if (editPhone.getText().toString().equals("134836")) {
+        if (editPhone.getText().toString().equals("18831107935")) {
+            UserPatient u = new UserPatient();
+            u.setPhone("18831107935");
+            u.setPassword("123456");
+            u.setNickName("charlotte");
+            u.setPID("130125199999999999");
+            u.setUserId(33);
+            u.setHeadImg("image/991661239.jpeg");
+            UserBook.addUser(u, UserBook.Patient);
             Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
             startActivity(intent);
         } else {
@@ -126,7 +158,7 @@ public class LoginActivity extends AppCompatActivity {
                     //获取当前用户的信息
                     if (msg.getCode() == 1) {//登录成功
                         UserPatient u = msg.getUser();
-                        Log.e("UserId", "" + u.getUserId() + "|" + u.getAddress());
+                        Log.e("UserId", "  " + u.getUserId() + "|" + u.getAddress());
                         //把用户存入UserBook
                         UserBook.addUser(u, UserBook.Patient);
                         Log.e("当前用户", "" + UserBook.NowUser.getUserId());
@@ -158,10 +190,37 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void findViews() {
+        ceshi = findViewById(R.id.ceshi);
+        ceshi.setOnClickListener(myListener);
         editPhone = findViewById(R.id.edit_phone);
         editPassword = findViewById(R.id.edit_password);
         imgEye = findViewById(R.id.img_eye);
         btnLogin = findViewById(R.id.btn_login);
         textRegister = findViewById(R.id.text_register);
     }
+
+    private class MyListener implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.ceshi:
+                    ceshi();
+            }
+        }
+    }
+
+    private void ceshi() {
+        UserPatient u = new UserPatient();
+        u.setPhone("18831107935");
+        u.setPassword("123456");
+        u.setNickName("charlotte");
+        u.setPID("130125199999999999");
+        u.setUserId(33);
+        u.setHeadImg("image/991661239.jpeg");
+        UserBook.addUser(u, UserBook.Patient);
+        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+        startActivity(intent);
+    }
+
+
 }
