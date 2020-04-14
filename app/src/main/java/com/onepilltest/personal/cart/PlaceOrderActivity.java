@@ -105,7 +105,7 @@ public class PlaceOrderActivity extends AppCompatActivity {
                             order.setType(Order.TYPE_UNSEND);
                             order.setDoctorId(cart.getMedicine().getDoctorID());
                             order.setAddress(buyerAddress);
-                            order.setUserId(UserBook.NowUser.getUserId());
+                            order.setUserId(UserBook.NowUser.getId());
                             sendNewOrderToServlet(NEW_UNSEND_IP, order);
                         }
                         Toast.makeText(PlaceOrderActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
@@ -122,7 +122,7 @@ public class PlaceOrderActivity extends AppCompatActivity {
                             order.setType(Order.TYPE_UNPAY);
                             order.setCount(cart.getMedicine().getDoctorID());
                             order.setAddress(buyerAddress);
-                            order.setUserId(UserBook.NowUser.getUserId());
+                            order.setUserId(UserBook.NowUser.getId());
                             sendNewOrderToServlet(NEW_UNPAY_IP, order);
                         }
                         Toast.makeText(PlaceOrderActivity.this, "支付失败，已放入未付款订单", Toast.LENGTH_SHORT).show();

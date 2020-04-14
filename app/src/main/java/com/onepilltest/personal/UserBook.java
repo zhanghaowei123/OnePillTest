@@ -65,8 +65,8 @@ public class UserBook {
             UserList.add(userPatient);
         }
         for (int i = 0; i < size; i++) {
-            Log.e("UserList", "比较" + UserList.get(i).getUserId() + "\n" + userPatient.getUserId());
-            if (UserList.get(i).getUserId() == userPatient.getUserId())
+            Log.e("UserList", "比较" + UserList.get(i).getId() + "\n" + userPatient.getId());
+            if (UserList.get(i).getId() == userPatient.getId())
                 f = false;
         }
         if (f && size != 0)

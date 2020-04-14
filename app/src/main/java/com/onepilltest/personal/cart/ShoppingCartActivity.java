@@ -109,7 +109,7 @@ public class ShoppingCartActivity extends AppCompatActivity {
 //        String strMedicine = new Gson().toJson(med);
         okHttpClient = new OkHttpClient();
         Request request = new Request.Builder()
-                .url(Connect.BASE_URL + "CurtServlet?userId=" + UserBook.NowUser.getUserId()
+                .url(Connect.BASE_URL + "CurtServlet?userId=" + UserBook.NowUser.getId()
                         + "&medicineId=" + med.getId() + "&price=" + med.getPrice() + "&Code=add")
                 .build();
         Call call = okHttpClient.newCall(request);
@@ -203,7 +203,7 @@ public class ShoppingCartActivity extends AppCompatActivity {
                 // 先发送 用户信息，用于查询登录用户对应的cart
                 JSONObject send = new JSONObject();
 //                int buyerId = sharedPreferences.getInt("NowUser", 0);
-                int buyerId = UserBook.NowUser.getUserId();
+                int buyerId = UserBook.NowUser.getId();
                 send.put("buyerId", buyerId);
                 ConUtil.setOutputStream(con, send.toString());
                 // 获取 返回的用户所对应的 cart列表

@@ -160,7 +160,7 @@ public class HomeFragment extends Fragment {
 
     private void setArticles() {
         Request request = new Request.Builder()
-                .url(Connect.BASE_URL + "ArticleServlet")
+                .url(Connect.BASE_URL + "article/list")
                 .build();
         Call call = okHttpClient.newCall(request);
         call.enqueue(new Callback() {

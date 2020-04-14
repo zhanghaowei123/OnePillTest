@@ -76,8 +76,8 @@ public class FocusListActivity extends AppCompatActivity {
             fDao.searchDoctor(UserBook.NowDoctor.getDoctorId(), 1);
             fDao.searchMedicine(UserBook.NowDoctor.getDoctorId(), 1);
         } else {
-            fDao.searchDoctor(UserBook.NowUser.getUserId(), 2);
-            fDao.searchMedicine(UserBook.NowUser.getUserId(), 2);
+            fDao.searchDoctor(UserBook.NowUser.getId(), 2);
+            fDao.searchMedicine(UserBook.NowUser.getId(), 2);
         }
     }
 
@@ -144,7 +144,7 @@ public class FocusListActivity extends AppCompatActivity {
             if (UserBook.Code == 1)
                 fs.setUserId(UserBook.NowDoctor.getDoctorId());
             else
-                fs.setUserId(UserBook.NowUser.getUserId());
+                fs.setUserId(UserBook.NowUser.getId());
             fs.setUserType(UserBook.Code);
             fs.setType(1);
             fs.setTypeId(doctorList.get(i).getDoctorId());
@@ -164,7 +164,7 @@ public class FocusListActivity extends AppCompatActivity {
             if (UserBook.Code == 1)
                 fs.setUserId(UserBook.NowDoctor.getDoctorId());
             else
-                fs.setUserId(UserBook.NowUser.getUserId());
+                fs.setUserId(UserBook.NowUser.getId());
             fs.setUserType(UserBook.Code);
             fs.setType(2);
             fs.setTypeId(medicineList.get(i).getId());

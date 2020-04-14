@@ -67,7 +67,7 @@ public class OrderActivity extends AppCompatActivity {
     //初始化用户信息
     private void initPatient() {
         OrdersDao dao = new OrdersDao();
-        dao.searchAll(UserBook.NowUser.getUserId());
+        dao.searchAll(UserBook.NowUser.getId());
         //创建ContentAdapter实例，传入上下文， 子布局id ,数据baseList
         adapter = new orderAdapter(OrderActivity.this, R.layout.order_list_item, baseList);
 

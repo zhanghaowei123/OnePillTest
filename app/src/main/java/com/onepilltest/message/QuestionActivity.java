@@ -193,7 +193,7 @@ public class QuestionActivity extends AppCompatActivity {
     }
 
     private void save() {
-        int userId = UserBook.NowUser.getUserId();
+        int userId = UserBook.NowUser.getId();
         String content = main.getText().toString();
         String title1 = title.getText().toString();
         Date date = new Date(System.currentTimeMillis());

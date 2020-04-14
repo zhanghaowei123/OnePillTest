@@ -13,6 +13,7 @@ import android.os.UserHandle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -22,6 +23,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.mob.MobSDK;
+import com.mob.OperationCallback;
 import com.onepilltest.R;
 import com.onepilltest.entity.UserPatient;
 
@@ -33,7 +35,7 @@ import cn.smssdk.SMSSDK;
 import cn.smssdk.gui.RegisterPage;
 import okhttp3.OkHttpClient;
 
-public class RegisterPatient extends AppCompatActivity implements View.OnClickListener {
+public class RegisterPatient extends AppCompatActivity implements View.OnClickListener{
     private EditText editPhone;         //电话号码
     private EditText editPassword;
     private EditText etVerificationCode;    //验证码
@@ -121,6 +123,21 @@ public class RegisterPatient extends AppCompatActivity implements View.OnClickLi
     protected void onDestroy() {
         super.onDestroy();
         SMSSDK.unregisterAllEventHandler();//注销回调接口
+    }
+
+    private void submitPrivacyGrantResult(boolean granted){
+        MobSDK.submitPolicyGrantResult(granted,new OperationCallback<Void>(){
+
+            @Override
+            public void onComplete(Void aVoid) {
+                Log.e("TAG","yinsi成功");
+            }
+
+            @Override
+            public void onFailure(Throwable throwable) {
+                Log.e("Tag","隐私失败");
+            }
+        });
     }
 
     private void register() {

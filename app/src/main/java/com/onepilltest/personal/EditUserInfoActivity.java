@@ -207,7 +207,7 @@ public class EditUserInfoActivity extends AppCompatActivity {
                     if (UserBook.Code == 1){//医生
                         postmsg = "?DoctorId="+UserBook.NowDoctor.getDoctorId()+"&Code=Doctor";
                     }else if(UserBook.Code ==2){//用户
-                        postmsg = "?UserId="+UserBook.NowUser.getUserId()+"&Code=Patient";
+                        postmsg = "?UserId="+UserBook.NowUser.getId()+"&Code=Patient";
                     }
 
                     Request request = new Request.Builder().url(Connect.BASE_URL + "EditHeadImgServlet"+postmsg)

@@ -139,7 +139,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
                 OrdersDao dao = new OrdersDao();
                 Orders orders = new Orders();
                 for(int i=0;i<medicines.size();i++){
-                    orders.setUserId(UserBook.NowUser.getUserId());
+                    orders.setUserId(UserBook.NowUser.getId());
                     orders.setMedicineId(medicines.get(i).getId());
                     orders.setImg(medicines.get(i).getImg1());
                     orders.setCount(2);

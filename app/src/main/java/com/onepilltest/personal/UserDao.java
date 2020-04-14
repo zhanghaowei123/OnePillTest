@@ -25,7 +25,7 @@ public class UserDao {
      */
     public void update(String code,String str){
 
-        int UserId = UserBook.NowUser.getUserId();
+        int UserId = UserBook.NowUser.getId();
 
         OkHttpClient okHttpClient = new OkHttpClient();
         Request request = new Request.Builder().url(Connect.BASE_URL+"EditUserServlet?UserId="+UserId+"&Code="+code+"&"+code+"="+str).build();

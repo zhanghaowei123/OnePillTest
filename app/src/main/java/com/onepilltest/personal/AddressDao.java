@@ -28,7 +28,7 @@ public class AddressDao {
      */
     public void save(Address addaddress){
 
-        int UserId = UserBook.NowUser.getUserId();
+        int UserId = UserBook.NowUser.getId();
         String name = addaddress.getName();
         String phoneNumber = addaddress.getPhoneNumber();
         String address = addaddress.getAddress();

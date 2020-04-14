@@ -1,7 +1,7 @@
 package com.onepilltest.entity;
 
 public class UserPatient {
-    private int userId;
+    private int id;
     private String nickName;
     private String phone;
     private String password;
@@ -23,12 +23,12 @@ public class UserPatient {
         this.headImg = headImg;
     }
 
-    public int getUserId() {
-        return userId;
+    public int getId() {
+        return id;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNickName() {
@@ -82,7 +82,7 @@ public class UserPatient {
     @Override
     public String toString() {
         return "UserPatient{" +
-                "userId='" + userId + '\'' +
+                "id='" + id + '\'' +
                 ", nickName='" + nickName + '\'' +
                 ", phone='" + phone + '\'' +
                 ", password='" + password + '\'' +

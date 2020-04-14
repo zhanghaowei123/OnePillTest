@@ -66,7 +66,7 @@ public class AddressActivity extends AppCompatActivity {
     private void initPatient() {
         Log.e("用户" + UserBook.NowUser.getNickName(), "进入地址列表");
         AddressDao dao = new AddressDao();
-        dao.searchAll(UserBook.NowUser.getUserId());
+        dao.searchAll(UserBook.NowUser.getId());
         Log.e("更新地址列表", "" + baseList.toString());
         //创建ContentAdapter实例，传入上下文， 子布局id ,数据baseList
         adapter = new AddressAdapter(AddressActivity.this, R.layout.user_address_item, baseList);
@@ -141,7 +141,7 @@ public class AddressActivity extends AppCompatActivity {
 
         if (msg.getCode().equals("AddressDao_save")) {
             if (msg.getJson().equals("yes")) {
-                new AddressDao().searchAll(UserBook.NowUser.getUserId());
+                new AddressDao().searchAll(UserBook.NowUser.getId());
                 Log.e("添加成功", "" + baseList.get(0).getAddress());
                 Toast.makeText(getApplicationContext(), "添加成功", Toast.LENGTH_SHORT);
             } else if (msg.getJson().equals("no")) {
@@ -166,7 +166,7 @@ public class AddressActivity extends AppCompatActivity {
             adapter.notifyDataSetChanged();
         } else if (msg.getCode().equals("AddressDao_update")) {
             if (msg.getJson().equals("yes")) {
-                new AddressDao().searchAll(UserBook.NowUser.getUserId());
+                new AddressDao().searchAll(UserBook.NowUser.getId());
                 Log.e("更新成功", "" + baseList.get(0).getAddress());
                 Toast.makeText(getApplicationContext(), "更新成功", Toast.LENGTH_SHORT);
             } else if (msg.getJson().equals("no")) {
@@ -175,7 +175,7 @@ public class AddressActivity extends AppCompatActivity {
             }
         } else if (msg.getCode().equals("AddressDao_delete")) {
             if (msg.getJson().equals("yes")) {
-                new AddressDao().searchAll(UserBook.NowUser.getUserId());
+                new AddressDao().searchAll(UserBook.NowUser.getId());
                 Log.e("添加成功", "" + baseList.get(0).getAddress());
                 Toast.makeText(getApplicationContext(), "添加成功", Toast.LENGTH_SHORT);
             } else if (msg.getJson().equals("no")) {

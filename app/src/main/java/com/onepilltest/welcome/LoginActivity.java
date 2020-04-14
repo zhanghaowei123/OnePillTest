@@ -74,7 +74,7 @@ public class LoginActivity extends AppCompatActivity {
                     u.setPassword("123456");
                     u.setNickName("charlotte");
                     u.setPID("130125199999999999");
-                    u.setUserId(33);
+                    u.setId(33);
                     u.setHeadImg("image/991661239.jpeg");
                     UserBook.addUser(u, UserBook.Patient);
                     Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
@@ -132,22 +132,23 @@ public class LoginActivity extends AppCompatActivity {
             u.setPassword("123456");
             u.setNickName("charlotte");
             u.setPID("130125199999999999");
-            u.setUserId(33);
+            u.setId(33);
             u.setHeadImg("image/991661239.jpeg");
             UserBook.addUser(u, UserBook.Patient);
             Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
             startActivity(intent);
         } else {
             Request request = new Request.Builder()
-                    .url(Connect.BASE_URL + "PatientLoginServlet?phone=" + editPhone.getText().toString()
+                    .url(Connect.BASE_URL + "user/login?phone=" + editPhone.getText().toString()
                             + "&password=" + editPassword.getText().toString())
                     .build();
+            Log.e("LoginInfo",request.toString());
             Call call = okHttpClient.newCall(request);
             call.enqueue(new Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {
+                    Log.e("LoginFailed",e.getMessage());
                     e.printStackTrace();
-//                Log.e("cnm",);
                 }
 
                 @Override
@@ -158,10 +159,11 @@ public class LoginActivity extends AppCompatActivity {
                     //获取当前用户的信息
                     if (msg.getCode() == 1) {//登录成功
                         UserPatient u = msg.getUser();
-                        Log.e("UserId", "  " + u.getUserId() + "|" + u.getAddress());
+                        Log.e("userInfo",u.toString());
+                        Log.e("UserId", "  " + u.getId() + "|" + u.getAddress());
                         //把用户存入UserBook
                         UserBook.addUser(u, UserBook.Patient);
-                        Log.e("当前用户", "" + UserBook.NowUser.getUserId());
+                        Log.e("当前用户", "" + UserBook.NowUser.getId());
                         save(u);//把u存进SharedPreferences
                         Log.e("success", "登录成功");
                         Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
@@ -184,7 +186,7 @@ public class LoginActivity extends AppCompatActivity {
         Gson gson = new Gson();
         String json = gson.toJson(userPatient, UserPatient.class);
         Log.e("json字符串", json);
-        Log.e("NowUser", "UserId:" + UserBook.NowUser.getUserId());
+        Log.e("NowUser", "UserId:" + UserBook.NowUser.getId());
         editor.putString("NowUser", json);
         editor.commit();
     }
@@ -215,7 +217,7 @@ public class LoginActivity extends AppCompatActivity {
         u.setPassword("123456");
         u.setNickName("charlotte");
         u.setPID("130125199999999999");
-        u.setUserId(33);
+        u.setId(33);
         u.setHeadImg("image/991661239.jpeg");
         UserBook.addUser(u, UserBook.Patient);
         Intent intent = new Intent(LoginActivity.this, HomeActivity.class);

@@ -47,7 +47,7 @@ public class UserListAdapter extends ArrayAdapter<UserPatient> {
                 .into(headImg);
         nickName.setText(base.getNickName());
         phone.setText(base.getPhone());
-        if (base.getUserId() == UserBook.NowUser.getUserId()){
+        if (base.getId() == UserBook.NowUser.getId()){
             btn.setImageResource(R.drawable.ahh);
         }
 

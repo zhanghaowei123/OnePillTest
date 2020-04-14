@@ -104,7 +104,7 @@ public class AddAddressActivity extends AppCompatActivity {
     private void save() {
 
 
-        int UserId =UserBook.NowUser.getUserId();
+        int UserId =UserBook.NowUser.getId();
         String name = et_name.getText().toString();
         String phoneNumber = et_phoneNumber.getText().toString();
         String address = et_address.getText().toString();

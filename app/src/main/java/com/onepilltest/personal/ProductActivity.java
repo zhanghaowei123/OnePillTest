@@ -126,7 +126,7 @@ public class ProductActivity extends Activity {
         if (UserBook.Code == 1) {
             dao.isHave(UserBook.NowDoctor.getDoctorId(), 1, 2, med.getId());
         } else {
-            dao.isHave(UserBook.NowUser.getUserId(), 2, 2, med.getId());
+            dao.isHave(UserBook.NowUser.getId(), 2, 2, med.getId());
         }
 
         Log.e("json搜索", "" + med.getMedicine());
@@ -229,13 +229,13 @@ public class ProductActivity extends Activity {
                         if (UserBook.Code == 1) {
                             dao.del(UserBook.NowDoctor.getDoctorId(), 1, 2, med.getId());
                         } else {
-                            dao.del(UserBook.NowUser.getUserId(), 2, 2, med.getId());
+                            dao.del(UserBook.NowUser.getId(), 2, 2, med.getId());
                         }
                     } else {
                         if (UserBook.Code == 1) {
                             dao.add(UserBook.NowDoctor.getDoctorId(), 1, 2, med.getId());
                         } else {
-                            dao.add(UserBook.NowUser.getUserId(), 2, 2, med.getId());
+                            dao.add(UserBook.NowUser.getId(), 2, 2, med.getId());
                         }
                     }
                     break;
@@ -260,7 +260,7 @@ public class ProductActivity extends Activity {
     private void saveMedicines() {
         OkHttpClient okHttpClient = new OkHttpClient();
         Request request = new Request.Builder()
-                .url(Connect.BASE_URL + "CurtServlet?userId=" + UserBook.NowUser.getUserId()
+                .url(Connect.BASE_URL + "CurtServlet?userId=" + UserBook.NowUser.getId()
                         + "&medicineId=" + med.getId() + "&price=" + med.getPrice() + "&Code=add")
                 .build();
         Call call = okHttpClient.newCall(request);
@@ -268,7 +268,7 @@ public class ProductActivity extends Activity {
             @Override
             public void onFailure(Call call, IOException e) {
 
-                e.printStackTrace();
+                 e.printStackTrace();
                 Log.e("袁康", e.getMessage());
             }
 

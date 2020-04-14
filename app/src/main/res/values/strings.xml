@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">OnePillTest</string>
+    <string name="secret">
+        我已阅读并同意
+        <a href="">第三方服务和隐私条款</a>
+    </string>
 </resources>

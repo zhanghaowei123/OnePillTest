@@ -48,7 +48,7 @@ public class OrdersDao {
      */
         public void add(Orders orders){
 
-            int UserId = UserBook.NowUser.getUserId();
+            int UserId = UserBook.NowUser.getId();
             int medicineId = orders.getMedicineId();
             int count = orders.getCount();
             String img = orders.getImg();

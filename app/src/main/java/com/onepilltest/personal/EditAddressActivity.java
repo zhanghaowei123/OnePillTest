@@ -103,7 +103,7 @@ public class EditAddressActivity extends AppCompatActivity {
 
     private void save() {
         int Id = editaddress.getId();
-        int UserId =UserBook.NowUser.getUserId();
+        int UserId =UserBook.NowUser.getId();
         String name = et_name.getText().toString();
         String phoneNumber = et_phone.getText().toString();
         String address = et_address.getText().toString();

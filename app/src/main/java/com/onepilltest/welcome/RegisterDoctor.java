@@ -11,6 +11,7 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -19,12 +20,13 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.mob.MobSDK;
+import com.mob.OperationCallback;
 import com.onepilltest.R;
 
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
 
-public class RegisterDoctor extends AppCompatActivity implements View.OnClickListener {
+public class RegisterDoctor extends AppCompatActivity implements View.OnClickListener{
     private ImageView imgResponse;
     private SharedPreferences sharedPreferences;
     private CheckBox checkBox;
@@ -108,6 +110,21 @@ public class RegisterDoctor extends AppCompatActivity implements View.OnClickLis
     protected void onDestroy() {
         super.onDestroy();
         SMSSDK.unregisterAllEventHandler();//注销回调接口
+    }
+
+    private void submitPrivacyGrantResult(boolean granted){
+        MobSDK.submitPolicyGrantResult(granted,new OperationCallback<Void>(){
+
+            @Override
+            public void onComplete(Void aVoid) {
+               Log.e("TAG","yinsi成功");
+            }
+
+            @Override
+            public void onFailure(Throwable throwable) {
+                Log.e("Tag","隐私失败");
+            }
+        });
     }
 
     private void registerDoctor() {

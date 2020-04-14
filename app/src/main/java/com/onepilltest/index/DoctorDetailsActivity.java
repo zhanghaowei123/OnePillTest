@@ -114,7 +114,7 @@ public class DoctorDetailsActivity extends AppCompatActivity {
         if (UserBook.Code ==1){
             fDao.isHave(UserBook.NowDoctor.getDoctorId(),1,1,doctor.getDoctorId());
         }else{
-            fDao.isHave(UserBook.NowUser.getUserId(),2,1,doctor.getDoctorId());
+            fDao.isHave(UserBook.NowUser.getId(),2,1,doctor.getDoctorId());
         }
 
     }
@@ -184,13 +184,13 @@ public class DoctorDetailsActivity extends AppCompatActivity {
                         if (UserBook.Code ==1){
                             fDao.del(UserBook.NowDoctor.getDoctorId(),1,1,doctor.getDoctorId());
                         }else{
-                            fDao.del(UserBook.NowUser.getUserId(),2,1,doctor.getDoctorId());
+                            fDao.del(UserBook.NowUser.getId(),2,1,doctor.getDoctorId());
                         }
                     }else{
                         if (UserBook.Code ==1){
                             fDao.add(UserBook.NowDoctor.getDoctorId(),1,1,doctor.getDoctorId());
                         }else{
-                            fDao.add(UserBook.NowUser.getUserId(),2,1,doctor.getDoctorId());
+                            fDao.add(UserBook.NowUser.getId(),2,1,doctor.getDoctorId());
                         }
                     }
                     /*if (UserBook.Code ==1){
