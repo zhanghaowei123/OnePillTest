@@ -79,26 +79,27 @@ public class LoginActivity extends AppCompatActivity {
                     UserBook.addUser(u, UserBook.Patient);
                     Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                     startActivity(intent);
+                } else {
+                    okHttpClient = new OkHttpClient();
+                    EMClient.getInstance().login(editPhone.getText().toString(),
+                            editPassword.getText().toString(), new EMCallBack() {
+                                @Override
+                                public void onSuccess() {
+                                    Log.e("环信登录账号:", "成功");
+                                    login();
+                                }
+
+                                @Override
+                                public void onError(int i, String s) {
+                                    Log.e("环信登录账号:", "失败," + i + "" + s);
+                                }
+
+                                @Override
+                                public void onProgress(int i, String s) {
+
+                                }
+                            });
                 }
-                okHttpClient = new OkHttpClient();
-                EMClient.getInstance().login(editPhone.getText().toString(),
-                        editPassword.getText().toString(), new EMCallBack() {
-                            @Override
-                            public void onSuccess() {
-                                Log.e("环信登录账号:", "成功");
-                                login();
-                            }
-
-                            @Override
-                            public void onError(int i, String s) {
-                                Log.e("环信登录账号:", "失败," + i + "" + s);
-                            }
-
-                            @Override
-                            public void onProgress(int i, String s) {
-
-                            }
-                        });
             }
         });
         //密码可视或不可视
@@ -120,7 +121,6 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
-
 
 
     }
