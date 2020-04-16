@@ -19,11 +19,13 @@ import com.hyphenate.exceptions.HyphenateException;
 import com.onepilltest.R;
 import com.onepilltest.URL.Connect;
 import com.onepilltest.entity.UserPatient;
+import com.onepilltest.util.OkhttpUtil;
 
 import java.io.IOException;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.FormBody;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -94,28 +96,23 @@ public class PerfectInforPatientActivity extends AppCompatActivity {
     private void postUserPatient() {
         String jsonStr = null;
         jsonStr = new Gson().toJson(userPatient);
-        Log.e("test", jsonStr.toString());
-        RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain;charset=utf-8"),
-                jsonStr);
-        Request request = new Request.Builder()
-                .post(requestBody)
-                .url(Connect.BASE_URL + "user/register")
+        Log.e("准备注册用户:", jsonStr.toString());
+        RequestBody requestBody = new FormBody.Builder()
+                .add("json", jsonStr)
                 .build();
-        Call call = okHttpClient.newCall(request);
-        call.enqueue(new Callback() {
+        String url = Connect.BASE_URL + "user/add";
+        OkhttpUtil.post(requestBody, url).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                //失败时回调
-                e.printStackTrace();
-                Log.e("false", e.toString());
+
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 //成功时回调
                 String isSuccessful = response.body().string();
-                if (isSuccessful.equals("true")) {
-                    Log.e("successful", isSuccessful);
+                if (isSuccessful.equals("yes")) {
+                    Log.e("注册用户成功：", isSuccessful);
                     Intent intent = new Intent(PerfectInforPatientActivity.this,
                             UserSuccessActivity.class);
                     startActivity(intent);
@@ -123,6 +120,36 @@ public class PerfectInforPatientActivity extends AppCompatActivity {
             }
         });
     }
+
+
+//        RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain;charset=utf-8"),
+//                jsonStr);
+//        Request request = new Request.Builder()
+//                .post(requestBody)
+//                .url(Connect.BASE_URL + "RegisterServlet")
+//                .build();
+//        Call call = okHttpClient.newCall(request);
+//        call.enqueue(new Callback() {
+//            @Override
+//            public void onFailure(Call call, IOException e) {
+//                //失败时回调
+//                e.printStackTrace();
+//                Log.e("false", e.toString());
+//            }
+//
+//            @Override
+//            public void onResponse(Call call, Response response) throws IOException {
+//                //成功时回调
+//                String isSuccessful = response.body().string();
+//                if (isSuccessful.equals("true")) {
+//                    Log.e("successful", isSuccessful);
+//                    Intent intent = new Intent(PerfectInforPatientActivity.this,
+//                            UserSuccessActivity.class);
+//                    startActivity(intent);
+//                }
+//            }
+//        });
+
 
     private void registerInfo() {
         userPatient = new UserPatient();

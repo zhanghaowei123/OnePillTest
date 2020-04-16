@@ -24,12 +24,14 @@ import com.google.gson.Gson;
 import com.onepilltest.R;
 import com.onepilltest.URL.Connect;
 import com.onepilltest.entity.UserDoctor;
+import com.onepilltest.util.OkhttpUtil;
 
 import java.io.File;
 import java.io.IOException;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.FormBody;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
@@ -107,32 +109,55 @@ public class PerfectInforDoctorActivity extends AppCompatActivity {
     private void postUserDoctor() {
         String jsonStr = null;
         jsonStr = new Gson().toJson(userDoctor);
-        Log.e("test", jsonStr.toString());
-        RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain;charset=utf-8"),
-                jsonStr);
-        Request request = new Request.Builder()
-                .post(requestBody)
-                .url(Connect.BASE_URL + "RegisterDoctorServlet")
+        Log.e("准备注册医生：", jsonStr.toString());
+
+        RequestBody requestBody = new FormBody.Builder()
+                .add("json", jsonStr)
                 .build();
-        Call call = okHttpClient.newCall(request);
-        call.enqueue(new Callback() {
+        String url = Connect.BASE_URL + "doctor/add";
+        OkhttpUtil.post(requestBody, url).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
-                Log.e("false", "返回错误");
+
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 //成功时回调
                 String isSuccessful = response.body().string();
-                if (isSuccessful.equals("true")) {
-                    Log.e("successful", isSuccessful);
+                if (isSuccessful.equals("yes")) {
+                    Log.e("医生注册成功：", isSuccessful);
                     Intent intent = new Intent(PerfectInforDoctorActivity.this,
                             DoctorSuccessActivity.class);
                     startActivity(intent);
                 }
             }
+//        RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain;charset=utf-8"),
+//                jsonStr);
+//        Request request = new Request.Builder()
+//                .post(requestBody)
+//                .url(Connect.BASE_URL + "RegisterDoctorServlet")
+//                .build();
+//        Call call = okHttpClient.newCall(request);
+//        call.enqueue(new Callback() {
+//            @Override
+//            public void onFailure(Call call, IOException e) {
+//                e.printStackTrace();
+//                Log.e("false", "返回错误");
+//            }
+//
+//            @Override
+//            public void onResponse(Call call, Response response) throws IOException {
+//                //成功时回调
+//                String isSuccessful = response.body().string();
+//                if (isSuccessful.equals("true")) {
+//                    Log.e("医生注册成功：", isSuccessful);
+//                    Intent intent = new Intent(PerfectInforDoctorActivity.this,
+//                            DoctorSuccessActivity.class);
+//                    startActivity(intent);
+//                }
+//            }
+//        });
         });
     }
 

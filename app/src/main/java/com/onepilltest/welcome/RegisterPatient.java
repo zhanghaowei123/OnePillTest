@@ -130,7 +130,7 @@ public class RegisterPatient extends AppCompatActivity implements View.OnClickLi
 
             @Override
             public void onComplete(Void aVoid) {
-                Log.e("TAG","yinsi成功");
+                Log.e("TAG","隐私成功");
             }
 
             @Override

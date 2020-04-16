@@ -30,6 +30,10 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+/**
+ * 医生简介页面
+ */
+
 public class DoctorDetailsActivity extends AppCompatActivity {
     private ImageView headImg = null;//头像
     UserDoctor doctor = null;
@@ -166,7 +170,10 @@ public class DoctorDetailsActivity extends AppCompatActivity {
                         DoctorDao dao = new DoctorDao();
                         Log.e("正在修改resume","yes");
                         Toast.makeText(context,"正在提交修改",Toast.LENGTH_SHORT).show();
-                        dao.update("resume",resume.getText().toString());
+                        UserDoctor userDoctor = UserBook.NowDoctor;
+                        userDoctor.setResume(resume.getText().toString());
+                        dao.update(userDoctor);
+                        UserBook.NowDoctor = userDoctor;
                     }else{
                         Log.e("无权修改resume","no");
                         Toast.makeText(context,"无权修改",Toast.LENGTH_SHORT).show();

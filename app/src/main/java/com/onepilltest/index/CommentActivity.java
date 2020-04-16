@@ -67,6 +67,7 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void requestData() {
+        Log.e("获取评论:",Connect.BASE_URL + "comment/getComment?articleId=" + comment.getArticleId());
         Request request = new Request.Builder()
                 .url(Connect.BASE_URL + "comment/getComment?articleId=" + comment.getArticleId())
                 .build();

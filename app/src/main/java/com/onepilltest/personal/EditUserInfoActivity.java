@@ -25,6 +25,8 @@ import com.bumptech.glide.request.RequestOptions;
 import com.onepilltest.R;
 import com.onepilltest.URL.Connect;
 import com.onepilltest.entity.EventMessage;
+import com.onepilltest.entity.UserDoctor;
+import com.onepilltest.entity.UserPatient;
 import com.onepilltest.welcome.PerfectInforDoctorActivity;
 
 import org.greenrobot.eventbus.EventBus;
@@ -223,7 +225,7 @@ public class EditUserInfoActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(Call call, Response response) throws IOException {
                             String json = response.body().string();
-                            Log.e("头像地址",json);
+                            Log.e("更新头像成功：",json);
                             if (UserBook.Code == 1){//医生
                                 UserBook.NowDoctor.setHeadImg(json);
                             }else if(UserBook.Code ==2){//用户
@@ -243,23 +245,27 @@ public class EditUserInfoActivity extends AppCompatActivity {
     //保存
     private void save() {
         if (UserBook.Code == 1){//医生
+            UserDoctor userDoctor = UserBook.NowDoctor;
             String name = et_nickName.getText().toString();
             String PID = et_PID.getText().toString();
             String password = et_password.getText().toString();
             String phone = et_phone.getText().toString();
-            doctorDao.update("name",name);
-            doctorDao.update("password",password);
-            doctorDao.update("phone",phone);
-            doctorDao.update("PID",PID);
+            userDoctor.setName(name);
+            userDoctor.setPID(PID);
+            userDoctor.setPassword(password);
+            userDoctor.setPhone(phone);
+            doctorDao.update(userDoctor);
         }else if(UserBook.Code ==2){//用户
+            UserPatient userPatient = UserBook.NowUser;
             String nickName = et_nickName.getText().toString();
             String PID = et_PID.getText().toString();
             String password = et_password.getText().toString();
             String phone = et_phone.getText().toString();
-            dao.update("nickName",nickName);
-            dao.update("password",password);
-            dao.update("phone",phone);
-            dao.update("PID",PID);
+            userPatient.setNickName(nickName);
+            userPatient.setPID(PID);
+            userPatient.setPassword(password);
+            userPatient.setPhone(phone);
+            dao.update(userPatient);
         }
 
 
