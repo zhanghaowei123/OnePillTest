@@ -82,7 +82,7 @@ public class UserBook {
             DoctorList.add(userDoctor);
         }
         for (int i = 0; i < size; i++) {
-            if (DoctorList.get(i).getDoctorId() == userDoctor.getDoctorId())
+            if (DoctorList.get(i).getId() == userDoctor.getId())
                 f = false;
         }
         if (f && size !=0)

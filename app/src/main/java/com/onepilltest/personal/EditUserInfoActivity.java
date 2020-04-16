@@ -205,7 +205,7 @@ public class EditUserInfoActivity extends AppCompatActivity {
                     RequestBody requestBody = requestBodyBuilder.build();
                     String postmsg = null;
                     if (UserBook.Code == 1){//医生
-                        postmsg = "?DoctorId="+UserBook.NowDoctor.getDoctorId()+"&Code=Doctor";
+                        postmsg = "?DoctorId="+UserBook.NowDoctor.getId()+"&Code=Doctor";
                     }else if(UserBook.Code ==2){//用户
                         postmsg = "?UserId="+UserBook.NowUser.getId()+"&Code=Patient";
                     }

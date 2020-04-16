@@ -102,7 +102,7 @@ public class DoctorDetailsActivity extends AppCompatActivity {
         }else
         resume.setText(doctor.getResume());
 
-        if (UserBook.Code == 1 && UserBook.NowDoctor.getDoctorId() == doctor.getDoctorId()){
+        if (UserBook.Code == 1 && UserBook.NowDoctor.getId() == doctor.getId()){
             resume.setFocusableInTouchMode(true);
             resume.setFocusable(true);
             resume.requestFocus();
@@ -112,9 +112,9 @@ public class DoctorDetailsActivity extends AppCompatActivity {
         }
 
         if (UserBook.Code ==1){
-            fDao.isHave(UserBook.NowDoctor.getDoctorId(),1,1,doctor.getDoctorId());
+            fDao.isHave(UserBook.NowDoctor.getId(),1,1,doctor.getId());
         }else{
-            fDao.isHave(UserBook.NowUser.getId(),2,1,doctor.getDoctorId());
+            fDao.isHave(UserBook.NowUser.getId(),2,1,doctor.getId());
         }
 
     }
@@ -162,7 +162,7 @@ public class DoctorDetailsActivity extends AppCompatActivity {
         public void onClick(View v) {
             switch (v.getId()){
                 case R.id.dc_details_editResume:
-                    if (UserBook.Code == 1 && UserBook.NowDoctor.getDoctorId() == doctor.getDoctorId()){
+                    if (UserBook.Code == 1 && UserBook.NowDoctor.getId() == doctor.getId()){
                         DoctorDao dao = new DoctorDao();
                         Log.e("正在修改resume","yes");
                         Toast.makeText(context,"正在提交修改",Toast.LENGTH_SHORT).show();
@@ -173,7 +173,7 @@ public class DoctorDetailsActivity extends AppCompatActivity {
                     }
                     break;
                 case R.id.dc_details_resume:
-                    if (UserBook.Code == 1 && UserBook.NowDoctor.getDoctorId() == doctor.getDoctorId()){
+                    if (UserBook.Code == 1 && UserBook.NowDoctor.getId() == doctor.getId()){
                         Toast.makeText(context,"正在修改",Toast.LENGTH_SHORT).show();
                     }else{
                         Toast.makeText(context,"无权修改",Toast.LENGTH_SHORT).show();
@@ -182,15 +182,15 @@ public class DoctorDetailsActivity extends AppCompatActivity {
                 case R.id.doctor_focus://关注医生
                     if (isFocus){
                         if (UserBook.Code ==1){
-                            fDao.del(UserBook.NowDoctor.getDoctorId(),1,1,doctor.getDoctorId());
+                            fDao.del(UserBook.NowDoctor.getId(),1,1,doctor.getId());
                         }else{
-                            fDao.del(UserBook.NowUser.getId(),2,1,doctor.getDoctorId());
+                            fDao.del(UserBook.NowUser.getId(),2,1,doctor.getId());
                         }
                     }else{
                         if (UserBook.Code ==1){
-                            fDao.add(UserBook.NowDoctor.getDoctorId(),1,1,doctor.getDoctorId());
+                            fDao.add(UserBook.NowDoctor.getId(),1,1,doctor.getId());
                         }else{
-                            fDao.add(UserBook.NowUser.getId(),2,1,doctor.getDoctorId());
+                            fDao.add(UserBook.NowUser.getId(),2,1,doctor.getId());
                         }
                     }
                     /*if (UserBook.Code ==1){

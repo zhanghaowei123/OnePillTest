@@ -24,7 +24,7 @@ public class DoctorDao {
      */
     public void update(String code,String str){
 
-        int DoctorId = UserBook.NowDoctor.getDoctorId();
+        int DoctorId = UserBook.NowDoctor.getId();
 
         OkHttpClient okHttpClient = new OkHttpClient();
         Request request = new Request.Builder().url(Connect.BASE_URL+"EditDoctorServlet?doctorId="+DoctorId+"&Code="+code+"&"+code+"="+str+"").build();

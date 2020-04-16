@@ -140,7 +140,7 @@ public class FoundDoctorActivity extends AppCompatActivity {
             Log.e("找医生",""+msg.getJson());
             UserDoctor doctor = gson.fromJson(msg.getJson(),UserDoctor.class);
             Intent intent = new Intent(FoundDoctorActivity.this, DoctorDetailsActivity.class);
-            intent.putExtra("id",doctor.getDoctorId());
+            intent.putExtra("id",doctor.getId());
             startActivity(intent);
         }
     }

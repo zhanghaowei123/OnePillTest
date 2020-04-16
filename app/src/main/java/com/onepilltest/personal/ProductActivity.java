@@ -124,7 +124,7 @@ public class ProductActivity extends Activity {
 
         //查询是否关注
         if (UserBook.Code == 1) {
-            dao.isHave(UserBook.NowDoctor.getDoctorId(), 1, 2, med.getId());
+            dao.isHave(UserBook.NowDoctor.getId(), 1, 2, med.getId());
         } else {
             dao.isHave(UserBook.NowUser.getId(), 2, 2, med.getId());
         }
@@ -227,13 +227,13 @@ public class ProductActivity extends Activity {
                 case R.id.btn_coll://收藏
                     if (isFocus) {
                         if (UserBook.Code == 1) {
-                            dao.del(UserBook.NowDoctor.getDoctorId(), 1, 2, med.getId());
+                            dao.del(UserBook.NowDoctor.getId(), 1, 2, med.getId());
                         } else {
                             dao.del(UserBook.NowUser.getId(), 2, 2, med.getId());
                         }
                     } else {
                         if (UserBook.Code == 1) {
-                            dao.add(UserBook.NowDoctor.getDoctorId(), 1, 2, med.getId());
+                            dao.add(UserBook.NowDoctor.getId(), 1, 2, med.getId());
                         } else {
                             dao.add(UserBook.NowUser.getId(), 2, 2, med.getId());
                         }

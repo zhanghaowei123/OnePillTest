@@ -111,7 +111,7 @@ public class LoginDoctorActivity extends AppCompatActivity implements View.OnCli
 
     private void login() {
         Request request = new Request.Builder()
-                .url(Connect.BASE_URL + "DoctorLoginServlet?phone=" + editPhone.getText().toString()
+                .url(Connect.BASE_URL + "doctor/login?phone=" + editPhone.getText().toString()
                         + "&password=" + editPassword.getText().toString())
                 .build();
         Call call = okHttpClient.newCall(request);
@@ -129,7 +129,7 @@ public class LoginDoctorActivity extends AppCompatActivity implements View.OnCli
                 //获取当前医生的信息
                 if (msg.getCode() == 1) {//登录成功
                     UserDoctor u = msg.getDoctor();
-                    Log.e("DoctorId", "" + u.getDoctorId() + "|" + u.getAddress());
+                    Log.e("DoctorId", "" + u.getId() + "|" + u.getAddress());
                     //把用户存入UserBook
                     UserBook.addUser(u, UserBook.Doctor);
                     save(u);//把u存进SharedPreferences

@@ -99,7 +99,7 @@ public class PerfectInforPatientActivity extends AppCompatActivity {
                 jsonStr);
         Request request = new Request.Builder()
                 .post(requestBody)
-                .url(Connect.BASE_URL + "RegisterServlet")
+                .url(Connect.BASE_URL + "user/register")
                 .build();
         Call call = okHttpClient.newCall(request);
         call.enqueue(new Callback() {

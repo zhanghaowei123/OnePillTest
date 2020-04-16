@@ -68,7 +68,7 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
 
     private void requestData() {
         Request request = new Request.Builder()
-                .url(Connect.BASE_URL + "CommentServlet?articleId=" + comment.getArticleId())
+                .url(Connect.BASE_URL + "comment/getComment?articleId=" + comment.getArticleId())
                 .build();
         Call call = okHttpClient.newCall(request);
         call.enqueue(new Callback() {
@@ -80,6 +80,7 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String commentListStr = response.body().string();
+                Log.e("CommentList",commentListStr.toString());
                 //定义他的派生类调用getType，真实对象
                 Type type = new TypeToken<List<Comment>>() {
                 }.getType();
@@ -158,7 +159,7 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
                 jsonStr);
         Request request = new Request.Builder()
                 .post(requestBody)
-                .url(Connect.BASE_URL + "CommentInsertServlet")
+                .url(Connect.BASE_URL + "comment/add")
                 .build();
         Call call = okHttpClient.newCall(request);
         call.enqueue(new Callback() {

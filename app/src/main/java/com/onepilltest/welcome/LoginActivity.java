@@ -131,7 +131,7 @@ public class LoginActivity extends AppCompatActivity {
             u.setPhone("18831107935");
             u.setPassword("123456");
             u.setNickName("charlotte");
-            u.setPID("130125199999999999");
+            u.setPID("1301251999999999991");
             u.setId(33);
             u.setHeadImg("image/991661239.jpeg");
             UserBook.addUser(u, UserBook.Patient);

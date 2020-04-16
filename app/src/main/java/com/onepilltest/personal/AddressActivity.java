@@ -99,7 +99,7 @@ public class AddressActivity extends AppCompatActivity {
     private void initDoctor() {
         Log.e("用户" + UserBook.NowDoctor.getName(), "进入地址列表");
         AddressDao dao = new AddressDao();
-        dao.searchDoctorAll(UserBook.NowDoctor.getDoctorId());
+        dao.searchDoctorAll(UserBook.NowDoctor.getId());
         Log.e("更新地址列表", "" + baseList.toString());
         //创建ContentAdapter实例，传入上下文， 子布局id ,数据baseList
         adapter = new AddressAdapter(AddressActivity.this, R.layout.user_address_item, baseList);

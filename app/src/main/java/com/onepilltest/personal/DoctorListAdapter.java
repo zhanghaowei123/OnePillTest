@@ -47,7 +47,7 @@ public class DoctorListAdapter extends ArrayAdapter<UserDoctor> {
                 .into(headImg);
         nickName.setText(base.getName());
         phone.setText(base.getPhone());
-        if (base.getDoctorId() == UserBook.NowDoctor.getDoctorId()){
+        if (base.getId() == UserBook.NowDoctor.getId()){
             btn.setImageResource(R.drawable.ahh);
         }
 
