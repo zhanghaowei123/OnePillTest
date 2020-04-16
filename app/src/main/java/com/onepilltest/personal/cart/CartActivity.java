@@ -19,11 +19,13 @@ import com.onepilltest.URL.Connect;
 import com.onepilltest.entity.Cart;
 import com.onepilltest.entity.Comment;
 import com.onepilltest.entity.EventMessage;
+import com.onepilltest.entity.MyCart;
 import com.onepilltest.entity.Orders;
 import com.onepilltest.entity.medicine_;
 import com.onepilltest.index.CommentAdapter;
 import com.onepilltest.personal.OrdersDao;
 import com.onepilltest.personal.UserBook;
+import com.onepilltest.util.OkhttpUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -54,6 +56,8 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
     private SharedPreferences sharedPreferences;
     private int price = 0;
 
+    private List<MyCart> myCarts = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,11 +71,12 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
         EventBus.getDefault().register(this);
         sharedPreferences = getSharedPreferences("addToCart", MODE_PRIVATE);
         findViews();
-        initView();
-        for (int i = 0; i < Cart.medicineList.size(); i++) {
-            requestData(Cart.medicineList.get(i));
-
-        }
+//        initView();
+        getDate();
+//        for (int i = 0; i < Cart.medicineList.size(); i++) {
+//            requestData(Cart.medicineList.get(i));
+//
+//        }
 
 
     }
@@ -86,8 +91,9 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initView() {
+        Log.e("init数据:",myCarts.size()+"");
         cartsListView = findViewById(R.id.lv_mcart);
-        cartAdapter = new CartAdapter(medicines, this, R.layout.item_mcart);
+        cartAdapter = new CartAdapter(myCarts, this, R.layout.item_mcart);
         cartsListView.setAdapter(cartAdapter);
     }
 
@@ -118,12 +124,21 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void updateUI(String msg) {
-        if (msg.equals("toCart")) {
-            //添加到数据库
+    public void updateUI(EventMessage message) {
+        if (message.getCode().equals("toCart")) {
             //更新视图
-            Log.e("price", medicines.get(medicines.size() - 1).getPrice());
-            price += Integer.valueOf(medicines.get(medicines.size() - 1).getPrice());
+            Gson gson = new Gson();
+            Type userListType = new TypeToken<ArrayList<MyCart>>(){}.getType();
+            myCarts = gson.fromJson(message.getJson(),userListType);
+            for (MyCart myCart:myCarts){
+                Log.e("数据：",myCart.toString());
+            }
+
+            for (MyCart myCart:myCarts){
+                price += myCart.getPrice();
+            }
+            Log.e("总金额：", price+"\n");
+            initView();
             cartAdapter.notifyDataSetChanged();
             tvSettlementPrice.setText("￥" + price);
         }
@@ -157,6 +172,27 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
                 cartAdapter.notifyDataSetChanged();
                 break;
         }
+    }
+
+    //获取购物车
+    public void getDate(){
+        String url = Connect.BASE_URL+"cart/findByUserId?userId="+UserBook.NowUser.getId();
+        OkhttpUtil.get(url).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.e("根据userId获取购物车信息：","获取失败。");
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String re = response.body().string();
+                Log.e("根据userId获取购物车信息：",re);
+                EventMessage message = new EventMessage();
+                message.setCode("toCart");
+                message.setJson(re);
+                EventBus.getDefault().post(message);
+            }
+        });
     }
 
 

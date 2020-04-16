@@ -52,11 +52,11 @@
 
     <ListView
         android:id="@+id/lv_mcart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="600dp"
         android:layout_above="@id/ll_price"
         android:layout_below="@id/ll_carttop"
-        android:background="#fff">
+        android:background="#777">
 
     </ListView>
 

@@ -25,6 +25,7 @@ import com.onepilltest.entity.Address;
 import com.onepilltest.entity.Cart;
 import com.onepilltest.entity.EventMessage;
 import com.onepilltest.entity.medicine_;
+import com.onepilltest.entity.service_cart;
 import com.onepilltest.index.DoctorDetailsActivity;
 import com.onepilltest.index.MedicineDao;
 
@@ -38,6 +39,7 @@ import com.hacknife.carouselbanner.interfaces.OnCarouselItemChangeListener;
 import com.hacknife.carouselbanner.interfaces.OnCarouselItemClickListener;
 import com.onepilltest.personal.cart.CartActivity;
 import com.onepilltest.personal.cart.ShoppingCartActivity;
+import com.onepilltest.util.OkhttpUtil;
 
 
 import java.io.IOException;
@@ -46,8 +48,10 @@ import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class ProductActivity extends Activity {
@@ -129,7 +133,7 @@ public class ProductActivity extends Activity {
             dao.isHave(UserBook.NowUser.getId(), 2, 2, med.getId());
         }
 
-        Log.e("json搜索", "" + med.getMedicine());
+        Log.e("药品详情json", "" + med.getMedicine());
         product_name.setText(med.getMedicine());
         product_type.setText(med.getGeneralName());
         tabHost1.setText(med.getOverview());
@@ -145,7 +149,7 @@ public class ProductActivity extends Activity {
         List<String> list = new ArrayList<>();
         Banner.init(new ImageFactory());
         list.add(Connect.BASE_URL + img1);
-        Log.e("111", "" + Connect.BASE_URL + img1);
+        Log.e("轮播图", "" + Connect.BASE_URL + img1);
         list.add(Connect.BASE_URL + img2);
         list.add(Connect.BASE_URL + img3);
 
@@ -176,9 +180,9 @@ public class ProductActivity extends Activity {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getMedicine(EventMessage msg) {
         Log.e("focusCode", "" + msg.getCode());
-        if (msg.getCode().equals("MedicineDao_searchMedicine")) {
+        if (msg.getCode().equals("MedicineDao_searchMedicineByName")) {
             Gson gson = new Gson();
-            Log.e("搜索json", "" + msg.getJson());
+            Log.e("查询药品json", "" + msg.getJson());
             medicine_ product = null;
             product = gson.fromJson(msg.getJson(), medicine_.class);
             med = product;
@@ -258,29 +262,57 @@ public class ProductActivity extends Activity {
     }
 
     private void saveMedicines() {
-        OkHttpClient okHttpClient = new OkHttpClient();
-        Request request = new Request.Builder()
-                .url(Connect.BASE_URL + "CurtServlet?userId=" + UserBook.NowUser.getId()
-                        + "&medicineId=" + med.getId() + "&price=" + med.getPrice() + "&Code=add")
+        String url = Connect.BASE_URL+"cart/add";
+        service_cart serviceCart = new service_cart();
+        serviceCart.setCount(2);//暂定<--------------------------数量
+        serviceCart.setMedicineId(med.getId());
+        serviceCart.setPrice(Integer.valueOf(med.getPrice()));
+        serviceCart.setStatus(1);//暂定<-------------------------状态码
+        serviceCart.setUserId(UserBook.NowUser.getId());
+        RequestBody requestBody = new FormBody.Builder()
+                .add("json",new Gson().toJson(serviceCart))
                 .build();
-        Call call = okHttpClient.newCall(request);
-        call.enqueue(new Callback() {
+        OkhttpUtil.post(requestBody,url).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-
-                 e.printStackTrace();
-                Log.e("袁康", e.getMessage());
+                e.printStackTrace();
+                Log.e("狗袁康", e.getMessage());
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String str = response.body().string();
+                Log.e("增加购物车：",str);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putInt("medicineId", med.getId());
                 Log.e("ceshi", "" + med.getId());
                 editor.commit();
             }
         });
+
+//        OkHttpClient okHttpClient = new OkHttpClient();
+//        Request request = new Request.Builder()
+//                .url(Connect.BASE_URL + "CurtServlet?userId=" + UserBook.NowUser.getId()
+//                        + "&medicineId=" + med.getId() + "&price=" + med.getPrice() + "&Code=add")
+//                .build();
+//        Call call = okHttpClient.newCall(request);
+//        call.enqueue(new Callback() {
+//            @Override
+//            public void onFailure(Call call, IOException e) {
+//
+//                 e.printStackTrace();
+//                Log.e("狗袁康", e.getMessage());
+//            }
+//
+//            @Override
+//            public void onResponse(Call call, Response response) throws IOException {
+//                String str = response.body().string();
+//                SharedPreferences.Editor editor = sharedPreferences.edit();
+//                editor.putInt("medicineId", med.getId());
+//                Log.e("ceshi", "" + med.getId());
+//                editor.commit();
+//            }
+//        });
     }
 
     @Override
