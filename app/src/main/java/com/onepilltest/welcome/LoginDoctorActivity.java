@@ -76,7 +76,7 @@ public class LoginDoctorActivity extends AppCompatActivity implements View.OnCli
                 if (editPhone.getText().toString().equals("18831107935")) {
 
                     UserDoctor u = new UserDoctor();
-                    String url = Connect.BASE_URL + "doctor/findById?id=33";
+                    String url = Connect.BASE_URL + "doctor/findById?id=19";
                     OkhttpUtil.get(url).enqueue(new Callback() {
                         @Override
                         public void onFailure(Call call, IOException e) {
