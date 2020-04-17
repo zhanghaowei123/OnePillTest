@@ -24,6 +24,7 @@ import com.onepilltest.entity.UserPatient;
 import com.onepilltest.index.HomeActivity;
 import com.onepilltest.index.HomeFragment;
 import com.onepilltest.personal.UserBook;
+import com.onepilltest.util.OkhttpUtil;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -69,14 +70,30 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 if (editPhone.getText().toString().equals("18831107935")) {
+
                     UserPatient u = new UserPatient();
-                    u.setPhone("18831107935");
-                    u.setPassword("123456");
-                    u.setNickName("charlotte");
-                    u.setPID("130125199999999999");
-                    u.setId(33);
-                    u.setHeadImg("image/991661239.jpeg");
-                    UserBook.addUser(u, UserBook.Patient);
+                    String url = Connect.BASE_URL+"user/findById?id=33";
+                    OkhttpUtil.get(url).enqueue(new Callback() {
+                        @Override
+                        public void onFailure(Call call, IOException e) {
+                            Log.e("登陆失败：","请检查网络");
+                        }
+
+                        @Override
+                        public void onResponse(Call call, Response response) throws IOException {
+                            String str = response.body().string();
+                            Log.e("已连接：","返回值："+str);
+                            if(str!=null)
+                            UserBook.addUser(new Gson().fromJson(str,UserPatient.class));
+                        }
+                    });
+//                    u.setPhone("18831107935");
+//                    u.setPassword("123456");
+//                    u.setNickName("charlotte");
+//                    u.setAddress("河北省");
+//                    u.setPID("130125199999999999");
+//                    u.setId(33);
+//                    u.setHeadImg("image/buyer.jpg");
                     Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                     startActivity(intent);
                 } else {
@@ -127,14 +144,15 @@ public class LoginActivity extends AppCompatActivity {
 
     private void login() {
         if (editPhone.getText().toString().equals("18831107935")) {
-            UserPatient u = new UserPatient();
-            u.setPhone("18831107935");
-            u.setPassword("123456");
-            u.setNickName("charlotte");
-            u.setPID("1301251999999999991");
-            u.setId(33);
-            u.setHeadImg("image/991661239.jpeg");
-            UserBook.addUser(u, UserBook.Patient);
+//            UserPatient u = new UserPatient();
+//            u.setPhone("18831107935");
+//            u.setPassword("123456");
+//            u.setNickName("charlotte");
+//            u.setAddress("河北省");
+//            u.setPID("1301251999999999991");
+//            u.setId(33);
+//            u.setHeadImg("image/991661239.jpeg");
+//            UserBook.addUser(u);
             Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
             startActivity(intent);
         } else {
@@ -162,7 +180,7 @@ public class LoginActivity extends AppCompatActivity {
                         Log.e("userInfo",u.toString());
                         Log.e("UserId", "  " + u.getId() + "|" + u.getAddress());
                         //把用户存入UserBook
-                        UserBook.addUser(u, UserBook.Patient);
+                        UserBook.addUser(u);
                         Log.e("当前用户", "" + UserBook.NowUser.getId());
                         save(u);//把u存进SharedPreferences
                         Log.e("success", "登录成功");
@@ -216,10 +234,11 @@ public class LoginActivity extends AppCompatActivity {
         u.setPhone("18831107935");
         u.setPassword("123456");
         u.setNickName("charlotte");
+        u.setAddress("河北省");
         u.setPID("130125199999999999");
         u.setId(33);
-        u.setHeadImg("image/991661239.jpeg");
-        UserBook.addUser(u, UserBook.Patient);
+        u.setHeadImg("image/buyer.jpg");
+        UserBook.addUser(u);
         Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
         startActivity(intent);
     }

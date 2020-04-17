@@ -131,7 +131,7 @@ public class LoginDoctorActivity extends AppCompatActivity implements View.OnCli
                     UserDoctor u = msg.getDoctor();
                     Log.e("DoctorId", "" + u.getId() + "|" + u.getAddress());
                     //把用户存入UserBook
-                    UserBook.addUser(u, UserBook.Doctor);
+                    UserBook.addUser(u);
                     save(u);//把u存进SharedPreferences
                     Log.e("success", "登录成功");
                     Intent intent = new Intent(LoginDoctorActivity.this, HomeActivity.class);

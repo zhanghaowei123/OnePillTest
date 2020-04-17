@@ -149,7 +149,7 @@ public class PersonalFragment extends Fragment {
             if (msg.getCode() == "更新头像") {
                 if (msg.getJson() == "yes") {
                     RequestOptions requestOptions = new RequestOptions().circleCrop();
-                    Glide.with(this)
+                    Glide.with(getActivity())
                             .load(Connect.BASE_URL + UserBook.NowUser.getHeadImg())
                             .apply(requestOptions)
                             .into(iv_personal);

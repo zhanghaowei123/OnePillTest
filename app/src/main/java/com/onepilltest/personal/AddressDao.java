@@ -92,7 +92,7 @@ public class AddressDao {
      */
     public void searchAll(int UserId){
 
-        String url = Connect.BASE_URL+"address/findByUserId"+UserId;
+        String url = Connect.BASE_URL+"address/findByUserId?userId="+UserId;
         OkhttpUtil.get(url).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -230,6 +230,7 @@ public class AddressDao {
     public void delet(int id){
 
         String url = Connect.BASE_URL+"address/delete?id="+id;
+        Log.e("删除Id:",""+id);
         OkhttpUtil.get(url).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {

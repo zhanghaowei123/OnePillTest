@@ -1,8 +1,8 @@
 package com.onepilltest.entity;
 
 public class Address {
-    private int UserId;
-    private int Id;
+    private int userId;
+    private int id;
     private String name;
     private String phoneNumber;
     private String address;
@@ -10,8 +10,8 @@ public class Address {
     private String postalCode;
 
     public Address(int UserId, String name, String phoneNumber, String address, String more, String postalCode) {
-        this.UserId = UserId;
-        this.Id = 0;
+        this.userId = UserId;
+        this.id = 0;
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.address = address;
@@ -20,8 +20,8 @@ public class Address {
     }
 
     public Address(int id, int UserId, String name, String phoneNumber, String address, String more, String postalCode) {
-        this.UserId = UserId;
-        this.Id = id;
+        this.userId = UserId;
+        this.id = id;
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.address = address;
@@ -32,19 +32,19 @@ public class Address {
     }
 
     public int getUserId() {
-        return UserId;
+        return userId;
     }
 
     public void setUserId(int userId) {
-        UserId = userId;
+        userId = userId;
     }
 
     public int getId() {
-        return Id;
+        return id;
     }
 
     public void setId(int id) {
-        Id = id;
+        id = id;
     }
 
     public String getName() {

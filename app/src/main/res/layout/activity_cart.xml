@@ -56,7 +56,7 @@
         android:layout_height="600dp"
         android:layout_above="@id/ll_price"
         android:layout_below="@id/ll_carttop"
-        android:background="#777">
+        android:background="#fff">
 
     </ListView>
 

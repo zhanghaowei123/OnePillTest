@@ -276,7 +276,7 @@ public class SettingActivity extends AppCompatActivity {
                 }
             }
         } else if (UserBook.Code == 2) {//用户
-            Log.e("Setting", msg.getCode() + msg.getJson());
+            Log.e("SettingActivity", msg.getCode() + msg.getJson());
             if (msg.getCode().equals("用户信息已更新")) {
                 Log.e("刷新", "" + msg.getJson() + msg.getCode());
                 init();

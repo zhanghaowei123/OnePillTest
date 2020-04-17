@@ -85,6 +85,7 @@ public class AddressActivity extends AppCompatActivity {
                 Bundle bundle = new Bundle();
                 Gson gson = new Gson();
                 bundle.putString("info", gson.toJson(info));
+                Log.e("发送的修改地址",""+gson.toJson(info));
 
                 Intent intent = new Intent(AddressActivity.this, EditAddressActivity.class);
                 intent.putExtras(bundle);
@@ -143,10 +144,10 @@ public class AddressActivity extends AppCompatActivity {
             if (msg.getJson().equals("yes")) {
                 new AddressDao().searchAll(UserBook.NowUser.getId());
                 Log.e("添加成功", "" + baseList.get(0).getAddress());
-                Toast.makeText(getApplicationContext(), "添加成功", Toast.LENGTH_SHORT);
+                Toast.makeText(getApplicationContext(), "添加成功", Toast.LENGTH_SHORT).show();
             } else if (msg.getJson().equals("no")) {
                 Log.e("添加失败", "" + baseList.get(0).getAddress());
-                Toast.makeText(getApplicationContext(), "添加失败", Toast.LENGTH_SHORT);
+                Toast.makeText(getApplicationContext(), "添加失败", Toast.LENGTH_SHORT).show();
             }
         } else if (msg.getCode().equals("AddressDao_searchAll")) {
             List<Address> addressList = gson.fromJson(msg.getJson(), new TypeToken<List<Address>>() {
@@ -168,19 +169,19 @@ public class AddressActivity extends AppCompatActivity {
             if (msg.getJson().equals("yes")) {
                 new AddressDao().searchAll(UserBook.NowUser.getId());
                 Log.e("更新成功", "" + baseList.get(0).getAddress());
-                Toast.makeText(getApplicationContext(), "更新成功", Toast.LENGTH_SHORT);
+                Toast.makeText(getApplicationContext(), "更新成功", Toast.LENGTH_SHORT).show();
             } else if (msg.getJson().equals("no")) {
                 Log.e("更新失败", "" + baseList.get(0).getAddress());
-                Toast.makeText(getApplicationContext(), "更新失败", Toast.LENGTH_SHORT);
+                Toast.makeText(getApplicationContext(), "更新失败", Toast.LENGTH_SHORT).show();
             }
         } else if (msg.getCode().equals("AddressDao_delete")) {
             if (msg.getJson().equals("yes")) {
                 new AddressDao().searchAll(UserBook.NowUser.getId());
-                Log.e("添加成功", "" + baseList.get(0).getAddress());
-                Toast.makeText(getApplicationContext(), "添加成功", Toast.LENGTH_SHORT);
+                Log.e("删除成功", "" + baseList.get(0).getAddress());
+                Toast.makeText(getApplicationContext(), "删除成功", Toast.LENGTH_SHORT).show();
             } else if (msg.getJson().equals("no")) {
-                Log.e("添加失败", "" + baseList.get(0).getAddress());
-                Toast.makeText(getApplicationContext(), "添加失败", Toast.LENGTH_SHORT);
+                Log.e("删除失败", "" + baseList.get(0).getAddress());
+                Toast.makeText(getApplicationContext(), "删除失败", Toast.LENGTH_SHORT).show();
             }
         }
     }

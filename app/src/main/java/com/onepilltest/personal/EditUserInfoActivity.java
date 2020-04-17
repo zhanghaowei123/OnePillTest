@@ -1,6 +1,7 @@
 package com.onepilltest.personal;
 
 import android.Manifest;
+
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -27,6 +28,7 @@ import com.onepilltest.URL.Connect;
 import com.onepilltest.entity.EventMessage;
 import com.onepilltest.entity.UserDoctor;
 import com.onepilltest.entity.UserPatient;
+import com.onepilltest.util.OkhttpUtil;
 import com.onepilltest.welcome.PerfectInforDoctorActivity;
 
 import org.greenrobot.eventbus.EventBus;
@@ -194,38 +196,39 @@ public class EditUserInfoActivity extends AppCompatActivity {
                      */
                     // 3.1 获取 OkHttpClient 对象
                     // 3.2 Post 请求，创建 RequestBody 对象 指定上传类型：图片；指定上传内容
-                    MediaType MutilPart_Form_Data = MediaType.parse("multipart/form-data; charset=utf-8");
-                    MultipartBody.Builder requestBodyBuilder = new MultipartBody.Builder()
-                            .setType(MultipartBody.FORM)
-                            .addFormDataPart("keyVo", "上传头像");
-
-                    File file = new File(imagePath);
-//                // 可使用for循环添加img file
-                    requestBodyBuilder.addFormDataPart("files", file.getName(),
-                            RequestBody.create(MutilPart_Form_Data, file));
-                    // 3.3 其余一致
-                    RequestBody requestBody = requestBodyBuilder.build();
+//                    MediaType MutilPart_Form_Data = MediaType.parse("multipart/form-data; charset=utf-8");
+//                    MultipartBody.Builder requestBodyBuilder = new MultipartBody.Builder()
+//                            .setType(MultipartBody.FORM)
+//                            .addFormDataPart("keyVo", "上传头像");
+//
+////                // 可使用for循环添加img file
+//                    requestBodyBuilder.addFormDataPart("files", file.getName(),
+//                            RequestBody.create(MutilPart_Form_Data, file));
+//                    // 3.3 其余一致
+//                    RequestBody requestBody = requestBodyBuilder.build();
                     String postmsg = null;
                     if (UserBook.Code == 1){//医生
-                        postmsg = "?DoctorId="+UserBook.NowDoctor.getId()+"&Code=Doctor";
+                        postmsg = "?doctorId="+UserBook.NowDoctor.getId();
                     }else if(UserBook.Code ==2){//用户
-                        postmsg = "?UserId="+UserBook.NowUser.getId()+"&Code=Patient";
+                        postmsg = "?userId="+UserBook.NowUser.getId();
                     }
-
-                    Request request = new Request.Builder().url(Connect.BASE_URL + "EditHeadImgServlet"+postmsg)
-                            .post(requestBody)
+                    File file = new File(imagePath);
+                    RequestBody image = RequestBody.create(MediaType.parse("image/png"), file);
+                    RequestBody requestBody = new MultipartBody.Builder()
+                            .setType(MultipartBody.FORM)
+                            .addFormDataPart("file", imagePath, image)
                             .build();
-                    Call call = okHttpClient.newCall(request);
-                    call.enqueue(new Callback() {
+
+                    OkhttpUtil.post(requestBody,Connect.BASE_URL + "file/up"+postmsg).enqueue(new Callback() {
                         @Override
                         public void onFailure(Call call, IOException e) {
-                            e.printStackTrace();
+
                         }
 
                         @Override
                         public void onResponse(Call call, Response response) throws IOException {
                             String json = response.body().string();
-                            Log.e("更新头像成功：",json);
+                            Log.e("更新头像：",json);
                             if (UserBook.Code == 1){//医生
                                 UserBook.NowDoctor.setHeadImg(json);
                             }else if(UserBook.Code ==2){//用户
@@ -237,6 +240,32 @@ public class EditUserInfoActivity extends AppCompatActivity {
                             EventBus.getDefault().post(msg);
                         }
                     });
+
+//                    Request request = new Request.Builder().url(Connect.BASE_URL + "file/up"+postmsg)
+//                            .post(requestBody)
+//                            .build();
+//                    Call call = okHttpClient.newCall(request);
+//                    call.enqueue(new Callback() {
+//                        @Override
+//                        public void onFailure(Call call, IOException e) {
+//                            e.printStackTrace();
+//                        }
+//
+//                        @Override
+//                        public void onResponse(Call call, Response response) throws IOException {
+//                            String json = response.body().string();
+//                            Log.e("更新头像成功：",json);
+//                            if (UserBook.Code == 1){//医生
+//                                UserBook.NowDoctor.setHeadImg(json);
+//                            }else if(UserBook.Code ==2){//用户
+//                                UserBook.NowUser.setHeadImg(json);
+//                            }
+//                            EventMessage msg = new EventMessage();
+//                            msg.setCode("更新头像");
+//                            msg.setJson("yes");
+//                            EventBus.getDefault().post(msg);
+//                        }
+//                    });
                 }
             }
         }

@@ -56,10 +56,10 @@ public class UserBook {
         NowDoctor = nowDoctor;
     }
 
-    public static void addUser(UserPatient userPatient, int code) {
+    public static void addUser(UserPatient userPatient) {
         int size = UserList.size();
         Log.e("UserList", "size" + size);
-        Code = code;
+        Code = 2;
         boolean f = true;
         if (size == 0) {
             UserList.add(userPatient);
@@ -74,9 +74,9 @@ public class UserBook {
         NowUser = userPatient;
     }
 
-    public static void addUser(UserDoctor userDoctor, int code) {
+    public static void addUser(UserDoctor userDoctor) {
         int size = DoctorList.size();
-        Code = code;
+        Code = 1;
         boolean f = true;
         if (size == 0) {
             DoctorList.add(userDoctor);
