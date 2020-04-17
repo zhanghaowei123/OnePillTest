@@ -10,12 +10,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.onepilltest.R;
 import com.onepilltest.URL.Connect;
 import com.onepilltest.entity.Comment;
+import com.onepilltest.entity.EventMessage;
 import com.onepilltest.entity.Inquiry;
 import com.onepilltest.entity.UserPatient;
 
@@ -57,6 +59,14 @@ public class QuestionListActivity extends AppCompatActivity {
         find();
         initView();
         pull();
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //处理点击事件
+                Toast.makeText(getApplicationContext(),"点什么点...没实现",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void initView() {
@@ -66,31 +76,39 @@ public class QuestionListActivity extends AppCompatActivity {
     }
 
     public void pull() {
-        Request request = new Request.Builder().url(Connect.BASE_URL + "PullServlet").build();
-        Call call = okHttpClient.newCall(request);
-        call.enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                Log.e("拉取失败，", e.getMessage());
-            }
 
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                String questionListStr = response.body().string();
-                //定义他的派生类调用getType，真实对象
-                Type type = new TypeToken<List<Inquiry>>() {
-                }.getType();
-                inquiries.addAll(new Gson().fromJson(questionListStr, type));
-                //在onResponse里面不能直接更新界面
-                //接收到之后发送消息  通知给主线程
-                EventBus.getDefault().post("问诊");
-            }
-        });
+        //获取数据
+        inquiryDao inquiry = new inquiryDao();
+        inquiry.findAll();
+
+//        Request request = new Request.Builder().url(Connect.BASE_URL + "PullServlet").build();
+//        Call call = okHttpClient.newCall(request);
+//        call.enqueue(new Callback() {
+//            @Override
+//            public void onFailure(Call call, IOException e) {
+//                Log.e("拉取失败，", e.getMessage());
+//            }
+//
+//            @Override
+//            public void onResponse(Call call, Response response) throws IOException {
+//                String questionListStr = response.body().string();
+//                //定义他的派生类调用getType，真实对象
+//                Type type = new TypeToken<List<Inquiry>>() {
+//                }.getType();
+//                inquiries.addAll(new Gson().fromJson(questionListStr, type));
+//                //在onResponse里面不能直接更新界面
+//                //接收到之后发送消息  通知给主线程
+//                EventBus.getDefault().post("问诊");
+//            }
+//        });
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void updateUI(String msg) {
-        if (msg.equals("问诊")) {
+    public void updateUI(EventMessage msg) {
+        if (msg.getCode().equals("all_inquiry_list")) {
+            Type type = new TypeToken<List<Inquiry>>() {}.getType();
+            inquiries.clear();
+            inquiries.addAll(new Gson().fromJson(msg.getJson(),type));
             //更新视图
             questionAdapter.notifyDataSetChanged();
         }

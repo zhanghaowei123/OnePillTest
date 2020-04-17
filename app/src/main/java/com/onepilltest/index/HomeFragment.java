@@ -246,6 +246,7 @@ public class HomeFragment extends Fragment {
                         Intent question_intent = new Intent(getContext(), QuestionActivity.class);
                         startActivity(question_intent);
                     } else if (UserBook.Code == 1) {//医生
+                        Log.e("医生登陆：","跳转到inquiryList");
                         Intent intent = new Intent(getContext(), QuestionListActivity.class);
                         startActivity(intent);
                     }

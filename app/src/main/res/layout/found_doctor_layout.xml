@@ -33,7 +33,7 @@
             android:layout_marginRight="3dp"
             android:layout_weight="2"
             android:padding="3dp"
-            android:src="@drawable/logo" />
+            android:src="@drawable/logo02" />
     </LinearLayout>
 
     <LinearLayout

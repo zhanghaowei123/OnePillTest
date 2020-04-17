@@ -15,16 +15,23 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
 import com.onepilltest.R;
 import com.onepilltest.URL.Connect;
+import com.onepilltest.entity.EventMessage;
 import com.onepilltest.entity.Inquiry;
 import com.onepilltest.index.HomeFragment;
 import com.onepilltest.personal.UserBook;
+import com.onepilltest.util.FileUtil;
 import com.onepilltest.welcome.PerfectInforDoctorActivity;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
 import java.io.IOException;
@@ -59,6 +66,7 @@ public class QuestionActivity extends AppCompatActivity {
     private Request request, request1;
     private Inquiry inquiry;
     private String imagePath;
+    private String img_path;
     private int mFlag = 0;
 
     @Override
@@ -68,6 +76,7 @@ public class QuestionActivity extends AppCompatActivity {
             getWindow().setStatusBarColor(0xff56ced4);
         }
         setContentView(R.layout.question);
+        EventBus.getDefault().register(this);
         okHttpClient = new OkHttpClient();
         myListener = new MyListener();
         find();
@@ -160,34 +169,53 @@ public class QuestionActivity extends AppCompatActivity {
                 /**
                  * 上传到服务器
                  */
-                // 3.1 获取 OkHttpClient 对象
-                // 3.2 Post 请求，创建 RequestBody 对象 指定上传类型：图片；指定上传内容
-                MediaType MutilPart_Form_Data = MediaType.parse("multipart/form-data;charset=utf-8");
-                MultipartBody.Builder requestBodyBuilder = new MultipartBody.Builder()
-                        .setType(MultipartBody.FORM)
-                        .addFormDataPart("keyVo", "上传病情图片");
 
-
-                File file = new File(imagePath);
-                requestBodyBuilder.addFormDataPart("files", file.getName(), RequestBody.create(MutilPart_Form_Data, file));
-
-                RequestBody requestBody = requestBodyBuilder.build();
-                request1 = new Request.Builder().url(Connect.BASE_URL + "ImageServlet")
-                        .post(requestBody)
-                        .build();
-                okHttpClient = new OkHttpClient();
-                Call call = okHttpClient.newCall(request1);
-                call.enqueue(new Callback() {
+                Toast.makeText(this, "图片正在上传...", Toast.LENGTH_SHORT).show();
+                String url = Connect.BASE_URL + "file/inquiry";
+                FileUtil.ImageUpLoad(imagePath, url).enqueue(new Callback() {
                     @Override
                     public void onFailure(Call call, IOException e) {
-                        Log.e("上传失败", "" + e.getMessage());
+
                     }
 
                     @Override
                     public void onResponse(Call call, Response response) throws IOException {
-                        Log.e("上传图片：", response.body().string());
+                        String re = response.body().string();
+                        EventMessage msg = new EventMessage();
+                        msg.setCode("inquiry_img_path");
+                        msg.setJson(re);
+                        EventBus.getDefault().post(msg);
                     }
                 });
+
+//                // 3.1 获取 OkHttpClient 对象
+//                // 3.2 Post 请求，创建 RequestBody 对象 指定上传类型：图片；指定上传内容
+//                MediaType MutilPart_Form_Data = MediaType.parse("multipart/form-data;charset=utf-8");
+//                MultipartBody.Builder requestBodyBuilder = new MultipartBody.Builder()
+//                        .setType(MultipartBody.FORM)
+//                        .addFormDataPart("keyVo", "上传病情图片");
+//
+//
+//                File file = new File(imagePath);
+//                requestBodyBuilder.addFormDataPart("files", file.getName(), RequestBody.create(MutilPart_Form_Data, file));
+//
+//                RequestBody requestBody = requestBodyBuilder.build();
+//                request1 = new Request.Builder().url(Connect.BASE_URL + "ImageServlet")
+//                        .post(requestBody)
+//                        .build();
+//                okHttpClient = new OkHttpClient();
+//                Call call = okHttpClient.newCall(request1);
+//                call.enqueue(new Callback() {
+//                    @Override
+//                    public void onFailure(Call call, IOException e) {
+//                        Log.e("上传失败", "" + e.getMessage());
+//                    }
+//
+//                    @Override
+//                    public void onResponse(Call call, Response response) throws IOException {
+//                        Log.e("上传图片：", response.body().string());
+//                    }
+//                });
             }
         }
     }
@@ -208,25 +236,24 @@ public class QuestionActivity extends AppCompatActivity {
         inquiry.setHeadImg(UserBook.NowUser.getHeadImg());
         inquiry.setName(UserBook.NowUser.getNickName());
         inquiry.setPhone(UserBook.NowUser.getPhone());
+        inquiry.setImg(img_path);
         String jsonStr = null;
         jsonStr = new Gson().toJson(inquiry);
-        RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain;charset=utf-8"),
-                jsonStr);
-        request = new Request.Builder()
-                .post(requestBody)
-                .url(Connect.BASE_URL + "InquiryServlet")
-                .build();
-        Call call = okHttpClient.newCall(request);
-        call.enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                Log.e("上传问诊记录失败", "" + e.getMessage());
-            }
+        inquiryDao inquiry = new inquiryDao();
+        inquiry.add(jsonStr);
 
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                Log.e("上传问诊记录：", response.body().string());
-            }
-        });
     }
+
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void updateUI(EventMessage msg) {
+        if (msg.getCode().equals("inquiry_img_path")) {
+            Log.e("服务器返回的图片路径：", msg.getJson());
+            img_path = msg.getJson();
+
+        }
+    }
+
+
 }
+

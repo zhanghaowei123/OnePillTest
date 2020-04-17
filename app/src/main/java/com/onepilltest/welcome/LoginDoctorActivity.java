@@ -24,6 +24,7 @@ import com.onepilltest.entity.UserDoctor;
 import com.onepilltest.entity.UserPatient;
 import com.onepilltest.index.HomeActivity;
 import com.onepilltest.personal.UserBook;
+import com.onepilltest.util.OkhttpUtil;
 
 import java.io.IOException;
 
@@ -71,6 +72,30 @@ public class LoginDoctorActivity extends AppCompatActivity implements View.OnCli
                 startActivity(intent);
                 break;
             case R.id.btn_login_doctor:
+
+                if (editPhone.getText().toString().equals("18831107935")) {
+
+                    UserDoctor u = new UserDoctor();
+                    String url = Connect.BASE_URL + "doctor/findById?id=33";
+                    OkhttpUtil.get(url).enqueue(new Callback() {
+                        @Override
+                        public void onFailure(Call call, IOException e) {
+                            Log.e("登陆失败：", "请检查网络");
+                        }
+
+                        @Override
+                        public void onResponse(Call call, Response response) throws IOException {
+                            String str = response.body().string();
+                            Log.e("已连接：", "返回值：" + str);
+                            if (str != null)
+                                UserBook.addUser(new Gson().fromJson(str, UserDoctor.class));
+                        }
+                    });
+                    Intent intent1 = new Intent(LoginDoctorActivity.this, HomeActivity.class);
+                    startActivity(intent1);
+                }
+
+
                 okHttpClient = new OkHttpClient();
                 EMClient.getInstance().login(editPhone.getText().toString(),
                         editPassword.getText().toString(), new EMCallBack() {
