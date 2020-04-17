@@ -2,6 +2,7 @@ package com.onepilltest.index;
 
 import android.app.DownloadManager;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -73,6 +74,7 @@ public class CommentAdapter extends BaseAdapter {
                 .load(Connect.BASE_URL + comment.getHeadImg())
                 .apply(requestOptions)
                 .into(viewHolder.ivCommenterImg);
+        Log.e("HeadImgURL",Connect.BASE_URL + comment.getHeadImg());
         viewHolder.tvCommenterName.setText(comment.getName());
         viewHolder.tvCommenterCotent.setText(comment.getCcomment());
         return convertView;
