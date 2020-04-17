@@ -219,7 +219,7 @@ public class EditUserInfoActivity extends AppCompatActivity {
                             .addFormDataPart("file", imagePath, image)
                             .build();
 
-                    OkhttpUtil.post(requestBody,Connect.BASE_URL + "file/up"+postmsg).enqueue(new Callback() {
+                    OkhttpUtil.post(requestBody,Connect.BASE_URL + "file/image"+postmsg).enqueue(new Callback() {
                         @Override
                         public void onFailure(Call call, IOException e) {
 
