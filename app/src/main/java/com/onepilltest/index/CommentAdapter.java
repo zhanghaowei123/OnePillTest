@@ -26,7 +26,10 @@ public class CommentAdapter extends BaseAdapter {
     private Context context = null;
     //item对应的布局文件
     private int item_layout_id;
-
+    //赞的标志
+    private boolean goodFlag = false;
+    //踩的标志
+    private boolean badFlag = false;
     public CommentAdapter(List<Comment> comments, Context context, int item_layout_id) {
         this.comments = comments;
         this.context = context;
@@ -63,6 +66,11 @@ public class CommentAdapter extends BaseAdapter {
             viewHolder.ivCommenterImg = convertView.findViewById(R.id.iv_commenterImg);
             viewHolder.tvCommenterName = convertView.findViewById(R.id.tv_commenter_name);
             viewHolder.tvCommenterCotent = convertView.findViewById(R.id.tv_commenter_content);
+            viewHolder.ivGood = convertView.findViewById(R.id.iv_good);
+            viewHolder.ivBad = convertView.findViewById(R.id.iv_bad);
+            viewHolder.tvGoodNum = convertView.findViewById(R.id.tv_goodnum);
+            viewHolder.tvBadNum = convertView.findViewById(R.id.tv_badnum);
+            viewHolder.tvResponse = convertView.findViewById(R.id.tv_response);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -77,6 +85,39 @@ public class CommentAdapter extends BaseAdapter {
         Log.e("HeadImgURL",Connect.BASE_URL + comment.getHeadImg());
         viewHolder.tvCommenterName.setText(comment.getName());
         viewHolder.tvCommenterCotent.setText(comment.getCcomment());
+        //点赞功能
+        ViewHolder finalViewHolder = viewHolder;
+        viewHolder.ivGood.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (goodFlag == false) {
+                    finalViewHolder.ivGood.setImageResource(R.drawable.goodselected);
+                    finalViewHolder.ivBad.setImageResource(R.drawable.badnormal);
+                    goodFlag = true;
+                    badFlag = false;
+                }else{
+                    finalViewHolder.ivGood.setImageResource(R.drawable.goodnormal);
+                    goodFlag = false;
+                    badFlag = false;
+                }
+            }
+        });
+        //差评功能
+        viewHolder.ivBad.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (badFlag == false) {
+                    finalViewHolder.ivBad.setImageResource(R.drawable.badselected);
+                    finalViewHolder.ivGood.setImageResource(R.drawable.goodnormal);
+                    badFlag = true;
+                    goodFlag = false;
+                }else {
+                    finalViewHolder.ivBad.setImageResource(R.drawable.badnormal);
+                    badFlag = false;
+                    goodFlag = false;
+                }
+            }
+        });
         return convertView;
     }
 
@@ -84,5 +125,10 @@ public class CommentAdapter extends BaseAdapter {
         public ImageView ivCommenterImg;
         public TextView tvCommenterCotent;
         public TextView tvCommenterName;
+        public ImageView ivGood;
+        public ImageView ivBad;
+        public TextView tvGoodNum;
+        public TextView tvBadNum;
+        public TextView tvResponse;
     }
 }

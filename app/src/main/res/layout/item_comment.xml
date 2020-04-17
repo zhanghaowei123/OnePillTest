@@ -32,4 +32,35 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="100dp"
             android:textSize="18sp" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_marginLeft="200dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/iv_good"
+            android:src="@drawable/goodnormal"
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
+        <TextView
+            android:id="@+id/tv_goodnum"
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
+        <ImageView
+            android:layout_marginLeft="15dp"
+            android:id="@+id/iv_bad"
+            android:src="@drawable/badnormal"
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
+        <TextView
+            android:id="@+id/tv_badnum"
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
+        <TextView
+            android:layout_marginLeft="15dp"
+            android:id="@+id/tv_response"
+            android:text="回复"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 </LinearLayout>
