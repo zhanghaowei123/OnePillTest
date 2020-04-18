@@ -2,65 +2,106 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_margin="0dp"
+    android:background="#f7f7f7"
+    android:orientation="vertical"
+    android:padding="5dp"
+    android:paddingBottom="40dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="7dp"
+        android:layout_marginRight="15dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/iv_commenterImg"
+            android:layout_width="30dp"
+            android:layout_height="38dp"
+            android:src="@drawable/user" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:layout_margin="3dp">
 
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="7"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_commenter_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="3"
+                    android:paddingLeft="4dp"
+                    android:text="Charlotte"
+                    android:textColor="#999"
+                    android:textSize="13dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:text="2019/10/1"
+                    android:id="@+id/tv_commenter_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="2"
+                    android:paddingLeft="4dp"
+                    android:textColor="#bbb"
+                    android:textSize="9dp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+
+            <!--点赞，未实现-->
             <ImageView
-                android:id="@+id/iv_commenterImg"
-                android:layout_width="50dp"
-                android:layout_height="50dp" />
-
+                android:id="@+id/iv_good"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/up_no" />
+            <!--关注-->
             <TextView
-                android:id="@+id/tv_commenter_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="6dp"
-                android:textColor="#FF0000"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:id="@+id/tv_response"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#0000"
+                android:gravity="center"
+                android:padding="0dp"
+                android:text="123"
+                android:textColor="#22a9ef"
+                android:textSize="12dp" />
+            <!--收藏-->
+            <ImageView
+                android:id="@+id/iv_bad"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/down_no"
+                android:text="" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/tv_commenter_content"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="100dp"
-            android:textSize="18sp" />
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_marginLeft="200dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:id="@+id/iv_good"
-            android:src="@drawable/goodnormal"
-            android:layout_width="20dp"
-            android:layout_height="20dp" />
-        <TextView
-            android:id="@+id/tv_goodnum"
-            android:layout_width="20dp"
-            android:layout_height="20dp" />
-        <ImageView
-            android:layout_marginLeft="15dp"
-            android:id="@+id/iv_bad"
-            android:src="@drawable/badnormal"
-            android:layout_width="20dp"
-            android:layout_height="20dp" />
-        <TextView
-            android:id="@+id/tv_badnum"
-            android:layout_width="20dp"
-            android:layout_height="20dp" />
-        <TextView
-            android:layout_marginLeft="15dp"
-            android:id="@+id/tv_response"
-            android:text="回复"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+
     </LinearLayout>
+
+    <TextView
+        android:text="接下来我要评论了：床前明月光，疑是地上霜。举头望明月。。。"
+        android:id="@+id/tv_commenter_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="20dp"
+        android:paddingBottom="7dp"
+        android:paddingTop="6dp"
+        android:textColor="#121212"
+        android:textSize="15dp" />
+
 </LinearLayout>

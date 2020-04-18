@@ -1,27 +1,77 @@
 package com.onepilltest.index;
 
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.zxing.ResultPoint;
+import com.journeyapps.barcodescanner.BarcodeCallback;
+import com.journeyapps.barcodescanner.BarcodeResult;
 import com.journeyapps.barcodescanner.CaptureManager;
 import com.journeyapps.barcodescanner.DecoratedBarcodeView;
 import com.onepilltest.R;
 
+import java.util.List;
+
 public class ZxingActivity extends AppCompatActivity {
     private CaptureManager capture;
     private DecoratedBarcodeView bv_barcode;
+    private TextView textView = null;
+    private MyListener myListener = null;
+    private String results = "扫描结果为空";
+    //回调
+    private BarcodeCallback barcodeCallback = new BarcodeCallback() {
+        @Override
+        public void barcodeResult(BarcodeResult result) {
+            bv_barcode.resume();
+            if (result != null){
+                Log.e(getClass().getName(), "获取到的扫描结果是：" + result.getText());
+                String myresult = result.getText();
+                if (!results.equals(myresult)){
+                    results = myresult;
+                    Toast.makeText(getApplicationContext(),result.getText(),Toast.LENGTH_SHORT).show();
+                    textView.setText(result.getText());
+                }
+                bv_barcode.resume();
+            }
+        }
+
+        @Override
+        public void possibleResultPoints(List<ResultPoint> resultPoints) {
+
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(0xffffffff);
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        }
         setContentView(R.layout.zxing);
-        bv_barcode = (DecoratedBarcodeView) findViewById(R.id.bv_barcode);
-
+        find();
+        init();
         capture = new CaptureManager(this, bv_barcode);
         capture.initializeFromIntent(getIntent(), savedInstanceState);
-        capture.decode();
+//        capture.decode();
+//        bv_barcode.decodeSingle(this.barcodeCallback);//单次扫描
+        bv_barcode.decodeContinuous(barcodeCallback);//连续扫描
+    }
+
+    public void find(){
+        bv_barcode = (DecoratedBarcodeView) findViewById(R.id.bv_barcode);
+        textView = findViewById(R.id.zxing_text);
+    }
+
+    public void init(){
+
     }
 
     @Override
@@ -56,5 +106,15 @@ public class ZxingActivity extends AppCompatActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         return bv_barcode.onKeyDown(keyCode, event) || super.onKeyDown(keyCode, event);
+    }
+
+
+    private class MyListener implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()){
+
+            }
+        }
     }
 }

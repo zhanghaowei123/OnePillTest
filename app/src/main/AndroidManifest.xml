@@ -7,7 +7,6 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
@@ -187,6 +186,7 @@
         <!-- <activity android:name=".index.ZxingActivity"></activity> -->
         <!-- 二维码扫码 -->
         <activity android:name=".index.ZxingActivity" />
+
         <activity android:name=".message.DoctorChatActivity" />
         <activity android:name=".personal.FocusListActivity" />
         <activity android:name=".personal.cart.PlaceOrderActivity" />

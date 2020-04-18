@@ -31,7 +31,7 @@ public class UserBook {
     /*   public UserPatient getNowUser() {
            return NowUser;
        }*/
-    public Object getNowUser() {
+    public static Object getNowUser() {
         if (Code == 1)
             return NowDoctor;
         else if (Code == 2) {

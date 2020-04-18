@@ -282,12 +282,11 @@ public class HomeActivity extends AppCompatActivity {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (result != null) {
             if (result.getContents() == null) {
-                Log.e("扫码", "Cancelled");
                 Toast.makeText(this, "扫描结果为空", Toast.LENGTH_LONG).show();
             } else {
                 String str = result.getContents();
-                Log.e("扫码", "Scanned: " + str);
-                Toast.makeText(this, str + "\n扫描结果不为空", Toast.LENGTH_LONG).show();
+                ZxingUtil.getResult(str);
+//                Toast.makeText(this, str, Toast.LENGTH_LONG).show();
             }
         }
     }

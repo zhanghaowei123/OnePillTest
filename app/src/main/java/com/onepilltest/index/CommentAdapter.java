@@ -68,9 +68,9 @@ public class CommentAdapter extends BaseAdapter {
             viewHolder.tvCommenterCotent = convertView.findViewById(R.id.tv_commenter_content);
             viewHolder.ivGood = convertView.findViewById(R.id.iv_good);
             viewHolder.ivBad = convertView.findViewById(R.id.iv_bad);
-            viewHolder.tvGoodNum = convertView.findViewById(R.id.tv_goodnum);
-            viewHolder.tvBadNum = convertView.findViewById(R.id.tv_badnum);
-            viewHolder.tvResponse = convertView.findViewById(R.id.tv_response);
+//            viewHolder.tvGoodNum = convertView.findViewById(R.id.tv_goodnum);
+//            viewHolder.tvBadNum = convertView.findViewById(R.id.tv_badnum);
+//            viewHolder.tvResponse = convertView.findViewById(R.id.tv_response);//点击item执行回复
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -91,12 +91,12 @@ public class CommentAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 if (goodFlag == false) {
-                    finalViewHolder.ivGood.setImageResource(R.drawable.goodselected);
-                    finalViewHolder.ivBad.setImageResource(R.drawable.badnormal);
+                    finalViewHolder.ivGood.setImageResource(R.drawable.up_yes);
+                    finalViewHolder.ivBad.setImageResource(R.drawable.down_no);
                     goodFlag = true;
                     badFlag = false;
                 }else{
-                    finalViewHolder.ivGood.setImageResource(R.drawable.goodnormal);
+                    finalViewHolder.ivGood.setImageResource(R.drawable.up_no);
                     goodFlag = false;
                     badFlag = false;
                 }
@@ -107,12 +107,12 @@ public class CommentAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 if (badFlag == false) {
-                    finalViewHolder.ivBad.setImageResource(R.drawable.badselected);
-                    finalViewHolder.ivGood.setImageResource(R.drawable.goodnormal);
+                    finalViewHolder.ivBad.setImageResource(R.drawable.down_yes);
+                    finalViewHolder.ivGood.setImageResource(R.drawable.up_no);
                     badFlag = true;
                     goodFlag = false;
                 }else {
-                    finalViewHolder.ivBad.setImageResource(R.drawable.badnormal);
+                    finalViewHolder.ivBad.setImageResource(R.drawable.down_no);
                     badFlag = false;
                     goodFlag = false;
                 }

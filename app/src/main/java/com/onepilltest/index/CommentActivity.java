@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -18,6 +19,7 @@ import com.onepilltest.R;
 import com.onepilltest.URL.Connect;
 import com.onepilltest.entity.Article;
 import com.onepilltest.entity.Comment;
+import com.onepilltest.entity.UserDoctor;
 import com.onepilltest.personal.UserBook;
 import com.onepilltest.welcome.PerfectInforPatientActivity;
 import com.onepilltest.welcome.UserSuccessActivity;
@@ -129,16 +131,34 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
                 startActivity(intent);
                 break;
             case R.id.btn_send_comment:
+                if (etComment.getText().toString().length()>100){
+                    Toast.makeText(getApplicationContext(),"评论字数最多不超过100字符。",Toast.LENGTH_SHORT).show();
+                }
+
                 if (!etComment.getText().toString().equals("")) {
-                    comment.setName(UserBook.NowUser.getNickName());
-                    Log.e("hahah", UserBook.NowUser.getNickName());
-                    comment.setCcomment(etComment.getText().toString());
-                    comment.setArticleId(Integer.parseInt(id));
-                    comment.setHeadImg(UserBook.NowUser.getHeadImg());
-                    Log.e("head", UserBook.NowUser.getHeadImg());
-                    comments.add(comment);
-                    //更新到数据库
-                    insertComment();
+                    if (UserBook.Code == 2){
+                        comment.setName(UserBook.NowUser.getNickName());
+                        Log.e("hahah", UserBook.NowUser.getNickName());
+                        comment.setCcomment(etComment.getText().toString());
+                        comment.setArticleId(Integer.parseInt(id));
+                        comment.setHeadImg(UserBook.NowUser.getHeadImg());
+                        Log.e("head", UserBook.NowUser.getHeadImg());
+                        comments.add(comment);
+                        //更新到数据库
+                        insertComment();
+                    }else if (UserBook.Code == 1){
+                        UserDoctor doctor = (UserDoctor) UserBook.getNowUser();
+                        comment.setName(doctor.getName());
+                        comment.setCcomment(etComment.getText().toString());
+                        comment.setArticleId(Integer.parseInt(id));
+                        comment.setHeadImg(doctor.getHeadImg());
+                        comments.add(comment);
+                        //更新到数据库
+                        insertComment();
+                    }else{
+                        Toast.makeText(getApplicationContext(),"错误!",Toast.LENGTH_SHORT).show();
+                    }
+
                 } else {
                     break;
                 }
