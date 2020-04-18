@@ -13,6 +13,8 @@ import com.onepilltest.R;
 import com.onepilltest.index.HomeFragment;
 import com.onepilltest.personal.UserBook;
 
+import cn.jpush.android.api.JPushInterface;
+
 public class WelcomeActivity extends AppCompatActivity implements View.OnClickListener {
     private LinearLayout linearDoctor;
     private LinearLayout linearPatient;
@@ -23,6 +25,12 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
             getWindow().setStatusBarColor(0xff56ced4 );
         }
         setContentView(R.layout.welcome_login);
+
+        //初始化极光推送
+        Log.e("Jpush:","初始化");
+        JPushInterface.setDebugMode(true);
+        JPushInterface.init(this);
+
         initView();
 
         /*if (UserBook.NowUser != null ){

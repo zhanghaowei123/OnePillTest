@@ -32,6 +32,8 @@ allprojects {
             name 'Google'
         }*/
 
+
+
         maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
         jcenter { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter' }
 
