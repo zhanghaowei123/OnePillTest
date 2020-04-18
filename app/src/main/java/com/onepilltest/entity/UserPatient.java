@@ -81,12 +81,13 @@ public class UserPatient {
 
     @Override
     public String toString() {
-        return "UserPatient{" +
-                "id='" + id + '\'' +
+        return "User{" +
+                "id=" + id +
                 ", nickName='" + nickName + '\'' +
                 ", phone='" + phone + '\'' +
                 ", password='" + password + '\'' +
                 ", PID='" + PID + '\'' +
+                ", headImg='" + headImg + '\'' +
                 ", address='" + address + '\'' +
                 '}';
     }

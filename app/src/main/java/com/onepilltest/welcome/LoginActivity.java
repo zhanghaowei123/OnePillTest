@@ -25,6 +25,7 @@ import com.onepilltest.index.HomeActivity;
 import com.onepilltest.index.HomeFragment;
 import com.onepilltest.personal.UserBook;
 import com.onepilltest.util.OkhttpUtil;
+import com.onepilltest.util.SharedPreferencesUtil;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -83,8 +84,14 @@ public class LoginActivity extends AppCompatActivity {
                         public void onResponse(Call call, Response response) throws IOException {
                             String str = response.body().string();
                             Log.e("已连接：","返回值："+str);
-                            if(str!=null)
-                            UserBook.addUser(new Gson().fromJson(str,UserPatient.class));
+                            if(str!=null){
+                                Gson gson = new Gson();
+                                UserPatient userPatient = gson.fromJson(str,UserPatient.class);
+                                Log.e("已连接：",""+userPatient.toString());
+                                SharedPreferencesUtil.saveUser(getApplicationContext(),userPatient);
+                            }
+
+
                         }
                     });
 //                    u.setPhone("18831107935");
@@ -142,20 +149,8 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+
     private void login() {
-        if (editPhone.getText().toString().equals("18831107935")) {
-//            UserPatient u = new UserPatient();
-//            u.setPhone("18831107935");
-//            u.setPassword("123456");
-//            u.setNickName("charlotte");
-//            u.setAddress("河北省");
-//            u.setPID("1301251999999999991");
-//            u.setId(33);
-//            u.setHeadImg("image/991661239.jpeg");
-//            UserBook.addUser(u);
-            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-            startActivity(intent);
-        } else {
             Request request = new Request.Builder()
                     .url(Connect.BASE_URL + "user/login?phone=" + editPhone.getText().toString()
                             + "&password=" + editPassword.getText().toString())
@@ -177,15 +172,11 @@ public class LoginActivity extends AppCompatActivity {
                     //获取当前用户的信息
                     if (msg.getCode() == 1) {//登录成功
                         UserPatient u = msg.getUser();
-                        Log.e("userInfo",u.toString());
-                        Log.e("UserId", "  " + u.getId() + "|" + u.getAddress());
-                        //把用户存入UserBook
-                        UserBook.addUser(u);
                         Log.e("当前用户", "" + UserBook.NowUser.getId());
-                        save(u);//把u存进SharedPreferences
                         Log.e("success", "登录成功");
                         Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                         startActivity(intent);
+                        finish();
                     } else if (msg.getCode() == 2) {//登录失败
                         Toast.makeText(getApplicationContext(), "电话不存在", Toast.LENGTH_SHORT).show();
                     } else if (msg.getCode() == 3) {
@@ -193,21 +184,23 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 }
             });
-        }
+
     }
 
-    //用SharedPreferences存储
-    private void save(UserPatient userPatient) {
-
-        SharedPreferences sharedPreferences = getSharedPreferences("NowUser", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(userPatient, UserPatient.class);
-        Log.e("json字符串", json);
-        Log.e("NowUser", "UserId:" + UserBook.NowUser.getId());
-        editor.putString("NowUser", json);
-        editor.commit();
-    }
+//    //用SharedPreferences存储
+//    private void save(UserPatient userPatient) {
+//
+//        SharedPreferences sharedPreferences = getSharedPreferences("NowUser", MODE_PRIVATE);
+//        SharedPreferences.Editor editor = sharedPreferences.edit();
+//        Gson gson = new Gson();
+//        String json = gson.toJson(userPatient, UserPatient.class);
+//        Log.e("json字符串", json);
+//        editor.putString("NowUser", json);
+//        editor.commit();
+//
+//        //实例
+//        String string = sharedPreferences.getString("name","");
+//    }
 
     private void findViews() {
         ceshi = findViewById(R.id.ceshi);

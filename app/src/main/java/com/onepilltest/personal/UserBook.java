@@ -17,20 +17,21 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ */
 
 public class UserBook {
     public static final int Doctor = 1;
     public static final int Patient = 2;
-    public static int Code = 0;//身份
+    public static int Code = 0;//身份:医生是1，用户是2
     public static UserPatient NowUser;//当前用户
     public static UserDoctor NowDoctor;//当前医生
-    private static List<UserPatient> UserList = new ArrayList<>();//用户列表
-    private static List<UserDoctor> DoctorList = new ArrayList<>();//医生列表
+    public static List<UserPatient> UserList = new ArrayList<>();//用户列表
+    public static List<UserDoctor> DoctorList = new ArrayList<>();//医生列表
     public static int money = 1000;
 
-    /*   public UserPatient getNowUser() {
-           return NowUser;
-       }*/
+
     public static Object getNowUser() {
         if (Code == 1)
             return NowDoctor;

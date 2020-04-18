@@ -28,6 +28,7 @@ import com.onepilltest.URL.Connect;
 import com.onepilltest.entity.EventMessage;
 import com.onepilltest.entity.UserDoctor;
 import com.onepilltest.entity.UserPatient;
+import com.onepilltest.util.LogUtil;
 import com.onepilltest.util.OkhttpUtil;
 import com.onepilltest.welcome.PerfectInforDoctorActivity;
 
@@ -93,6 +94,7 @@ public class EditUserInfoActivity extends AppCompatActivity {
     }
 
     private void initPatient() {
+        LogUtil.show(this,UserBook.NowUser.getHeadImg());
         RequestOptions requestOptions = new RequestOptions().circleCrop();
         Glide.with(this)
                 .load(Connect.BASE_URL+UserBook.NowUser.getHeadImg())//本地图片的File对象
@@ -229,11 +231,15 @@ public class EditUserInfoActivity extends AppCompatActivity {
                         public void onResponse(Call call, Response response) throws IOException {
                             String json = response.body().string();
                             Log.e("更新头像：",json);
+                            Log.e("EditUserInfoActivity","返回的头像地址："+json);
+                            Log.e("更新前的头像",""+UserBook.NowUser.getHeadImg());
                             if (UserBook.Code == 1){//医生
                                 UserBook.NowDoctor.setHeadImg(json);
                             }else if(UserBook.Code ==2){//用户
                                 UserBook.NowUser.setHeadImg(json);
+                                Log.e("更新后的头像",""+UserBook.NowUser.getHeadImg());
                             }
+
                             EventMessage msg = new EventMessage();
                             msg.setCode("更新头像");
                             msg.setJson("yes");
@@ -286,6 +292,7 @@ public class EditUserInfoActivity extends AppCompatActivity {
             doctorDao.update(userDoctor);
         }else if(UserBook.Code ==2){//用户
             UserPatient userPatient = UserBook.NowUser;
+            Log.e("EditUser保存之前:",userPatient.toString());
             String nickName = et_nickName.getText().toString();
             String PID = et_PID.getText().toString();
             String password = et_password.getText().toString();
@@ -294,6 +301,7 @@ public class EditUserInfoActivity extends AppCompatActivity {
             userPatient.setPID(PID);
             userPatient.setPassword(password);
             userPatient.setPhone(phone);
+            Log.e("EditUser保存之后:",userPatient.toString());
             dao.update(userPatient);
         }
 

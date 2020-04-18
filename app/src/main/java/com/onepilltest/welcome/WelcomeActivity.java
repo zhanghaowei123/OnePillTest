@@ -10,8 +10,10 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.onepilltest.R;
+import com.onepilltest.index.HomeActivity;
 import com.onepilltest.index.HomeFragment;
 import com.onepilltest.personal.UserBook;
+import com.onepilltest.util.SharedPreferencesUtil;
 
 import cn.jpush.android.api.JPushInterface;
 
@@ -31,6 +33,8 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
         JPushInterface.setDebugMode(true);
         JPushInterface.init(this);
 
+        autoLogin();
+
         initView();
 
         /*if (UserBook.NowUser != null ){
@@ -39,6 +43,25 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
 
         }*/
     }
+
+    //自动登陆
+    private void autoLogin() {
+        if (SharedPreferencesUtil.userExist(getApplicationContext())){
+            SharedPreferencesUtil.initUserBook(getApplicationContext());
+            Intent intent = new Intent(WelcomeActivity.this, HomeActivity.class);
+            startActivity(intent);
+            finish();
+
+        }else if (SharedPreferencesUtil.doctorExist(getApplicationContext())){
+            SharedPreferencesUtil.initUserBook(getApplicationContext());
+            Intent intent = new Intent(WelcomeActivity.this, HomeActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
+
+    }
+
     private void initView(){
         linearDoctor = findViewById(R.id.linear_doctor);
         linearPatient = findViewById(R.id.linear_patient);

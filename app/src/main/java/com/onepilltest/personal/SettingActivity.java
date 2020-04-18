@@ -23,6 +23,7 @@ import com.onepilltest.entity.EventMessage;
 import com.onepilltest.entity.QR;
 import com.onepilltest.index.HomeActivity;
 import com.onepilltest.message.QuestionActivity;
+import com.onepilltest.util.SharedPreferencesUtil;
 import com.onepilltest.welcome.LoginActivity;
 import com.onepilltest.welcome.WelcomeActivity;
 
@@ -187,7 +188,8 @@ public class SettingActivity extends AppCompatActivity {
                     EMClient.getInstance().logout(false, new EMCallBack() {
                         @Override
                         public void onSuccess() {
-                            UserBook.NowUser = null;
+                            SharedPreferencesUtil.delUser(getApplicationContext());
+                            SharedPreferencesUtil.delDoctor(getApplicationContext());
                             Intent intent = new Intent(SettingActivity.this, WelcomeActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
