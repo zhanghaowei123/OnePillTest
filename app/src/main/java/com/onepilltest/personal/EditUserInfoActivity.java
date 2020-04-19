@@ -289,6 +289,7 @@ public class EditUserInfoActivity extends AppCompatActivity {
             userDoctor.setPID(PID);
             userDoctor.setPassword(password);
             userDoctor.setPhone(phone);
+            Toast.makeText(getApplicationContext(),"正在更新医生信息",Toast.LENGTH_SHORT).show();
             doctorDao.update(userDoctor);
         }else if(UserBook.Code ==2){//用户
             UserPatient userPatient = UserBook.NowUser;
@@ -302,6 +303,7 @@ public class EditUserInfoActivity extends AppCompatActivity {
             userPatient.setPassword(password);
             userPatient.setPhone(phone);
             Log.e("EditUser保存之后:",userPatient.toString());
+            Toast.makeText(getApplicationContext(),"正在更新用户信息",Toast.LENGTH_SHORT).show();
             dao.update(userPatient);
         }
 
@@ -313,7 +315,7 @@ public class EditUserInfoActivity extends AppCompatActivity {
 
         Log.e("EditUser",msg.getCode()+msg.getJson());
         if (msg.getCode().equals("UserDao_update")){
-            if(msg.getJson().equals("yes")){
+            if(!msg.getJson().equals("no")){
                 Log.e("更改NowUser",""+msg.getJson()+msg.getCode());
 
                 String nickName = et_nickName.getText().toString();
@@ -325,12 +327,10 @@ public class EditUserInfoActivity extends AppCompatActivity {
                 UserBook.NowUser.setPID(PID);
                 UserBook.NowUser.setPassword(password);
                 UserBook.NowUser.setPhone(phone);
-                EventMessage msg2 = new EventMessage();
-                msg2.setCode("用户信息已更新");
-                EventBus.getDefault().post(msg2);
+
                 finish();
             }else{
-                Toast.makeText(getApplicationContext(),"修改失败",Toast.LENGTH_SHORT);
+                Toast.makeText(getApplicationContext(),"修改失败",Toast.LENGTH_SHORT).show();
             }
         }else if(msg.getCode().equals("更新头像")){
             if(msg.getJson().equals("yes")){
@@ -341,7 +341,7 @@ public class EditUserInfoActivity extends AppCompatActivity {
                         .into(Img);
             }
         }else if(msg.getCode().equals("DoctorDao_update")){
-            if(msg.getJson().equals("yes")){
+            if(!msg.getJson().equals("no")){
                 Log.e("更改NowDoctor",""+msg.getJson()+msg.getCode());
 
                 String name = et_nickName.getText().toString();
@@ -353,12 +353,10 @@ public class EditUserInfoActivity extends AppCompatActivity {
                 UserBook.NowDoctor.setPID(PID);
                 UserBook.NowDoctor.setPassword(password);
                 UserBook.NowDoctor.setPhone(phone);
+                Toast.makeText(getApplicationContext(),"医生信息已更新",Toast.LENGTH_SHORT).show();
                 finish();
-                EventMessage msg2 = new EventMessage();
-                msg2.setCode("医生信息已更新");
-                EventBus.getDefault().post(msg2);
             }else{
-                Toast.makeText(getApplicationContext(),"修改失败",Toast.LENGTH_SHORT);
+                Toast.makeText(getApplicationContext(),"修改失败",Toast.LENGTH_SHORT).show();
             }
         }
 

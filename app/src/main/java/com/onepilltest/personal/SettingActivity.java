@@ -15,12 +15,15 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.gson.Gson;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 import com.onepilltest.R;
 import com.onepilltest.URL.Connect;
 import com.onepilltest.entity.EventMessage;
 import com.onepilltest.entity.QR;
+import com.onepilltest.entity.UserDoctor;
+import com.onepilltest.entity.UserPatient;
 import com.onepilltest.index.HomeActivity;
 import com.onepilltest.message.QuestionActivity;
 import com.onepilltest.util.SharedPreferencesUtil;
@@ -265,8 +268,10 @@ public class SettingActivity extends AppCompatActivity {
 
         if (UserBook.Code == 1) {//医生
             Log.e("Setting", msg.getCode() + msg.getJson());
-            if (msg.getCode().equals("医生信息已更新")) {
+            if (msg.getCode().equals("DoctorDao_update")) {
                 Log.e("刷新", "" + msg.getJson() + msg.getCode());
+                Toast.makeText(getApplicationContext(),"医生信息已更新",Toast.LENGTH_SHORT).show();
+                SharedPreferencesUtil.saveDoctor(getApplicationContext(),new Gson().fromJson(msg.getJson(), UserDoctor.class));
                 init();
             } else if (msg.getCode().equals("更新头像")) {
                 if (msg.getJson().equals("yes")) {
@@ -279,8 +284,10 @@ public class SettingActivity extends AppCompatActivity {
             }
         } else if (UserBook.Code == 2) {//用户
             Log.e("SettingActivity", msg.getCode() + msg.getJson());
-            if (msg.getCode().equals("用户信息已更新")) {
+            if (msg.getCode().equals("UserDao_update")) {
                 Log.e("刷新", "" + msg.getJson() + msg.getCode());
+                Toast.makeText(getApplicationContext(),"用户信息已更新",Toast.LENGTH_SHORT).show();
+                SharedPreferencesUtil.saveUser(getApplicationContext(),new Gson().fromJson(msg.getJson(), UserPatient.class));
                 init();
             } else if (msg.getCode().equals("更新头像")) {
                 if (msg.getJson().equals("yes")) {

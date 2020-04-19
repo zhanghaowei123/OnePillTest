@@ -95,7 +95,6 @@ public class HomeFragment extends Fragment {
         find(view);
         initView(view);
         setArticles();
-        Log.e("当前用户信息：",""+UserBook.NowUser.toString());
        // initZxing();
         initHe();
         HeConfig.switchToFreeServerNode();

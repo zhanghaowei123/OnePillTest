@@ -7,6 +7,7 @@ import com.onepilltest.URL.Connect;
 import com.onepilltest.entity.EventMessage;
 import com.onepilltest.entity.UserPatient;
 import com.onepilltest.util.OkhttpUtil;
+import com.onepilltest.util.SharedPreferencesUtil;
 
 import org.greenrobot.eventbus.EventBus;
 
