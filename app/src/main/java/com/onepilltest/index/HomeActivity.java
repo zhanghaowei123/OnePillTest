@@ -285,7 +285,7 @@ public class HomeActivity extends AppCompatActivity {
                 Toast.makeText(this, "扫描结果为空", Toast.LENGTH_LONG).show();
             } else {
                 String str = result.getContents();
-                ZxingUtil.getResult(str);
+                Log.e("扫描结构",str);
 //                Toast.makeText(this, str, Toast.LENGTH_LONG).show();
             }
         }

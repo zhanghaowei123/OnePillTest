@@ -1,7 +1,11 @@
 package com.onepilltest.index;
 
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +20,7 @@ import com.journeyapps.barcodescanner.BarcodeResult;
 import com.journeyapps.barcodescanner.CaptureManager;
 import com.journeyapps.barcodescanner.DecoratedBarcodeView;
 import com.onepilltest.R;
+import com.onepilltest.util.SharedPreferencesUtil;
 
 import java.util.List;
 
@@ -23,6 +28,7 @@ public class ZxingActivity extends AppCompatActivity {
     private CaptureManager capture;
     private DecoratedBarcodeView bv_barcode;
     private TextView textView = null;
+    SharedPreferences.Editor editor = null;
     private MyListener myListener = null;
     private String results = "扫描结果为空";
     //回调
@@ -34,9 +40,13 @@ public class ZxingActivity extends AppCompatActivity {
                 Log.e(getClass().getName(), "获取到的扫描结果是：" + result.getText());
                 String myresult = result.getText();
                 if (!results.equals(myresult)){
+                    editor = SharedPreferencesUtil.getSharedEdit(getApplicationContext(),"zxing");
+                    editor.putString("result",myresult);
+                    editor.commit();
                     results = myresult;
-                    Toast.makeText(getApplicationContext(),result.getText(),Toast.LENGTH_SHORT).show();
-                    textView.setText(result.getText());
+//                    Toast.makeText(getApplicationContext(),result.getText(),Toast.LENGTH_SHORT).show();
+                    textView.setText("扫描成功");
+                    replace(new ZxingUser());
                 }
                 bv_barcode.resume();
             }
@@ -47,6 +57,13 @@ public class ZxingActivity extends AppCompatActivity {
 
         }
     };
+
+    private void replace(Fragment fragment) {
+        FragmentManager manager=getSupportFragmentManager();
+        FragmentTransaction transaction=manager.beginTransaction();
+        transaction.replace(R.id.zxing_fragment,fragment);
+        transaction.commit();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

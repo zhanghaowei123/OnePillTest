@@ -11,9 +11,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.onepilltest.R;
 import com.onepilltest.URL.Connect;
 import com.onepilltest.entity.QR;
+import com.onepilltest.entity.ZxingMessage;
 
 public class QR_codeActivity extends AppCompatActivity {
 
@@ -58,7 +60,11 @@ public class QR_codeActivity extends AppCompatActivity {
             Glide.with(this)
                     .load(Connect.BASE_URL + UserBook.NowDoctor.getHeadImg())
                     .into(userImg);
-            img.setImageBitmap(QR.getQR(300, 300, UserBook.NowDoctor.toString()));
+            //生成二维码
+            ZxingMessage zxingMessage = new ZxingMessage();
+            zxingMessage.setCode(UserBook.Code);
+            zxingMessage.setJson(new Gson().toJson(UserBook.NowDoctor));
+            img.setImageBitmap(QR.getQR(300, 300, new Gson().toJson(zxingMessage)));
         } else {
             name.setText(UserBook.NowUser.getNickName());
             address.setText(UserBook.NowUser.getAddress());
@@ -66,7 +72,12 @@ public class QR_codeActivity extends AppCompatActivity {
             Glide.with(this)
                     .load(Connect.BASE_URL + UserBook.NowUser.getHeadImg())
                     .into(userImg);
-            img.setImageBitmap(QR.getQR(300, 300, UserBook.NowUser.toString()));
+
+            //生成二维码
+            ZxingMessage zxingMessage = new ZxingMessage();
+            zxingMessage.setCode(UserBook.Code);
+            zxingMessage.setJson(new Gson().toJson(UserBook.NowUser));
+            img.setImageBitmap(QR.getQR(300, 300, new Gson().toJson(zxingMessage)));
         }
         //img.setImageBitmap(QR.getQR(300,300,str));
     }
@@ -78,6 +89,7 @@ public class QR_codeActivity extends AppCompatActivity {
                 case R.id.setting_qr_code_back://用户地址
                     Intent address_intent = new Intent(QR_codeActivity.this, SettingActivity.class);
                     startActivity(address_intent);
+                    finish();
                     break;
                 case R.id.setting_qr_code_img:
                     if (UserBook.Code == 1) {
