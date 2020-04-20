@@ -6,25 +6,139 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:gravity="center"
-        android:layout_height="35dp">
-        <TextView
-            android:id="@+id/wallet_list_time"
-            android:layout_width="0dp"
+        android:layout_height="250dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/linearlayout_wallet"
+        android:orientation="vertical"
+        android:paddingLeft="15dp"
+        android:paddingTop="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="100dp"
-            android:text="2018-09-23"
-            android:textSize="17dp" />
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="付款成功"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_marginRight="3dp"
+                android:id="@+id/wallet_list_time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:text="04月19日" />
+        </LinearLayout>
+
 
         <TextView
             android:id="@+id/wallet_list_cash"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="5.50元"
+            android:textSize="22dp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="-￥20.0"
-            android:textColor="#d00"
-            android:textSize="17dp" />
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/underline"></LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:padding="0dp">
+            <TextView
+                android:layout_width="0dp"
+                android:textSize="14dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="交易对象：" />
+            <TextView
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:gravity="center_vertical"
+                android:text="张二狗" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:padding="0dp">
+            <TextView
+                android:layout_width="0dp"
+                android:textSize="14dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="交易说明：" />
+            <TextView
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:gravity="center_vertical"
+                android:text="商品" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/wallet_list_call"
+            android:gravity="center_vertical"
+            android:text="联系收款方"
+            android:background="@drawable/underline"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp" />
+        <Button
+            android:id="@+id/wallet_list_more"
+            android:gravity="center_vertical"
+            android:text="查看详情"
+            android:background="@drawable/underline"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp" />
+
+
+        <!--<TextView-->
+        <!--android:id="@+id/wallet_list_time"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_weight="1"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginRight="100dp"-->
+        <!--android:text="2018-09-23"-->
+        <!--android:textSize="17dp" />-->
+
+        <!--<TextView-->
+        <!--android:id="@+id/wallet_list_cash"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_weight="1"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="-￥20.0"-->
+        <!--android:textColor="#d00"-->
+        <!--android:textSize="17dp" />-->
     </LinearLayout>
 
 </LinearLayout>

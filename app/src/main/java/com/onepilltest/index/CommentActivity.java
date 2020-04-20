@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -66,10 +67,18 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
         findViews();
         initView();
         requestData();
+
+        //item点击事件
+        commentListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getApplicationContext(),"别点了..这里是回复",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void requestData() {
-        Log.e("获取评论:",Connect.BASE_URL + "comment/getComment?articleId=" + comment.getArticleId());
+//        Log.e("获取评论:",Connect.BASE_URL + "comment/getComment?articleId=" + comment.getArticleId());
         Request request = new Request.Builder()
                 .url(Connect.BASE_URL + "comment/getComment?articleId=" + comment.getArticleId())
                 .build();

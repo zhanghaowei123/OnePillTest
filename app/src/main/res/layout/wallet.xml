@@ -2,30 +2,34 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#f1f1f1"
     android:orientation="vertical">
 
     <!--标题栏-->
     <LinearLayout
+
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="#0a7"
+        android:layout_height="45dp"
+        android:background="#f1f1f1"
         android:gravity="center"
         android:orientation="horizontal">
 
         <Button
+            android:layout_marginLeft="5dp"
             android:id="@+id/wallet_back"
             android:layout_width="0dp"
             android:layout_height="30dp"
             android:layout_gravity="center"
             android:layout_weight="4"
-            android:background="@drawable/back_white_left" />
+            android:background="@drawable/back" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="38"
-            android:text="余额"
-            android:textColor="#f1f1f1"
+            android:text="支付"
+            android:textStyle="bold"
+            android:textColor="#333"
             android:textSize="16dp" />
 
 
@@ -35,19 +39,21 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="3"
-        android:background="#0a7"
+        android:layout_margin="10dp"
+        android:background="@drawable/linearlayout_shape2"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:gravity="center"
             android:layout_weight="2">
 
             <TextView
                 android:id="@+id/wallet_cash"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:text="￥3000.0"
                 android:textColor="#f1f1f1"
                 android:textSize="30dp" />
@@ -56,11 +62,11 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginLeft="100dp"
-            android:layout_marginRight="100dp"
             android:layout_weight="1">
 
             <LinearLayout
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="10dp"
@@ -92,21 +98,26 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="10"
+        android:layout_weight="9"
         android:orientation="vertical"
-        android:padding="30dp">
+        android:padding="0dp">
 
         <TextView
+            android:layout_marginLeft="30dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="交易记录"
             android:textSize="17dp" />
 
         <ListView
+            android:divider="@drawable/underline"
             android:id="@+id/wallet_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollbars="none"></ListView>
 
     </LinearLayout>
+
+
 </LinearLayout>
+

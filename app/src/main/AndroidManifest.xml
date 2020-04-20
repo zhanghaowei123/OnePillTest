@@ -7,17 +7,17 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
-
-    <!--Jpush-->
+    <!-- Jpush -->
     <!-- Required -->
     <permission
         android:name="${applicationId}.permission.JPUSH_MESSAGE"
         android:protectionLevel="signature" />
 
-    <!-- Required  一些系统要求的权限，如访问网络等-->
+    <!-- Required  一些系统要求的权限，如访问网络等 -->
     <uses-permission android:name="${applicationId}.permission.JPUSH_MESSAGE" />
     <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -155,11 +155,11 @@
         <activity android:name=".welcome.RegisterPatient" />
         <activity android:name=".personal.SettingActivity" />
         <activity android:name=".personal.AddressActivity" />
-        <activity android:name=".personal.WalletActivity" />
         <activity android:name=".personal.QR_codeActivity" />
         <activity android:name=".personal.EditUserInfoActivity" />
         <activity android:name=".personal.EditAddressActivity" />
         <activity android:name=".personal.recordActivity" />
+        <activity android:name=".personal.WalletActivity" />
         <activity android:name=".message.QuestionActivity" />
         <activity android:name=".message.QuestionListActivity" />
         <activity android:name=".message.ListActivity" />
@@ -204,7 +204,6 @@
         <!-- <activity android:name=".index.ZxingActivity"></activity> -->
         <!-- 二维码扫码 -->
         <activity android:name=".index.ZxingActivity" />
-
         <activity android:name=".message.DoctorChatActivity" />
         <activity android:name=".personal.FocusListActivity" />
         <activity android:name=".personal.cart.PlaceOrderActivity" />
@@ -212,14 +211,14 @@
         <activity android:name=".personal.OrderActivity" />
         <activity android:name=".personal.cart.CartActivity" />
         <activity android:name=".ceshi.ceshiActivity" />
-        <activity android:name=".message.QuestionType"></activity>
+        <activity android:name=".message.QuestionType" />
 
-
-        <!--Jpush-->
-        <!-- Since JCore2.0.0 Required SDK核心功能-->
+        <!-- Jpush -->
+        <!-- Since JCore2.0.0 Required SDK核心功能 -->
         <!-- 可配置android:process参数将Service放在其他进程中；android:enabled属性不能是false -->
         <!-- 这个是自定义Service，要继承极光JCommonService，可以在更多手机平台上使得推送通道保持的更稳定 -->
-        <service android:name="com.onepilltest.Jpush.MyJCommonService"
+        <service
+            android:name=".Jpush.MyJCommonService"
             android:enabled="true"
             android:exported="false"
             android:process=":pushcore">
@@ -233,16 +232,17 @@
         <!-- 3.3.0开始所有事件将通过该类回调 -->
         <!-- 该广播需要继承 JPush 提供的 JPushMessageReceiver 类, 并如下新增一个 Intent-Filter -->
         <receiver
-            android:name="com.onepilltest.Jpush.MyReceiver"
+            android:name=".Jpush.MyReceiver"
             android:enabled="true"
-            android:exported="false" >
+            android:exported="false">
             <intent-filter>
                 <action android:name="cn.jpush.android.intent.RECEIVE_MESSAGE" />
+
                 <category android:name="com.onepilltest" />
             </intent-filter>
         </receiver>
 
-
+        <activity android:name=".personal.WalletMoreActivity"></activity>
     </application>
 
 </manifest>
