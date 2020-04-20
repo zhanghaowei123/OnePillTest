@@ -92,7 +92,7 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String commentListStr = response.body().string();
-                Log.e("CommentList",commentListStr.toString());
+                Log.e("CommentList", commentListStr.toString());
                 //定义他的派生类调用getType，真实对象
                 Type type = new TypeToken<List<Comment>>() {
                 }.getType();
@@ -140,12 +140,12 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
                 startActivity(intent);
                 break;
             case R.id.btn_send_comment:
-                if (etComment.getText().toString().length()>100){
-                    Toast.makeText(getApplicationContext(),"评论字数最多不超过100字符。",Toast.LENGTH_SHORT).show();
+                if (etComment.getText().toString().length() > 100) {
+                    Toast.makeText(getApplicationContext(), "评论字数最多不超过100字符。", Toast.LENGTH_SHORT).show();
                 }
 
                 if (!etComment.getText().toString().equals("")) {
-                    if (UserBook.Code == 2){
+                    if (UserBook.Code == 2) {
                         comment.setName(UserBook.NowUser.getNickName());
                         Log.e("hahah", UserBook.NowUser.getNickName());
                         comment.setCcomment(etComment.getText().toString());
@@ -155,7 +155,7 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
                         comments.add(comment);
                         //更新到数据库
                         insertComment();
-                    }else if (UserBook.Code == 1){
+                    } else if (UserBook.Code == 1) {
                         UserDoctor doctor = (UserDoctor) UserBook.getNowUser();
                         comment.setName(doctor.getName());
                         comment.setCcomment(etComment.getText().toString());
@@ -164,8 +164,8 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
                         comments.add(comment);
                         //更新到数据库
                         insertComment();
-                    }else{
-                        Toast.makeText(getApplicationContext(),"错误!",Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "错误!", Toast.LENGTH_SHORT).show();
                     }
 
                 } else {
