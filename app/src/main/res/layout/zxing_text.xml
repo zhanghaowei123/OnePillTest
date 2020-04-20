@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_margin="30dp"
+    android:paddingTop="20dp"
+    android:paddingBottom="20dp"
+    android:gravity="center"
+    android:background="@drawable/linearlayout_shape"
+    android:layout_height="100dp"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/zxing_textz_loading"
+        android:src="@drawable/logo"
+        android:layout_width="60dp"
+        android:layout_marginBottom="10dp"
+        android:layout_height="35dp" />
+    <TextView
+        android:id="@+id/zxing_text"
+        android:layout_width="wrap_content"
+        android:text="OnePill正在扫描...."
+        android:layout_height="wrap_content" />
+</LinearLayout>
