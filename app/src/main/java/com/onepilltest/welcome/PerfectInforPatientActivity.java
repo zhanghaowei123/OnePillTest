@@ -69,7 +69,7 @@ public class PerfectInforPatientActivity extends AppCompatActivity {
                 registerInfo();
                 if (flag) {
                     postUserPatient();
-                    signup();
+                //    signup();
                 } else {
                     Toast.makeText(getApplicationContext(), "请完善个人信息", Toast.LENGTH_SHORT).show();
                 }
@@ -82,16 +82,38 @@ public class PerfectInforPatientActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    EMClient.getInstance().createAccount(userPatient.getPhone().trim(),
-                            userPatient.getPassword().trim());
-                    Log.e("ECtest", "注册成功");
-                } catch (HyphenateException e) {
+//                    EMClient.getInstance().createAccount(userPatient.getPhone().trim(),
+//                            userPatient.getPassword().trim());
+                    String jsonStr = null;
+                    String str = "{username:"+userPatient.getPhone()+",password:"+userPatient.getPassword()+"}";
+                    jsonStr = new Gson().toJson(str);
+                    Log.e("注册用户:", jsonStr.toString());
+                    RequestBody requestBody = new FormBody.Builder()
+                            .add("json", jsonStr)
+                            .build();
+                    String url = Connect.REST_URL + "users";
+                    OkhttpUtil.post(requestBody, url).enqueue(new Callback() {
+                        @Override
+                        public void onFailure(Call call, IOException e) {
+
+                        }
+
+                        @Override
+                        public void onResponse(Call call, Response response) throws IOException {
+                            Log.e("ECtest", "注册成功");
+                            Log.e("ECtest",response.body().string());
+                        }
+                    });
+//Hyphenate
+                } catch (Exception e) {
                     e.printStackTrace();
-                    Log.e("ECtest", "注册失败" + "," + e.getErrorCode() + "," + e.getMessage());
+//                    Log.e("ECtest", "注册失败" + "," + e.getErrorCode() + "," + e.getMessage());
+                    Log.e("ECtest","注册失败");
                 }
             }
         }).start();
     }
+
 
     private void postUserPatient() {
         String jsonStr = null;
@@ -104,7 +126,7 @@ public class PerfectInforPatientActivity extends AppCompatActivity {
         OkhttpUtil.post(requestBody, url).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-
+                Log.e("注册用户失败",e.getMessage());
             }
 
             @Override
@@ -120,36 +142,6 @@ public class PerfectInforPatientActivity extends AppCompatActivity {
             }
         });
     }
-
-
-//        RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain;charset=utf-8"),
-//                jsonStr);
-//        Request request = new Request.Builder()
-//                .post(requestBody)
-//                .url(Connect.BASE_URL + "RegisterServlet")
-//                .build();
-//        Call call = okHttpClient.newCall(request);
-//        call.enqueue(new Callback() {
-//            @Override
-//            public void onFailure(Call call, IOException e) {
-//                //失败时回调
-//                e.printStackTrace();
-//                Log.e("false", e.toString());
-//            }
-//
-//            @Override
-//            public void onResponse(Call call, Response response) throws IOException {
-//                //成功时回调
-//                String isSuccessful = response.body().string();
-//                if (isSuccessful.equals("true")) {
-//                    Log.e("successful", isSuccessful);
-//                    Intent intent = new Intent(PerfectInforPatientActivity.this,
-//                            UserSuccessActivity.class);
-//                    startActivity(intent);
-//                }
-//            }
-//        });
-
 
     private void registerInfo() {
         userPatient = new UserPatient();

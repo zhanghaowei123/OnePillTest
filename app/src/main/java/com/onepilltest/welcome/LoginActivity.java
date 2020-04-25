@@ -94,13 +94,6 @@ public class LoginActivity extends AppCompatActivity {
 
                         }
                     });
-//                    u.setPhone("18831107935");
-//                    u.setPassword("123456");
-//                    u.setNickName("charlotte");
-//                    u.setAddress("河北省");
-//                    u.setPID("130125199999999999");
-//                    u.setId(33);
-//                    u.setHeadImg("image/buyer.jpg");
                     Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                     startActivity(intent);
                 } else {
