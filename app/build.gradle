@@ -80,6 +80,10 @@ android {
 }
 
 dependencies {
+
+    //加载效果
+    implementation 'com.elyeproj.libraries:loaderviewlibrary:2.0.0'
+
     //ZXing
     implementation 'com.google.zxing:core:3.3.3'
     implementation('com.journeyapps:zxing-android-embedded:3.6.0') { transitive = false }

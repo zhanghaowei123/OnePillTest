@@ -101,11 +101,20 @@ public class CommentAdapter extends BaseAdapter {
         Log.e("goodNum",comment.getGoodNum()+"");
         viewHolder.tvGoodNum.setText(comment.getGoodNum()+"");
         viewHolder.tvBadNum.setText(comment.getBadNum()+"");
+        if (comment.getIsBad() == 0){
+            viewHolder.ivBad.setImageResource(R.drawable.down_yes);
+            viewHolder.ivGood.setImageResource(R.drawable.up_no);
+        }else {
+            viewHolder.ivBad.setImageResource(R.drawable.down_no);
+            viewHolder.ivGood.setImageResource(R.drawable.up_yes);
+        }
         //点赞功能
         viewHolder.ivGood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if(comment.getIsGood() == 0){
+                    Log.e("点赞",position+"\n"+comment.toString());
                     comment.setIsGood(1);
                     comment.setGoodNum(comment.getGoodNum()+1);
                     viewHolder.tvGoodNum.setText(comment.getGoodNum()+"");//数据库没动
@@ -114,6 +123,8 @@ public class CommentAdapter extends BaseAdapter {
                     updateComment(comment);
                     notifyDataSetChanged();
                 }else {
+
+                    Log.e("点赞",position+"\n"+comment.toString());
                     comment.setIsGood(0);
                     comment.setGoodNum(comment.getGoodNum()-1);
                     viewHolder.tvGoodNum.setText(comment.getGoodNum()+"");
@@ -123,17 +134,20 @@ public class CommentAdapter extends BaseAdapter {
                 }
             }
         });
+
         //差评功能
         viewHolder.ivBad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (comment.getIsBad() == 0){
+                    Log.e("quxiao点赞",position+"\n"+comment.toString());
                     comment.setIsBad(1);
                     comment.setGoodNum(comment.getBadNum()+1);
                     viewHolder.tvBadNum.setText(comment.getBadNum()+"");
                     viewHolder.ivBad.setImageResource(R.drawable.down_yes);
                     viewHolder.ivGood.setImageResource(R.drawable.up_no);
                 }else {
+                    Log.e("quxiao点赞",position+"\n"+comment.toString());
                     comment.setIsBad(0);
                     comment.setBadNum(comment.getBadNum()-1);
                     viewHolder.tvBadNum.setText(comment.getBadNum()+"");
@@ -141,6 +155,7 @@ public class CommentAdapter extends BaseAdapter {
                 }
             }
         });
+
         return convertView;
     }
 

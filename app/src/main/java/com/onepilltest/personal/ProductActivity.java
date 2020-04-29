@@ -85,16 +85,16 @@ public class ProductActivity extends Activity {
             getWindow().setStatusBarColor(0xffffffff);
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
+
         sharedPreferences = getSharedPreferences("addToCart", MODE_PRIVATE);
         myListener = new MyListener();
         find();
-        String product = getIntent().getStringExtra("product");
+
+        initMed();
+
         btnAddCart = findViewById(R.id.btn_addcart);
         EventBus.getDefault().register(this);
-        MedicineDao dao = new MedicineDao();
-        String name = product;
-        Log.e("搜索", "" + name);
-        dao.searchMedicineByName(name);
+
 //        initLoopView();  //实现轮播图
         //1.获取TabHost控件
         TabHost tabHost = findViewById(android.R.id.tabhost);
@@ -105,6 +105,22 @@ public class ProductActivity extends Activity {
         tabHost.addTab(tabHost.newTabSpec("function").setIndicator("功能主治").setContent(R.id.tab_2));
         tabHost.addTab(tabHost.newTabSpec("sideEffect").setIndicator("副作用").setContent(R.id.tab_3));
         tabHost.addTab(tabHost.newTabSpec("explain").setIndicator("使用说明").setContent(R.id.tab_4));
+
+    }
+
+    private void initMed() {
+
+        if (getIntent().getStringExtra("product")!= null){
+            String product = getIntent().getStringExtra("product");
+            MedicineDao dao = new MedicineDao();
+            String name = product;
+            Log.e("搜索", "" + name);
+            dao.searchMedicineByName(name);
+        }else{
+            int id = getIntent().getIntExtra("id",0);
+            MedicineDao dao = new MedicineDao();
+            dao.searchMedicineById(id);
+        }
 
     }
 
@@ -133,7 +149,6 @@ public class ProductActivity extends Activity {
             dao.isHave(UserBook.NowUser.getId(), 2, 2, med.getId());
         }
 
-        Log.e("药品详情json", "" + med.getMedicine());
         product_name.setText(med.getMedicine());
         product_type.setText(med.getGeneralName());
         tabHost1.setText(med.getOverview());
@@ -182,7 +197,6 @@ public class ProductActivity extends Activity {
         Log.e("focusCode", "" + msg.getCode());
         if (msg.getCode().equals("MedicineDao_searchMedicineByName")) {
             Gson gson = new Gson();
-            Log.e("查询药品json", "" + msg.getJson());
             medicine_ product = null;
             product = gson.fromJson(msg.getJson(), medicine_.class);
             med = product;
@@ -195,7 +209,6 @@ public class ProductActivity extends Activity {
             } else if (msg.getCode().equals("focusDao_isHave")) {*/
             if (msg.getJson().equals("yes")) {
                 isFocus = true;
-                Log.e("focuse", "更改字体！！！！！！");
                 btn.setText("已关注");
             } else {
                 isFocus = false;
@@ -221,6 +234,13 @@ public class ProductActivity extends Activity {
                 Toast.makeText(getApplicationContext(), "请检查网络连接", Toast.LENGTH_SHORT).show();
 
             }
+        }else if (msg.getCode().equals("MedicineDao_searchMedicineById")){
+            Gson gson = new Gson();
+            medicine_ product = null;
+            product = gson.fromJson(msg.getJson(), medicine_.class);
+            med = product;
+            //初始化
+            init();
         }
     }
 

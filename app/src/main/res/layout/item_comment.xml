@@ -18,7 +18,7 @@
 
         <ImageView
             android:id="@+id/iv_commenterImg"
-            android:layout_width="33dp"
+            android:layout_width="38dp"
             android:layout_height="38dp"
             android:src="@drawable/user" />
 

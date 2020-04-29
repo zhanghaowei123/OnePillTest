@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.onepilltest.R;
-import com.onepilltest.welcome.LoginActivity;
+import com.onepilltest.nearby.NearMap;
 
 public class ceshiActivity extends AppCompatActivity {
 
@@ -42,6 +42,8 @@ public class ceshiActivity extends AppCompatActivity {
             switch (v.getId()) {
                 case R.id.file_upload:
                     Toast.makeText(getApplicationContext(),"文件正在上传...",Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(ceshiActivity.this,NearMap.class);
+                    startActivity(intent);
 
             }
         }

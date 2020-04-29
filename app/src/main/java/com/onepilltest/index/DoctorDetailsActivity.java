@@ -50,6 +50,7 @@ public class DoctorDetailsActivity extends AppCompatActivity {
     boolean isFocus = false;
     //设置DoctorId来显示不同的医生详情页
     int DoctorId = 1;
+    Button back = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +85,8 @@ public class DoctorDetailsActivity extends AppCompatActivity {
         headImg = findViewById(R.id.dc_details_headImg);
         name = findViewById(R.id.dc_details_name);
         hos = findViewById(R.id.dc_details_hos);
+        back = findViewById(R.id.dc_details_back);
+        back.setOnClickListener(myListener);
     }
 
     private void init(){
@@ -207,6 +210,9 @@ public class DoctorDetailsActivity extends AppCompatActivity {
                     }*/
 
 
+                    break;
+                case R.id.dc_details_back:
+                    finish();
                     break;
             }
         }

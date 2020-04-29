@@ -70,6 +70,12 @@
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
+    <!-- 百度地图 -->
+    <!-- 这个权限用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- 这个权限用于访问GPS定位 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:name=".ECApplication"
         android:allowBackup="true"
@@ -242,7 +248,8 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".personal.WalletMoreActivity"></activity>
+        <activity android:name=".personal.WalletMoreActivity" />
+        <activity android:name=".nearby.NearMap"></activity>
     </application>
 
 </manifest>

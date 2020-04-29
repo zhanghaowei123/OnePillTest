@@ -1,66 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:paddingTop="5dp"
+    android:layout_height="70dp"
+    android:layout_marginBottom="5dp"
+    android:layout_marginTop="4dp"
     android:background="#fff"
-    android:paddingBottom="4dp"
-    android:layout_height="wrap_content"
     android:orientation="horizontal">
 
 
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="3"
-        android:gravity="right">
+    <com.onepilltest.others.SwipeMenu
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/focus_list_item_img"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_centerInParent="true"
-            android:layout_marginRight="10dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/user">
 
-        </ImageView>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="7"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:paddingLeft="5dp">
-
-        <TextView
-            android:id="@+id/focus_list_item_name"
+        <LinearLayout
+            android:id="@+id/focus_list_show"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="7dp"
-            android:gravity="left"
-            android:text="李四  18831107935" />
+            android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/focus_list_item_tag"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="left"
-            android:text="河北师范大学软件学院302" />
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:gravity="center_vertical">
 
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="3">
+                <ImageView
+                    android:layout_marginLeft="20dp"
+                    android:id="@+id/focus_list_item_img"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="10dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/user">
 
-        <!--<Button
-            android:id="@+id/user_address_item_edit"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/transparent"
-            android:text="编辑" />-->
-    </LinearLayout>
+                </ImageView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="7"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingLeft="5dp">
+
+                <TextView
+                    android:id="@+id/focus_list_item_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="7dp"
+                    android:gravity="left"
+                    android:text="李四  18831107935" />
+
+                <TextView
+                    android:id="@+id/focus_list_item_tag"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:text="河北师范大学软件学院302" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="65dp"
+                android:layout_weight="3"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/focus_list_item_add"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center"
+
+                    />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="160dp"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/focus_list_adds"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:background="#f70"
+                android:gravity="center"
+                android:text="查看"
+                android:textColor="#ffffff"
+                android:textSize="14sp" />
+            <TextView
+                android:id="@+id/focus_list_dels"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:background="@color/holo_red_light"
+                android:gravity="center"
+                android:text="取消关注"
+                android:textColor="#ffffff"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+
+
+    </com.onepilltest.others.SwipeMenu>
 </LinearLayout>

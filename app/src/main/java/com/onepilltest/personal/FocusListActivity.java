@@ -3,6 +3,8 @@ package com.onepilltest.personal;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.BaseAdapter;
@@ -16,15 +18,18 @@ import com.onepilltest.R;
 import com.onepilltest.entity.Address;
 import com.onepilltest.entity.EventMessage;
 import com.onepilltest.entity.Medicine;
+import com.onepilltest.entity.ToFocus;
 import com.onepilltest.entity.UserDoctor;
 import com.onepilltest.entity.UserPatient;
 import com.onepilltest.entity.focus;
 import com.onepilltest.entity.medicine_;
+import com.onepilltest.others.SwipeMenu;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,15 +40,18 @@ public class FocusListActivity extends AppCompatActivity {
     Button medicineTag = null;
     ListView focusList = null;
     MyListener myListener = null;
-    BaseAdapter adapter = null;
+    FocusListAdapter2 adapter = null;
     Gson gson = new Gson();
-    focus fs = null;
-    private List<focus> baseList = new ArrayList<>();
-    private List<focus> baseList1 = new ArrayList<>();
-    private List<focus> baseList2 = new ArrayList<>();
-    private List<UserDoctor> doctorList = new ArrayList<>();
-    private List<medicine_> medicineList = new ArrayList<>();
+    ToFocus fs = null;
+    private List<ToFocus> baseList = new ArrayList<>();
+    private List<ToFocus> baseList1 = new ArrayList<>();
+    private List<ToFocus> baseList2 = new ArrayList<>();
+    private List<ToFocus> doctorList = new ArrayList<>();
+    private List<ToFocus> medicineList = new ArrayList<>();
     focusDao fDao = new focusDao();
+    private SwipeMenu swipeMenu = null;
+    private RecyclerView recyclerView = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +75,10 @@ public class FocusListActivity extends AppCompatActivity {
         doctorTag.setOnClickListener(myListener);
         medicineTag = findViewById(R.id.focus_list_tab2);
         medicineTag.setOnClickListener(myListener);
-        focusList = findViewById(R.id.focus_list_list);
+        recyclerView = findViewById(R.id.focus_list_list);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
 
     }
 
@@ -118,58 +129,33 @@ public class FocusListActivity extends AppCompatActivity {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void updateUI(EventMessage msg) {
         if (msg.getCode().equals("focusDao_searchDoctor")) {
-            doctorList = gson.fromJson(msg.getJson(), new TypeToken<List<UserDoctor>>() {
-            }.getType());
+            Type focusList = new TypeToken<ArrayList<ToFocus>>(){}.getType();
+            doctorList = gson.fromJson(msg.getJson(),focusList);
+            Log.e("doctorList",""+doctorList.get(0).toString());
             setBaseList1();
         } else if (msg.getCode().equals("focusDao_searchMedicine")) {
-            medicineList = gson.fromJson(msg.getJson(), new TypeToken<List<medicine_>>() {
+            medicineList = gson.fromJson(msg.getJson(), new TypeToken<List<ToFocus>>() {
             }.getType());
             setBaseList2();
         }
-        //创建ContentAdapter实例，传入上下文， 子布局id ,数据baseList
-        adapter = new FocusListAdapter(FocusListActivity.this, R.layout.focus_liste_item, baseList);
 
-        focusList = (ListView) findViewById(R.id.focus_list_list);
-        focusList.setAdapter(adapter);//绑定适配器
+        adapter = new FocusListAdapter2(baseList);
+        recyclerView.setAdapter(adapter);
+//        //创建ContentAdapter实例，传入上下文， 子布局id ,数据baseList
+//        adapter = new FocusListAdapter(FocusListActivity.this, R.layout.focus_liste_item, baseList);
+//
+//        focusList = (ListView) findViewById(R.id.focus_list_list);
+//        focusList.setAdapter(adapter);//绑定适配器
         initTag1();
     }
 
     private void setBaseList1() {
 
-        for (int i = 0; i < doctorList.size(); i++) {
-            fs = new focus();
-            fs.setImg(doctorList.get(i).getHeadImg());
-            fs.setName(doctorList.get(i).getName());
-            fs.setMore(doctorList.get(i).getTag());
-            if (UserBook.Code == 1)
-                fs.setUserId(UserBook.NowDoctor.getId());
-            else
-                fs.setUserId(UserBook.NowUser.getId());
-            fs.setUserType(UserBook.Code);
-            fs.setType(1);
-            fs.setTypeId(doctorList.get(i).getId());
-            baseList1.add(fs);
-
-        }
+        baseList1  = doctorList;
     }
 
     private void setBaseList2() {
 
-        for (int i = 0; i < medicineList.size(); i++) {
-            fs = new focus();
-            //Log.e("BaseList",""+medicineList.get(i).getMedicine());
-            fs.setImg(medicineList.get(i).getImg1());
-            fs.setName(medicineList.get(i).getMedicine());
-            fs.setMore(medicineList.get(i).getStandard());
-            if (UserBook.Code == 1)
-                fs.setUserId(UserBook.NowDoctor.getId());
-            else
-                fs.setUserId(UserBook.NowUser.getId());
-            fs.setUserType(UserBook.Code);
-            fs.setType(2);
-            fs.setTypeId(medicineList.get(i).getId());
-            Log.e("BaseList",""+fs.getName());
-            baseList2.add(fs);
-        }
+        baseList2 = medicineList;
     }
 }

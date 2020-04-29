@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@drawable/underline"
+    android:paddingTop="10dp"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:layout_weight="4">
+
+        <TextView
+            android:id="@+id/locationitem_name"
+            android:textStyle="bold"
+            android:textSize="18dp"
+            android:paddingLeft="30dp"
+            android:gravity="center_vertical"
+            android:text="河北省第二人民医院"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3" />
+
+        <TextView
+            android:id="@+id/locationitem_line"
+            android:textSize="15dp"
+            android:paddingLeft="30dp"
+            android:text="据当前位置645米"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:gravity="center_vertical"
+        android:layout_height="100dp"
+        android:layout_weight="1">
+        <ImageView
+            android:src="@drawable/to"
+            android:layout_gravity="center"
+            android:layout_width="25dp"
+            android:layout_height="30dp" />
+
+        <TextView
+            android:text="到这里"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp" />
+    </LinearLayout>
+</LinearLayout>

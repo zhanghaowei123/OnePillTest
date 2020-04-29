@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <!--显示地图的视图控件-->
+
     <com.baidu.mapapi.map.MapView
         android:id="@+id/map_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"></com.baidu.mapapi.map.MapView>
 
-    </com.baidu.mapapi.map.MapView>
-</android.support.constraint.ConstraintLayout>
+    <Button
+        android:id="@+id/near_nowlocation"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/locations" />
+</FrameLayout><!--显示地图的视图控件-->

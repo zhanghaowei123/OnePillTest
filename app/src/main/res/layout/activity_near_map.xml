@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="#f7f7f7"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:paddingBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:background="@drawable/linearlayout"
+            android:layout_marginLeft="10dp"
+            android:paddingRight="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/nearmap_back"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="2"
+                android:background="@drawable/back" />
+
+            <EditText
+                android:id="@+id/nearmap_edit"
+                android:background="@null"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="17"
+                android:hint="搜索地点"
+                android:textStyle="bold"
+                android:textColor="#555"
+                android:textSize="14dp" />
+            <Button
+                android:id="@+id/nearmap_search"
+                android:gravity="center"
+                android:text="搜索"
+                android:textColor="#333"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="2"
+                android:background="#0000"/>
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:background="@drawable/underline"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="30dp"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:paddingTop="25dp">
+
+        <LinearLayout
+            android:id="@+id/nearmap_hospital"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:src="@drawable/hospital" />
+
+            <TextView
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="医院" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/nearmap_pill"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:src="@drawable/pill" />
+
+            <TextView
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="药店" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/nearmap_bank"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:src="@drawable/money" />
+
+            <TextView
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="银行" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/nearmap_bus"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:src="@drawable/bus" />
+
+            <TextView
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="公交站" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ListView
+            android:divider="@null"
+            android:id="@+id/nearmap_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></ListView>
+    </LinearLayout>
+</LinearLayout>
