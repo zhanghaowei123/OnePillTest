@@ -68,8 +68,8 @@ public class PerfectInforPatientActivity extends AppCompatActivity {
                 okHttpClient = new OkHttpClient();
                 registerInfo();
                 if (flag) {
+                    signup();
                     postUserPatient();
-                //    signup();
                 } else {
                     Toast.makeText(getApplicationContext(), "请完善个人信息", Toast.LENGTH_SHORT).show();
                 }
@@ -82,33 +82,27 @@ public class PerfectInforPatientActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-//                    EMClient.getInstance().createAccount(userPatient.getPhone().trim(),
-//                            userPatient.getPassword().trim());
-                    String jsonStr = null;
-                    String str = "{username:"+userPatient.getPhone()+",password:"+userPatient.getPassword()+"}";
-                    jsonStr = new Gson().toJson(str);
-                    Log.e("注册用户:", jsonStr.toString());
-                    RequestBody requestBody = new FormBody.Builder()
-                            .add("json", jsonStr)
+                    Request request = new Request.Builder()
+                            .url(Connect.BASE_URL + "auth/register?userName="+
+                                    userPatient.getPhone()+"&password="+
+                            userPatient.getPassword()+"&nickName="+userPatient.getNickName())
                             .build();
-                    String url = Connect.REST_URL + "users";
-                    OkhttpUtil.post(requestBody, url).enqueue(new Callback() {
+                    Call call = okHttpClient.newCall(request);
+                    call.enqueue(new Callback() {
                         @Override
                         public void onFailure(Call call, IOException e) {
-
+                            e.printStackTrace();
                         }
 
                         @Override
                         public void onResponse(Call call, Response response) throws IOException {
-                            Log.e("ECtest", "注册成功");
-                            Log.e("ECtest",response.body().string());
+                            String result = response.body().toString();
+                            Log.e("ECtest,注册成功",result);
                         }
                     });
-//Hyphenate
                 } catch (Exception e) {
-                    e.printStackTrace();
-//                    Log.e("ECtest", "注册失败" + "," + e.getErrorCode() + "," + e.getMessage());
                     Log.e("ECtest","注册失败");
+                    e.printStackTrace();
                 }
             }
         }).start();

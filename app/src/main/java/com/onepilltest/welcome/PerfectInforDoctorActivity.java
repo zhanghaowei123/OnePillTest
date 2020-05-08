@@ -96,12 +96,44 @@ public class PerfectInforDoctorActivity extends AppCompatActivity {
             public void onClick(View v) {
                 registerInfo();
                 if (flag) {
+                    signup();
                     postUserDoctor();
                 } else {
                     Toast.makeText(getApplicationContext(), "请完善个人信息", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+    }
+
+    private void signup() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Request request = new Request.Builder()
+                            .url(Connect.BASE_URL + "auth/register?userName="+
+                                    userDoctor.getPhone()+"&password="+
+                                    userDoctor.getPassword()+"&nickName="+userDoctor.getName())
+                            .build();
+                    Call call = okHttpClient.newCall(request);
+                    call.enqueue(new Callback() {
+                        @Override
+                        public void onFailure(Call call, IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        @Override
+                        public void onResponse(Call call, Response response) throws IOException {
+                            String result = response.body().toString();
+                            Log.e("ECtest,注册成功",result);
+                        }
+                    });
+                } catch (Exception e) {
+                    Log.e("ECtest","注册失败");
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 
     private void postUserDoctor() {
