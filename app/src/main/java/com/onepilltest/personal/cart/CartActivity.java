@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -58,6 +59,12 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
 
     private List<MyCart> myCarts = new ArrayList<>();
 
+    //新增
+    private TextView tvCartManage;
+    private Button btnDelete;
+    private CheckBox checkBoxAll;
+    private TextView tvFinish;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,10 +84,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
 //            requestData(Cart.medicineList.get(i));
 //
 //        }
-
-
     }
-
     private void findViews() {
         settlement = findViewById(R.id.btn_cart_settlement);
         ivCommentLeft = findViewById(R.id.cart_back);
@@ -88,13 +92,25 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
         tvSettlementPrice = findViewById(R.id.tv_settlement_price);
         btnCartSettlement = findViewById(R.id.btn_cart_settlement);
         btnCartSettlement.setOnClickListener(this);
+        tvCartManage = findViewById(R.id.tv_cart_manage1);
+        tvCartManage.setOnClickListener(this);
+        btnDelete = findViewById(R.id.btn_delete1);
+        btnDelete.setOnClickListener(this);
+        checkBoxAll = findViewById(R.id.chbox_choose_all);
+        checkBoxAll.setOnClickListener(this);
+        tvFinish = findViewById(R.id.tv_cart_finish1);
+        tvFinish.setOnClickListener(this);
     }
 
     private void initView() {
         Log.e("init数据:",myCarts.size()+"");
         cartsListView = findViewById(R.id.lv_mcart);
-        cartAdapter = new CartAdapter(myCarts, this, R.layout.item_mcart);
+        cartAdapter = new CartAdapter(myCarts, this, R.layout.item_mcart,checkBoxAll
+        ,btnDelete);
         cartsListView.setAdapter(cartAdapter);
+        cartAdapter.setBtnDeleteListener();
+        cartAdapter.setCheckBoxItemAll();
+        cartAdapter.setSelectCartItemMap();
     }
 
     private void requestData(int id) {
@@ -133,7 +149,6 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
             for (MyCart myCart:myCarts){
                 Log.e("数据：",myCart.toString());
             }
-
             for (MyCart myCart:myCarts){
                 price += myCart.getPrice();
             }
@@ -171,6 +186,24 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
                 medicines.clear();
                 cartAdapter.notifyDataSetChanged();
                 break;
+                //new
+            case R.id.tv_cart_manage1:// 当管理按钮被点下时，可进行删除操作
+                tvCartManage.setVisibility(View.GONE);
+                tvFinish.setVisibility(View.VISIBLE);
+                btnDelete.setVisibility(View.VISIBLE);
+                btnCartSettlement.setVisibility(View.VISIBLE);
+                tvSettlementPrice.setVisibility(View.INVISIBLE);
+                break;
+            case  R.id.tv_cart_finish1:// 当修改完成时，可进行下单操作
+                tvFinish.setVisibility(View.GONE);
+                tvCartManage.setVisibility(View.VISIBLE);
+                btnCartSettlement.setVisibility(View.VISIBLE);
+                btnDelete.setVisibility(View.GONE);
+                tvSettlementPrice.setVisibility(View.VISIBLE);
+                break;
+            case R.id.btn_delete1:
+
+
         }
     }
 

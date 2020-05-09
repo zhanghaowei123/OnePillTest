@@ -11,7 +11,6 @@ import android.widget.LinearLayout;
 
 import com.onepilltest.R;
 import com.onepilltest.index.HomeActivity;
-import com.onepilltest.index.HomeFragment;
 import com.onepilltest.personal.UserBook;
 import com.onepilltest.util.SharedPreferencesUtil;
 

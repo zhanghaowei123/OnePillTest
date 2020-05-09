@@ -2,7 +2,7 @@ package com.onepilltest.entity;
 
 public class SelectCartItem {
     private boolean selected;
-    private Cart cart;
+    private MyCart cart;
 
     public boolean isSelected() {
         return selected;
@@ -12,11 +12,11 @@ public class SelectCartItem {
         this.selected = selected;
     }
 
-    public Cart getCart() {
+    public MyCart getCart() {
         return cart;
     }
 
-    public void setCart(Cart cart) {
+    public void setCart(MyCart cart) {
         this.cart = cart;
     }
 }

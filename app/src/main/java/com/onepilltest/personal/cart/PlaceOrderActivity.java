@@ -77,154 +77,155 @@ public class PlaceOrderActivity extends AppCompatActivity {
         buyCarts = (List<Cart>) getIntent().getSerializableExtra("buyCart");
         fromWhere = getIntent().getStringExtra("fromWhere");
         // 设置初始数据
-        setInitData();
+//        setInitData();
 
-        //设置点击事件监听器
-        imgBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-        btnSubmitOrder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (fromWhere.equals(ShoppingCartActivity.FROM_CART)) {
-                    //若从购物车中启动该界面，则删除购物车中对应数据
-                    deleteChooseCartFromCartList();
-                }
-                AlertDialog.Builder builder = new AlertDialog.Builder(PlaceOrderActivity.this);
-                builder.setTitle("确认付款");
-                builder.setPositiveButton("确认支付", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //选中确认按钮，生成一个代发货的Order
-                        for (Cart cart : buyCarts) {
-                            Order order = new Order();
-                            order.setMedicine(cart.getMedicine());
-                            order.setType(Order.TYPE_UNSEND);
-                            order.setDoctorId(cart.getMedicine().getDoctorID());
-                            order.setAddress(buyerAddress);
-                            order.setUserId(UserBook.NowUser.getId());
-                            sendNewOrderToServlet(NEW_UNSEND_IP, order);
-                        }
-                        Toast.makeText(PlaceOrderActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
-                        finish();
-                    }
-                });
-                builder.setNegativeButton("取消支付", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //选中取消按钮，生成一个代付款的Order
-                        for (Cart cart : buyCarts) {
-                            Order order = new Order();
-                            order.setMedicine(cart.getMedicine());
-                            order.setType(Order.TYPE_UNPAY);
-                            order.setCount(cart.getMedicine().getDoctorID());
-                            order.setAddress(buyerAddress);
-                            order.setUserId(UserBook.NowUser.getId());
-                            sendNewOrderToServlet(NEW_UNPAY_IP, order);
-                        }
-                        Toast.makeText(PlaceOrderActivity.this, "支付失败，已放入未付款订单", Toast.LENGTH_SHORT).show();
-                        finish();
-                    }
-                });
-                builder.create().show();
-            }
-        });
-    }
-
-    private void sendNewOrderToServlet(final String CON_IP, final Order order) {
-        new Thread() {
-            @Override
-            public void run() {
-                try {
-                    URL url = new URL(CON_IP);
-                    HttpURLConnection con = (HttpURLConnection) url.openConnection();
-                    con.setRequestMethod("POST");
-                    JSONObject send = new JSONObject();
-                    send.put("type", order.getType());
-                    send.put("buyerId", order.getUserId());
-                    send.put("doctorId", order.getDoctorId());
-                    send.put("count", order.getCount());
-                    send.put("medicineId", order.getMedicine().getId().get(0));
-                    send.put("addressId", order.getAddress().getId());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }.start();
-    }
-
-    private void deleteChooseCartFromCartList() {
-        for (Cart cart : buyCarts) {
-            final int id = cart.getId();
-            new Thread() {
-                @Override
-                public void run() {
-                    // 向服务器端发送消息，删除对应 Id 的cart信息
-                    try {
-                        URL url = new URL(DELETE_CART_IP);
-                        HttpURLConnection con = (HttpURLConnection) url.openConnection();
-                        con.setRequestMethod("POST");
-                        JSONObject send = new JSONObject();
-                        send.put("id", id);
-                        ConUtil.setOutputStream(con, send.toString());
-                        ConUtil.getInputStream(con);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            }.start();
-        }
-    }
-
-    private void setInitData() {
-        //配置药品列表
-        adapter = new PlaceOrderAdapter(PlaceOrderActivity.this, buyCarts, R.layout.listview_place_item);
-        lvPlaceOrder.setAdapter(adapter);
-        setListViewHeightBasedOnChildren(lvPlaceOrder);
-        // 设置价格
-        int totalPrice = 0;
-        for (Cart cart : buyCarts) {
-            totalPrice += cart.getCount() * cart.getMedicine().getPrice().get(0);
-        }
-        Log.e("totalPrice", totalPrice + "");
-        tvOrderPrice.setText("￥" + totalPrice + "");
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        switch (requestCode) {
-            case ADDRESS_BACK_TO_PLACE:
-                //在地址返回界面返回某一地址
-                buyerAddress = (Address) data.getSerializableExtra("address");
-        }
-    }
-
-    //设置listView高度
-    public void setListViewHeightBasedOnChildren(ListView listView) {
-        try {
-            //获取listview对应的adapter
-            if (adapter == null) {
-                return;
-            }
-            int totalHeight = 0;
-            for (int i = 0, len = adapter.getCount(); i < len; i++) {
-                // listAdapter.getCount()返回数据项的数目
-                View listItem = adapter.getView(i, null, listView);
-                // 计算子项View 的宽高
-                listItem.measure(0, 0);
-                // 统计所有子项的总高度
-                totalHeight += listItem.getMeasuredHeight();
-            }
-            ViewGroup.LayoutParams params = listView.getLayoutParams();
-            params.height = totalHeight + (listView.getDividerHeight() * (adapter.getCount() - 1));
-            // listView.getDividerHeight()获取子项间分隔符占用的高度
-            // params.height最后得到整个ListView完整显示需要的高度
-            listView.setLayoutParams(params);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        //设置点击事件监听器
+//        imgBack.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                finish();
+//            }
+//        });
+//        btnSubmitOrder.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (fromWhere.equals(CartActivity.FROM_CART)) {
+//                    //若从购物车中启动该界面，则删除购物车中对应数据
+//                    deleteChooseCartFromCartList();
+//                }
+//                AlertDialog.Builder builder = new AlertDialog.Builder(PlaceOrderActivity.this);
+//                builder.setTitle("确认付款");
+//                builder.setPositiveButton("确认支付", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        //选中确认按钮，生成一个代发货的Order
+//                        for (Cart cart : buyCarts) {
+//                            Order order = new Order();
+//                            order.setMedicine(cart.getMedicine());
+//                            order.setType(Order.TYPE_UNSEND);
+//                            order.setDoctorId(cart.getMedicine().getDoctorID());
+//                            order.setAddress(buyerAddress);
+//                            order.setUserId(UserBook.NowUser.getId());
+//                            sendNewOrderToServlet(NEW_UNSEND_IP, order);
+//                        }
+//                        Toast.makeText(PlaceOrderActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
+//                        finish();
+//                    }
+//                });
+//                builder.setNegativeButton("取消支付", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        //选中取消按钮，生成一个代付款的Order
+//                        for (Cart cart : buyCarts) {
+//                            Order order = new Order();
+//                            order.setMedicine(cart.getMedicine());
+//                            order.setType(Order.TYPE_UNPAY);
+//                            order.setCount(cart.getMedicine().getDoctorID());
+//                            order.setAddress(buyerAddress);
+//                            order.setUserId(UserBook.NowUser.getId());
+//                            sendNewOrderToServlet(NEW_UNPAY_IP, order);
+//                        }
+//                        Toast.makeText(PlaceOrderActivity.this, "支付失败，已放入未付款订单", Toast.LENGTH_SHORT).show();
+//                        finish();
+//                    }
+//                });
+//                builder.create().show();
+//            }
+//        });
+//    }
+//
+//    private void sendNewOrderToServlet(final String CON_IP, final Order order) {
+//        new Thread() {
+//            @Override
+//            public void run() {
+//                try {
+//                    URL url = new URL(CON_IP);
+//                    HttpURLConnection con = (HttpURLConnection) url.openConnection();
+//                    con.setRequestMethod("POST");
+//                    JSONObject send = new JSONObject();
+//                    send.put("type", order.getType());
+//                    send.put("buyerId", order.getUserId());
+//                    send.put("doctorId", order.getDoctorId());
+//                    send.put("count", order.getCount());
+//                    send.put("medicineId", order.getMedicine().getId().get(0));
+//                    send.put("addressId", order.getAddress().getId());
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }.start();
+//    }
+//
+//    private void deleteChooseCartFromCartList() {
+//        for (Cart cart : buyCarts) {
+//            final int id = cart.getId();
+//            new Thread() {
+//                @Override
+//                public void run() {
+//                    // 向服务器端发送消息，删除对应 Id 的cart信息
+//                    try {
+//                        URL url = new URL(DELETE_CART_IP);
+//                        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+//                        con.setRequestMethod("POST");
+//                        JSONObject send = new JSONObject();
+//                        send.put("id", id);
+//                        ConUtil.setOutputStream(con, send.toString());
+//                        ConUtil.getInputStream(con);
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }.start();
+//        }
+//    }
+//
+//    private void setInitData() {
+//        //配置药品列表
+//        adapter = new PlaceOrderAdapter(PlaceOrderActivity.this, buyCarts, R.layout.listview_place_item);
+//        lvPlaceOrder.setAdapter(adapter);
+//        setListViewHeightBasedOnChildren(lvPlaceOrder);
+//        // 设置价格
+//        int totalPrice = 0;
+//        for (Cart cart : buyCarts) {
+//            totalPrice += cart.getCount() * cart.getMedicine().getPrice().get(0);
+//        }
+//        Log.e("totalPrice", totalPrice + "");
+//        tvOrderPrice.setText("￥" + totalPrice + "");
+//    }
+//
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        switch (requestCode) {
+//            case ADDRESS_BACK_TO_PLACE:
+//                //在地址返回界面返回某一地址
+//                buyerAddress = (Address) data.getSerializableExtra("address");
+//        }
+//    }
+//
+//    //设置listView高度
+//    public void setListViewHeightBasedOnChildren(ListView listView) {
+//        try {
+//            //获取listview对应的adapter
+//            if (adapter == null) {
+//                return;
+//            }
+//            int totalHeight = 0;
+//            for (int i = 0, len = adapter.getCount(); i < len; i++) {
+//                // listAdapter.getCount()返回数据项的数目
+//                View listItem = adapter.getView(i, null, listView);
+//                // 计算子项View 的宽高
+//                listItem.measure(0, 0);
+//                // 统计所有子项的总高度
+//                totalHeight += listItem.getMeasuredHeight();
+//            }
+//            ViewGroup.LayoutParams params = listView.getLayoutParams();
+//            params.height = totalHeight + (listView.getDividerHeight() * (adapter.getCount() - 1));
+//            // listView.getDividerHeight()获取子项间分隔符占用的高度
+//            // params.height最后得到整个ListView完整显示需要的高度
+//            listView.setLayoutParams(params);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
     }
 }

@@ -38,7 +38,6 @@ import com.hacknife.carouselbanner.CoolCarouselBanner;
 import com.hacknife.carouselbanner.interfaces.OnCarouselItemChangeListener;
 import com.hacknife.carouselbanner.interfaces.OnCarouselItemClickListener;
 import com.onepilltest.personal.cart.CartActivity;
-import com.onepilltest.personal.cart.ShoppingCartActivity;
 import com.onepilltest.util.OkhttpUtil;
 
 
