@@ -98,11 +98,11 @@ public class CartAdapter extends BaseAdapter {
                         @Override
                         public void run() {
                             try {
-                                URL url = new URL(Connect.BASE_URL+"cart/deleteList?id="+id);
+                                URL url = new URL(Connect.BASE_URL+"cart/deleteList?ids="+id);
                                 HttpURLConnection con = (HttpURLConnection) url.openConnection();
                                 con.setRequestMethod("POST");
                                 JSONObject send = new JSONObject();
-                                send.put("id", id);
+                                send.put("ids", id);
                                 ConUtil.setOutputStream(con, send.toString());
                                 ConUtil.getInputStream(con);
                             } catch (Exception e) {
