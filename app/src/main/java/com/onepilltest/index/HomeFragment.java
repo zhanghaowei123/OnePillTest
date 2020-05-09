@@ -209,7 +209,7 @@ public class HomeFragment extends Fragment {
         } else {
 
         }
-        text = "今天温度：" + heFeng.getTem() + "°C----->" + str;
+        text = "今天天气"+heFeng.getLife()+",温度：" + heFeng.getTem() + "°C----->" + str;
         bar.setText(text);
         Log.e("获取到天气数据", heFeng.getLife() + heFeng.getTem());
 

@@ -22,12 +22,9 @@ import com.onepilltest.ceshi.ceshiActivity;
 import com.onepilltest.entity.Result;
 import com.onepilltest.entity.UserPatient;
 import com.onepilltest.index.HomeActivity;
-import com.onepilltest.index.HomeFragment;
 import com.onepilltest.personal.UserBook;
 import com.onepilltest.util.OkhttpUtil;
 import com.onepilltest.util.SharedPreferencesUtil;
-
-import org.greenrobot.eventbus.EventBus;
 
 import java.io.IOException;
 
@@ -73,25 +70,23 @@ public class LoginActivity extends AppCompatActivity {
                 if (editPhone.getText().toString().equals("18831107935")) {
 
                     UserPatient u = new UserPatient();
-                    String url = Connect.BASE_URL+"user/findById?id=33";
+                    String url = Connect.BASE_URL + "user/findById?id=33";
                     OkhttpUtil.get(url).enqueue(new Callback() {
                         @Override
                         public void onFailure(Call call, IOException e) {
-                            Log.e("登陆失败：","请检查网络");
+                            Log.e("登陆失败：", "请检查网络");
                         }
 
                         @Override
                         public void onResponse(Call call, Response response) throws IOException {
                             String str = response.body().string();
-                            Log.e("已连接：","返回值："+str);
-                            if(str!=null){
+                            Log.e("已连接：", "返回值：" + str);
+                            if (str != null) {
                                 Gson gson = new Gson();
-                                UserPatient userPatient = gson.fromJson(str,UserPatient.class);
-                                Log.e("已连接：",""+userPatient.toString());
-                                SharedPreferencesUtil.saveUser(getApplicationContext(),userPatient);
+                                UserPatient userPatient = gson.fromJson(str, UserPatient.class);
+                                Log.e("已连接：", "" + userPatient.toString());
+                                SharedPreferencesUtil.saveUser(getApplicationContext(), userPatient);
                             }
-
-
                         }
                     });
                     Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
@@ -144,56 +139,58 @@ public class LoginActivity extends AppCompatActivity {
 
 
     private void login() {
-            Request request = new Request.Builder()
-                    .url(Connect.BASE_URL + "user/login?phone=" + editPhone.getText().toString()
-                            + "&password=" + editPassword.getText().toString())
-                    .build();
-            Log.e("LoginInfo",request.toString());
-            Call call = okHttpClient.newCall(request);
-            call.enqueue(new Callback() {
-                @Override
-                public void onFailure(Call call, IOException e) {
-                    Log.e("LoginFailed",e.getMessage());
-                    e.printStackTrace();
-                }
+        Request request = new Request.Builder()
+                .url(Connect.BASE_URL + "user/login?phone=" + editPhone.getText().toString()
+                        + "&password=" + editPassword.getText().toString())
+                .build();
+        Log.e("LoginInfo", request.toString());
+        Call call = okHttpClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.e("LoginFailed", e.getMessage());
+                e.printStackTrace();
+            }
 
-                @Override
-                public void onResponse(Call call, Response response) throws IOException {
-                    String jsonStr = response.body().string();
-                    Log.e("登陆", jsonStr.toString());
-                    Result msg = new Gson().fromJson(jsonStr, Result.class);
-                    //获取当前用户的信息
-                    if (msg.getCode() == 1) {//登录成功
-                        UserPatient u = msg.getUser();
-                        Log.e("当前用户", "" + UserBook.NowUser.getId());
-                        Log.e("success", "登录成功");
-                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                        startActivity(intent);
-                        finish();
-                    } else if (msg.getCode() == 2) {//登录失败
-                        Toast.makeText(getApplicationContext(), "电话不存在", Toast.LENGTH_SHORT).show();
-                    } else if (msg.getCode() == 3) {
-                        Toast.makeText(getApplicationContext(), "密码错误", Toast.LENGTH_SHORT).show();
-                    }
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String jsonStr = response.body().string();
+                Log.e("登陆", jsonStr.toString());
+                Result msg = new Gson().fromJson(jsonStr, Result.class);
+                //获取当前用户的信息
+                if (msg.getCode() == 1) {//登录成功
+                    UserPatient u = msg.getUser();
+                    UserBook.addUser(u);
+                    save(u);
+                    Log.e("当前用户", "" + UserBook.NowUser.getId());
+                    Log.e("success", "登录成功");
+                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else if (msg.getCode() == 2) {//登录失败
+                    Toast.makeText(getApplicationContext(), "电话不存在", Toast.LENGTH_SHORT).show();
+                } else if (msg.getCode() == 3) {
+                    Toast.makeText(getApplicationContext(), "密码错误", Toast.LENGTH_SHORT).show();
                 }
-            });
+            }
+        });
 
     }
 
-//    //用SharedPreferences存储
-//    private void save(UserPatient userPatient) {
-//
-//        SharedPreferences sharedPreferences = getSharedPreferences("NowUser", MODE_PRIVATE);
-//        SharedPreferences.Editor editor = sharedPreferences.edit();
-//        Gson gson = new Gson();
-//        String json = gson.toJson(userPatient, UserPatient.class);
-//        Log.e("json字符串", json);
-//        editor.putString("NowUser", json);
-//        editor.commit();
-//
-//        //实例
-//        String string = sharedPreferences.getString("name","");
-//    }
+    //用SharedPreferences存储
+    private void save(UserPatient userPatient) {
+
+        SharedPreferences sharedPreferences = getSharedPreferences("NowUser", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(userPatient, UserPatient.class);
+        Log.e("json字符串", json);
+        editor.putString("NowUser", json);
+        editor.commit();
+
+        //实例
+        String string = sharedPreferences.getString("name", "");
+    }
 
     private void findViews() {
         ceshi = findViewById(R.id.ceshi);

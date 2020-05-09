@@ -2,6 +2,7 @@ package com.onepilltest;
 
 import android.app.ActivityManager;
 import android.app.Application;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.util.Log;
 
@@ -13,9 +14,12 @@ import java.util.Iterator;
 import java.util.List;
 
 public class ECApplication extends Application {
+    private static Context context;
+
     @Override
     public void onCreate() {
         super.onCreate();
+        context = getApplicationContext();
 //        EMOptions options = new EMOptions();
 //        // 默认添加好友时，是不需要验证的，改成需要验证
 //        options.setAcceptInvitationAlways(false);
@@ -28,10 +32,14 @@ public class ECApplication extends Application {
         if (EaseUI.getInstance().init(this, options)) {
             Log.e("EaseUI", "初始化成功");
             //在做打包混淆时，关闭debug模式，避免消耗不必要的资源
-       //     EMClient.getInstance().setDebugMode(true);
+            //     EMClient.getInstance().setDebugMode(true);
             //EaseUI初始化成功之后再去调用注册消息监听的代码
         } else {
             Log.e("EaseUI", "初始化失败");
         }
+    }
+
+    public static Context getContext() {
+        return context;
     }
 }
