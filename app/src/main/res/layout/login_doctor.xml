@@ -124,7 +124,7 @@
             android:id="@+id/btn_QQ"
             android:layout_width="38dp"
             android:layout_height="40dp"
-            android:background="@drawable/QQ"/>
+            android:background="@drawable/qq"/>
 
     </LinearLayout>
 

@@ -18,6 +18,7 @@ import com.onepilltest.R;
 import com.onepilltest.URL.ConUtil;
 import com.onepilltest.URL.Connect;
 import com.onepilltest.entity.Cart;
+import com.onepilltest.entity.Medicine;
 import com.onepilltest.entity.MyCart;
 import com.onepilltest.entity.SelectCartItem;
 import com.onepilltest.entity.medicine_;
@@ -203,6 +204,10 @@ public class CartAdapter extends BaseAdapter {
         tvCartMedicineCount.setText(myCart.getCount()+"");
         checkBoxItem.setText(myCart.getId()+"");
 
+        medicine_ medicine =myCart.getMedicine();
+        int maxCount = medicine.getStock();
+        int minCount = 1;
+
         int cartId = Integer.parseInt(checkBoxItem.getText().toString());
 
         //根据selectCaryItemMap中的选中位，设置是否全选
@@ -249,6 +254,75 @@ public class CartAdapter extends BaseAdapter {
                         }
                     }
                 }
+            }
+        });
+        //数量加减
+        btnCartPlus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //1.获取当前count文本框值
+                int nowCount = Integer.parseInt(tvCartMedicineCount.getText().toString());
+                //判断当前值是否大于or等于最小值
+                if (nowCount >= maxCount) {
+                    btnCartPlus.setClickable(false);
+                    btnCartMinus.setClickable(true);
+                    Toast.makeText(context, "已达到库存最大值", Toast.LENGTH_SHORT).show();
+                } else {
+                    btnCartPlus.setClickable(true);
+                    tvCartMedicineCount.setText(nowCount + 1 + "");
+                    btnCartMinus.setClickable(true);
+
+                    //将修改信息传入数据库
+//                    new Thread() {
+//                        @Override
+//                        public void run() {
+//                            try {
+//
+//                            } catch (Exception e) {
+//                                e.printStackTrace();
+//                            }
+//
+//                        }
+//                    }.start();
+                }
+                //获取新数据
+                int afterCount = Integer.parseInt(tvCartMedicineCount.getText().toString());
+                myCartList.get(position).setCount(afterCount);
+                notifyDataSetChanged();
+            }
+        });
+        btnCartMinus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               //1.获取当前count文本框值
+                int nowCount = Integer.parseInt(tvCartMedicineCount.getText().toString());
+                //判断当前值是否大于or等于最小值
+                if (nowCount <= minCount) {
+                    btnCartMinus.setClickable(false);
+                    btnCartPlus.setClickable(true);
+                    Toast.makeText(context, "已达到库存最大值", Toast.LENGTH_SHORT).show();
+                } else {
+                    btnCartMinus.setClickable(true);
+                    tvCartMedicineCount.setText(nowCount -1 + "");
+                    btnCartPlus.setClickable(true);
+
+                    //将修改信息传入数据库
+//                    new Thread() {
+//                        @Override
+//                        public void run() {
+//                            try {
+//
+//                            } catch (Exception e) {
+//                                e.printStackTrace();
+//                            }
+//
+//                        }
+//                    }.start();
+                }
+                //获取新数据
+                int afterCount = Integer.parseInt(tvCartMedicineCount.getText().toString());
+                myCartList.get(position).setCount(afterCount);
+                notifyDataSetChanged();
             }
         });
         return convertView;

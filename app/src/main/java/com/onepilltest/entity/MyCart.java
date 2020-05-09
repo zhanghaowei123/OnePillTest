@@ -11,6 +11,7 @@ public class MyCart {
     private String img;    //商品图片
     private String name;   //药品名
     private String standard;//规格
+    private medicine_ medicine;
 
     public int getId() {
         return id;
@@ -84,6 +85,13 @@ public class MyCart {
         this.standard = standard;
     }
 
+    public medicine_ getMedicine() {
+        return medicine;
+    }
+
+    public void setMedicine(medicine_ medicine) {
+        this.medicine = medicine;
+    }
 
     @Override
     public String toString() {
