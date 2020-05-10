@@ -1,6 +1,8 @@
 package com.onepilltest.personal;
 
 import android.content.Intent;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -191,6 +193,28 @@ public class SettingActivity extends AppCompatActivity {
                     EMClient.getInstance().logout(false, new EMCallBack() {
                         @Override
                         public void onSuccess() {
+                            if (UserBook.Code == 2){
+                                try{
+                                    SQLiteDatabase db = SQLiteDatabase
+                                            .openOrCreateDatabase("/data/data/com.onepilltest/databases/user_db", null);
+                                    db.delete("PATIENT",null,null);
+                                    Log.e("SQLite","删除PATIENT表成功");
+                                    db.close();
+                                }catch (SQLException e){
+                                    Log.e("SQLite",e.getMessage()+","+e.getCause());
+                                }
+                            }else if(UserBook.Code == 1){
+                                try{
+                                    SQLiteDatabase db = SQLiteDatabase
+                                            .openOrCreateDatabase("/data/data/com.onepilltest/databases/doctor_db", null);
+                                    db.delete("DOCTOR",null,null);
+                                    Log.e("SQLite","删除DOCTOR表成功");
+                                    db.close();
+                                }catch (SQLException e){
+                                    Log.e("SQLite",e.getMessage()+","+e.getCause());
+                                }
+                            }
+
                             SharedPreferencesUtil.delUser(getApplicationContext());
                             SharedPreferencesUtil.delDoctor(getApplicationContext());
                             Intent intent = new Intent(SettingActivity.this, WelcomeActivity.class);

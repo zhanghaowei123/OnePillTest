@@ -1,7 +1,9 @@
 package com.onepilltest.welcome;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +18,8 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
+import com.onepilltest.Ease.MyUserProvider;
+import com.onepilltest.MyDBHelper;
 import com.onepilltest.R;
 import com.onepilltest.URL.Connect;
 import com.onepilltest.ceshi.ceshiActivity;
@@ -27,6 +31,8 @@ import com.onepilltest.util.OkhttpUtil;
 import com.onepilltest.util.SharedPreferencesUtil;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -44,6 +50,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button ceshi;//测试按钮
     MyListener myListener = new MyListener();
 
+    private SQLiteDatabase database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +59,11 @@ public class LoginActivity extends AppCompatActivity {
             getWindow().setStatusBarColor(0xff56ced4);
         }
         setContentView(R.layout.activity_login);
+
+        //打开或者创建一个数据库
+        MyDBHelper myDBHelper = new MyDBHelper(getApplicationContext(), "user_db", 1);
+        database = myDBHelper.getWritableDatabase();
+
 
         findViews();
         int i = editPassword.getText().length();
@@ -164,6 +176,25 @@ public class LoginActivity extends AppCompatActivity {
                     save(u);
                     Log.e("当前用户", "" + UserBook.NowUser.getId());
                     Log.e("success", "登录成功");
+                    //设置自己的昵称和头像
+                    MyUserProvider.getInstance().setUser(UserBook.NowUser.getPhone(),
+                            UserBook.NowUser.getNickName(),
+                            Connect.BASE_URL + UserBook.NowUser.getHeadImg());
+
+                    //设置SQLite数据库，将用户信息保存进去
+                    try{
+                        //插入数据
+                        ContentValues contentValues = new ContentValues();
+                        contentValues.put("PHONE",UserBook.NowUser.getPhone());
+                        contentValues.put("NAME",UserBook.NowUser.getNickName());
+                        contentValues.put("IMG",UserBook.NowUser.getHeadImg());
+                        database.insert("PATIENT",null,contentValues);
+                        database.close();
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+
+                    //跳转
                     Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                     startActivity(intent);
                     finish();

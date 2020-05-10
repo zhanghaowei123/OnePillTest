@@ -1,7 +1,9 @@
 package com.onepilltest.welcome;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,6 +19,8 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
+import com.onepilltest.Ease.MyUserProvider;
+import com.onepilltest.MyDoctorDBHelper;
 import com.onepilltest.R;
 import com.onepilltest.URL.Connect;
 import com.onepilltest.entity.Result;
@@ -41,6 +45,8 @@ public class LoginDoctorActivity extends AppCompatActivity implements View.OnCli
     private ImageView imgEye;
     private TextView textRegister;//注册
     private OkHttpClient okHttpClient;
+    private MyDoctorDBHelper myDoctorDBHelper;
+    private SQLiteDatabase database;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,6 +55,10 @@ public class LoginDoctorActivity extends AppCompatActivity implements View.OnCli
             getWindow().setStatusBarColor(0xff56ced4);
         }
         setContentView(R.layout.login_doctor);
+
+        myDoctorDBHelper = new MyDoctorDBHelper(getApplicationContext(),"doctor_db",1);
+        database = myDoctorDBHelper.getWritableDatabase();
+
         findViews();
     }
 
@@ -158,6 +168,22 @@ public class LoginDoctorActivity extends AppCompatActivity implements View.OnCli
                     //把用户存入UserBook
                     UserBook.addUser(u);
                     save(u);//把u存进SharedPreferences
+                    //设置昵称和头像
+                    MyUserProvider.getInstance().setUser(UserBook.NowDoctor.getPhone(),
+                            UserBook.NowDoctor.getName(),
+                            Connect.BASE_URL+UserBook.NowDoctor.getHeadImg());
+                    //设置SQLite数据库，将用户信息保存进去
+                    try{
+                        //插入数据
+                        ContentValues contentValues = new ContentValues();
+                        contentValues.put("PHONE",UserBook.NowDoctor.getPhone());
+                        contentValues.put("NAME",UserBook.NowDoctor.getName());
+                        contentValues.put("IMG",UserBook.NowDoctor.getHeadImg());
+                        database.insert("DOCTOR",null,contentValues);
+                        database.close();
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
                     Log.e("success", "登录成功");
                     Intent intent = new Intent(LoginDoctorActivity.this, HomeActivity.class);
                     startActivity(intent);

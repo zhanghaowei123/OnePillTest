@@ -1,5 +1,7 @@
 package com.onepilltest.Ease;
 
+import android.util.Log;
+
 import com.hyphenate.easeui.EaseUI;
 import com.hyphenate.easeui.domain.EaseUser;
 
@@ -20,9 +22,29 @@ public class MyUserProvider implements EaseUI.EaseUserProfileProvider {
         if (userList.containsKey(username))
             //有就返归这个对象。。
             return userList.get(username);
-        System.out.println("error ： 没有 数据" + username);
+        Log.e("mprovider,ERROR", "没有数据" + username);
         return null;
     }
 
+    public void setUser(String username, String nickname, String imageUrl) {
+        if (!userList.containsKey(username)) {
+            EaseUser easeUser = new EaseUser(username);
+            userList.put(username, easeUser);
+        }
+
+        EaseUser easeUser = getUser(username);
+        // 环信的easerUser的父类有一个setNickname 的方法可以用来设置昵称，直接调用就好。。
+        easeUser.setNickname(nickname);
+        // 同理，设置一个图像的url就好，因为他加载头像是使用glide加载的
+        easeUser.setAvatar(imageUrl);
+    }
+
+    // 获取单例子
+    public static MyUserProvider getInstance() {
+        if (myUserProvider == null) {
+            myUserProvider = new MyUserProvider();
+        }
+        return myUserProvider;
+    }
 
 }

@@ -10,6 +10,7 @@ import com.hyphenate.chat.EMMessage;
 import com.hyphenate.easeui.EaseConstant;
 import com.hyphenate.easeui.EaseUI;
 import com.hyphenate.easeui.ui.EaseConversationListFragment;
+import com.onepilltest.Ease.MyUserProvider;
 
 import java.util.List;
 
@@ -41,6 +42,22 @@ public class MessageFragment extends EaseConversationListFragment {
     private EMMessageListener emMessageListener = new EMMessageListener() {
         @Override
         public void onMessageReceived(List<EMMessage> list) {
+            //接收到对方的消息
+            for (EMMessage message : list) {
+                String imUserName = message.getStringAttribute("ImUserName", "");
+                String imNickName = message.getStringAttribute("ImNickName", "");
+                String imImageUrl = message.getStringAttribute("ImImageUrl", "");
+
+                Log.e("对方用户昵称", imNickName);
+                Log.e("对方用户名", imUserName);
+                Log.e("对方用户头像", imImageUrl);
+                //设置对方信息（如果没这段代码，我们手机将会不显示对方的头像和昵称）
+                //通过MyUserProvider设置对方信息(每次和用户聊天必须传递给用户自己的信息，
+                // 然后对方将会保存这些信息到MyUserProvider中，再保存到数据库中)
+                MyUserProvider.getInstance().setUser(imUserName, imNickName, imImageUrl);
+                //保存到内存
+                //保存到数据库
+            }
             //设置数据
             EaseUI.getInstance().getNotifier().notify(list);
             //刷新页面

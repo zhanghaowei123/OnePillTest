@@ -7,6 +7,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -32,6 +33,7 @@ import android.widget.Toast;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.EMMessageListener;
 import com.hyphenate.EMValueCallBack;
+import com.hyphenate.chat.EMChatManager;
 import com.hyphenate.chat.EMChatRoom;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMCmdMessageBody;
@@ -139,6 +141,9 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
     // "正在输入"功能的开关，打开后本设备发送消息将持续发送cmd类型消息通知对方"正在输入"
     private boolean turnOnTyping;
 
+    private String phone;
+    private String name;
+    private String img;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.ease_fragment_chat, container, false);
@@ -909,6 +914,25 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
         }
         if (chatFragmentHelper != null) {
             //set extension
+            //在数据库中查找
+            SQLiteDatabase db = SQLiteDatabase.
+                    openOrCreateDatabase("user_db", null);
+            // 查询获得游标
+            Cursor cursor = db.query ("PATIENT",null,null,null,null,null,null);
+// 判断游标是否为空
+            if(cursor.moveToFirst()) {
+                // 遍历游标
+                do {
+                    phone=cursor.getString(cursor.getColumnIndex("PHONE"));
+                    name = cursor.getString(cursor.getColumnIndex("NAME"));
+                    img = cursor.getString(cursor.getColumnIndex("IMG"));
+                    Log.e("mydb", phone + "|"+name+"|"+img);
+                } while (cursor.moveToNext());
+            }
+            db.close();
+            message.setAttribute("ImUserName", phone);//设置我的环信username
+            message.setAttribute("ImNickName", name);//设置我的昵称
+            message.setAttribute("ImImageUrl", img);//设置我的头像url
             chatFragmentHelper.onSetMessageAttributes(message);
         }
         if (chatType == EaseConstant.CHATTYPE_GROUP) {

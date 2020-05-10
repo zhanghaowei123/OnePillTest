@@ -9,17 +9,16 @@ import android.util.Log;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMOptions;
 import com.hyphenate.easeui.EaseUI;
+import com.onepilltest.Ease.MyUserProvider;
 
 import java.util.Iterator;
 import java.util.List;
 
 public class ECApplication extends Application {
-    private static Context context;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        context = getApplicationContext();
 //        EMOptions options = new EMOptions();
 //        // 默认添加好友时，是不需要验证的，改成需要验证
 //        options.setAcceptInvitationAlways(false);
@@ -37,9 +36,7 @@ public class ECApplication extends Application {
         } else {
             Log.e("EaseUI", "初始化失败");
         }
-    }
-
-    public static Context getContext() {
-        return context;
+        //设置provider
+        EaseUI.getInstance().setUserProfileProvider(MyUserProvider.getInstance());
     }
 }
