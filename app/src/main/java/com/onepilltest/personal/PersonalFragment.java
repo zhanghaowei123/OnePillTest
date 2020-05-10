@@ -21,7 +21,6 @@ import com.onepilltest.entity.Article;
 import com.onepilltest.entity.EventMessage;
 import com.onepilltest.index.IndexAdapter;
 import com.onepilltest.personal.cart.CartActivity;
-import com.onepilltest.personal.cart.ShoppingCartActivity;
 import com.onepilltest.personal.oder.PatientOrderActivity;
 
 import org.greenrobot.eventbus.EventBus;
