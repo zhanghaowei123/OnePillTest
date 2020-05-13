@@ -47,10 +47,21 @@
 
     </LinearLayout>
 
-    <android.support.v7.widget.RecyclerView
+    <com.onepilltest.others.MyRecyclerView
         android:id="@+id/focus_list_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="10dp"></android.support.v7.widget.RecyclerView>
+        android:paddingTop="10dp"></com.onepilltest.others.MyRecyclerView>
+
+    <!--Empty提示图-->
+    <ImageView
+        android:id="@+id/empty_iv"
+        android:layout_margin="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        android:contentDescription="@null"
+        android:src="@drawable/empty"
+        android:layout_centerInParent="true" />
 
 </LinearLayout>

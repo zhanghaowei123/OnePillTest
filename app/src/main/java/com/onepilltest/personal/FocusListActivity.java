@@ -4,25 +4,17 @@ import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.onepilltest.R;
-import com.onepilltest.entity.Address;
+import com.onepilltest.entity.Dao.focusDao;
 import com.onepilltest.entity.EventMessage;
-import com.onepilltest.entity.Medicine;
 import com.onepilltest.entity.ToFocus;
-import com.onepilltest.entity.UserDoctor;
-import com.onepilltest.entity.UserPatient;
-import com.onepilltest.entity.focus;
-import com.onepilltest.entity.medicine_;
+import com.onepilltest.others.MyRecyclerView;
 import com.onepilltest.others.SwipeMenu;
 
 import org.greenrobot.eventbus.EventBus;
@@ -50,7 +42,9 @@ public class FocusListActivity extends AppCompatActivity {
     private List<ToFocus> medicineList = new ArrayList<>();
     focusDao fDao = new focusDao();
     private SwipeMenu swipeMenu = null;
-    private RecyclerView recyclerView = null;
+    private MyRecyclerView recyclerView = null;
+    private View mEmptyView;
+
 
 
     @Override
@@ -78,6 +72,9 @@ public class FocusListActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.focus_list_list);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
+        mEmptyView = findViewById(R.id.empty_iv);
+
+
 
 
     }
@@ -131,7 +128,7 @@ public class FocusListActivity extends AppCompatActivity {
         if (msg.getCode().equals("focusDao_searchDoctor")) {
             Type focusList = new TypeToken<ArrayList<ToFocus>>(){}.getType();
             doctorList = gson.fromJson(msg.getJson(),focusList);
-            Log.e("doctorList",""+doctorList.get(0).toString());
+            //Log.e("doctorList",""+doctorList.get(0).toString());
             setBaseList1();
         } else if (msg.getCode().equals("focusDao_searchMedicine")) {
             medicineList = gson.fromJson(msg.getJson(), new TypeToken<List<ToFocus>>() {
@@ -141,11 +138,7 @@ public class FocusListActivity extends AppCompatActivity {
 
         adapter = new FocusListAdapter2(baseList);
         recyclerView.setAdapter(adapter);
-//        //创建ContentAdapter实例，传入上下文， 子布局id ,数据baseList
-//        adapter = new FocusListAdapter(FocusListActivity.this, R.layout.focus_liste_item, baseList);
-//
-//        focusList = (ListView) findViewById(R.id.focus_list_list);
-//        focusList.setAdapter(adapter);//绑定适配器
+        recyclerView.setEmptyView(mEmptyView);
         initTag1();
     }
 

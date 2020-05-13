@@ -29,6 +29,7 @@ import com.onepilltest.entity.UserPatient;
 import com.onepilltest.index.HomeActivity;
 import com.onepilltest.personal.UserBook;
 import com.onepilltest.util.OkhttpUtil;
+import com.onepilltest.util.SharedPreferencesUtil;
 
 import java.io.IOException;
 
@@ -82,30 +83,6 @@ public class LoginDoctorActivity extends AppCompatActivity implements View.OnCli
                 startActivity(intent);
                 break;
             case R.id.btn_login_doctor:
-
-                if (editPhone.getText().toString().equals("18831107935")) {
-
-                    UserDoctor u = new UserDoctor();
-                    String url = Connect.BASE_URL + "doctor/findById?id=19";
-                    OkhttpUtil.get(url).enqueue(new Callback() {
-                        @Override
-                        public void onFailure(Call call, IOException e) {
-                            Log.e("登陆失败：", "请检查网络");
-                        }
-
-                        @Override
-                        public void onResponse(Call call, Response response) throws IOException {
-                            String str = response.body().string();
-                            Log.e("已连接：", "返回值：" + str);
-                            if (str != null)
-                                UserBook.addUser(new Gson().fromJson(str, UserDoctor.class));
-                        }
-                    });
-                    Intent intent1 = new Intent(LoginDoctorActivity.this, HomeActivity.class);
-                    startActivity(intent1);
-                }
-
-
                 okHttpClient = new OkHttpClient();
                 EMClient.getInstance().login(editPhone.getText().toString(),
                         editPassword.getText().toString(), new EMCallBack() {
@@ -113,6 +90,7 @@ public class LoginDoctorActivity extends AppCompatActivity implements View.OnCli
                             public void onSuccess() {
                                 Log.e("环信登录账号:", "成功");
                                 login();
+                                finish();
                             }
 
                             @Override
@@ -159,7 +137,7 @@ public class LoginDoctorActivity extends AppCompatActivity implements View.OnCli
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String jsonStr = response.body().string();
-                Log.e("test", jsonStr.toString());
+                Log.e("登陆信息：", "\n"+jsonStr.toString());
                 Result msg = new Gson().fromJson(jsonStr, Result.class);
                 //获取当前医生的信息
                 if (msg.getCode() == 1) {//登录成功
@@ -198,13 +176,6 @@ public class LoginDoctorActivity extends AppCompatActivity implements View.OnCli
 
     //用SharedPreferences存储
     private void save(UserDoctor userDoctor) {
-
-        SharedPreferences sharedPreferences = getSharedPreferences("NowDoctor", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(userDoctor, UserDoctor.class);
-        Log.e("json字符串", json);
-        editor.putString("NowDoctor", json);
-        editor.commit();
+        SharedPreferencesUtil.saveDoctor(getApplicationContext(),userDoctor);
     }
 }

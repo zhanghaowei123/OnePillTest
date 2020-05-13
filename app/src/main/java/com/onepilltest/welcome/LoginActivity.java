@@ -79,31 +79,31 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (editPhone.getText().toString().equals("18831107935")) {
-
-                    UserPatient u = new UserPatient();
-                    String url = Connect.BASE_URL + "user/findById?id=33";
-                    OkhttpUtil.get(url).enqueue(new Callback() {
-                        @Override
-                        public void onFailure(Call call, IOException e) {
-                            Log.e("登陆失败：", "请检查网络");
-                        }
-
-                        @Override
-                        public void onResponse(Call call, Response response) throws IOException {
-                            String str = response.body().string();
-                            Log.e("已连接：", "返回值：" + str);
-                            if (str != null) {
-                                Gson gson = new Gson();
-                                UserPatient userPatient = gson.fromJson(str, UserPatient.class);
-                                Log.e("已连接：", "" + userPatient.toString());
-                                SharedPreferencesUtil.saveUser(getApplicationContext(), userPatient);
-                            }
-                        }
-                    });
-                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                    startActivity(intent);
-                } else {
+//                if (editPhone.getText().toString().equals("18831107935")) {
+//
+//                    UserPatient u = new UserPatient();
+//                    String url = Connect.BASE_URL + "user/findById?id=33";
+//                    OkhttpUtil.get(url).enqueue(new Callback() {
+//                        @Override
+//                        public void onFailure(Call call, IOException e) {
+//                            Log.e("登陆失败：", "请检查网络");
+//                        }
+//
+//                        @Override
+//                        public void onResponse(Call call, Response response) throws IOException {
+//                            String str = response.body().string();
+//                            Log.e("已连接：", "返回值：" + str);
+//                            if (str != null) {
+//                                Gson gson = new Gson();
+//                                UserPatient userPatient = gson.fromJson(str, UserPatient.class);
+//                                Log.e("已连接：", "" + userPatient.toString());
+//                                SharedPreferencesUtil.saveUser(getApplicationContext(), userPatient);
+//                            }
+//                        }
+//                    });
+//                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+//                    startActivity(intent);
+//                } else {
                     okHttpClient = new OkHttpClient();
                     EMClient.getInstance().login(editPhone.getText().toString(),
                             editPassword.getText().toString(), new EMCallBack() {
@@ -111,6 +111,7 @@ public class LoginActivity extends AppCompatActivity {
                                 public void onSuccess() {
                                     Log.e("环信登录账号:", "成功");
                                     login();
+                                    finish();
                                 }
 
                                 @Override
@@ -124,7 +125,7 @@ public class LoginActivity extends AppCompatActivity {
                                 }
                             });
                 }
-            }
+
         });
         //密码可视或不可视
         imgEye.setOnClickListener(new View.OnClickListener() {
@@ -167,15 +168,14 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String jsonStr = response.body().string();
-                Log.e("登陆", jsonStr.toString());
+                Log.e("登陆信息：", "\n"+jsonStr.toString());
                 Result msg = new Gson().fromJson(jsonStr, Result.class);
                 //获取当前用户的信息
                 if (msg.getCode() == 1) {//登录成功
                     UserPatient u = msg.getUser();
                     UserBook.addUser(u);
                     save(u);
-                    Log.e("当前用户", "" + UserBook.NowUser.getId());
-                    Log.e("success", "登录成功");
+                    Log.e("登陆成功，当前用户:", "\n" + UserBook.NowUser.getId());
                     //设置自己的昵称和头像
                     MyUserProvider.getInstance().setUser(UserBook.NowUser.getPhone(),
                             UserBook.NowUser.getNickName(),
@@ -210,17 +210,8 @@ public class LoginActivity extends AppCompatActivity {
 
     //用SharedPreferences存储
     private void save(UserPatient userPatient) {
-
-        SharedPreferences sharedPreferences = getSharedPreferences("NowUser", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(userPatient, UserPatient.class);
-        Log.e("json字符串", json);
-        editor.putString("NowUser", json);
-        editor.commit();
-
-        //实例
-        String string = sharedPreferences.getString("name", "");
+        Log.e("自动登陆已生效，保存用户信息",userPatient.toString()+"\n");
+        SharedPreferencesUtil.saveUser(getApplicationContext(),userPatient);
     }
 
     private void findViews() {

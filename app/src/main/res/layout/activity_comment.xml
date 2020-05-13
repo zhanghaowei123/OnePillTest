@@ -8,38 +8,43 @@
     <LinearLayout
         android:id="@+id/ll_detial"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="45dp"
         android:background="#fff"
         android:gravity="center"
         android:orientation="horizontal">
 
-        <ImageView
+        <LinearLayout
             android:id="@+id/iv_comment_left"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="30dp"
             android:layout_marginLeft="12dp"
-            android:gravity="left"
-            android:src="@drawable/left" />
+            android:gravity="center"
+            android:layout_height="30dp">
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/left" />
+        </LinearLayout>
+
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="-35dp"
             android:gravity="center"
-            android:text="评论"
-            android:textSize="18sp"
+            android:text="评论详情"
+            android:textColor="#222"
+            android:textSize="16dp"
             android:textStyle="bold" />
     </LinearLayout>
 
-    <ListView
+    <android.support.v7.widget.RecyclerView
         android:divider="@drawable/underline"
         android:id="@+id/lv_comment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/ll_send"
         android:layout_below="@id/ll_detial"
-        android:layout_marginTop="10dp"
-        android:background="#fff" />
+        android:layout_marginTop="7dp"/>
 
     <LinearLayout
         android:id="@+id/ll_send"

@@ -1,6 +1,5 @@
 package com.onepilltest.index;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
@@ -15,7 +14,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
 import com.onepilltest.R;
@@ -24,7 +22,7 @@ import com.onepilltest.entity.EventMessage;
 import com.onepilltest.entity.UserDoctor;
 import com.onepilltest.personal.DoctorDao;
 import com.onepilltest.personal.UserBook;
-import com.onepilltest.personal.focusDao;
+import com.onepilltest.entity.Dao.focusDao;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;

@@ -47,14 +47,14 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
     private void autoLogin() {
         if (SharedPreferencesUtil.userExist(getApplicationContext())){
             SharedPreferencesUtil.initUserBook(getApplicationContext());
-            Log.e("当前用户信息：",""+UserBook.NowUser.toString());
+            Log.e("用户自动登陆：",""+UserBook.NowUser.toString());
             Intent intent = new Intent(WelcomeActivity.this, HomeActivity.class);
             startActivity(intent);
             finish();
 
         }else if (SharedPreferencesUtil.doctorExist(getApplicationContext())){
             SharedPreferencesUtil.initUserBook(getApplicationContext());
-            Log.e("当前用户信息：",""+UserBook.NowDoctor.toString());
+            Log.e("医生自动登陆：",""+UserBook.NowDoctor.toString());
             Intent intent = new Intent(WelcomeActivity.this, HomeActivity.class);
             startActivity(intent);
             finish();

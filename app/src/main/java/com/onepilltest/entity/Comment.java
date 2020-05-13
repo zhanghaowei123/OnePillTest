@@ -2,22 +2,14 @@ package com.onepilltest.entity;
 
 public class Comment {
     private int id;
-    private String name;
-    private String ccomment;
-    private String headImg;
     private int articleId;
-    private int isGood;
-    private int isBad;
+    private int userId;
+    private int userType;
+    private String name;
+    private String headImg;
+    private String ccomment;
     private int goodNum;
-    private int badNum;
-
-    public Comment() {
-    }
-
-    public Comment(String name, String ccomment) {
-        this.name = name;
-        this.ccomment = ccomment;
-    }
+    private boolean isGood;
 
     public int getId() {
         return id;
@@ -43,14 +35,6 @@ public class Comment {
         this.name = name;
     }
 
-    public String getCcomment() {
-        return ccomment;
-    }
-
-    public void setCcomment(String ccomment) {
-        this.ccomment = ccomment;
-    }
-
     public String getHeadImg() {
         return headImg;
     }
@@ -59,20 +43,12 @@ public class Comment {
         this.headImg = headImg;
     }
 
-    public int getIsGood() {
-        return isGood;
+    public String getCcomment() {
+        return ccomment;
     }
 
-    public void setIsGood(int isGood) {
-        this.isGood = isGood;
-    }
-
-    public int getIsBad() {
-        return isBad;
-    }
-
-    public void setIsBad(int isBad) {
-        this.isBad = isBad;
+    public void setCcomment(String ccomment) {
+        this.ccomment = ccomment;
     }
 
     public int getGoodNum() {
@@ -83,25 +59,43 @@ public class Comment {
         this.goodNum = goodNum;
     }
 
-    public int getBadNum() {
-        return badNum;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setBadNum(int badNum) {
-        this.badNum = badNum;
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public int getUserType() {
+        return userType;
+    }
+
+    public void setUserType(int userType) {
+        this.userType = userType;
+    }
+
+    public boolean isGood() {
+        return isGood;
+    }
+
+    public void setGood(boolean good) {
+        isGood = good;
     }
 
     @Override
     public String toString() {
-        return "Comment{" +
-                "name='" + name + '\'' +
-                ", ccomment='" + ccomment + '\'' +
-                ", headImg='" + headImg + '\'' +
+        return "ToComment{" +
+                "id=" + id +
                 ", articleId=" + articleId +
-                ", isGood=" + isGood +
-                ", isBad=" + isBad +
+                ", userId=" + userId +
+                ", userType=" + userType +
+                ", name='" + name + '\'' +
+                ", headImg='" + headImg + '\'' +
+                ", ccomment='" + ccomment + '\'' +
                 ", goodNum=" + goodNum +
-                ", badNum=" + badNum +
+                ", isGood=" + isGood +
                 '}';
     }
 }
+

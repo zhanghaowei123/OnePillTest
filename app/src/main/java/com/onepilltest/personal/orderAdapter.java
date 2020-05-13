@@ -7,22 +7,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
-import com.google.gson.Gson;
 import com.onepilltest.R;
 import com.onepilltest.URL.Connect;
-import com.onepilltest.entity.Address;
 import com.onepilltest.entity.Orders;
-import com.onepilltest.entity.focus;
-import com.onepilltest.index.MedicineDao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class orderAdapter extends ArrayAdapter<Orders> {

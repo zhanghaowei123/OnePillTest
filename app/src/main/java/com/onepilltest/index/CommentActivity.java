@@ -4,12 +4,15 @@ import android.content.Intent;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +23,7 @@ import com.onepilltest.R;
 import com.onepilltest.URL.Connect;
 import com.onepilltest.entity.Article;
 import com.onepilltest.entity.Comment;
+import com.onepilltest.entity.Dao.GoodDao;
 import com.onepilltest.entity.UserDoctor;
 import com.onepilltest.personal.UserBook;
 import com.onepilltest.welcome.PerfectInforPatientActivity;
@@ -44,23 +48,27 @@ import okhttp3.Response;
 
 public class CommentActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private ImageView ivCommentLeft;
+    private LinearLayout ivCommentLeft;
     private Button btnSendComment;
     private OkHttpClient okHttpClient;
     private List<Comment> comments = new ArrayList<>();
-    private ListView commentListView;
-    private CommentAdapter commentAdapter;
     private EditText etComment;
     private Comment comment;
     private String id;
+
+    private RecyclerView recyclerView = null;
+    private CommentNewAdapter commentNewAdapter = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(0xff56ced4);
+            getWindow().setStatusBarColor(0xffffffff);
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
         setContentView(R.layout.activity_comment);
+
+        GoodDao.goodMap.clear();
         //将主线程注册成为订阅者
         EventBus.getDefault().register(this);
         okHttpClient = new OkHttpClient();
@@ -68,19 +76,20 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
         initView();
         requestData();
 
-        //item点击事件
-        commentListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(),"别点了..这里是回复",Toast.LENGTH_SHORT).show();
-            }
-        });
+
     }
 
     private void requestData() {
 //        Log.e("获取评论:",Connect.BASE_URL + "comment/getComment?articleId=" + comment.getArticleId());
+        int id = 0;
+        if (UserBook.Code == 1){
+            id = UserBook.NowDoctor.getId();
+        }else {
+            id = UserBook.NowUser.getId();
+        }
+        String url = Connect.BASE_URL + "comment/getComment?articleId=" + comment.getArticleId()+" &userId="+id+"&userType="+UserBook.Code;
         Request request = new Request.Builder()
-                .url(Connect.BASE_URL + "comment/getComment?articleId=" + comment.getArticleId())
+                .url(url)
                 .build();
         Call call = okHttpClient.newCall(request);
         call.enqueue(new Callback() {
@@ -110,14 +119,19 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
     public void updateUI(String msg) {
         if (msg.equals("评论")) {
             //更新视图
-            commentAdapter.notifyDataSetChanged();
+            commentNewAdapter.notifyDataSetChanged();
         }
     }
 
     private void initView() {
-        commentListView = findViewById(R.id.lv_comment);
-        commentAdapter = new CommentAdapter(comments, this, R.layout.item_comment);
-        commentListView.setAdapter(commentAdapter);
+//        commentListView = findViewById(R.id.lv_comment);
+//        commentAdapter = new CommentAdapter(comments, this, R.layout.item_comment);
+//        commentListView.setAdapter(commentAdapter);
+        recyclerView = findViewById(R.id.lv_comment);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        commentNewAdapter = new CommentNewAdapter(comments);
+        recyclerView.setAdapter(commentNewAdapter);
     }
 
     public void findViews() {
@@ -146,21 +160,20 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
 
                 if (!etComment.getText().toString().equals("")) {
                     if (UserBook.Code == 2) {
-                        comment.setName(UserBook.NowUser.getNickName());
-                        Log.e("hahah", UserBook.NowUser.getNickName());
+                        Log.e("当前评论用户：", UserBook.NowUser.getNickName());
                         comment.setCcomment(etComment.getText().toString());
                         comment.setArticleId(Integer.parseInt(id));
-                        comment.setHeadImg(UserBook.NowUser.getHeadImg());
-                        Log.e("head", UserBook.NowUser.getHeadImg());
+                        comment.setUserId(UserBook.NowUser.getId());
+                        comment.setUserType(2);
                         comments.add(comment);
                         //更新到数据库
                         insertComment();
                     } else if (UserBook.Code == 1) {
                         UserDoctor doctor = (UserDoctor) UserBook.getNowUser();
-                        comment.setName(doctor.getName());
                         comment.setCcomment(etComment.getText().toString());
                         comment.setArticleId(Integer.parseInt(id));
-                        comment.setHeadImg(doctor.getHeadImg());
+                        comment.setUserType(1);
+                        comment.setUserId(UserBook.NowDoctor.getId());
                         comments.add(comment);
                         //更新到数据库
                         insertComment();
@@ -176,7 +189,7 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
                 etComment.setText("");
                 comment = new Comment();
                 comment.setArticleId(Integer.parseInt(id));
-                commentAdapter.notifyDataSetChanged();
+                commentNewAdapter.notifyDataSetChanged();
                 break;
         }
     }
@@ -184,7 +197,7 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
     private void insertComment() {
         String jsonStr = null;
         jsonStr = new Gson().toJson(comment);
-        Log.e("test", jsonStr.toString());
+        Log.e("添加评论：\n", jsonStr.toString());
         RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain;charset=utf-8"),
                 jsonStr);
         Request request = new Request.Builder()
@@ -214,5 +227,9 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+
+//        点赞事务
+        GoodDao.post();
     }
+
 }

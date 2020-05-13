@@ -8,31 +8,12 @@ public class Article {
     private String tag;
     private String title;
 
-    public Article() {
-    }
-
-    public Article(int id, String title, String articleCotent, String tag, String writerName) {
-        this.id = id;
-        this.writerName = writerName;
-        this.content = articleCotent;
-        this.tag = tag;
-        this.title = title;
-    }
-
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
-        id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
+        this.id = id;
     }
 
     public String getHeadImg() {
@@ -55,8 +36,8 @@ public class Article {
         return content;
     }
 
-    public void setContent(String cotent) {
-        this.content = cotent;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public String getTag() {
@@ -65,5 +46,25 @@ public class Article {
 
     public void setTag(String tag) {
         this.tag = tag;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    @Override
+    public String toString() {
+        return "ToArticle{" +
+                "id=" + id +
+                ", headImg='" + headImg + '\'' +
+                ", writerName='" + writerName + '\'' +
+                ", content='" + content + '\'' +
+                ", tag='" + tag + '\'' +
+                ", title='" + title + '\'' +
+                '}';
     }
 }

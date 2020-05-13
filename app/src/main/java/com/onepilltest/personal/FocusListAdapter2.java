@@ -8,9 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,16 +16,16 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.onepilltest.R;
 import com.onepilltest.URL.Connect;
+import com.onepilltest.entity.Dao.focusDao;
 import com.onepilltest.entity.ToFocus;
-import com.onepilltest.entity.focus;
 import com.onepilltest.index.DoctorDetailsActivity;
-import com.onepilltest.index.FoundDoctorActivity;
 
 import java.util.List;
 
 public class FocusListAdapter2 extends RecyclerView.Adapter<FocusListAdapter2.ViewHolder> {
 
     private List<ToFocus> focusList;
+    private focusDao fDao = new focusDao();
 
     public FocusListAdapter2(List<ToFocus> baseList) {
         focusList = baseList;
@@ -113,8 +111,8 @@ public class FocusListAdapter2 extends RecyclerView.Adapter<FocusListAdapter2.Vi
         viewHolder.del.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e("focusAdapter","删除第"+i+"条数据");
                 Toast.makeText(mContext,"删除第"+i+"条数据",Toast.LENGTH_SHORT).show();
+                fDao.del(focus.getUserId(),focus.getUserType(),focus.getType(),focus.getTypeId());
             }
         });
     }

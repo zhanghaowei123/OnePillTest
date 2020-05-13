@@ -2,115 +2,138 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="0dp"
-    android:background="#f7f7f7"
+    android:background="#fff"
     android:orientation="vertical"
     android:padding="5dp"
-    android:paddingBottom="50dp">
+    android:paddingBottom="50dp"
+    android:paddingTop="20dp">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:background="#f1f1f1" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
         android:layout_marginBottom="4dp"
-        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="10dp"
         android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/iv_commenterImg"
-            android:layout_width="38dp"
-            android:layout_height="38dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:src="@drawable/user" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="3dp">
+            android:layout_marginLeft="5dp">
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="7"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_weight="9"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/tv_commenter_name"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_weight="3"
+                    android:layout_marginBottom="2dp"
                     android:paddingLeft="4dp"
                     android:text="Charlotte"
-                    android:textColor="#999"
-                    android:textSize="13dp"
-                    android:textStyle="bold" />
+                    android:textColor="#333"
+                    android:textSize="14dp" />
 
                 <TextView
-                    android:text="2019/10/1"
                     android:id="@+id/tv_commenter_time"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_weight="2"
                     android:paddingLeft="4dp"
-                    android:textColor="#bbb"
-                    android:textSize="9dp"
-                    android:textStyle="bold" />
+                    android:text="2019-10-1"
+                    android:textColor="#999"
+                    android:textSize="12dp" />
 
             </LinearLayout>
 
 
-            <!--点赞，未实现-->
-            <ImageView
-                android:id="@+id/iv_good"
+            <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:src="@drawable/up_no" />
-            <!--点赞数量-->
-            <TextView
-                android:id="@+id/tv_goodnum"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="#0000"
-                android:gravity="center"
-                android:padding="0dp"
-                android:textColor="#22a9ef"
-                android:textSize="12dp" />
-            <!--踩-->
-            <ImageView
-                android:id="@+id/iv_bad"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:src="@drawable/down_no"
-                android:text="" />
-            <TextView
-                android:id="@+id/tv_badnum"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="#0000"
-                android:gravity="center"
-                android:padding="0dp"
-                android:textColor="#22a9ef"
-                android:textSize="12dp" />
+                android:layout_height="25dp"
+                android:layout_weight="3"
+                android:gravity="center_vertical"><!--点赞，未实现-->
+                <ImageView
+                    android:id="@+id/iv_good"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:src="@drawable/up_no" />
+                <!--点赞数量-->
+                <TextView
+                    android:id="@+id/tv_goodnum"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:layout_gravity="center_vertical"
+                    android:background="#0000"
+                    android:gravity="center_vertical"
+                    android:padding="0dp"
+                    android:text="300"
+                    android:textColor="#22a9ef"
+                    android:textSize="15dp" />
+                <!--&lt;!&ndash;踩&ndash;&gt;-->
+                <!--<ImageView-->
+                <!--android:id="@+id/iv_bad"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_weight="1"-->
+                <!--android:src="@drawable/down_no"-->
+                <!--android:text="" />-->
+
+                <!--<TextView-->
+                <!--android:id="@+id/tv_badnum"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_weight="1"-->
+                <!--android:background="#0000"-->
+                <!--android:gravity="center"-->
+                <!--android:padding="0dp"-->
+                <!--android:textColor="#22a9ef"-->
+                <!--android:textSize="12dp" />-->
+            </LinearLayout>
+
         </LinearLayout>
 
 
     </LinearLayout>
 
     <TextView
-        android:text="接下来我要评论了：床前明月光，疑是地上霜。举头望明月。。。"
         android:id="@+id/tv_commenter_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="53dp"
+        android:layout_marginLeft="70dp"
         android:layout_marginRight="20dp"
         android:paddingBottom="7dp"
-        android:paddingTop="6dp"
-        android:textColor="#121212"
-        android:textSize="15dp" />
+        android:paddingTop="3dp"
+        android:text="接下来我要评论了：床前明月光，疑是地上霜。举头望明月。。。"
+        android:textColor="#111"
+        android:textSize="16dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:background="#f7f7f7" />
 
 </LinearLayout>

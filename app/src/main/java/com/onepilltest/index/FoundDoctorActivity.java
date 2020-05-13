@@ -61,25 +61,25 @@ public class FoundDoctorActivity extends AppCompatActivity {
             case R.id.tb_one://流感
                 Toast.makeText(getApplicationContext(),"流感",Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(FoundDoctorActivity.this, DoctorDetailsActivity.class);
-                intent.putExtra("id",18);
+                intent.putExtra("id",1);
                 startActivity(intent);
                 break;
             case R.id.tb_two://头痛
                 Toast.makeText(getApplicationContext(),"头痛",Toast.LENGTH_SHORT).show();
                 Intent intent1 = new Intent(FoundDoctorActivity.this, DoctorDetailsActivity.class);
-                intent1.putExtra("id",19);
+                intent1.putExtra("id",2);
                 startActivity(intent1);
                 break;
             case R.id.tb_three://伤寒
                 Toast.makeText(getApplicationContext(),"伤寒",Toast.LENGTH_SHORT).show();
                 Intent intent2 = new Intent(FoundDoctorActivity.this, DoctorDetailsActivity.class);
-                intent2.putExtra("id",19);
+                intent2.putExtra("id",1);
                 startActivity(intent2);
                 break;
             case R.id.tb_four://宝宝健康
                 Toast.makeText(getApplicationContext(),"宝宝健康",Toast.LENGTH_SHORT).show();
                 Intent intent3 = new Intent(FoundDoctorActivity.this, DoctorDetailsActivity.class);
-                intent3.putExtra("id",18);
+                intent3.putExtra("id",1);
                 startActivity(intent3);
                 break;
             case R.id.tb_five://肠胃
@@ -91,43 +91,43 @@ public class FoundDoctorActivity extends AppCompatActivity {
             case R.id.tb_six://皮肤
                 Toast.makeText(getApplicationContext(),"皮肤",Toast.LENGTH_SHORT).show();
                 Intent intent5 = new Intent(FoundDoctorActivity.this, DoctorDetailsActivity.class);
-                intent5.putExtra("id",19);
+                intent5.putExtra("id",2);
                 startActivity(intent5);
                 break;
             case R.id.tb_seven://肥胖
                 Toast.makeText(getApplicationContext(),"肥胖",Toast.LENGTH_SHORT).show();
                 Intent intent6 = new Intent(FoundDoctorActivity.this, DoctorDetailsActivity.class);
-                intent6.putExtra("id",19);
+                intent6.putExtra("id",1);
                 startActivity(intent6);
                 break;
             case R.id.tb_eight://月经不调
                 Toast.makeText(getApplicationContext(),"月经不调",Toast.LENGTH_SHORT).show();
                 Intent intent7 = new Intent(FoundDoctorActivity.this, DoctorDetailsActivity.class);
-                intent7.putExtra("id",18);
+                intent7.putExtra("id",2);
                 startActivity(intent7);
                 break;
             case R.id.tb_nine://心血管
                 Toast.makeText(getApplicationContext(),"心血管",Toast.LENGTH_SHORT).show();
                 Intent intent8 = new Intent(FoundDoctorActivity.this, DoctorDetailsActivity.class);
-                intent8.putExtra("id",18);
+                intent8.putExtra("id",1);
                 startActivity(intent8);
                 break;
             case R.id.tb_ten://鼻炎
                 Toast.makeText(getApplicationContext(),"鼻炎",Toast.LENGTH_SHORT).show();
                 Intent intent9 = new Intent(FoundDoctorActivity.this, DoctorDetailsActivity.class);
-                intent9.putExtra("id",18);
+                intent9.putExtra("id",1);
                 startActivity(intent9);
                 break;
             case R.id.tb_eleven://焦虑
                 Toast.makeText(getApplicationContext(),"焦虑",Toast.LENGTH_SHORT).show();
                 Intent intent10 = new Intent(FoundDoctorActivity.this, DoctorDetailsActivity.class);
-                intent10.putExtra("id",19);
+                intent10.putExtra("id",2);
                 startActivity(intent10);
                 break;
             case R.id.tb_twelve://空腔问题
                 Toast.makeText(getApplicationContext(),"空腔问题",Toast.LENGTH_SHORT).show();
                 Intent intent11 = new Intent(FoundDoctorActivity.this, DoctorDetailsActivity.class);
-                intent11.putExtra("id",19);
+                intent11.putExtra("id",2);
                 startActivity(intent11);
                 break;
         }

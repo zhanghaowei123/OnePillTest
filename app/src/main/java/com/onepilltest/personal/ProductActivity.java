@@ -21,13 +21,13 @@ import com.google.gson.Gson;
 import com.hacknife.carouselbanner.interfaces.CarouselImageFactory;
 import com.onepilltest.R;
 import com.onepilltest.URL.Connect;
-import com.onepilltest.entity.Address;
 import com.onepilltest.entity.Cart;
+import com.onepilltest.entity.Dao.focusDao;
 import com.onepilltest.entity.EventMessage;
 import com.onepilltest.entity.medicine_;
 import com.onepilltest.entity.service_cart;
 import com.onepilltest.index.DoctorDetailsActivity;
-import com.onepilltest.index.MedicineDao;
+import com.onepilltest.entity.Dao.MedicineDao;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -37,7 +37,6 @@ import com.hacknife.carouselbanner.Banner;
 import com.hacknife.carouselbanner.CoolCarouselBanner;
 import com.hacknife.carouselbanner.interfaces.OnCarouselItemChangeListener;
 import com.hacknife.carouselbanner.interfaces.OnCarouselItemClickListener;
-import com.onepilltest.personal.cart.CartActivity;
 import com.onepilltest.util.OkhttpUtil;
 
 
@@ -48,8 +47,6 @@ import java.util.List;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 

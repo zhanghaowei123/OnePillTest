@@ -71,90 +71,90 @@ public class CommentAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        okHttpClient = new OkHttpClient();
-        if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(item_layout_id, null);
-            viewHolder = new ViewHolder();
-            viewHolder.ivCommenterImg = (ImageView) convertView.findViewById(R.id.iv_commenterImg);
-            viewHolder.tvCommenterName = (TextView) convertView.findViewById(R.id.tv_commenter_name);
-            viewHolder.tvCommenterCotent = (TextView) convertView.findViewById(R.id.tv_commenter_content);
-            viewHolder.ivGood = (ImageView) convertView.findViewById(R.id.iv_good);
-            viewHolder.ivBad = (ImageView)convertView.findViewById(R.id.iv_bad);
-            viewHolder.tvGoodNum = convertView.findViewById(R.id.tv_goodnum);
-            viewHolder.tvBadNum = convertView.findViewById(R.id.tv_badnum);
-//            viewHolder.tvResponse = convertView.findViewById(R.id.tv_response);//点击item执行回复
-            convertView.setTag(viewHolder);
-        } else {
-            viewHolder = (ViewHolder) convertView.getTag();
-        }
-        final Comment comment = comments.get(position);
-        Log.e("commentNew",comment.toString());
-        //加载评论头像
-        RequestOptions requestOptions = new RequestOptions().circleCrop();
-        Glide.with(context)
-                .load(Connect.BASE_URL + comment.getHeadImg())
-                .apply(requestOptions)
-                .into(viewHolder.ivCommenterImg);
-        Log.e("HeadImgURL",Connect.BASE_URL + comment.getHeadImg());
-        viewHolder.tvCommenterName.setText(comment.getName());
-        viewHolder.tvCommenterCotent.setText(comment.getCcomment());
-        Log.e("goodNum",comment.getGoodNum()+"");
-        viewHolder.tvGoodNum.setText(comment.getGoodNum()+"");
-        viewHolder.tvBadNum.setText(comment.getBadNum()+"");
-        if (comment.getIsBad() == 0){
-            viewHolder.ivBad.setImageResource(R.drawable.down_yes);
-            viewHolder.ivGood.setImageResource(R.drawable.up_no);
-        }else {
-            viewHolder.ivBad.setImageResource(R.drawable.down_no);
-            viewHolder.ivGood.setImageResource(R.drawable.up_yes);
-        }
-        //点赞功能
-        viewHolder.ivGood.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if(comment.getIsGood() == 0){
-                    Log.e("点赞",position+"\n"+comment.toString());
-                    comment.setIsGood(1);
-                    comment.setGoodNum(comment.getGoodNum()+1);
-                    viewHolder.tvGoodNum.setText(comment.getGoodNum()+"");//数据库没动
-                    viewHolder.ivGood.setImageResource(R.drawable.up_yes);
-                    viewHolder.ivBad.setImageResource(R.drawable.down_no);
-                    updateComment(comment);
-                    notifyDataSetChanged();
-                }else {
-
-                    Log.e("点赞",position+"\n"+comment.toString());
-                    comment.setIsGood(0);
-                    comment.setGoodNum(comment.getGoodNum()-1);
-                    viewHolder.tvGoodNum.setText(comment.getGoodNum()+"");
-                    viewHolder.ivGood.setImageResource(R.drawable.up_no);
-                    updateComment(comment);
-                    notifyDataSetChanged();
-                }
-            }
-        });
-
-        //差评功能
-        viewHolder.ivBad.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (comment.getIsBad() == 0){
-                    Log.e("quxiao点赞",position+"\n"+comment.toString());
-                    comment.setIsBad(1);
-                    comment.setGoodNum(comment.getBadNum()+1);
-                    viewHolder.tvBadNum.setText(comment.getBadNum()+"");
-                    viewHolder.ivBad.setImageResource(R.drawable.down_yes);
-                    viewHolder.ivGood.setImageResource(R.drawable.up_no);
-                }else {
-                    Log.e("quxiao点赞",position+"\n"+comment.toString());
-                    comment.setIsBad(0);
-                    comment.setBadNum(comment.getBadNum()-1);
-                    viewHolder.tvBadNum.setText(comment.getBadNum()+"");
-                    viewHolder.ivBad.setImageResource(R.drawable.down_no);
-                }
-            }
-        });
+//        okHttpClient = new OkHttpClient();
+//        if (convertView == null) {
+//            convertView = LayoutInflater.from(context).inflate(item_layout_id, null);
+//            viewHolder = new ViewHolder();
+//            viewHolder.ivCommenterImg = (ImageView) convertView.findViewById(R.id.iv_commenterImg);
+//            viewHolder.tvCommenterName = (TextView) convertView.findViewById(R.id.tv_commenter_name);
+//            viewHolder.tvCommenterCotent = (TextView) convertView.findViewById(R.id.tv_commenter_content);
+//            viewHolder.ivGood = (ImageView) convertView.findViewById(R.id.iv_good);
+//            viewHolder.ivBad = (ImageView)convertView.findViewById(R.id.iv_bad);
+//            viewHolder.tvGoodNum = convertView.findViewById(R.id.tv_goodnum);
+//            viewHolder.tvBadNum = convertView.findViewById(R.id.tv_badnum);
+////            viewHolder.tvResponse = convertView.findViewById(R.id.tv_response);//点击item执行回复
+//            convertView.setTag(viewHolder);
+//        } else {
+//            viewHolder = (ViewHolder) convertView.getTag();
+//        }
+//        final Comment comment = comments.get(position);
+//        Log.e("commentNew",comment.toString());
+//        //加载评论头像
+//        RequestOptions requestOptions = new RequestOptions().circleCrop();
+//        Glide.with(context)
+//                .load(Connect.BASE_URL + comment.getHeadImg())
+//                .apply(requestOptions)
+//                .into(viewHolder.ivCommenterImg);
+//        Log.e("HeadImgURL",Connect.BASE_URL + comment.getHeadImg());
+//        viewHolder.tvCommenterName.setText(comment.getName());
+//        viewHolder.tvCommenterCotent.setText(comment.getCcomment());
+//        Log.e("goodNum",comment.getGoodNum()+"");
+//        viewHolder.tvGoodNum.setText(comment.getGoodNum()+"");
+//        viewHolder.tvBadNum.setText(comment.getBadNum()+"");
+//        if (comment.getIsBad() == 0){
+//            viewHolder.ivBad.setImageResource(R.drawable.down_yes);
+//            viewHolder.ivGood.setImageResource(R.drawable.up_no);
+//        }else {
+//            viewHolder.ivBad.setImageResource(R.drawable.down_no);
+//            viewHolder.ivGood.setImageResource(R.drawable.up_yes);
+//        }
+//        //点赞功能
+//        viewHolder.ivGood.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                if(comment.getIsGood() == 0){
+//                    Log.e("点赞",position+"\n"+comment.toString());
+//                    comment.setIsGood(1);
+//                    comment.setGoodNum(comment.getGoodNum()+1);
+//                    viewHolder.tvGoodNum.setText(comment.getGoodNum()+"");//数据库没动
+//                    viewHolder.ivGood.setImageResource(R.drawable.up_yes);
+//                    viewHolder.ivBad.setImageResource(R.drawable.down_no);
+//                    updateComment(comment);
+//                    notifyDataSetChanged();
+//                }else {
+//
+//                    Log.e("点赞",position+"\n"+comment.toString());
+//                    comment.setIsGood(0);
+//                    comment.setGoodNum(comment.getGoodNum()-1);
+//                    viewHolder.tvGoodNum.setText(comment.getGoodNum()+"");
+//                    viewHolder.ivGood.setImageResource(R.drawable.up_no);
+//                    updateComment(comment);
+//                    notifyDataSetChanged();
+//                }
+//            }
+//        });
+//
+//        //差评功能
+//        viewHolder.ivBad.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (comment.getIsBad() == 0){
+//                    Log.e("quxiao点赞",position+"\n"+comment.toString());
+//                    comment.setIsBad(1);
+//                    comment.setGoodNum(comment.getBadNum()+1);
+//                    viewHolder.tvBadNum.setText(comment.getBadNum()+"");
+//                    viewHolder.ivBad.setImageResource(R.drawable.down_yes);
+//                    viewHolder.ivGood.setImageResource(R.drawable.up_no);
+//                }else {
+//                    Log.e("quxiao点赞",position+"\n"+comment.toString());
+//                    comment.setIsBad(0);
+//                    comment.setBadNum(comment.getBadNum()-1);
+//                    viewHolder.tvBadNum.setText(comment.getBadNum()+"");
+//                    viewHolder.ivBad.setImageResource(R.drawable.down_no);
+//                }
+//            }
+//        });
 
         return convertView;
     }
