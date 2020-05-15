@@ -4,6 +4,8 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -58,8 +60,8 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
     private int price = 0;
 
     private List<MyCart> myCarts = new ArrayList<>();
-
-    //新增
+    private RecyclerView recyclerView = null;
+    private CartNewAdapter cartNewAdapter= null;
     private TextView tvCartManage;
     private Button btnDelete;
     private CheckBox checkBoxAll;
@@ -104,13 +106,21 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
 
     private void initView() {
         Log.e("init数据:",myCarts.size()+"");
-        cartsListView = findViewById(R.id.lv_mcart);
-        cartAdapter = new CartAdapter(myCarts, this, R.layout.item_mcart,checkBoxAll
-        ,btnDelete);
-        cartsListView.setAdapter(cartAdapter);
-        cartAdapter.setBtnDeleteListener();
-        cartAdapter.setCheckBoxItemAll();
-        cartAdapter.setSelectCartItemMap();
+//        cartsListView = findViewById(R.id.lv_mcart);
+//        cartAdapter = new CartAdapter(myCarts, this, R.layout.item_mcart,checkBoxAll
+//        ,btnDelete);
+//        cartsListView.setAdapter(cartAdapter);
+//        cartAdapter.setBtnDeleteListener();
+//        cartAdapter.setCheckBoxItemAll();
+//        cartAdapter.setSelectCartItemMap();
+        recyclerView = findViewById(R.id.lv_mcart);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        cartNewAdapter = new CartNewAdapter(myCarts);
+        recyclerView.setAdapter(cartNewAdapter);
+//        cartNewAdapter.selectAll();
+//        cartNewAdapter.deleteingData();
+
     }
 
     private void requestData(int id) {
@@ -154,7 +164,8 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
             }
             Log.e("总金额：", price+"\n");
             initView();
-            cartAdapter.notifyDataSetChanged();
+//            cartAdapter.notifyDataSetChanged();
+            cartNewAdapter.notifyDataSetChanged();
             tvSettlementPrice.setText("￥" + price);
         }
     }
@@ -201,9 +212,6 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
                 btnDelete.setVisibility(View.GONE);
                 tvSettlementPrice.setVisibility(View.VISIBLE);
                 break;
-            case R.id.btn_delete1:
-
-
         }
     }
 

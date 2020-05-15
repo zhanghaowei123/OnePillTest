@@ -1,6 +1,6 @@
 package com.onepilltest.entity;
 
-public class Good {
+public class good {
     private int Id;
     private int userId;
     private int commentId;

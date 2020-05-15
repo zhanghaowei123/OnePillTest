@@ -172,7 +172,6 @@
         <activity android:name=".index.CommentActivity" />
         <activity android:name=".personal.AddAddressActivity" />
         <activity android:name=".personal.FocusAndSaveActivity" />
-        <activity android:name=".personal.cart.ShoppingCartActivity" />
         <activity android:name=".personal.HelpAndFeedBackActivity" />
         <activity android:name=".personal.switchActivity" />
         <activity android:name=".personal.UserList" />
