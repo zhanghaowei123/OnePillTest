@@ -101,8 +101,8 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
                         y++;
                         i--;
                     }
-                    notify();
                 }
+                notify();
                 if (y==0){
                     Toast.makeText(getApplicationContext(),"请选择要删除的药品",Toast.LENGTH_SHORT).show();
                 }
@@ -273,6 +273,4 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
         initCheck(f);
         cartNewAdapter.notifyDataSetChanged();
     }
-
-
 }
