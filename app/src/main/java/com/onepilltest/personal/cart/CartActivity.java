@@ -82,17 +82,30 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
         EventBus.getDefault().register(this);
         sharedPreferences = getSharedPreferences("addToCart", MODE_PRIVATE);
         findViews();
-//        initView();
         getDate();
-//        for (int i = 0; i < Cart.medicineList.size(); i++) {
-//            requestData(Cart.medicineList.get(i));
-//
-//        }
 
         checkBoxAll.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 selectAll(isChecked);
+            }
+        });
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int y=0;
+                for (int i=0;i<myCarts.size();i++){
+                    if (booleanList.get(i)!=null && booleanList.get(i)){
+                        myCarts.remove(i);
+                        booleanList.remove(i);
+                        y++;
+                        i--;
+                    }
+                    notify();
+                }
+                if (y==0){
+                    Toast.makeText(getApplicationContext(),"请选择要删除的药品",Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

@@ -95,7 +95,7 @@ public class CartNewAdapter extends RecyclerView.Adapter<CartNewAdapter.ViewHold
         });
         viewHolder.checkBox.setChecked(booleanList.get(i));
         //数量
-        viewHolder.tvCount.setText(myCart.getCount()+"");
+        viewHolder.tvCount.setText(myCart.getCount()-1+"");
         //钱
         viewHolder.tvPrice.setText(myCart.getPrice()+"");
         //加减
@@ -133,10 +133,13 @@ public class CartNewAdapter extends RecyclerView.Adapter<CartNewAdapter.ViewHold
                     viewHolder.btnMin.setClickable(true);
                     viewHolder.btnAdd.setClickable(true);
                     viewHolder.tvCount.setText(num-1+"");
+                    num -= 1;
+                    viewHolder.tvCount.setText(num+"");
+                    //获取新数据
+                    myCarts.get(i).setCount(num);
+                    notifyDataSetChanged();
                 }
-                //获取新数据
-                myCarts.get(i).setCount(num-1);
-                notifyDataSetChanged();
+
             }
         });
     }
@@ -146,22 +149,23 @@ public class CartNewAdapter extends RecyclerView.Adapter<CartNewAdapter.ViewHold
         return myCarts.size();
     }
     //删除选中的数据
-    public void deleteingData(){
-        int y=0;
-        for (int i = 0;i<myCarts.size();i++){
-            if (booleanList.get(i)!=null && booleanList.get(i)){
-                myCarts.remove(i);
-                booleanList.remove(i);
-                y++;
-                i--;
-
-            }
-        }
-        notifyDataSetChanged();
-        if (y==0){
-            Toast.makeText(context,"请选择要删除的药品",Toast.LENGTH_SHORT).show();
-        }
-    }
+//    public void deleteingData(){
+//        int y=0;
+//        for (int i = 0;i<myCarts.size();i++){
+//            if (booleanList.get(i)!=null && booleanList.get(i)){
+//                myCarts.remove(i);
+//                booleanList.remove(i);
+//                y++;
+//                i--;
+//
+//            }
+//        }
+//        notifyDataSetChanged();
+//
+//        if (y==0){
+//            Toast.makeText(context,"请选择要删除的药品",Toast.LENGTH_SHORT).show();
+//        }
+//    }
 
 
 }
