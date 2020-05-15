@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -61,11 +62,12 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
 
     private List<MyCart> myCarts = new ArrayList<>();
     private RecyclerView recyclerView = null;
-    private CartNewAdapter cartNewAdapter= null;
+    private CartNewAdapter cartNewAdapter = null;
     private TextView tvCartManage;
     private Button btnDelete;
     private CheckBox checkBoxAll;
     private TextView tvFinish;
+    private List<Boolean> booleanList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +88,15 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
 //            requestData(Cart.medicineList.get(i));
 //
 //        }
+
+        checkBoxAll.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                selectAll(isChecked);
+            }
+        });
     }
+
     private void findViews() {
         settlement = findViewById(R.id.btn_cart_settlement);
         ivCommentLeft = findViewById(R.id.cart_back);
@@ -105,7 +115,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initView() {
-        Log.e("init数据:",myCarts.size()+"");
+        Log.e("init数据:", myCarts.size() + "");
 //        cartsListView = findViewById(R.id.lv_mcart);
 //        cartAdapter = new CartAdapter(myCarts, this, R.layout.item_mcart,checkBoxAll
 //        ,btnDelete);
@@ -116,7 +126,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
         recyclerView = findViewById(R.id.lv_mcart);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        cartNewAdapter = new CartNewAdapter(myCarts);
+        cartNewAdapter = new CartNewAdapter(myCarts, booleanList);
         recyclerView.setAdapter(cartNewAdapter);
 //        cartNewAdapter.selectAll();
 //        cartNewAdapter.deleteingData();
@@ -154,15 +164,14 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
         if (message.getCode().equals("toCart")) {
             //更新视图
             Gson gson = new Gson();
-            Type userListType = new TypeToken<ArrayList<MyCart>>(){}.getType();
-            myCarts = gson.fromJson(message.getJson(),userListType);
-            for (MyCart myCart:myCarts){
-                Log.e("数据：",myCart.toString());
-            }
-            for (MyCart myCart:myCarts){
+            Type userListType = new TypeToken<ArrayList<MyCart>>() {
+            }.getType();
+            myCarts = gson.fromJson(message.getJson(), userListType);
+            for (MyCart myCart : myCarts) {
+                booleanList.add(false);
                 price += myCart.getPrice();
             }
-            Log.e("总金额：", price+"\n");
+            Log.e("总金额：", price + "\n");
             initView();
 //            cartAdapter.notifyDataSetChanged();
             cartNewAdapter.notifyDataSetChanged();
@@ -179,7 +188,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_cart_settlement:
                 OrdersDao dao = new OrdersDao();
                 Orders orders = new Orders();
-                for(int i=0;i<medicines.size();i++){
+                for (int i = 0; i < medicines.size(); i++) {
                     orders.setUserId(UserBook.NowUser.getId());
                     orders.setMedicineId(medicines.get(i).getId());
                     orders.setImg(medicines.get(i).getImg1());
@@ -187,17 +196,17 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
                     orders.setStatus(1);
                     dao.add(orders);
                 }
-                Toast.makeText(getApplicationContext(),"订单结算成功",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "订单结算成功", Toast.LENGTH_SHORT).show();
                 EventMessage msg = new EventMessage();
                 msg.setCode("update_wallet");
-                msg.setJson(""+price);
+                msg.setJson("" + price);
                 int all = UserBook.money;
-                UserBook.money = all-price;
+                UserBook.money = all - price;
                 EventBus.getDefault().post(msg);
                 medicines.clear();
                 cartNewAdapter.notifyDataSetChanged();
                 break;
-                //new
+            //new
             case R.id.tv_cart_manage1:// 当管理按钮被点下时，可进行删除操作
                 tvCartManage.setVisibility(View.GONE);
                 tvFinish.setVisibility(View.VISIBLE);
@@ -205,7 +214,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
                 btnCartSettlement.setVisibility(View.VISIBLE);
                 tvSettlementPrice.setVisibility(View.INVISIBLE);
                 break;
-            case  R.id.tv_cart_finish1:// 当修改完成时，可进行下单操作
+            case R.id.tv_cart_finish1:// 当修改完成时，可进行下单操作
                 tvFinish.setVisibility(View.GONE);
                 tvCartManage.setVisibility(View.VISIBLE);
                 btnCartSettlement.setVisibility(View.VISIBLE);
@@ -216,24 +225,40 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     //获取购物车
-    public void getDate(){
-        String url = Connect.BASE_URL+"cart/findByUserId?userId="+UserBook.NowUser.getId();
+    public void getDate() {
+        String url = Connect.BASE_URL + "cart/findByUserId?userId=" + UserBook.NowUser.getId();
         OkhttpUtil.get(url).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                Log.e("根据userId获取购物车信息：","获取失败。");
+                Log.e("根据userId获取购物车信息：", "获取失败。");
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String re = response.body().string();
-                Log.e("根据userId获取购物车信息：",re);
+                Log.e("根据userId获取购物车信息：", re);
                 EventMessage message = new EventMessage();
                 message.setCode("toCart");
                 message.setJson(re);
                 EventBus.getDefault().post(message);
             }
         });
+    }
+
+
+    //更改集合内部存储的状态
+    public void initCheck(boolean flag) {
+
+        for (int i = 0; i < myCarts.size(); i++) {
+            //更改指定位置的数据
+            booleanList.set(i, flag);
+        }
+    }
+
+    //全选
+    public void selectAll(boolean f) {
+        initCheck(f);
+        cartNewAdapter.notifyDataSetChanged();
     }
 
 

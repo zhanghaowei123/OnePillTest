@@ -48,16 +48,17 @@ public class CartNewAdapter extends RecyclerView.Adapter<CartNewAdapter.ViewHold
     private  Context context;
     //原始数据
     private List<MyCart> myCarts = null;
-    private List<Boolean> booleanList = new ArrayList<>();
+    private List<Boolean> booleanList = null;
 
     int num = 0;
 
-    public CartNewAdapter(List<MyCart> myCarts){
+    public CartNewAdapter(List<MyCart> myCarts,List<Boolean> booleanList){
         this.myCarts = myCarts;
+        this.booleanList = booleanList;
         for (MyCart c:myCarts){
             Log.e("购物车数据源",""+c.toString());
             //设置默认的显示
-            booleanList.add(false);
+//            booleanList.add(false);
         }
     }
 
@@ -101,7 +102,6 @@ public class CartNewAdapter extends RecyclerView.Adapter<CartNewAdapter.ViewHold
         int max = 10;
         int min =1;
 
-        Log.e("Cart_num:","初始值"+num);
         viewHolder.btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -113,16 +113,10 @@ public class CartNewAdapter extends RecyclerView.Adapter<CartNewAdapter.ViewHold
                 }else{
                     viewHolder.btnMin.setClickable(true);
                     viewHolder.btnAdd.setClickable(true);
-
                     num += 1;
                     viewHolder.tvCount.setText(num+"");
-                    Log.e("Cart_num:","add"+num+"..."+num);
                     //获取新数据
                     myCarts.get(i).setCount(num);
-                    for (MyCart c:myCarts){
-                        Log.e("Cart_num:","购物车数据源"+c.toString());
-                    }
-                    Log.e("Cart_num:","购物车药品数量:"+myCarts.get(i).getCount());
                     notifyDataSetChanged();
                 }
 
@@ -142,7 +136,6 @@ public class CartNewAdapter extends RecyclerView.Adapter<CartNewAdapter.ViewHold
                 }
                 //获取新数据
                 myCarts.get(i).setCount(num-1);
-                Log.e("购物车药品数量:",num-1+"");
                 notifyDataSetChanged();
             }
         });
@@ -169,18 +162,6 @@ public class CartNewAdapter extends RecyclerView.Adapter<CartNewAdapter.ViewHold
             Toast.makeText(context,"请选择要删除的药品",Toast.LENGTH_SHORT).show();
         }
     }
-    //更改集合内部存储的状态
-    public void initCheck(boolean flag) {
 
-        for (int i = 0; i < myCarts.size(); i++) {
-            //更改指定位置的数据
-            booleanList.set(i,flag);
-        }
-    }
-    //全选
-    public void selectAll(){
-        initCheck(true);
-        notifyDataSetChanged();
-    }
 
 }

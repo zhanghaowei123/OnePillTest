@@ -61,7 +61,6 @@ public class CommentDao {
     }
     //插入评论
     public void add(Comment comment){
-        Log.e("CommentDao","插入"+comment.toString());
         String url = Connect.BASE_URL + "comment/add";
         RequestBody body = new FormBody.Builder()
                 .add("json",gson.toJson(comment))
