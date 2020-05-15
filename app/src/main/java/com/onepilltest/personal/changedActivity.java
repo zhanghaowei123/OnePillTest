@@ -15,9 +15,9 @@ public class changedActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         //取消顶部导航栏
-        if (getSupportActionBar()!=null){
-            getSupportActionBar().hide();
-        }
+//        if (getSupportActionBar()!=null){
+//            getSupportActionBar().hide();
+//        }
         setContentView(R.layout.activity_changed);
 
         Handler handler = new Handler();

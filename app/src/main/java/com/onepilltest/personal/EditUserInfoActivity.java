@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.onepilltest.BaseActivity;
 import com.onepilltest.R;
 import com.onepilltest.URL.Connect;
 import com.onepilltest.entity.EventMessage;
@@ -39,6 +40,7 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.io.File;
 import java.io.IOException;
 
+import interfaces.heweather.com.interfacesmodule.bean.Base;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
@@ -48,7 +50,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class EditUserInfoActivity extends AppCompatActivity {
+public class EditUserInfoActivity extends BaseActivity {
 
     MyListener myListener = null;
     Button back = null;
@@ -73,16 +75,28 @@ public class EditUserInfoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(0xffffffff );
-            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            getWindow().setStatusBarColor(0xffffffff );
+//            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+//        }
         setContentView(R.layout._edit_user_info);
         EventBus.getDefault().register(this);
         myListener = new MyListener();
         okHttpClient = new OkHttpClient();
         find();
         init();
+    }
+
+    @Override
+    public int[] hideSoftByEditViewIds() {
+        int[] ids = {R.id.edit_user_info_nickName, R.id.edit_user_info_PID,R.id.edit_user_info_password,R.id.edit_user_info_phone};
+        return ids;
+    }
+
+
+    @Override
+    public int intiLayout() {
+        return R.layout._edit_user_info;
     }
 
     public void init(){

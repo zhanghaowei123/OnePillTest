@@ -55,13 +55,17 @@ public class IndexAdapter extends RecyclerView.Adapter {
      */
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, final int i) {
+        Article article = articles.get(i);
         //设置每一项所显示的内容
         MyItemViewHolder itemViewHolder = (MyItemViewHolder) viewHolder;
         itemViewHolder.writerName.setText(articles.get(i).getWriterName());
-        itemViewHolder.articleContent.setText(articles.get(i).getContent());
+        String content = article.getContent();
+        if (content.length()>150){
+            content = content.substring(0,149)+"...";
+        }
+        itemViewHolder.articleContent.setText(content);
         itemViewHolder.title.setText(articles.get(i).getTitle());
         itemViewHolder.tag.setText(articles.get(i).getTag());
-        Article article = articles.get(i);
         RequestOptions requestOptions = new RequestOptions().circleCrop();
         Glide.with(context)
                 .load(Connect.BASE_URL + article.getHeadImg())
@@ -72,6 +76,7 @@ public class IndexAdapter extends RecyclerView.Adapter {
             @Override
             public void onClick(View v) {
                 Toast.makeText(context, "点击第" + (i + 1) + "条数据", Toast.LENGTH_SHORT).show();
+
             }
         });
         itemViewHolder.imgComment.setOnClickListener(new View.OnClickListener() {

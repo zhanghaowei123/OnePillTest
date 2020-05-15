@@ -19,6 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.onepilltest.BaseActivity;
 import com.onepilltest.PermissionsManager;
 import com.onepilltest.PermissionsResultAction;
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -28,13 +29,14 @@ import com.onepilltest.entity.EventMessage;
 import com.onepilltest.message.MessageFragment;
 import com.onepilltest.nearby.NearFragment;
 import com.onepilltest.personal.PersonalFragment;
+import com.onepilltest.util.StatusBarUtil;
 
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends BaseActivity {
 
     private class MyTabSpec {
         private ImageView imageView = null;
@@ -122,18 +124,26 @@ public class HomeActivity extends AppCompatActivity {
             }
         }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(0xff56ced4);
-        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            getWindow().setStatusBarColor(0xff56ced4);
+//        }
         setContentView(R.layout.activity_main);
 
+        initStatusBar();
         requestPermissions();
-
         initData();
-
         setListener();
         // 设置默认显示的TabSpec
         changeTab(tabStrId[0]);
+    }
+
+    private void initStatusBar() {
+//        StatusBarUtil.setTranslucentStatus(this);
+    }
+
+    @Override
+    public int intiLayout() {
+        return R.layout.activity_main;
     }
 
     // 自定义的监听器类，完成Tab页面切换及图表转化
@@ -144,24 +154,61 @@ public class HomeActivity extends AppCompatActivity {
             msg.setCode("bar");
             switch (v.getId()) {
                 case R.id.tab_spec_home:
+                    Log.e("bar","首页\n");
                     changeTab(tabStrId[0]);
                     msg.setJson("0");
                     EventBus.getDefault().post(msg);
+                    //设置状态栏透明
+//                    StatusBarUtil.setTranslucentStatus(HomeActivity.this);
+                    //设置状态栏paddingTop
+                    StatusBarUtil.setRootViewFitsSystemWindows(HomeActivity.this, false);
+                    //设置状态栏颜色
+                    StatusBarUtil.setStatusBarColor(HomeActivity.this, 0xff56ced4);
+                    //设置状态栏神色浅色切换
+                    StatusBarUtil.setStatusBarDarkTheme(HomeActivity.this, false);
                     break;
                 case R.id.tab_spec_near:
+                    Log.e("bar","附近\n");
                     changeTab(tabStrId[1]);
                     msg.setJson("1");
                     EventBus.getDefault().post(msg);
+                    //设置状态栏透明
+//                    StatusBarUtil.setTranslucentStatus(HomeActivity.this);
+                    //设置状态栏paddingTop
+                    StatusBarUtil.setRootViewFitsSystemWindows(HomeActivity.this, false);
+                    //设置状态栏颜色
+                    StatusBarUtil.setStatusBarColor(HomeActivity.this, 0x0056ced4);
+                    //设置状态栏神色浅色切换
+                    StatusBarUtil.setStatusBarDarkTheme(HomeActivity.this, true);
+
                     break;
                 case R.id.tab_spec_msg:
+                    Log.e("bar","消息\n");
                     changeTab(tabStrId[2]);
                     msg.setJson("1");
                     EventBus.getDefault().post(msg);
+                    //设置状态栏透明
+//                    StatusBarUtil.setTranslucentStatus(HomeActivity.this);
+                    //设置状态栏paddingTop
+                    StatusBarUtil.setRootViewFitsSystemWindows(HomeActivity.this, false);
+                    //设置状态栏颜色
+                    StatusBarUtil.setStatusBarColor(HomeActivity.this, 0xff56ced4);
+                    //设置状态栏神色浅色切换
+                    StatusBarUtil.setStatusBarDarkTheme(HomeActivity.this, false);
                     break;
                 case R.id.tab_spec_me:
+                    Log.e("bar","个人\n");
                     changeTab(tabStrId[3]);
                     msg.setJson("1");
                     EventBus.getDefault().post(msg);
+                    //设置状态栏透明
+//                    StatusBarUtil.setTranslucentStatus(HomeActivity.this);
+                    //设置状态栏paddingTop
+                    StatusBarUtil.setRootViewFitsSystemWindows(HomeActivity.this, false);
+                    //设置状态栏颜色
+                    StatusBarUtil.setStatusBarColor(HomeActivity.this, 0x0056ced4);
+                    //设置状态栏神色浅色切换
+                    StatusBarUtil.setStatusBarDarkTheme(HomeActivity.this, false);
                     break;
             }
         }
@@ -285,7 +332,7 @@ public class HomeActivity extends AppCompatActivity {
                 Toast.makeText(this, "扫描结果为空", Toast.LENGTH_LONG).show();
             } else {
                 String str = result.getContents();
-                Log.e("扫描结构",str);
+                Log.e("扫描结构", str);
 //                Toast.makeText(this, str, Toast.LENGTH_LONG).show();
             }
         }

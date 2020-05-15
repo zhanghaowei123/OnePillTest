@@ -53,6 +53,7 @@ import com.google.gson.Gson;
 import com.onepilltest.R;
 import com.onepilltest.index.HomeFragment;
 import com.onepilltest.util.SharedPreferencesUtil;
+import com.onepilltest.util.StatusBarUtil;
 
 import java.util.List;
 
@@ -68,6 +69,24 @@ public class NearFragment extends Fragment {
     private MyLocationListener myLocationListener = null;
     BDLocation location = null;
     Button nowlo = null;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+//        initBar();
+    }
+
+    private void initBar() {
+        //设置状态栏透明
+        StatusBarUtil.setTranslucentStatus(getActivity());
+        //设置状态栏paddingTop
+//        StatusBarUtil.setRootViewFitsSystemWindows(getActivity(),true);
+        //设置状态栏颜色
+//        StatusBarUtil.setStatusBarColor(getActivity(),0xff56ced4);
+        //设置状态栏神色浅色切换
+        StatusBarUtil.setStatusBarDarkTheme(getActivity(),true);
+
+    }
 
     @Nullable
     @Override
