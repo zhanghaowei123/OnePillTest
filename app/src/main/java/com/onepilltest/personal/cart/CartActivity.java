@@ -195,7 +195,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
                 UserBook.money = all-price;
                 EventBus.getDefault().post(msg);
                 medicines.clear();
-                cartAdapter.notifyDataSetChanged();
+                cartNewAdapter.notifyDataSetChanged();
                 break;
                 //new
             case R.id.tv_cart_manage1:// 当管理按钮被点下时，可进行删除操作

@@ -50,6 +50,8 @@ public class CartNewAdapter extends RecyclerView.Adapter<CartNewAdapter.ViewHold
     private List<MyCart> myCarts = null;
     private List<Boolean> booleanList = new ArrayList<>();
 
+    int num = 0;
+
     public CartNewAdapter(List<MyCart> myCarts){
         this.myCarts = myCarts;
         for (MyCart c:myCarts){
@@ -92,16 +94,18 @@ public class CartNewAdapter extends RecyclerView.Adapter<CartNewAdapter.ViewHold
         });
         viewHolder.checkBox.setChecked(booleanList.get(i));
         //数量
-        viewHolder.tvCount.setText(1+"");
+        viewHolder.tvCount.setText(myCart.getCount()+"");
         //钱
         viewHolder.tvPrice.setText(myCart.getPrice()+"");
         //加减
         int max = 10;
         int min =1;
-        int num  = Integer.parseInt(viewHolder.tvCount.getText().toString());
+
+        Log.e("Cart_num:","初始值"+num);
         viewHolder.btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                num = myCarts.get(i).getCount();
                 if (max<=num){
                     viewHolder.btnAdd.setClickable(false);
                     viewHolder.btnMin.setClickable(true);
@@ -109,13 +113,19 @@ public class CartNewAdapter extends RecyclerView.Adapter<CartNewAdapter.ViewHold
                 }else{
                     viewHolder.btnMin.setClickable(true);
                     viewHolder.btnAdd.setClickable(true);
-                    viewHolder.tvCount.setText(num+1+"");
-                    Log.e("num",num+"");
+
+                    num += 1;
+                    viewHolder.tvCount.setText(num+"");
+                    Log.e("Cart_num:","add"+num+"..."+num);
+                    //获取新数据
+                    myCarts.get(i).setCount(num);
+                    for (MyCart c:myCarts){
+                        Log.e("Cart_num:","购物车数据源"+c.toString());
+                    }
+                    Log.e("Cart_num:","购物车药品数量:"+myCarts.get(i).getCount());
+                    notifyDataSetChanged();
                 }
-                //获取新数据
-                myCarts.get(i).setCount(num+1);
-                Log.e("购物车药品数量:",num+1+"");
-                notifyDataSetChanged();
+
             }
         });
         viewHolder.btnMin.setOnClickListener(new View.OnClickListener() {
