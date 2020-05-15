@@ -1,5 +1,6 @@
 package com.onepilltest.index;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.onepilltest.BaseActivity;
 import com.onepilltest.R;
 import com.onepilltest.URL.Connect;
 import com.onepilltest.entity.Article;
@@ -29,6 +31,7 @@ import com.onepilltest.entity.EventMessage;
 import com.onepilltest.entity.UserDoctor;
 import com.onepilltest.others.MyRecyclerView;
 import com.onepilltest.personal.UserBook;
+import com.onepilltest.util.StatusBarUtil;
 import com.onepilltest.welcome.PerfectInforPatientActivity;
 import com.onepilltest.welcome.UserSuccessActivity;
 
@@ -49,7 +52,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class CommentActivity extends AppCompatActivity implements View.OnClickListener {
+public class CommentActivity extends BaseActivity implements View.OnClickListener {
 
     private LinearLayout ivCommentLeft;
     private Button btnSendComment;
@@ -72,7 +75,7 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
 //            getWindow().setStatusBarColor(0xffffffff);
 //            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 //        }
-        setContentView(R.layout.activity_comment);
+//        setContentView(R.layout.activity_comment);
 
         GoodDao.goodMap.clear();
         //将主线程注册成为订阅者
@@ -82,8 +85,25 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
         id = Integer.parseInt(intent.getStringExtra("articleId"));
         findViews();
         commentDao.getComment(id,comments);
+        initBar(CommentActivity.this);
 
+    }
 
+    private void initBar(Activity activity) {
+        //设置状态栏透明
+//        StatusBarUtil.setTranslucentStatus(activity);
+        //设置状态栏paddingTop
+//        StatusBarUtil.setRootViewFitsSystemWindows(activity,true);
+        //设置状态栏颜色
+        StatusBarUtil.setStatusBarColor(activity,0xff56ced4);
+        //设置状态栏神色浅色切换
+        StatusBarUtil.setStatusBarDarkTheme(activity,false);
+
+    }
+
+    @Override
+    public int intiLayout() {
+        return R.layout.activity_comment;
     }
 
     public void findViews() {
