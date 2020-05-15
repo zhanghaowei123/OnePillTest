@@ -235,6 +235,4 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
     }
-
-
 }

@@ -138,12 +138,17 @@ public class CartNewAdapter extends RecyclerView.Adapter<CartNewAdapter.ViewHold
                 }else {
                     viewHolder.btnMin.setClickable(true);
                     viewHolder.btnAdd.setClickable(true);
-                    viewHolder.tvCount.setText(num-1+"");
+                    num -=1;
+                    viewHolder.tvCount.setText(num+"");
+                    //获取新数据
+                    myCarts.get(i).setCount(num);
+                    for (MyCart c:myCarts){
+                        Log.e("Cart_num:","购物车数据源"+c.toString());
+                    }
+                    Log.e("Cart_num:","购物车药品数量:"+myCarts.get(i).getCount());
+                    notifyDataSetChanged();
                 }
-                //获取新数据
-                myCarts.get(i).setCount(num-1);
-                Log.e("购物车药品数量:",num-1+"");
-                notifyDataSetChanged();
+
             }
         });
     }
