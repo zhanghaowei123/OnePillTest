@@ -214,7 +214,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
                 btnCartSettlement.setVisibility(View.VISIBLE);
                 tvSettlementPrice.setVisibility(View.INVISIBLE);
                 break;
-            case R.id.tv_cart_finish1:// 当修改完成时，可进行下单操作
+            case  R.id.tv_cart_finish1:// 当修改完成时，可进行下单操作
                 tvFinish.setVisibility(View.GONE);
                 tvCartManage.setVisibility(View.VISIBLE);
                 btnCartSettlement.setVisibility(View.VISIBLE);
