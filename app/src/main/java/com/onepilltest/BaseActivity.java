@@ -269,13 +269,13 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     /*实现案例===============================================================================================*/
 
-//    @Override
+//    @Override   传入EditView
 //    public int[] hideSoftByEditViewIds() {
 //        int[] ids = {R.id.et_company_name, R.id.et_address};
 //        return ids;
 //    }
 //
-//    @Override
+//    @Override  传入需要过滤的View，点击这些View的时候软键盘不会消失
 //    public View[] filterViewByIds() {
 //        View[] views = {mEtCompanyName, mEtAddress};
 //        return views;

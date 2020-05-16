@@ -117,7 +117,7 @@ public class SharedPreferencesUtil {
             }.getType();
             return gson.fromJson(str, userListType);
         }
-        return null;
+        return new ArrayList<>();
     }
 
     //获取doctorList
@@ -129,7 +129,7 @@ public class SharedPreferencesUtil {
             }.getType();
             return gson.fromJson(str, userListType);
         }
-        return null;
+        return new ArrayList<>();
     }
 
     //判断User是否存在
