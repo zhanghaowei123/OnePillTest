@@ -57,7 +57,7 @@ public class LoginDoctorActivity extends AppCompatActivity implements View.OnCli
 //        }
         setContentView(R.layout.login_doctor);
 
-        myDoctorDBHelper = new MyDoctorDBHelper(getApplicationContext(),"doctor_db",1);
+        myDoctorDBHelper = new MyDoctorDBHelper(getApplicationContext(),"doctor",1);
         database = myDoctorDBHelper.getWritableDatabase();
 
         findViews();
@@ -144,7 +144,7 @@ public class LoginDoctorActivity extends AppCompatActivity implements View.OnCli
                     UserDoctor u = msg.getDoctor();
                     Log.e("DoctorId", "" + u.getId() + "|" + u.getAddress());
                     //把用户存入UserBook
-                    UserBook.addUser(u);
+                    UserBook.addDoctor(u);
                     save(u);//把u存进SharedPreferences
                     //设置昵称和头像
                     MyUserProvider.getInstance().setUser(UserBook.NowDoctor.getPhone(),

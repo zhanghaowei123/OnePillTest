@@ -143,6 +143,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
     private String phone;
     private String name;
     private String img;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.ease_fragment_chat, container, false);
@@ -917,15 +918,15 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
             SQLiteDatabase db = SQLiteDatabase.
                     openOrCreateDatabase("user_db", null);
             // 查询获得游标
-            Cursor cursor = db.query ("PATIENT",null,null,null,null,null,null);
+            Cursor cursor = db.query("PATIENT", null, null, null, null, null, null);
 // 判断游标是否为空
-            if(cursor.moveToFirst()) {
+            if (cursor.moveToFirst()) {
                 // 遍历游标
                 do {
-                    phone=cursor.getString(cursor.getColumnIndex("PHONE"));
+                    phone = cursor.getString(cursor.getColumnIndex("PHONE"));
                     name = cursor.getString(cursor.getColumnIndex("NAME"));
                     img = cursor.getString(cursor.getColumnIndex("IMG"));
-                    Log.e("mydb", phone + "|"+name+"|"+img);
+                    Log.e("mydb", phone + "|" + name + "|" + img);
                 } while (cursor.moveToNext());
             }
             db.close();
@@ -940,25 +941,47 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
             message.setChatType(ChatType.ChatRoom);
         }
         //在数据库中查找
-        SQLiteDatabase db = SQLiteDatabase.
-                openOrCreateDatabase("user_db", null);
-        // 查询获得游标
-        Cursor cursor = db.query ("PATIENT",null,null,null,null,null,null);
-// 判断游标是否为空
-        if(cursor.moveToFirst()) {
-            // 遍历游标
-            do {
-                phone=cursor.getString(cursor.getColumnIndex("PHONE"));
-                name = cursor.getString(cursor.getColumnIndex("NAME"));
-                img = cursor.getString(cursor.getColumnIndex("IMG"));
-                Log.e("mydb", phone + "|"+name+"|"+img);
-            } while (cursor.moveToNext());
+        SQLiteDatabase db = SQLiteDatabase
+                .openOrCreateDatabase("/data/data/com.onepilltest/databases/user", null);
+        if (db != null) {
+            // 查询获得游标
+            Cursor cursor = db.query("PATIENT", null, null, null, null, null, null);
+            // 判断游标是否为空
+            if (cursor.moveToFirst()) {
+                // 遍历游标
+                do {
+                    phone = cursor.getString(cursor.getColumnIndex("PHONE"));
+                    name = cursor.getString(cursor.getColumnIndex("NAME"));
+                    img = cursor.getString(cursor.getColumnIndex("IMG"));
+                    Log.e("mydb", phone + "|" + name + "|" + img);
+                } while (cursor.moveToNext());
+            }
+            db.close();
+            message.setAttribute("ImUserName", phone);//设置我的环信username
+            message.setAttribute("ImNickName", name);//设置我的昵称
+            message.setAttribute("ImImageUrl", img);//设置我的头像url
+        } else {
+            SQLiteDatabase db2 = SQLiteDatabase.
+                    openOrCreateDatabase("/data/data/com.onepilltest/databases/doctor", null);
+            if (db2 != null) {
+                // 查询获得游标
+                Cursor cursor = db2.query("DOCTOR", null, null, null, null, null, null);
+                // 判断游标是否为空
+                if (cursor.moveToFirst()) {
+                    // 遍历游标
+                    do {
+                        phone = cursor.getString(cursor.getColumnIndex("PHONE"));
+                        name = cursor.getString(cursor.getColumnIndex("NAME"));
+                        img = cursor.getString(cursor.getColumnIndex("IMG"));
+                        Log.e("mydb", phone + "|" + name + "|" + img);
+                    } while (cursor.moveToNext());
+                }
+                db2.close();
+                message.setAttribute("ImUserName", phone);//设置我的环信username
+                message.setAttribute("ImNickName", name);//设置我的昵称
+                message.setAttribute("ImImageUrl", img);//设置我的头像url
+            }
         }
-        db.close();
-        message.setAttribute("ImUserName", phone);//设置我的环信username
-        message.setAttribute("ImNickName", name);//设置我的昵称
-        message.setAttribute("ImImageUrl", img);//设置我的头像url
-
         message.setMessageStatusCallback(messageStatusCallback);
 
         // Send message.

@@ -61,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         //打开或者创建一个数据库
-        MyDBHelper myDBHelper = new MyDBHelper(getApplicationContext(), "user_db", 1);
+        MyDBHelper myDBHelper = new MyDBHelper(getApplicationContext(), "user", 1);
         database = myDBHelper.getWritableDatabase();
 
 

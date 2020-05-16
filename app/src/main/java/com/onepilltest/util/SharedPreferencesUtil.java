@@ -92,6 +92,7 @@ public class SharedPreferencesUtil {
             if (!f)
                 userDoctorList.add(userDoctor);
         } else {
+            userDoctorList = new ArrayList<>();
             userDoctorList.add(userDoctor);
         }
         editor.putString("userList", gson.toJson(userDoctorList));
