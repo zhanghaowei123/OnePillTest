@@ -82,7 +82,7 @@ public class UserList extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 UserDoctor base = doctorList.get(position);
-                UserBook.addUser(base);
+                UserBook.addDoctor(base);
                 //UserBook.NowUser = baseList.get(position);
 
                 Intent intent = new Intent(UserList.this, HomeActivity.class);

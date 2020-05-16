@@ -75,7 +75,7 @@ public class UserBook {
         NowUser = userPatient;
     }
 
-    public static void addUser(UserDoctor userDoctor) {
+    public static void addDoctor(UserDoctor userDoctor) {
         int size = DoctorList.size();
         Code = 1;
         boolean f = true;
