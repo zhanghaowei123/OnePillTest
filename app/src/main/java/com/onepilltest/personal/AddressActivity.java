@@ -1,5 +1,6 @@
 package com.onepilltest.personal;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
@@ -14,9 +15,11 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.onepilltest.BaseActivity;
 import com.onepilltest.R;
 import com.onepilltest.entity.Address;
 import com.onepilltest.entity.EventMessage;
+import com.onepilltest.util.StatusBarUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -28,7 +31,7 @@ import java.util.List;
 /**
  * 个人_设置_用户地址页面
  */
-public class AddressActivity extends AppCompatActivity {
+public class AddressActivity extends BaseActivity {
 
     Button back;
     Button bAdd = null;
@@ -52,6 +55,25 @@ public class AddressActivity extends AppCompatActivity {
         //将主线程注册成为订阅者
         EventBus.getDefault().register(this);
 
+        initBar(this);
+
+    }
+
+    private void initBar(Activity activity) {
+
+        //设置状态栏paddingTop
+        StatusBarUtil.setRootViewFitsSystemWindows(activity,true);
+        //设置状态栏颜色0xff56ced4
+//        StatusBarUtil.setStatusBarColor(activity,0xff56ced4);
+        //设置状态栏神色浅色切换
+        StatusBarUtil.setStatusBarDarkTheme(activity,true);
+
+    }
+
+
+    @Override
+    public int intiLayout() {
+        return R.layout.user_address;
     }
 
     public void init() {

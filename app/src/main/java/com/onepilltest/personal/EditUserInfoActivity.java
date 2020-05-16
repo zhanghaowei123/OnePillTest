@@ -2,6 +2,7 @@ package com.onepilltest.personal;
 
 import android.Manifest;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -31,6 +32,7 @@ import com.onepilltest.entity.UserDoctor;
 import com.onepilltest.entity.UserPatient;
 import com.onepilltest.util.LogUtil;
 import com.onepilltest.util.OkhttpUtil;
+import com.onepilltest.util.StatusBarUtil;
 import com.onepilltest.welcome.PerfectInforDoctorActivity;
 
 import org.greenrobot.eventbus.EventBus;
@@ -85,6 +87,19 @@ public class EditUserInfoActivity extends BaseActivity {
         okHttpClient = new OkHttpClient();
         find();
         init();
+
+        initBar(this);
+    }
+
+    private void initBar(Activity activity) {
+
+        //设置状态栏paddingTop
+        StatusBarUtil.setRootViewFitsSystemWindows(activity,true);
+        //设置状态栏颜色0xff56ced4
+//        StatusBarUtil.setStatusBarColor(activity,0xff56ced4);
+        //设置状态栏神色浅色切换
+        StatusBarUtil.setStatusBarDarkTheme(activity,true);
+
     }
 
     @Override

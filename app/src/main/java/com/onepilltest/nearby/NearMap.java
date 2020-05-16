@@ -1,5 +1,6 @@
 package com.onepilltest.nearby;
 
+import android.app.Activity;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -30,16 +31,18 @@ import com.baidu.mapapi.search.poi.PoiSortType;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.onepilltest.BaseActivity;
 import com.onepilltest.R;
 import com.onepilltest.URL.Connect;
 import com.onepilltest.util.SharedPreferencesUtil;
+import com.onepilltest.util.StatusBarUtil;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class NearMap extends AppCompatActivity {
+public class NearMap extends BaseActivity {
     private MyListener myListener = new MyListener();
     LinearLayout hospital = null;
     LinearLayout pill = null;
@@ -113,6 +116,24 @@ public class NearMap extends AppCompatActivity {
         initDate();
         locationAdapter = new LocationAdapter(poiInfos,getApplicationContext(),R.layout.nearmap_item);
         positionList.setAdapter(locationAdapter);
+
+        initBar(this);
+    }
+
+    private void initBar(Activity activity) {
+
+        //设置状态栏paddingTop
+        StatusBarUtil.setRootViewFitsSystemWindows(activity,true);
+        //设置状态栏颜色0xff56ced4
+//        StatusBarUtil.setStatusBarColor(activity,0xff56ced4);
+        //设置状态栏神色浅色切换
+        StatusBarUtil.setStatusBarDarkTheme(activity,true);
+
+    }
+
+    @Override
+    public int intiLayout() {
+        return R.layout.activity_near_map;
     }
 
     private void initDate() {

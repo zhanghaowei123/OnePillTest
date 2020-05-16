@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.hacknife.carouselbanner.interfaces.CarouselImageFactory;
+import com.onepilltest.BaseActivity;
 import com.onepilltest.R;
 import com.onepilltest.URL.Connect;
 import com.onepilltest.entity.Cart;
@@ -38,6 +39,7 @@ import com.hacknife.carouselbanner.CoolCarouselBanner;
 import com.hacknife.carouselbanner.interfaces.OnCarouselItemChangeListener;
 import com.hacknife.carouselbanner.interfaces.OnCarouselItemClickListener;
 import com.onepilltest.util.OkhttpUtil;
+import com.onepilltest.util.StatusBarUtil;
 
 
 import java.io.IOException;
@@ -50,7 +52,7 @@ import okhttp3.FormBody;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class ProductActivity extends Activity {
+public class ProductActivity extends BaseActivity {
     private ViewPager viewPager;  //轮播图模块
     private int[] mImg;
     private int[] mImg_id;
@@ -102,6 +104,25 @@ public class ProductActivity extends Activity {
         tabHost.addTab(tabHost.newTabSpec("sideEffect").setIndicator("副作用").setContent(R.id.tab_3));
         tabHost.addTab(tabHost.newTabSpec("explain").setIndicator("使用说明").setContent(R.id.tab_4));
 
+        initBar(this);
+
+    }
+
+    private void initBar(Activity activity) {
+
+        //设置状态栏paddingTop
+        StatusBarUtil.setRootViewFitsSystemWindows(activity,true);
+        //设置状态栏颜色0xff56ced4
+//        StatusBarUtil.setStatusBarColor(activity,0xff56ced4);
+        //设置状态栏神色浅色切换
+        StatusBarUtil.setStatusBarDarkTheme(activity,true);
+
+    }
+
+
+    @Override
+    public int intiLayout() {
+        return R.layout.activity_product;
     }
 
     private void initMed() {

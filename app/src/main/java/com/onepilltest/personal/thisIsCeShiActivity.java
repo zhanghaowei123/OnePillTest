@@ -1,5 +1,6 @@
 package com.onepilltest.personal;
 
+import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
@@ -8,19 +9,22 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TabHost;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
+import com.onepilltest.BaseActivity;
 import com.onepilltest.R;
 import com.onepilltest.entity.QR;
+import com.onepilltest.util.StatusBarUtil;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class thisIsCeShiActivity extends AppCompatActivity {
+public class thisIsCeShiActivity extends BaseActivity {
 
     //二维码尺寸
     private int width = 300;
@@ -40,6 +44,24 @@ public class thisIsCeShiActivity extends AppCompatActivity {
         myListener = new MyListener();
         initView();
 
+        initBar(this);
+
+    }
+
+    private void initBar(Activity activity) {
+
+        //设置状态栏paddingTop
+        StatusBarUtil.setRootViewFitsSystemWindows(activity,true);
+        //设置状态栏颜色0xff56ced4
+//        StatusBarUtil.setStatusBarColor(activity,0xff56ced4);
+        //设置状态栏神色浅色切换
+        StatusBarUtil.setStatusBarDarkTheme(activity,true);
+
+    }
+
+    @Override
+    public int intiLayout() {
+        return R.layout.this_is_ce_shi;
     }
 
     private void initView() {

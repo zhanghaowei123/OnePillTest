@@ -1,5 +1,6 @@
 package com.onepilltest.personal;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
@@ -12,12 +13,14 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
+import com.onepilltest.BaseActivity;
 import com.onepilltest.R;
 import com.onepilltest.URL.Connect;
 import com.onepilltest.entity.QR;
 import com.onepilltest.entity.ZxingMessage;
+import com.onepilltest.util.StatusBarUtil;
 
-public class QR_codeActivity extends AppCompatActivity {
+public class QR_codeActivity extends BaseActivity {
 
     Button back = null;
     ImageView userImg = null;
@@ -38,6 +41,25 @@ public class QR_codeActivity extends AppCompatActivity {
         myListener = new MyListener();
         find();
         init();
+
+        initBar(this);
+    }
+
+
+    private void initBar(Activity activity) {
+
+        //设置状态栏paddingTop
+        StatusBarUtil.setRootViewFitsSystemWindows(activity,true);
+        //设置状态栏颜色0xff56ced4
+//        StatusBarUtil.setStatusBarColor(activity,0xff56ced4);
+        //设置状态栏神色浅色切换
+        StatusBarUtil.setStatusBarDarkTheme(activity,true);
+
+    }
+
+    @Override
+    public int intiLayout() {
+        return R.layout.setting_qr_code;
     }
 
     private void find() {

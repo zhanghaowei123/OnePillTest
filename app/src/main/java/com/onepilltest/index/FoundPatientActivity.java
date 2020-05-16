@@ -1,5 +1,6 @@
 package com.onepilltest.index;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,13 +13,15 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.onepilltest.BaseActivity;
 import com.onepilltest.R;
 import com.onepilltest.message.QuestionActivity;
 import com.onepilltest.personal.ProductActivity;
+import com.onepilltest.util.StatusBarUtil;
 
 import org.greenrobot.eventbus.EventBus;
 
-public class FoundPatientActivity extends AppCompatActivity {
+public class FoundPatientActivity extends BaseActivity {
     FoundPatientActivity.MyListener myListener = null;
     private ImageView imgBack;
     private EditText editSelect;
@@ -58,6 +61,25 @@ public class FoundPatientActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         } );
+
+        initBar(this);
+    }
+
+    @Override
+    public int intiLayout() {
+        return R.layout.found_patient_layout;
+    }
+
+    private void initBar(Activity activity) {
+        //设置状态栏透明
+//        StatusBarUtil.setTranslucentStatus(activity);
+        //设置状态栏paddingTop
+//        StatusBarUtil.setRootViewFitsSystemWindows(activity,true);
+        //设置状态栏颜色0xff56ced4
+        StatusBarUtil.setStatusBarColor(activity,0xff56ced4);
+        //设置状态栏神色浅色切换
+        StatusBarUtil.setStatusBarDarkTheme(activity,false);
+
     }
     private void find(){
         btn1 = findViewById(R.id.btn_1);

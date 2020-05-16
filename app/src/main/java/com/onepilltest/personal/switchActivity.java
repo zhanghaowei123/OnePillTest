@@ -1,5 +1,6 @@
 package com.onepilltest.personal;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,11 +12,13 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.onepilltest.BaseActivity;
 import com.onepilltest.R;
 import com.onepilltest.URL.Connect;
+import com.onepilltest.util.StatusBarUtil;
 
 
-public class switchActivity extends AppCompatActivity {
+public class switchActivity extends BaseActivity {
     MyListener myListener = new MyListener();
     ImageView headImg = null;
     TextView nickName = null;
@@ -33,6 +36,23 @@ public class switchActivity extends AppCompatActivity {
         find();
         init();
 
+        initBar(this);
+    }
+
+    private void initBar(Activity activity) {
+
+        //设置状态栏paddingTop
+        StatusBarUtil.setRootViewFitsSystemWindows(activity,true);
+        //设置状态栏颜色0xff56ced4
+//        StatusBarUtil.setStatusBarColor(activity,0xff56ced4);
+        //设置状态栏神色浅色切换
+        StatusBarUtil.setStatusBarDarkTheme(activity,true);
+
+    }
+
+    @Override
+    public int intiLayout() {
+        return R.layout.activity_switch;
     }
 
     public void init(){

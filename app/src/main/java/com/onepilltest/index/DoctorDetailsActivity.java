@@ -1,5 +1,6 @@
 package com.onepilltest.index;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
+import com.onepilltest.BaseActivity;
 import com.onepilltest.R;
 import com.onepilltest.URL.Connect;
 import com.onepilltest.entity.EventMessage;
@@ -23,6 +25,7 @@ import com.onepilltest.entity.UserDoctor;
 import com.onepilltest.personal.DoctorDao;
 import com.onepilltest.personal.UserBook;
 import com.onepilltest.entity.Dao.focusDao;
+import com.onepilltest.util.StatusBarUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -32,7 +35,7 @@ import org.greenrobot.eventbus.ThreadMode;
  * 医生简介页面
  */
 
-public class DoctorDetailsActivity extends AppCompatActivity {
+public class DoctorDetailsActivity extends BaseActivity {
     private ImageView headImg = null;//头像
     UserDoctor doctor = null;
     MyListener myListener = null;
@@ -64,6 +67,25 @@ public class DoctorDetailsActivity extends AppCompatActivity {
         find();
         context = getBaseContext();
         //init();
+        initBar(this);
+
+    }
+
+    @Override
+    public int intiLayout() {
+        return R.layout.doctor_details;
+    }
+
+    private void initBar(Activity activity) {
+        //设置状态栏透明
+//        StatusBarUtil.setTranslucentStatus(activity);
+        //设置状态栏paddingTop
+//        StatusBarUtil.setRootViewFitsSystemWindows(activity,true);
+        //设置状态栏颜色0xff56ced4
+        StatusBarUtil.setStatusBarColor(activity,0xff808080);
+        //设置状态栏神色浅色切换
+        StatusBarUtil.setStatusBarDarkTheme(activity,false);
+
     }
 
     public void setId(){

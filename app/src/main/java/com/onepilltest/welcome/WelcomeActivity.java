@@ -1,5 +1,6 @@
 package com.onepilltest.welcome;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -9,14 +10,16 @@ import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.onepilltest.BaseActivity;
 import com.onepilltest.R;
 import com.onepilltest.index.HomeActivity;
 import com.onepilltest.personal.UserBook;
 import com.onepilltest.util.SharedPreferencesUtil;
+import com.onepilltest.util.StatusBarUtil;
 
 import cn.jpush.android.api.JPushInterface;
 
-public class WelcomeActivity extends AppCompatActivity implements View.OnClickListener {
+public class WelcomeActivity extends BaseActivity implements View.OnClickListener {
     private LinearLayout linearDoctor;
     private LinearLayout linearPatient;
     @Override
@@ -41,6 +44,24 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
             startActivity(new Intent(WelcomeActivity.this, HomeFragment.class));
 
         }*/
+
+        initBar(this);
+    }
+
+    private void initBar(Activity activity) {
+
+        //设置状态栏paddingTop
+        StatusBarUtil.setRootViewFitsSystemWindows(activity,true);
+        //设置状态栏颜色0xff56ced4
+        StatusBarUtil.setStatusBarColor(activity,0xff56ced4);
+        //设置状态栏神色浅色切换
+        StatusBarUtil.setStatusBarDarkTheme(activity,false);
+
+    }
+
+    @Override
+    public int intiLayout() {
+        return R.layout.welcome_login;
     }
 
     //自动登陆

@@ -1,5 +1,6 @@
 package com.onepilltest.welcome;
 
+import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
+import com.onepilltest.BaseActivity;
 import com.onepilltest.Ease.MyUserProvider;
 import com.onepilltest.MyDoctorDBHelper;
 import com.onepilltest.R;
@@ -30,6 +32,7 @@ import com.onepilltest.index.HomeActivity;
 import com.onepilltest.personal.UserBook;
 import com.onepilltest.util.OkhttpUtil;
 import com.onepilltest.util.SharedPreferencesUtil;
+import com.onepilltest.util.StatusBarUtil;
 
 import java.io.IOException;
 
@@ -39,7 +42,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class LoginDoctorActivity extends AppCompatActivity implements View.OnClickListener {
+public class LoginDoctorActivity extends BaseActivity implements View.OnClickListener {
     private EditText editPhone;
     private EditText editPassword;
     private Button btnLogin;
@@ -61,6 +64,24 @@ public class LoginDoctorActivity extends AppCompatActivity implements View.OnCli
         database = myDoctorDBHelper.getWritableDatabase();
 
         findViews();
+
+        initBar(this);
+    }
+
+    private void initBar(Activity activity) {
+
+        //设置状态栏paddingTop
+        StatusBarUtil.setRootViewFitsSystemWindows(activity,true);
+        //设置状态栏颜色0xff56ced4
+        StatusBarUtil.setStatusBarColor(activity,0xff56ced4);
+        //设置状态栏神色浅色切换
+        StatusBarUtil.setStatusBarDarkTheme(activity,false);
+
+    }
+
+    @Override
+    public int intiLayout() {
+        return R.layout.login_doctor;
     }
 
     private void findViews() {

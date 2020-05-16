@@ -1,5 +1,6 @@
 package com.onepilltest.personal;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
@@ -13,9 +14,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.onepilltest.BaseActivity;
 import com.onepilltest.R;
 import com.onepilltest.entity.EventMessage;
 import com.onepilltest.entity.WalletBase;
+import com.onepilltest.util.StatusBarUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -29,7 +32,7 @@ import java.util.List;
 /**
  * 个人_钱包页面
  */
-public class WalletActivity extends AppCompatActivity {
+public class WalletActivity extends BaseActivity {
 
     MyListener myListener = null;
     Button back = null;
@@ -66,6 +69,24 @@ public class WalletActivity extends AppCompatActivity {
         });
 
         setGestureListener();
+
+        initBar(this);
+    }
+
+    private void initBar(Activity activity) {
+
+        //设置状态栏paddingTop
+        StatusBarUtil.setRootViewFitsSystemWindows(activity,true);
+        //设置状态栏颜色0xff56ced4
+//        StatusBarUtil.setStatusBarColor(activity,0xff56ced4);
+        //设置状态栏神色浅色切换
+        StatusBarUtil.setStatusBarDarkTheme(activity,true);
+
+    }
+
+    @Override
+    public int intiLayout() {
+        return R.layout.wallet;
     }
 
     private void setGestureListener() {

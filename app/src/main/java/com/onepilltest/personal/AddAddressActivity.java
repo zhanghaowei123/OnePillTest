@@ -1,5 +1,6 @@
 package com.onepilltest.personal;
 
+import android.app.Activity;
 import android.app.DownloadManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,10 +15,12 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.onepilltest.BaseActivity;
 import com.onepilltest.R;
 import com.onepilltest.URL.Connect;
 import com.onepilltest.entity.Address;
 import com.onepilltest.entity.UserPatient;
+import com.onepilltest.util.StatusBarUtil;
 import com.onepilltest.welcome.LoginActivity;
 
 import org.greenrobot.eventbus.EventBus;
@@ -32,7 +35,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class AddAddressActivity extends AppCompatActivity {
+public class AddAddressActivity extends BaseActivity {
 
     MyListener myListener = new MyListener();
     Button save = null;
@@ -60,7 +63,26 @@ public class AddAddressActivity extends AppCompatActivity {
         find();
         gson = new Gson();
         okHttpClient = new OkHttpClient();
+
+        initBar(this);
     }
+
+    @Override
+    public int intiLayout() {
+        return R.layout.add_address;
+    }
+
+    private void initBar(Activity activity) {
+
+        //设置状态栏paddingTop
+        StatusBarUtil.setRootViewFitsSystemWindows(activity,true);
+        //设置状态栏颜色0xff56ced4
+//        StatusBarUtil.setStatusBarColor(activity,0xff56ced4);
+        //设置状态栏神色浅色切换
+        StatusBarUtil.setStatusBarDarkTheme(activity,true);
+
+    }
+
 
     /*//获取当前账号的信息
     public UserPatient getNowUser() {

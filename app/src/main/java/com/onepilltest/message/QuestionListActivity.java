@@ -1,5 +1,6 @@
 package com.onepilltest.message;
 
+import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Build;
@@ -14,12 +15,14 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.onepilltest.BaseActivity;
 import com.onepilltest.R;
 import com.onepilltest.URL.Connect;
 import com.onepilltest.entity.Comment;
 import com.onepilltest.entity.EventMessage;
 import com.onepilltest.entity.Inquiry;
 import com.onepilltest.entity.UserPatient;
+import com.onepilltest.util.StatusBarUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -36,7 +39,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class QuestionListActivity extends AppCompatActivity {
+public class QuestionListActivity extends BaseActivity {
 
     private Response response;
     private int i;
@@ -67,6 +70,26 @@ public class QuestionListActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),"点什么点...没实现",Toast.LENGTH_SHORT).show();
             }
         });
+
+        initBar(this);
+
+    }
+
+    @Override
+    public int intiLayout() {
+        return R.layout.activity_question_list;
+    }
+
+    private void initBar(Activity activity) {
+        //设置状态栏透明
+//        StatusBarUtil.setTranslucentStatus(activity);
+        //设置状态栏paddingTop
+//        StatusBarUtil.setRootViewFitsSystemWindows(activity,true);
+        //设置状态栏颜色0xff56ced4
+        StatusBarUtil.setStatusBarColor(activity,0xff56ced4);
+        //设置状态栏神色浅色切换
+        StatusBarUtil.setStatusBarDarkTheme(activity,false);
+
     }
 
     private void initView() {

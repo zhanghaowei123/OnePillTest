@@ -1,5 +1,6 @@
 package com.onepilltest.personal;
 
+import android.app.Activity;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,12 +11,14 @@ import android.widget.ListView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.onepilltest.BaseActivity;
 import com.onepilltest.R;
 import com.onepilltest.entity.Dao.focusDao;
 import com.onepilltest.entity.EventMessage;
 import com.onepilltest.entity.ToFocus;
 import com.onepilltest.others.MyRecyclerView;
 import com.onepilltest.others.SwipeMenu;
+import com.onepilltest.util.StatusBarUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -25,7 +28,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FocusListActivity extends AppCompatActivity {
+public class FocusListActivity extends BaseActivity {
 
     Button back;
     Button doctorTag = null;
@@ -60,6 +63,25 @@ public class FocusListActivity extends AppCompatActivity {
         myListener = new MyListener();
         find();
         init();
+
+        initBar(this);
+    }
+
+
+    private void initBar(Activity activity) {
+
+        //设置状态栏paddingTop
+        StatusBarUtil.setRootViewFitsSystemWindows(activity,true);
+        //设置状态栏颜色0xff56ced4
+//        StatusBarUtil.setStatusBarColor(activity,0xff56ced4);
+        //设置状态栏神色浅色切换
+        StatusBarUtil.setStatusBarDarkTheme(activity,true);
+
+    }
+
+    @Override
+    public int intiLayout() {
+        return R.layout.focus_list;
     }
 
     public void find() {

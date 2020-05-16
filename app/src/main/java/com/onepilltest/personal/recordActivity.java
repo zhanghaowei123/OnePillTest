@@ -1,5 +1,6 @@
 package com.onepilltest.personal;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -8,13 +9,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
+import com.onepilltest.BaseActivity;
 import com.onepilltest.R;
+import com.onepilltest.util.StatusBarUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class recordActivity extends AppCompatActivity {
+public class recordActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +49,26 @@ public class recordActivity extends AppCompatActivity {
         int d = c.get(Calendar.DAY_OF_MONTH);
         textView.setText(y+"年"+m+"月"+d+"日");
 
+        initBar(this);
 
     }
+
+    private void initBar(Activity activity) {
+
+        //设置状态栏paddingTop
+        StatusBarUtil.setRootViewFitsSystemWindows(activity,true);
+        //设置状态栏颜色0xff56ced4
+//        StatusBarUtil.setStatusBarColor(activity,0xff56ced4);
+        //设置状态栏神色浅色切换
+        StatusBarUtil.setStatusBarDarkTheme(activity,true);
+
+    }
+
+    @Override
+    public int intiLayout() {
+        return R.layout.activity_record;
+    }
+
     private class MyListener implements View.OnClickListener{
 
         TextView textView = findViewById(R.id.tv_time);

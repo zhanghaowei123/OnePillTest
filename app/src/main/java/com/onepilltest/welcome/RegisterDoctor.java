@@ -1,5 +1,6 @@
 package com.onepilltest.welcome;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -21,12 +22,14 @@ import android.widget.Toast;
 
 import com.mob.MobSDK;
 import com.mob.OperationCallback;
+import com.onepilltest.BaseActivity;
 import com.onepilltest.R;
+import com.onepilltest.util.StatusBarUtil;
 
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
 
-public class RegisterDoctor extends AppCompatActivity implements View.OnClickListener{
+public class RegisterDoctor extends BaseActivity implements View.OnClickListener{
     private ImageView imgResponse;
     private SharedPreferences sharedPreferences;
     private CheckBox checkBox;
@@ -104,6 +107,24 @@ public class RegisterDoctor extends AppCompatActivity implements View.OnClickLis
             }
         };
         SMSSDK.registerEventHandler(eventHandler);/// 注册一个事件回调，用于处理SMSSDK接口请求的结果
+
+        initBar(this);
+    }
+
+
+    private void initBar(Activity activity) {
+
+        //设置状态栏paddingTop
+        StatusBarUtil.setRootViewFitsSystemWindows(activity,true);
+        //设置状态栏颜色0xff56ced4
+        StatusBarUtil.setStatusBarColor(activity,0xff56ced4);
+        //设置状态栏神色浅色切换
+        StatusBarUtil.setStatusBarDarkTheme(activity,false);
+
+    }
+    @Override
+    public int intiLayout() {
+        return R.layout.register_doctor_layout;
     }
 
     @Override

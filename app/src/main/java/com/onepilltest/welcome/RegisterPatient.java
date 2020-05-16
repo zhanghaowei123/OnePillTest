@@ -1,6 +1,7 @@
 package com.onepilltest.welcome;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -24,8 +25,10 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.mob.MobSDK;
 import com.mob.OperationCallback;
+import com.onepilltest.BaseActivity;
 import com.onepilltest.R;
 import com.onepilltest.entity.UserPatient;
+import com.onepilltest.util.StatusBarUtil;
 
 import java.util.HashMap;
 import java.util.Objects;
@@ -35,7 +38,7 @@ import cn.smssdk.SMSSDK;
 import cn.smssdk.gui.RegisterPage;
 import okhttp3.OkHttpClient;
 
-public class RegisterPatient extends AppCompatActivity implements View.OnClickListener{
+public class RegisterPatient extends BaseActivity implements View.OnClickListener{
     private EditText editPhone;         //电话号码
     private EditText editPassword;
     private EditText etVerificationCode;    //验证码
@@ -117,6 +120,24 @@ public class RegisterPatient extends AppCompatActivity implements View.OnClickLi
             }
         };
         SMSSDK.registerEventHandler(eventHandler);/// 注册一个事件回调，用于处理SMSSDK接口请求的结果
+
+        initBar(this);
+    }
+
+
+    private void initBar(Activity activity) {
+
+        //设置状态栏paddingTop
+        StatusBarUtil.setRootViewFitsSystemWindows(activity,true);
+        //设置状态栏颜色0xff56ced4
+        StatusBarUtil.setStatusBarColor(activity,0xff56ced4);
+        //设置状态栏神色浅色切换
+        StatusBarUtil.setStatusBarDarkTheme(activity,false);
+
+    }
+    @Override
+    public int intiLayout() {
+        return R.layout.register_patient_layout;
     }
 
     @Override

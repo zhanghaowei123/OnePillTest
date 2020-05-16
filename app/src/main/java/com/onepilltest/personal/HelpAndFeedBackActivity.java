@@ -1,5 +1,6 @@
 package com.onepilltest.personal;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -9,9 +10,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.onepilltest.BaseActivity;
 import com.onepilltest.R;
+import com.onepilltest.util.StatusBarUtil;
 
-public class HelpAndFeedBackActivity extends AppCompatActivity {
+public class HelpAndFeedBackActivity extends BaseActivity {
 
     private ImageView ivback;
     private Button btnsubmit;
@@ -32,6 +35,26 @@ public class HelpAndFeedBackActivity extends AppCompatActivity {
 
         myListener = new MyListener();
         find();
+
+
+        initBar(this);
+    }
+
+    private void initBar(Activity activity) {
+
+        //设置状态栏paddingTop
+        StatusBarUtil.setRootViewFitsSystemWindows(activity,true);
+        //设置状态栏颜色0xff56ced4
+//        StatusBarUtil.setStatusBarColor(activity,0xff56ced4);
+        //设置状态栏神色浅色切换
+        StatusBarUtil.setStatusBarDarkTheme(activity,true);
+
+    }
+
+
+    @Override
+    public int intiLayout() {
+        return R.layout.helpandfeedback;
     }
 
     private void find() {

@@ -1,5 +1,6 @@
 package com.onepilltest.personal;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -11,13 +12,15 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.google.gson.Gson;
+import com.onepilltest.BaseActivity;
 import com.onepilltest.R;
 import com.onepilltest.entity.Address;
+import com.onepilltest.util.StatusBarUtil;
 
 /**
  * 个人_设置_用户地址_编辑地址界面
  */
-public class EditAddressActivity extends AppCompatActivity {
+public class EditAddressActivity extends BaseActivity {
 
     EditText et_name = null;
     EditText et_phone = null;
@@ -49,6 +52,26 @@ public class EditAddressActivity extends AppCompatActivity {
         editaddress = gson.fromJson(json,Address.class);
         Log.e("火车Id",""+editaddress.toString()+"???:"+editaddress.getId());
         init(editaddress);
+
+
+        initBar(this);
+    }
+
+    private void initBar(Activity activity) {
+
+        //设置状态栏paddingTop
+        StatusBarUtil.setRootViewFitsSystemWindows(activity,true);
+        //设置状态栏颜色0xff56ced4
+//        StatusBarUtil.setStatusBarColor(activity,0xff56ced4);
+        //设置状态栏神色浅色切换
+        StatusBarUtil.setStatusBarDarkTheme(activity,true);
+
+    }
+
+
+    @Override
+    public int intiLayout() {
+        return R.layout.edit_address;
     }
 
     private void init(Address address){

@@ -1,6 +1,7 @@
 package com.onepilltest.welcome;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -21,9 +22,11 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
+import com.onepilltest.BaseActivity;
 import com.onepilltest.R;
 import com.onepilltest.URL.Connect;
 import com.onepilltest.entity.UserDoctor;
+import com.onepilltest.util.StatusBarUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -37,7 +40,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class PerfectInforDoctorActivity extends AppCompatActivity {
+public class PerfectInforDoctorActivity extends BaseActivity {
     private ImageView imgBack;
     private EditText editName;
     private EditText editNum;
@@ -103,6 +106,24 @@ public class PerfectInforDoctorActivity extends AppCompatActivity {
                 }
             }
         });
+
+        initBar(this);
+    }
+
+    private void initBar(Activity activity) {
+
+        //设置状态栏paddingTop
+        StatusBarUtil.setRootViewFitsSystemWindows(activity,true);
+        //设置状态栏颜色0xff56ced4
+        StatusBarUtil.setStatusBarColor(activity,0xff56ced4);
+        //设置状态栏神色浅色切换
+        StatusBarUtil.setStatusBarDarkTheme(activity,false);
+
+    }
+
+    @Override
+    public int intiLayout() {
+        return R.layout.doctorinfo_layout;
     }
 
     private void signup() {

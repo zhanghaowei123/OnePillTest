@@ -1,5 +1,6 @@
 package com.onepilltest.personal.cart;
 
+import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.onepilltest.BaseActivity;
 import com.onepilltest.R;
 import com.onepilltest.URL.Connect;
 import com.onepilltest.entity.Cart;
@@ -30,6 +32,7 @@ import com.onepilltest.index.CommentAdapter;
 import com.onepilltest.personal.OrdersDao;
 import com.onepilltest.personal.UserBook;
 import com.onepilltest.util.OkhttpUtil;
+import com.onepilltest.util.StatusBarUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -46,7 +49,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class CartActivity extends AppCompatActivity implements View.OnClickListener {
+public class CartActivity extends BaseActivity implements View.OnClickListener {
 
     private ImageView ivCommentLeft;
     private TextView tvSettlementPrice;
@@ -89,12 +92,33 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
 //
 //        }
 
+
+        //全选监听器
         checkBoxAll.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 selectAll(isChecked);
             }
         });
+
+        initBar(this);
+
+    }
+
+    private void initBar(Activity activity) {
+
+        //设置状态栏paddingTop
+        StatusBarUtil.setRootViewFitsSystemWindows(activity,true);
+        //设置状态栏颜色0xff56ced4
+//        StatusBarUtil.setStatusBarColor(activity,0xff56ced4);
+        //设置状态栏神色浅色切换
+        StatusBarUtil.setStatusBarDarkTheme(activity,true);
+
+    }
+
+    @Override
+    public int intiLayout() {
+        return R.layout.activity_cart;
     }
 
     private void findViews() {
