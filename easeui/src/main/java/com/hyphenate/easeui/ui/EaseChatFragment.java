@@ -3,7 +3,6 @@ package com.hyphenate.easeui.ui;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ClipboardManager;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -940,6 +939,25 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
         } else if (chatType == EaseConstant.CHATTYPE_CHATROOM) {
             message.setChatType(ChatType.ChatRoom);
         }
+        //在数据库中查找
+        SQLiteDatabase db = SQLiteDatabase.
+                openOrCreateDatabase("user_db", null);
+        // 查询获得游标
+        Cursor cursor = db.query ("PATIENT",null,null,null,null,null,null);
+// 判断游标是否为空
+        if(cursor.moveToFirst()) {
+            // 遍历游标
+            do {
+                phone=cursor.getString(cursor.getColumnIndex("PHONE"));
+                name = cursor.getString(cursor.getColumnIndex("NAME"));
+                img = cursor.getString(cursor.getColumnIndex("IMG"));
+                Log.e("mydb", phone + "|"+name+"|"+img);
+            } while (cursor.moveToNext());
+        }
+        db.close();
+        message.setAttribute("ImUserName", phone);//设置我的环信username
+        message.setAttribute("ImNickName", name);//设置我的昵称
+        message.setAttribute("ImImageUrl", img);//设置我的头像url
 
         message.setMessageStatusCallback(messageStatusCallback);
 
