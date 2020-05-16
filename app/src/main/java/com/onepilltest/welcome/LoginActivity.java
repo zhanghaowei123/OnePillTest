@@ -207,7 +207,7 @@ public class LoginActivity extends BaseActivity {
                         ContentValues contentValues = new ContentValues();
                         contentValues.put("PHONE",UserBook.NowUser.getPhone());
                         contentValues.put("NAME",UserBook.NowUser.getNickName());
-                        contentValues.put("IMG",UserBook.NowUser.getHeadImg());
+                        contentValues.put("IMG",Connect.BASE_URL+UserBook.NowUser.getHeadImg());
                         database.insert("PATIENT",null,contentValues);
                         database.close();
                     }catch (Exception e){

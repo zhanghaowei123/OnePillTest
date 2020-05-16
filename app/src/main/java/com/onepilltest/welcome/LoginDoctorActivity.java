@@ -177,7 +177,7 @@ public class LoginDoctorActivity extends BaseActivity implements View.OnClickLis
                         ContentValues contentValues = new ContentValues();
                         contentValues.put("PHONE",UserBook.NowDoctor.getPhone());
                         contentValues.put("NAME",UserBook.NowDoctor.getName());
-                        contentValues.put("IMG",UserBook.NowDoctor.getHeadImg());
+                        contentValues.put("IMG",Connect.BASE_URL+UserBook.NowDoctor.getHeadImg());
                         database.insert("DOCTOR",null,contentValues);
                         database.close();
                     }catch (Exception e){
