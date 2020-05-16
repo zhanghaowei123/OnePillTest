@@ -22,7 +22,7 @@ public class MyUserProvider implements EaseUI.EaseUserProfileProvider {
         if (userList.containsKey(username))
             //有就返归这个对象。。
             return userList.get(username);
-        Log.e("mprovider,ERROR", "没有数据" + username);
+//        Log.e("mprovider,ERROR", "没有数据" + username);
         return null;
     }
 
