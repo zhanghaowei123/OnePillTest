@@ -22,6 +22,7 @@ import com.onepilltest.entity.EventMessage;
 import com.onepilltest.index.IndexAdapter;
 import com.onepilltest.personal.cart.CartActivity;
 import com.onepilltest.personal.oder.PatientOrderActivity;
+import com.onepilltest.util.StatusBarUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -42,16 +43,27 @@ public class PersonalFragment extends Fragment {
     private LinearLayout ask;
     private LinearLayout help;
     private LinearLayout focus;
+    private LinearLayout focusArticle;
     private ImageView iv_personal = null;
     private TextView name = null;
     private TextView degree = null;
     MyListener myListener = null;
 
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        initBar();
+    }
 
+    private void initBar() {
+        //设置状态栏透明
+        StatusBarUtil.setTranslucentStatus(getActivity());
+        //设置状态栏paddingTop
+//        StatusBarUtil.setRootViewFitsSystemWindows(getActivity(),true);
+        //设置状态栏颜色
+//        StatusBarUtil.setStatusBarColor(getActivity(),0xff56ced4);
+        //设置状态栏神色浅色切换
+        StatusBarUtil.setStatusBarDarkTheme(getActivity(),false);
 
     }
 
@@ -64,7 +76,7 @@ public class PersonalFragment extends Fragment {
         name = view.findViewById(R.id.personal_name);
         degree = view.findViewById(R.id.personal_work);
         degree.setText(UserBook.getDegree());
-        iv_personal = view.findViewById(R.id.iv_personal);
+        iv_personal = view.findViewById(R.id.iv_setting);
         setting = view.findViewById(R.id.iv_setting);
         setting.setOnClickListener(myListener);
         order = view.findViewById(R.id.ll_order);
@@ -79,6 +91,8 @@ public class PersonalFragment extends Fragment {
         help.setOnClickListener(myListener);
         focus = view.findViewById(R.id.ll_sc);
         focus.setOnClickListener(myListener);
+        focusArticle = view.findViewById(R.id.ll_focus_article);
+        focusArticle.setOnClickListener(myListener);
     }
 
     @Nullable
@@ -165,33 +179,31 @@ public class PersonalFragment extends Fragment {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
-                case R.id.iv_setting:
+                case R.id.iv_setting://设置
                     Intent intent = new Intent(getContext(), SettingActivity.class);
                     startActivity(intent);
                     break;
-                case R.id.ll_order:
+                case R.id.ll_order://订单
                     Intent intent1 = new Intent(getContext(), OrderActivity.class);
                     startActivity(intent1);
                     break;
-                case R.id.ll_cart:
+                case R.id.ll_cart://购物车
                     Intent intent2 = new Intent(getContext(), CartActivity.class);
                     startActivity(intent2);
                     break;
-                case R.id.ll_wallet:
+                case R.id.ll_wallet://钱包
                     Intent intent3 = new Intent(getContext(), WalletActivity.class);
                     startActivity(intent3);
                     break;
-                /*case R.id.ll_ask:
-                    Intent intent4 = new Intent(getContext(), recordActivity.class);
-                    startActivity(intent4);
-                    break;*/
-                case R.id.ll_help:
+                case R.id.ll_help://帮助与反馈
                     Intent intent5 = new Intent(getContext(), HelpAndFeedBackActivity.class);
                     startActivity(intent5);
                     break;
-                case R.id.ll_sc:
+                case R.id.ll_sc://关注和收藏
                     Intent intent6 = new Intent(getContext(), FocusListActivity.class);
                     startActivity(intent6);
+                    break;
+                case R.id.ll_focus_article://收藏的文章
                     break;
             }
         }

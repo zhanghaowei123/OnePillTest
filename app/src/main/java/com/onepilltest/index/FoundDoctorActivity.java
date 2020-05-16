@@ -29,9 +29,9 @@ public class FoundDoctorActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate ( savedInstanceState );
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(0xff56ced4 );
-        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            getWindow().setStatusBarColor(0xff56ced4 );
+//        }
         setContentView ( R.layout.found_doctor_layout );
         EventBus.getDefault().register(this);
         imgBack = findViewById ( R.id.findoctor_left );

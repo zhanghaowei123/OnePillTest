@@ -48,9 +48,12 @@ public class CommentNewAdapter extends RecyclerView.Adapter<CommentNewAdapter.Vi
 
     public CommentNewAdapter(List<Comment> comments){
         this.comments = comments;
-        for(Comment c:comments){
-            Log.e("focus数据源",""+c.toString());
+        if (comments!=null){
+            for(Comment c:comments){
+                Log.e("focus数据源",""+c.toString());
+            }
         }
+
     }
 
     private Context mContext;

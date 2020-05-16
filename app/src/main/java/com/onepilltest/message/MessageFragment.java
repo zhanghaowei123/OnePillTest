@@ -11,14 +11,18 @@ import com.hyphenate.easeui.EaseConstant;
 import com.hyphenate.easeui.EaseUI;
 import com.hyphenate.easeui.ui.EaseConversationListFragment;
 import com.onepilltest.Ease.MyUserProvider;
+import com.onepilltest.util.StatusBarUtil;
 
 import java.util.List;
 
 public class MessageFragment extends EaseConversationListFragment {
 
+
+
     @Override
     protected void initView() {
         super.initView();
+//        initBar();
         //跳转到会话详情页
         setConversationListItemClickListener(new EaseConversationListItemClickListener() {
             @Override
@@ -37,6 +41,18 @@ public class MessageFragment extends EaseConversationListFragment {
 //        conversationList.clear();
         //监听会话消息
         EMClient.getInstance().chatManager().addMessageListener(emMessageListener);
+    }
+
+    private void initBar() {
+        //设置状态栏透明
+//        StatusBarUtil.setTranslucentStatus(getActivity());
+        //设置状态栏paddingTop
+//        StatusBarUtil.setRootViewFitsSystemWindows(getActivity(),true);
+        //设置状态栏颜色
+        StatusBarUtil.setStatusBarColor(getActivity(),0xff56ced4);
+        //设置状态栏神色浅色切换
+        StatusBarUtil.setStatusBarDarkTheme(getActivity(),false);
+
     }
 
     private EMMessageListener emMessageListener = new EMMessageListener() {

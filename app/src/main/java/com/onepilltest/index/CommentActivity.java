@@ -1,5 +1,6 @@
 package com.onepilltest.index;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
@@ -19,13 +20,18 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.onepilltest.BaseActivity;
 import com.onepilltest.R;
 import com.onepilltest.URL.Connect;
 import com.onepilltest.entity.Article;
 import com.onepilltest.entity.Comment;
+import com.onepilltest.entity.Dao.CommentDao;
 import com.onepilltest.entity.Dao.GoodDao;
+import com.onepilltest.entity.EventMessage;
 import com.onepilltest.entity.UserDoctor;
+import com.onepilltest.others.MyRecyclerView;
 import com.onepilltest.personal.UserBook;
+import com.onepilltest.util.StatusBarUtil;
 import com.onepilltest.welcome.PerfectInforPatientActivity;
 import com.onepilltest.welcome.UserSuccessActivity;
 
@@ -46,7 +52,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class CommentActivity extends AppCompatActivity implements View.OnClickListener {
+public class CommentActivity extends BaseActivity implements View.OnClickListener {
 
     private LinearLayout ivCommentLeft;
     private Button btnSendComment;
@@ -54,97 +60,95 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
     private List<Comment> comments = new ArrayList<>();
     private EditText etComment;
     private Comment comment;
-    private String id;
-
-    private RecyclerView recyclerView = null;
+    private View emptyView = null;
+    private int id;
+    private CommentDao commentDao = new CommentDao();
+    private MyRecyclerView recyclerView = null;
     private CommentNewAdapter commentNewAdapter = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(0xffffffff);
-            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-        }
-        setContentView(R.layout.activity_comment);
+
+
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            getWindow().setStatusBarColor(0xffffffff);
+//            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+//        }
+//        setContentView(R.layout.activity_comment);
 
         GoodDao.goodMap.clear();
         //将主线程注册成为订阅者
         EventBus.getDefault().register(this);
         okHttpClient = new OkHttpClient();
+        Intent intent = getIntent();
+        id = Integer.parseInt(intent.getStringExtra("articleId"));
         findViews();
-        initView();
-        requestData();
-
+        commentDao.getComment(id,comments);
+        initBar(CommentActivity.this);
 
     }
 
-    private void requestData() {
-//        Log.e("获取评论:",Connect.BASE_URL + "comment/getComment?articleId=" + comment.getArticleId());
-        int id = 0;
-        if (UserBook.Code == 1){
-            id = UserBook.NowDoctor.getId();
-        }else {
-            id = UserBook.NowUser.getId();
-        }
-        String url = Connect.BASE_URL + "comment/getComment?articleId=" + comment.getArticleId()+" &userId="+id+"&userType="+UserBook.Code;
-        Request request = new Request.Builder()
-                .url(url)
-                .build();
-        Call call = okHttpClient.newCall(request);
-        call.enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
-            }
+    private void initBar(Activity activity) {
+        //设置状态栏透明
+//        StatusBarUtil.setTranslucentStatus(activity);
+        //设置状态栏paddingTop
+//        StatusBarUtil.setRootViewFitsSystemWindows(activity,true);
+        //设置状态栏颜色
+        StatusBarUtil.setStatusBarColor(activity,0xff56ced4);
+        //设置状态栏神色浅色切换
+        StatusBarUtil.setStatusBarDarkTheme(activity,false);
 
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                String commentListStr = response.body().string();
-                Log.e("CommentList", commentListStr.toString());
-                //定义他的派生类调用getType，真实对象
-                Type type = new TypeToken<List<Comment>>() {
-                }.getType();
-                comments.addAll(new Gson().fromJson(commentListStr, type));
-                //在onResponse里面不能直接更新界面
-                //接收到之后发送消息  通知给主线程
-                EventBus.getDefault().post("评论");
-            }
-        });
     }
 
-    //根据参数类型调用
-    //消息的处理方法，形参类型同消息一致
-    @Subscribe(threadMode = ThreadMode.MAIN)    //设置线程模式为主线程
-    public void updateUI(String msg) {
-        if (msg.equals("评论")) {
-            //更新视图
-            commentNewAdapter.notifyDataSetChanged();
-        }
-    }
-
-    private void initView() {
-//        commentListView = findViewById(R.id.lv_comment);
-//        commentAdapter = new CommentAdapter(comments, this, R.layout.item_comment);
-//        commentListView.setAdapter(commentAdapter);
-        recyclerView = findViewById(R.id.lv_comment);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        commentNewAdapter = new CommentNewAdapter(comments);
-        recyclerView.setAdapter(commentNewAdapter);
+    @Override
+    public int intiLayout() {
+        return R.layout.activity_comment;
     }
 
     public void findViews() {
         etComment = findViewById(R.id.et_comment);
         ivCommentLeft = findViewById(R.id.iv_comment_left);
         btnSendComment = findViewById(R.id.btn_send_comment);
-        Intent intent = getIntent();
-        id = intent.getStringExtra("articleId");
         comment = new Comment();
-        comment.setArticleId(Integer.parseInt(id));
+        comment.setArticleId(id);
         ivCommentLeft.setOnClickListener(this);
         btnSendComment.setOnClickListener(this);
+
     }
+
+
+    private void init() {
+        Log.e("commentActivity","初始化...");
+        recyclerView = findViewById(R.id.lv_comment);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        commentNewAdapter = new CommentNewAdapter(comments);
+        emptyView = findViewById(R.id.empty_iv2);
+        recyclerView.setEmptyView(emptyView);
+        recyclerView.setAdapter(commentNewAdapter);
+
+    }
+
+
+    //根据参数类型调用
+    //消息的处理方法，形参类型同消息一致
+    @Subscribe(threadMode = ThreadMode.MAIN)    //设置线程模式为主线程
+    public void updateUI(EventMessage msg) {
+        if (msg.getCode().equals("评论")) {
+
+            //定义他的派生类调用getType，真实对象
+            Type type = new TypeToken<List<Comment>>() {
+            }.getType();
+
+                comments.addAll(new Gson().fromJson(msg.getJson(), type));
+
+            init();
+            //更新视图
+            commentNewAdapter.notifyDataSetChanged();
+        }
+    }
+
 
     @Override
     public void onClick(View v) {
@@ -162,21 +166,27 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
                     if (UserBook.Code == 2) {
                         Log.e("当前评论用户：", UserBook.NowUser.getNickName());
                         comment.setCcomment(etComment.getText().toString());
-                        comment.setArticleId(Integer.parseInt(id));
+                        comment.setArticleId(id);
                         comment.setUserId(UserBook.NowUser.getId());
                         comment.setUserType(2);
+                        comment.setHeadImg(UserBook.NowUser.getHeadImg());
+                        comment.setName(UserBook.NowUser.getNickName());
                         comments.add(comment);
                         //更新到数据库
-                        insertComment();
+                        commentDao.add(comment);
                     } else if (UserBook.Code == 1) {
                         UserDoctor doctor = (UserDoctor) UserBook.getNowUser();
                         comment.setCcomment(etComment.getText().toString());
-                        comment.setArticleId(Integer.parseInt(id));
+                        comment.setArticleId(id);
                         comment.setUserType(1);
+                        comment.setHeadImg(UserBook.NowDoctor.getHeadImg());
+                        comment.setName(UserBook.NowDoctor.getName());
+
+
                         comment.setUserId(UserBook.NowDoctor.getId());
                         comments.add(comment);
                         //更新到数据库
-                        insertComment();
+                        commentDao.add(comment);
                     } else {
                         Toast.makeText(getApplicationContext(), "错误!", Toast.LENGTH_SHORT).show();
                     }
@@ -188,40 +198,12 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
                 etComment.clearFocus();
                 etComment.setText("");
                 comment = new Comment();
-                comment.setArticleId(Integer.parseInt(id));
+                comment.setArticleId(id);
                 commentNewAdapter.notifyDataSetChanged();
                 break;
         }
     }
 
-    private void insertComment() {
-        String jsonStr = null;
-        jsonStr = new Gson().toJson(comment);
-        Log.e("添加评论：\n", jsonStr.toString());
-        RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain;charset=utf-8"),
-                jsonStr);
-        Request request = new Request.Builder()
-                .post(requestBody)
-                .url(Connect.BASE_URL + "comment/add")
-                .build();
-        Call call = okHttpClient.newCall(request);
-        call.enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
-                Log.e("Comment_false", e.getMessage());
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                //成功时回调
-                String isSuccessful = response.body().string();
-                if (isSuccessful.equals("true")) {
-                    Log.e("Comment_successful", isSuccessful);
-                }
-            }
-        });
-    }
 
     @Override
     protected void onDestroy() {

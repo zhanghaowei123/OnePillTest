@@ -33,6 +33,7 @@ import com.onepilltest.entity.HeFeng;
 import com.onepilltest.message.QuestionActivity;
 import com.onepilltest.message.QuestionListActivity;
 import com.onepilltest.personal.UserBook;
+import com.onepilltest.util.StatusBarUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -80,6 +81,20 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        设置状态栏
+        initBar();
+    }
+
+    private void initBar() {
+        //设置状态栏透明
+//        StatusBarUtil.setTranslucentStatus(getActivity());
+        //设置状态栏paddingTop
+//        StatusBarUtil.setRootViewFitsSystemWindows(getActivity(),true);
+        //设置状态栏颜色
+        StatusBarUtil.setStatusBarColor(getActivity(),0xff56ced4);
+        //设置状态栏神色浅色切换
+        StatusBarUtil.setStatusBarDarkTheme(getActivity(),false);
+
     }
 
     @Nullable
@@ -175,7 +190,7 @@ public class HomeFragment extends Fragment {
                 //定义他的派生类调用getType，真实对象
                 Type type = new TypeToken<List<Article>>() {
                 }.getType();
-                articles.addAll((List<Article>) new Gson().fromJson(articleListStr, type));
+                articles.addAll(new Gson().fromJson(articleListStr, type));
 
                 //在onResponse里面不能直接更新界面
                 //接收到之后发送消息  通知给主线程
@@ -221,7 +236,7 @@ public class HomeFragment extends Fragment {
             if (msg.getJson() == "0") {
                 bar.setVisibility(View.VISIBLE);//可见
             } else if (msg.getJson() == "1") {
-                bar.setVisibility(View.INVISIBLE);//可见
+                bar.setVisibility(View.INVISIBLE);//bu可见
             }
         }
     }

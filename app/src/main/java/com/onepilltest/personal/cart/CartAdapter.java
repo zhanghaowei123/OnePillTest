@@ -204,11 +204,13 @@ public class CartAdapter extends BaseAdapter {
         tvCartMedicineCount.setText(myCart.getCount()+"");
         checkBoxItem.setText(myCart.getId()+"");
 
-        medicine_ medicine =myCart.getMedicine();
-        int maxCount = medicine.getStock();
+//        medicine_ medicine =myCart.getMedicine();
+        int maxCount = 10;
         int minCount = 1;
 
         int cartId = Integer.parseInt(checkBoxItem.getText().toString());
+        Log.e("获取的购物车id：",cartId+"");
+
 
         //根据selectCaryItemMap中的选中位，设置是否全选
         if (selectCartItemMap.get(cartId).isSelected()){
@@ -288,6 +290,7 @@ public class CartAdapter extends BaseAdapter {
                 //获取新数据
                 int afterCount = Integer.parseInt(tvCartMedicineCount.getText().toString());
                 myCartList.get(position).setCount(afterCount);
+                Log.e("购物车药品数量:",afterCount+"");
                 notifyDataSetChanged();
             }
         });
@@ -300,7 +303,7 @@ public class CartAdapter extends BaseAdapter {
                 if (nowCount <= minCount) {
                     btnCartMinus.setClickable(false);
                     btnCartPlus.setClickable(true);
-                    Toast.makeText(context, "已达到库存最大值", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "不能够再减少了哦", Toast.LENGTH_SHORT).show();
                 } else {
                     btnCartMinus.setClickable(true);
                     tvCartMedicineCount.setText(nowCount -1 + "");

@@ -20,6 +20,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
+import com.onepilltest.BaseActivity;
 import com.onepilltest.R;
 import com.onepilltest.URL.Connect;
 import com.onepilltest.entity.EventMessage;
@@ -29,6 +30,7 @@ import com.onepilltest.entity.UserPatient;
 import com.onepilltest.index.HomeActivity;
 import com.onepilltest.message.QuestionActivity;
 import com.onepilltest.util.SharedPreferencesUtil;
+import com.onepilltest.util.StatusBarUtil;
 import com.onepilltest.welcome.LoginActivity;
 import com.onepilltest.welcome.WelcomeActivity;
 
@@ -39,7 +41,7 @@ import org.greenrobot.eventbus.ThreadMode;
 /**
  * 个人_设置页面
  */
-public class SettingActivity extends AppCompatActivity {
+public class SettingActivity extends BaseActivity {
 
     int state = 0;//状态
 
@@ -66,15 +68,24 @@ public class SettingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(0xffffffff);
-            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-        }
-        setContentView(R.layout.setting);
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            getWindow().setStatusBarColor(0xffffffff);
+//            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+//        }
+//        setContentView(R.layout.setting);
+
+        StatusBarUtil.setRootViewFitsSystemWindows(this,true);
         EventBus.getDefault().register(this);
         myListener = new MyListener();
         find();
         init();
+        BaseActivity.Help();
+
+    }
+
+    @Override
+    public int intiLayout() {
+        return R.layout.setting;
     }
 
     private void find() {
@@ -247,6 +258,8 @@ public class SettingActivity extends AppCompatActivity {
         } else if (UserBook.Code == 2) {//用户
             initPatient();
         }
+
+
     }
 
     //初始化用户信息
