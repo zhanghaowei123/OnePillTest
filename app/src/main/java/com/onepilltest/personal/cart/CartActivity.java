@@ -231,6 +231,7 @@ public class CartActivity extends BaseActivity implements View.OnClickListener {
                     orders.setCount(myCarts.get(i).getCount());
                     orders.setStatus(0);
 //                  cartDao添加deletByUserId
+                    cartDao.deleteByUserId(UserBook.NowUser.getId());
                     dao.add(orders);
 
                 }

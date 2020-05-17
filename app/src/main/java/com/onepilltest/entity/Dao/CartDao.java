@@ -111,4 +111,25 @@ public class CartDao {
             }
         });
     }
+
+
+    //根据UserId删除购物车
+    public void deleteByUserId(int id){
+        String url = Connect.BASE_URL+"cart/deleteByUserId?userId="+id;
+        RequestBody requestBody = new FormBody.Builder()
+                .build();
+        OkhttpUtil.post(requestBody,url).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                //更新失败
+                Log.e("CartDao","清空购物车失败");
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                //更新成功
+                Log.e("CartDao","清空购物车成功");
+            }
+        });
+    }
 }

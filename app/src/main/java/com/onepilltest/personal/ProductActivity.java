@@ -213,6 +213,7 @@ public class ProductActivity extends BaseActivity {
     public void getMedicine(EventMessage msg) {
         Log.e("focusCode", "" + msg.getCode());
         if (msg.getCode().equals("MedicineDao_searchMedicineByName")) {
+            Log.e("medicine",msg.getJson());
             Gson gson = new Gson();
             medicine_ product = null;
             product = gson.fromJson(msg.getJson(), medicine_.class);
