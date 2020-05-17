@@ -8,6 +8,9 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.onepilltest.URL.Connect;
 import com.onepilltest.entity.EventMessage;
+import com.onepilltest.entity.MyCart;
+import com.onepilltest.entity.Order;
+import com.onepilltest.entity.Orders;
 import com.onepilltest.entity.UserDoctor;
 import com.onepilltest.entity.UserPatient;
 
@@ -30,6 +33,8 @@ public class UserBook {
     public static List<UserPatient> UserList = new ArrayList<>();//用户列表
     public static List<UserDoctor> DoctorList = new ArrayList<>();//医生列表
     public static int money = 1000;
+    public static List<MyCart> myCartList = new ArrayList<>();//购物车列表
+    public static List<Orders> ordersList = new ArrayList<>();//订单列表
 
 
     public static Object getNowUser() {

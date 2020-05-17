@@ -1,10 +1,9 @@
-package com.onepilltest.personal;
+package com.onepilltest.personal.oder;
 
 import android.app.Activity;
-import android.content.Intent;
-import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,9 +16,12 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.onepilltest.BaseActivity;
 import com.onepilltest.R;
-import com.onepilltest.entity.Address;
+import com.onepilltest.entity.Dao.OrdersDao;
 import com.onepilltest.entity.EventMessage;
 import com.onepilltest.entity.Orders;
+import com.onepilltest.personal.UserBook;
+import com.onepilltest.personal.cart.CartNewAdapter;
+import com.onepilltest.personal.orderAdapter;
 import com.onepilltest.util.StatusBarUtil;
 
 import org.greenrobot.eventbus.EventBus;
@@ -32,9 +34,9 @@ import java.util.List;
 public class OrderActivity extends BaseActivity {
 
     Button back;
-    ListView orderList = null;
+    RecyclerView orderList = null;
     MyListener myListener = null;
-    BaseAdapter adapter = null;
+    OrdersAdapter ordersAdapter = null;
     Gson gson = new Gson();
     private List<Orders> baseList = new ArrayList<>();
 
@@ -49,10 +51,9 @@ public class OrderActivity extends BaseActivity {
         myListener = new MyListener();
         find();
         init();
+
         //将主线程注册成为订阅者
         EventBus.getDefault().register(this);
-
-
         initBar(this);
     }
 
@@ -83,6 +84,7 @@ public class OrderActivity extends BaseActivity {
     }
 
     private void initDoctor() {
+        //???
 
 
     }
@@ -91,24 +93,7 @@ public class OrderActivity extends BaseActivity {
     private void initPatient() {
         OrdersDao dao = new OrdersDao();
         dao.searchAll(UserBook.NowUser.getId());
-        //创建ContentAdapter实例，传入上下文， 子布局id ,数据baseList
-        adapter = new orderAdapter(OrderActivity.this, R.layout.order_list_item, baseList);
 
-        //orderList = (ListView) findViewById(R.id.setting_order_list);
-        orderList.setAdapter(adapter);//绑定适配器
-
-
-        //item点击监听器
-        orderList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.e("click", "点击第" + position + "个item");
-
-                //点击事件监听器
-
-
-            }
-        });
     }
 
 
@@ -120,8 +105,22 @@ public class OrderActivity extends BaseActivity {
             }.getType());
             baseList.clear();
             baseList.addAll(list);
-            adapter.notifyDataSetChanged();
+            LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+            orderList.setLayoutManager(layoutManager);
+            ordersAdapter = new OrdersAdapter(baseList);
+            orderList.setAdapter(ordersAdapter);
+            initItem();
         }
+    }
+
+    private void initItem() {
+        ordersAdapter.setOnItemClickListener(new OrdersAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View v, Orders orders, int position) {
+                //跳转到详情页
+                Toast.makeText(OrderActivity.this,"请付款",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 

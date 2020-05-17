@@ -213,7 +213,7 @@
         <activity android:name=".personal.FocusListActivity" />
         <activity android:name=".personal.cart.PlaceOrderActivity" />
         <activity android:name=".personal.oder.PatientOrderActivity" />
-        <activity android:name=".personal.OrderActivity" />
+        <activity android:name=".personal.oder.OrderActivity" />
         <activity android:name=".personal.cart.CartActivity" />
         <activity android:name=".ceshi.ceshiActivity" />
         <activity android:name=".message.QuestionType" />

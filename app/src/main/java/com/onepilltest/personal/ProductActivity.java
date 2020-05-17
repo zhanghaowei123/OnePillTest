@@ -313,7 +313,7 @@ public class ProductActivity extends BaseActivity {
             @Override
             public void onFailure(Call call, IOException e) {
                 e.printStackTrace();
-                Log.e("狗袁康", e.getMessage());
+
             }
 
             @Override

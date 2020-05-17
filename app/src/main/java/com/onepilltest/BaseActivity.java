@@ -29,6 +29,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     private  boolean isshowstate = true;
     /***封装toast对象**/
     private static Toast toast;
+    private static Toast mTextToast;
+    private static Toast mViewToast;
     /***获取TAG的activity名称**/
     protected final String TAG = this.getClass().getSimpleName();
     @Override
@@ -96,33 +98,20 @@ public abstract class BaseActivity extends AppCompatActivity {
      * 显示长toast
      * @param msg
      */
-    public void toastLong(String msg){
-        if (null == toast) {
-            toast = new Toast(this);
-            toast.setDuration(Toast.LENGTH_LONG);
-            toast.setText(msg);
-            toast.show();
-        } else {
-            toast.setText(msg);
-            toast.show();
+    public void showToast(String msg){
+        if(null == mTextToast){
+            mTextToast = Toast.makeText(this,"",Toast.LENGTH_SHORT);
         }
+        mTextToast.setText(msg);
+        mTextToast.show();
     }
 
-
-    /**
-     * 显示短toast
-     * @param msg
-     */
-    public void toastShort(String msg){
-        if (null == toast) {
-            toast = new Toast(this);
-            toast.setDuration(Toast.LENGTH_SHORT);
-            toast.setText(msg);
-            toast.show();
-        } else {
-            toast.setText(msg);
-            toast.show();
+    public void showToast(View view){
+        if(null == mViewToast){
+            mViewToast = Toast.makeText(this,0,Toast.LENGTH_SHORT);
         }
+        mViewToast.setView(view);
+        mViewToast.show();
     }
 
 

@@ -2,8 +2,6 @@ package com.onepilltest.personal.cart;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
-import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -21,33 +19,24 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.onepilltest.BaseActivity;
 import com.onepilltest.R;
-import com.onepilltest.URL.Connect;
-import com.onepilltest.entity.Cart;
-import com.onepilltest.entity.Comment;
+import com.onepilltest.entity.Dao.CartDao;
 import com.onepilltest.entity.EventMessage;
 import com.onepilltest.entity.MyCart;
 import com.onepilltest.entity.Orders;
 import com.onepilltest.entity.medicine_;
-import com.onepilltest.index.CommentAdapter;
-import com.onepilltest.personal.OrdersDao;
+import com.onepilltest.entity.Dao.OrdersDao;
 import com.onepilltest.personal.UserBook;
-import com.onepilltest.util.OkhttpUtil;
 import com.onepilltest.util.StatusBarUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-import okhttp3.Call;
-import okhttp3.Callback;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 
 public class CartActivity extends BaseActivity implements View.OnClickListener {
 
@@ -63,7 +52,7 @@ public class CartActivity extends BaseActivity implements View.OnClickListener {
     private SharedPreferences sharedPreferences;
     private int price = 0;
 
-    private List<MyCart> myCarts = new ArrayList<>();
+    private List<MyCart> myCarts = null;
     private RecyclerView recyclerView = null;
     private CartNewAdapter cartNewAdapter = null;
     private TextView tvCartManage;
@@ -71,6 +60,7 @@ public class CartActivity extends BaseActivity implements View.OnClickListener {
     private CheckBox checkBoxAll;
     private TextView tvFinish;
     private List<Boolean> booleanList = new ArrayList<>();
+    private CartDao cartDao = new CartDao();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,15 +91,22 @@ public class CartActivity extends BaseActivity implements View.OnClickListener {
                 int y=0;
                 for (int i=0;i<myCarts.size();i++){
                     if (booleanList.get(i)!=null && booleanList.get(i)){
+                        cartDao.del(myCarts.get(i).getId());
                         myCarts.remove(i);
                         booleanList.remove(i);
                         y++;
                         i--;
+//                        delList.add(myCarts.get(i).getId());
+
+                        //
                     }
                 }
-                notify();
+
+//                notify();
                 if (y==0){
                     Toast.makeText(getApplicationContext(),"请选择要删除的药品",Toast.LENGTH_SHORT).show();
+                }else {
+                    cartNewAdapter.notifyDataSetChanged();
                 }
             }
         });
@@ -152,7 +149,7 @@ public class CartActivity extends BaseActivity implements View.OnClickListener {
     }
 
     private void initView() {
-        Log.e("init数据:", myCarts.size() + "");
+
 //        cartsListView = findViewById(R.id.lv_mcart);
 //        cartAdapter = new CartAdapter(myCarts, this, R.layout.item_mcart,checkBoxAll
 //        ,btnDelete);
@@ -170,40 +167,41 @@ public class CartActivity extends BaseActivity implements View.OnClickListener {
 
     }
 
-    private void requestData(int id) {
-        int medicineId = sharedPreferences.getInt("medicineId", 0);
-        Request request = new Request.Builder()
-                .url(Connect.BASE_URL + "CartServlet?medicineId=" + id)
-                .build();
-        Call call = okHttpClient.newCall(request);
-        call.enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                String medicineListStr = response.body().string();
-                //定义他的派生类调用getType，真实对象
-                Type type = new TypeToken<List<medicine_>>() {
-                }.getType();
-                medicines.addAll(new Gson().fromJson(medicineListStr, type));
-                //在onResponse里面不能直接更新界面
-                //接收到之后发送消息  通知给主线程
-                EventBus.getDefault().post("toCart");
-            }
-        });
-    }
+//    private void requestData(int id) {
+//        int medicineId = sharedPreferences.getInt("medicineId", 0);
+//        Request request = new Request.Builder()
+//                .url(Connect.BASE_URL + "CartServlet?medicineId=" + id)
+//                .build();
+//        Call call = okHttpClient.newCall(request);
+//        call.enqueue(new Callback() {
+//            @Override
+//            public void onFailure(Call call, IOException e) {
+//                e.printStackTrace();
+//            }
+//
+//            @Override
+//            public void onResponse(Call call, Response response) throws IOException {
+//                String medicineListStr = response.body().string();
+//                //定义他的派生类调用getType，真实对象
+//                Type type = new TypeToken<List<medicine_>>() {
+//                }.getType();
+//                medicines.addAll(new Gson().fromJson(medicineListStr, type));
+//                //在onResponse里面不能直接更新界面
+//                //接收到之后发送消息  通知给主线程
+//                EventBus.getDefault().post("toCart");
+//            }
+//        });
+//    }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void updateUI(EventMessage message) {
-        if (message.getCode().equals("toCart")) {
+        if (message.getCode().equals("CartDao_getCarts")) {
             //更新视图
             Gson gson = new Gson();
             Type userListType = new TypeToken<ArrayList<MyCart>>() {
             }.getType();
-            myCarts = gson.fromJson(message.getJson(), userListType);
+            UserBook.myCartList = gson.fromJson(message.getJson(), userListType);
+            myCarts = UserBook.myCartList;
             for (MyCart myCart : myCarts) {
                 booleanList.add(false);
                 price += myCart.getPrice();
@@ -225,13 +223,16 @@ public class CartActivity extends BaseActivity implements View.OnClickListener {
             case R.id.btn_cart_settlement:
                 OrdersDao dao = new OrdersDao();
                 Orders orders = new Orders();
-                for (int i = 0; i < medicines.size(); i++) {
+                for (int i = 0; i < myCarts.size(); i++) {
+                    //将MyCart转换成Order对象
                     orders.setUserId(UserBook.NowUser.getId());
-                    orders.setMedicineId(medicines.get(i).getId());
-                    orders.setImg(medicines.get(i).getImg1());
-                    orders.setCount(2);
-                    orders.setStatus(1);
+                    orders.setMedicineId(myCarts.get(i).getMedicineId());
+                    orders.setImg(myCarts.get(i).getImg());
+                    orders.setCount(myCarts.get(i).getCount());
+                    orders.setStatus(0);
+//                  cartDao添加deletByUserId
                     dao.add(orders);
+
                 }
                 Toast.makeText(getApplicationContext(), "订单结算成功", Toast.LENGTH_SHORT).show();
                 EventMessage msg = new EventMessage();
@@ -240,7 +241,7 @@ public class CartActivity extends BaseActivity implements View.OnClickListener {
                 int all = UserBook.money;
                 UserBook.money = all - price;
                 EventBus.getDefault().post(msg);
-                medicines.clear();
+                myCarts.clear();
                 cartNewAdapter.notifyDataSetChanged();
                 break;
             //new
@@ -263,24 +264,10 @@ public class CartActivity extends BaseActivity implements View.OnClickListener {
 
     //获取购物车
     public void getDate() {
-        String url = Connect.BASE_URL + "cart/findByUserId?userId=" + UserBook.NowUser.getId();
-        OkhttpUtil.get(url).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                Log.e("根据userId获取购物车信息：", "获取失败。");
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                String re = response.body().string();
-                Log.e("根据userId获取购物车信息：", re);
-                EventMessage message = new EventMessage();
-                message.setCode("toCart");
-                message.setJson(re);
-                EventBus.getDefault().post(message);
-            }
-        });
+        cartDao.getCarts();
     }
+
+
 
 
     //更改集合内部存储的状态

@@ -1,4 +1,4 @@
-package com.onepilltest.personal;
+package com.onepilltest.entity.Dao;
 
 import android.util.Log;
 
@@ -33,7 +33,7 @@ public class OrdersDao {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String re = response.body().string();
-                Log.e("查询全部", re);
+                Log.e("查询全部订单", re);
                 EventMessage msg = new EventMessage();
                 msg.setCode("OrdersDao_searchAll");
                 msg.setJson(re);

@@ -4,7 +4,7 @@ public class medicine_ {
     private int id;
     private String generalName;
     private String medicine;
-    private String price;
+    private int price;
     private String overview;
     private String function;
     private String introdutions;
@@ -20,7 +20,7 @@ public class medicine_ {
     public medicine_() {
     }
 
-    public medicine_(int id, String generalName, String medicine, String price, String overview, String function, String introdutions, String side_effect, String forbiddance, int doctor_id, String img1, String img2 , String img3, String standard,int stock) {
+    public medicine_(int id, String generalName, String medicine, int price, String overview, String function, String introdutions, String side_effect, String forbiddance, int doctor_id, String img1, String img2 , String img3, String standard,int stock) {
         this.id = id;
         this.generalName = generalName;
         this.medicine = medicine;
@@ -78,11 +78,11 @@ public class medicine_ {
         this.medicine = medicine;
     }
 
-    public String getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
