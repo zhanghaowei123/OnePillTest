@@ -231,10 +231,11 @@ public class CartActivity extends BaseActivity implements View.OnClickListener {
                     orders.setCount(myCarts.get(i).getCount());
                     orders.setStatus(0);
 //                  cartDao添加deletByUserId
-                    cartDao.deleteByUserId(UserBook.NowUser.getId());
+
                     dao.add(orders);
 
                 }
+                cartDao.deleteByUserId(UserBook.NowUser.getId());
                 Toast.makeText(getApplicationContext(), "订单结算成功", Toast.LENGTH_SHORT).show();
                 EventMessage msg = new EventMessage();
                 msg.setCode("update_wallet");

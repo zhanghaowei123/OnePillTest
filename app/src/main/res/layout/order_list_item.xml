@@ -33,40 +33,78 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/underline"
-        android:paddingBottom="20dp"
-        android:paddingLeft="30dp"
-        android:paddingTop="10dp">
-
-        <ImageView
-            android:id="@+id/setting_order_list_item_img1"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginRight="20dp"
-            android:src="@drawable/user" />
-
-        <ImageView
-            android:id="@+id/setting_order_list_item_img2"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginRight="20dp" />
-
-        <ImageView
-            android:id="@+id/setting_order_list_item_img3"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginRight="20dp" />
-
-        <TextView
-            android:id="@+id/setting_order_list_item_money"
+        android:layout_height="match_parent">
+        <com.onepilltest.others.SwipeMenu
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="right"
-            android:paddingRight="25dp"
-            android:text="￥12333" />
+            android:layout_height="match_parent">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/underline"
+                android:paddingBottom="20dp"
+                android:paddingLeft="30dp"
+                android:paddingTop="10dp">
+
+                <ImageView
+                    android:id="@+id/setting_order_list_item_img1"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginRight="20dp"
+                    android:src="@drawable/user" />
+
+                <ImageView
+                    android:id="@+id/setting_order_list_item_img2"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginRight="20dp" />
+
+                <ImageView
+                    android:id="@+id/setting_order_list_item_img3"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginRight="20dp" />
+
+                <TextView
+                    android:id="@+id/setting_order_list_item_money"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="right"
+                    android:paddingRight="25dp"
+                    android:text="￥12333" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="200dp"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/order_list_del"
+                    android:background="#f33"
+                    android:text="删除订单"
+                    android:gravity="center"
+                    android:textColor="#ffffff"
+                    android:textSize="14sp"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+
+                <TextView
+                    android:id="@+id/order_list_more"
+                    android:background="#f71"
+                    android:text="查看详情"
+                    android:gravity="center"
+                    android:textColor="#ffffff"
+                    android:textSize="14sp"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+        </com.onepilltest.others.SwipeMenu>
     </LinearLayout>
+
+
 
 </LinearLayout>

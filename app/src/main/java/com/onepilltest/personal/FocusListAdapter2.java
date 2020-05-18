@@ -95,7 +95,7 @@ public class FocusListAdapter2 extends RecyclerView.Adapter<FocusListAdapter2.Vi
             @Override
             public void onClick(View v) {
                 Log.e("focusAdapter","查看第"+i+"条数据");
-                Toast.makeText(mContext,"查看第"+i+"条数据,Type:"+focus.toString(),Toast.LENGTH_SHORT).show();
+//                Toast.makeText(mContext,"查看第"+i+"条数据,Type:"+focus.toString(),Toast.LENGTH_SHORT).show();
                 if (focus.getType() == 1){
                     Intent intent = new Intent(mContext, DoctorDetailsActivity.class);
                     intent.putExtra("id",focus.getTypeId());

@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.onepilltest.R;
@@ -50,6 +51,8 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
         TextView status;//状态
         ImageView img;//药品图片
         TextView price;//总金额
+        TextView del;//删除
+        TextView more;//详细信息
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -57,6 +60,8 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
             status = itemView.findViewById(R.id.setting_order_list_isPay);
             img = itemView.findViewById(R.id.setting_order_list_item_img1);
             price = itemView.findViewById(R.id.setting_order_list_item_money);
+            del = itemView.findViewById(R.id.order_list_del);
+            more = itemView.findViewById(R.id.order_list_more);
         }
     }
     private Context mContext;
@@ -94,6 +99,20 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
                 if (onItemClickListener != null) {
                     onItemClickListener.onItemClick(v, orders, i);
                 }
+            }
+        });
+
+        viewHolder.del.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(mContext,"快写删除功能",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        viewHolder.more.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(mContext,"在这里付款和选择地址",Toast.LENGTH_SHORT).show();
             }
         });
 
