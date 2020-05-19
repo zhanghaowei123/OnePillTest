@@ -30,7 +30,7 @@ public class PatientOrderActivity extends AppCompatActivity {
     private ListView listView = null;
     private List<Order> dataSource = new ArrayList<>();
     private PatientOdertestAdapter adapter = null;
-    public static final String ORDER_PATIENT_ID = Connect.BASE_URL+"FormListServlet";
+    public static final String ORDER_PATIENT_ID = Connect.BASE_URL+"/findByUserId";
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -74,7 +74,6 @@ public class CartNewAdapter extends RecyclerView.Adapter<CartNewAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull CartNewAdapter.ViewHolder viewHolder, int i) {
         MyCart myCart = myCarts.get(i);
-
         //图片
         RequestOptions requestOptions = new RequestOptions().circleCrop();
         Glide.with(context)
@@ -148,24 +147,8 @@ public class CartNewAdapter extends RecyclerView.Adapter<CartNewAdapter.ViewHold
     public int getItemCount() {
         return myCarts.size();
     }
-    //删除选中的数据
-//    public void deleteingData(){
-//        int y=0;
-//        for (int i = 0;i<myCarts.size();i++){
-//            if (booleanList.get(i)!=null && booleanList.get(i)){
-//                myCarts.remove(i);
-//                booleanList.remove(i);
-//                y++;
-//                i--;
-//
-//            }
-//        }
-//        notifyDataSetChanged();
-//
-//        if (y==0){
-//            Toast.makeText(context,"请选择要删除的药品",Toast.LENGTH_SHORT).show();
-//        }
-//    }
-
-
+    public void deleteItem(int position){
+        myCarts.remove(position);
+        notifyDataSetChanged();
+    }
 }

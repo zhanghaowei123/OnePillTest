@@ -96,9 +96,6 @@ public class CartActivity extends BaseActivity implements View.OnClickListener {
                         booleanList.remove(i);
                         y++;
                         i--;
-//                        delList.add(myCarts.get(i).getId());
-
-                        //
                     }
                 }
 
