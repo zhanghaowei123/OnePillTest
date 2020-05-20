@@ -8,6 +8,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -35,6 +37,12 @@ public class FoundDoctorActivity extends BaseActivity {
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 //            getWindow().setStatusBarColor(0xff56ced4 );
 //        }
+        Window window = getWindow();
+        //隐藏状态栏
+        //定义全屏参数
+        int flag= WindowManager.LayoutParams.FLAG_FULLSCREEN;
+        //设置当前窗体为全屏显示
+        window.setFlags(flag, flag);
         setContentView ( R.layout.found_doctor_layout );
         EventBus.getDefault().register(this);
         imgBack = findViewById ( R.id.findoctor_left );

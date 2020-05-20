@@ -39,6 +39,7 @@ allprojects {
 
         //轮播图
         maven { url 'https://jitpack.io' }
+        google()
     }
 }
 
