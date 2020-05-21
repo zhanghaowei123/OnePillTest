@@ -6,12 +6,7 @@
     android:background="#f7f7f7"
     android:orientation="vertical">
 
-    <com.onepilltest.util.StatusBarHeightView
-        app:use_type="use_padding_top"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
 
-    </com.onepilltest.util.StatusBarHeightView>
     <!--标题栏-->
     <LinearLayout
         android:layout_width="match_parent"

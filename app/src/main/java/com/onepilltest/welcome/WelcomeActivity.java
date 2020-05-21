@@ -2,18 +2,22 @@ package com.onepilltest.welcome;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.onepilltest.BaseActivity;
 import com.onepilltest.R;
 import com.onepilltest.index.HomeActivity;
 import com.onepilltest.personal.UserBook;
+import com.onepilltest.util.CustomVideoView;
 import com.onepilltest.util.SharedPreferencesUtil;
 import com.onepilltest.util.StatusBarUtil;
 
@@ -22,6 +26,7 @@ import cn.jpush.android.api.JPushInterface;
 public class WelcomeActivity extends BaseActivity implements View.OnClickListener {
     private LinearLayout linearDoctor;
     private LinearLayout linearPatient;
+    private CustomVideoView videoview;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +42,7 @@ public class WelcomeActivity extends BaseActivity implements View.OnClickListene
 
         autoLogin();
 
+        init();
         initView();
 
         /*if (UserBook.NowUser != null ){
@@ -51,9 +57,9 @@ public class WelcomeActivity extends BaseActivity implements View.OnClickListene
     private void initBar(Activity activity) {
 
         //设置状态栏paddingTop
-        StatusBarUtil.setRootViewFitsSystemWindows(activity,true);
+//        StatusBarUtil.setRootViewFitsSystemWindows(activity,true);
         //设置状态栏颜色0xff56ced4
-        StatusBarUtil.setStatusBarColor(activity,0xff56ced4);
+//        StatusBarUtil.setStatusBarColor(activity,0xff56ced4);
         //设置状态栏神色浅色切换
         StatusBarUtil.setStatusBarDarkTheme(activity,false);
 
@@ -84,7 +90,30 @@ public class WelcomeActivity extends BaseActivity implements View.OnClickListene
 
     }
 
-    private void initView(){
+
+    /**
+     * 初始化
+     */
+    private void initView() {
+
+
+        videoview.setVideoURI(Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.video3));
+
+        //播放
+        videoview.start();
+        //循环播放
+        videoview.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                videoview.start();
+            }
+        });
+
+    }
+
+    private void init(){
+
+        videoview = findViewById(R.id.welcome_video);
         linearDoctor = findViewById(R.id.linear_doctor);
         linearPatient = findViewById(R.id.linear_patient);
         linearDoctor.setOnClickListener(this);
@@ -105,5 +134,19 @@ public class WelcomeActivity extends BaseActivity implements View.OnClickListene
                 startActivity(intent1);
                 break;
         }
+    }
+
+    //返回重启加载
+    @Override
+    protected void onRestart() {
+        initView();
+        super.onRestart();
+    }
+
+    //防止锁屏或者切出的时候，音乐在播放
+    @Override
+    protected void onStop() {
+        videoview.stopPlayback();
+        super.onStop();
     }
 }

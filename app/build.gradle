@@ -44,6 +44,11 @@ android {
     }
     compileSdkVersion 28
     defaultConfig {
+
+        //报错：Failed to capture snapshot of input files for task ':app:preDebugBuild' property 'compileManifests' during up-to-date check之后加的
+        javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
+
+
         applicationId "com.onepilltest"
         minSdkVersion 16
         targetSdkVersion 28
@@ -114,7 +119,6 @@ dependencies {
     //Jpush
     implementation 'cn.jiguang.sdk:jpush:3.6.0'  // 此处以JPush 3.6.0 版本为例。
     implementation 'cn.jiguang.sdk:jcore:2.3.4'  // 此处以JCore 2.3.4 版本为例。
-
 
 
 }

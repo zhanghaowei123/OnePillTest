@@ -204,6 +204,8 @@ public class PersonalFragment extends Fragment {
                     startActivity(intent6);
                     break;
                 case R.id.ll_focus_article://收藏的文章
+                    Intent intent7 = new Intent(getContext(), focusArticle.class);
+                    startActivity(intent7);
                     break;
             }
         }

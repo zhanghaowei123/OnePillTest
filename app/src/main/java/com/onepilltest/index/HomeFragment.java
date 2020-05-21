@@ -110,6 +110,7 @@ public class HomeFragment extends Fragment {
         find(view);
         initView(view);
         setArticles();
+        Log.e("用户信息：",UserBook.print());
        // initZxing();
         initHe();
         HeConfig.switchToFreeServerNode();

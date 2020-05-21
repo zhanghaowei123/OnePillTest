@@ -106,12 +106,16 @@ public class UserBook {
     }
 
     public static String print() {
-        String str = "";
+        String str = "\nUserList一共记录了" + UserList.size() + "个用户信息";
         for (int i = 0; i < UserList.size(); i++) {
-            str += "\n" + UserList.get(i).getNickName();
+            str += "\n" + UserList.get(i).toString();
 
         }
-        str += "UserList一共记录了" + UserList.size() + "个用户信息";
+        str += "\nDoctorList一共记录了" + DoctorList.size() + "个医生信息";
+        for (int i = 0; i < DoctorList.size(); i++) {
+            str += "\n" + DoctorList.get(i).toString();
+
+        }
         return str;
     }
 

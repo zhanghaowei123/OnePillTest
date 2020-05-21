@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f1f1f1"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!--标题栏-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/focus_article_back"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_weight="4"
+                android:background="@drawable/back" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="38"
+                android:text="我的收藏"
+                android:textColor="#333"
+                android:textStyle="bold"
+                android:textSize="16dp" />
+
+            <!--<Button-->
+            <!--android:id="@+id/focus_article_save"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="27dp"-->
+            <!--android:layout_marginLeft="5dp"-->
+            <!--android:layout_marginRight="7dp"-->
+            <!--android:layout_weight="6"-->
+            <!--android:background="@drawable/button_circle_little"-->
+            <!--android:text="保存"-->
+            <!--android:textColor="#fff" />-->
+        </LinearLayout>
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/focus_article_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+</LinearLayout>

@@ -248,7 +248,8 @@
         </receiver>
 
         <activity android:name=".personal.WalletMoreActivity" />
-        <activity android:name=".nearby.NearMap"></activity>
+        <activity android:name=".nearby.NearMap" />
+        <activity android:name=".personal.focusArticle"></activity>
     </application>
 
 </manifest>

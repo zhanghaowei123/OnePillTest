@@ -34,15 +34,13 @@ public class FoundDoctorActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate ( savedInstanceState );
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//            getWindow().setStatusBarColor(0xff56ced4 );
-//        }
-        Window window = getWindow();
-        //隐藏状态栏
-        //定义全屏参数
-        int flag= WindowManager.LayoutParams.FLAG_FULLSCREEN;
-        //设置当前窗体为全屏显示
-        window.setFlags(flag, flag);
+
+//        Window window = getWindow();
+//        //隐藏状态栏
+//        //定义全屏参数
+//        int flag= WindowManager.LayoutParams.FLAG_FULLSCREEN;
+//        //设置当前窗体为全屏显示
+//        window.setFlags(flag, flag);
         setContentView ( R.layout.found_doctor_layout );
         EventBus.getDefault().register(this);
         imgBack = findViewById ( R.id.findoctor_left );
@@ -75,7 +73,7 @@ public class FoundDoctorActivity extends BaseActivity {
 
     private void initBar(Activity activity) {
         //设置状态栏paddingTop
-//        StatusBarUtil.setRootViewFitsSystemWindows(activity,true);
+        StatusBarUtil.setRootViewFitsSystemWindows(activity,true);
         //设置状态栏颜色0xff56ced4
         StatusBarUtil.setStatusBarColor(activity,0xff56ced4);
         //设置状态栏神色浅色切换
