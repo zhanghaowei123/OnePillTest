@@ -109,6 +109,14 @@ public class WelcomeActivity extends BaseActivity implements View.OnClickListene
             }
         });
 
+        //设置音量，左右声道
+        videoview.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                mp.setVolume(0,0);
+            }
+        });
+
     }
 
     private void init(){

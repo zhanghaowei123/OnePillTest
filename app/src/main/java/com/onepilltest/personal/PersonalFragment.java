@@ -1,6 +1,8 @@
 package com.onepilltest.personal;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -48,6 +50,7 @@ public class PersonalFragment extends Fragment {
     private TextView name = null;
     private TextView degree = null;
     MyListener myListener = null;
+    private ImageView background = null;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -73,6 +76,8 @@ public class PersonalFragment extends Fragment {
      * @param view
      */
     private void find(View view) {
+        background = view.findViewById(R.id.personal_user_img);
+        background.setOnClickListener(myListener);
         name = view.findViewById(R.id.personal_name);
         degree = view.findViewById(R.id.personal_work);
         degree.setText(UserBook.getDegree());
@@ -107,6 +112,9 @@ public class PersonalFragment extends Fragment {
     }
 
     private void initData() {
+        //指定滤镜颜色以及混合模式
+        background.setColorFilter(Color.parseColor("#66000000"));
+
         if (UserBook.Code == 1) {//医生
             initDoctor();
         } else if (UserBook.Code == 2) {//用户
@@ -123,6 +131,8 @@ public class PersonalFragment extends Fragment {
     }
 
     private void initView(View view) {
+
+
 
         myListener = new MyListener();
         find(view);
