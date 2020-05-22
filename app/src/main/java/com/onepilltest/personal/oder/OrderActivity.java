@@ -110,6 +110,10 @@ public class OrderActivity extends BaseActivity {
             ordersAdapter = new OrdersAdapter(baseList);
             orderList.setAdapter(ordersAdapter);
             initItem();
+        }else if (msg.getCode().equals("OrderDao_del")){
+            if (msg.getJson().equals("yes")){
+                ordersAdapter.notifyDataSetChanged();
+            }
         }
     }
 

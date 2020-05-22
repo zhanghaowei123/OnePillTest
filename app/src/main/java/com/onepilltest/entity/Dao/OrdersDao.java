@@ -66,31 +66,32 @@ public class OrdersDao {
 
     /**
      * add
+     *
      * @param orders
      */
-        public void add(Orders orders){
+    public void add(Orders orders) {
 
-            Gson gson = new Gson();
-            RequestBody requestBody = new FormBody.Builder()
-                    .add("json",gson.toJson(orders))
-                    .build();
-            String url = Connect.BASE_URL+"order/add";
-            OkhttpUtil.post(requestBody,url).enqueue(new Callback() {
-                @Override
-                public void onFailure(Call call, IOException e) {
+        Gson gson = new Gson();
+        RequestBody requestBody = new FormBody.Builder()
+                .add("json", gson.toJson(orders))
+                .build();
+        String url = Connect.BASE_URL + "order/add";
+        OkhttpUtil.post(requestBody, url).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
 
-                }
+            }
 
-                @Override
-                public void onResponse(Call call, Response response) throws IOException {
-                    EventMessage msg = new EventMessage();
-                    String re = response.body().string();
-                    Log.e("添加订单：",re+"");
-                    msg.setCode("OrdersServlet_add");
-                    msg.setJson(re);
-                    EventBus.getDefault().post(msg);
-                }
-            });
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                EventMessage msg = new EventMessage();
+                String re = response.body().string();
+                Log.e("添加订单：", re + "");
+                msg.setCode("OrdersServlet_add");
+                msg.setJson(re);
+                EventBus.getDefault().post(msg);
+            }
+        });
 
 //            int UserId = UserBook.NowUser.getId();
 //            int medicineId = orders.getMedicineId();
@@ -120,7 +121,36 @@ public class OrdersDao {
 //                    EventBus.getDefault().post(msg);
 //                }
 //            });
-        }
-
     }
+
+    //del
+    public void del(int id) {
+        String url = Connect.BASE_URL + "/order/delete?id="+id;
+        OkhttpUtil.get(url).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                EventMessage msg = new EventMessage();
+                msg.setCode("OrderDao_del");
+                msg.setJson("no");
+                EventBus.getDefault().post(msg);
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String str = response.body().string();
+                EventMessage msg = new EventMessage();
+                msg.setCode("OrderDao_del");
+                if (str.equals("yes"))
+                    msg.setJson(str);
+                else
+                    msg.setJson("no");
+                EventBus.getDefault().post(msg);
+                Log.e("OrderDao",str);
+            }
+        });
+    }
+
+
+
+}
 

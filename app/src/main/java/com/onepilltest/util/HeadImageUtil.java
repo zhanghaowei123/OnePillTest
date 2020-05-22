@@ -19,8 +19,8 @@ public class HeadImageUtil extends ScrollView {
 
     private float firstPosition;//记录第一次按下的位置
     private boolean isScrolling;//是否正在缩放
-    private float mScrollRate = 0.3f;//缩放系数，缩放系数越大，变化的越大
-    private float mReplyRate = 0.5f;//回调系数，越大，回调越慢
+    private float mScrollRate = 1.0f;//缩放系数，缩放系数越大，变化的越大
+    private float mReplyRate = 1.0f;//回调系数，越大，回调越慢
 
     public HeadImageUtil(Context context) {
         super(context);
@@ -82,7 +82,7 @@ public class HeadImageUtil extends ScrollView {
                         break;
                     }
                 }
-                int distance = (int) ((ev.getY() - firstPosition) * mScrollRate)*2; // 滚动距离乘以一个系数
+                int distance = (int) ((ev.getY() - firstPosition) * mScrollRate); // 滚动距离乘以一个系数
                 if (distance < 0) { // 当前位置比记录位置要小，正常返回
                     break;
                 }

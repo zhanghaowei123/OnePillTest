@@ -16,9 +16,9 @@
         <ImageView
             android:id="@+id/personal_user_img"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="220dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/personal_back" />
+            android:src="@drawable/pic_01"/>
         <LinearLayout
             android:orientation="vertical"
             android:id="@+id/personal_user_path"
@@ -31,12 +31,12 @@
             android:layout_alignTop="@+id/personal_user_path"
             android:orientation="vertical"
             android:layout_width="match_parent"
+            android:paddingBottom="1500dp"
             android:layout_height="match_parent">
             <LinearLayout
                 android:id="@+id/personal_user_setting"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
-                android:layout_alignParentTop="true"
                 android:paddingLeft="10dp">
 
                 <ImageView
@@ -81,15 +81,9 @@
                 android:id="@+id/personal_list1_view"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
-                android:layout_below="@id/personal_user_setting"
-                android:layout_marginTop="10dp"
+                android:paddingLeft="40dp"
+                android:paddingRight="40dp"
                 android:background="#FFFFFF">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:paddingLeft="40dp"
-                    android:paddingRight="40dp">
 
                     <LinearLayout
                         android:id="@+id/ll_order"
@@ -157,32 +151,6 @@
                             android:text="钱包"
                             android:textColor="#3C3C3C"
                             android:textSize="14dp" />
-
-                    </LinearLayout>
-
-                    <!--<LinearLayout
-                        android:id="@+id/ll_ask"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="28dp"
-                            android:layout_height="28dp"
-                            android:layout_margin="5dp"
-                            android:src="@drawable/ask" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="问诊记录"
-                            android:textColor="#3C3C3C"
-                            android:textSize="14dp" />
-
-                    </LinearLayout>-->
-
                 </LinearLayout>
 
             </LinearLayout>
@@ -271,6 +239,11 @@
 
                 </LinearLayout>
             </LinearLayout>
+
+
+
+
+
         </LinearLayout>
 
     </RelativeLayout>

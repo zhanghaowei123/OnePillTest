@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.onepilltest.R;
 import com.onepilltest.URL.Connect;
+import com.onepilltest.entity.Dao.OrdersDao;
 import com.onepilltest.entity.Orders;
 import com.onepilltest.personal.cart.CartNewAdapter;
 
@@ -23,6 +24,7 @@ import java.util.List;
 public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder> {
 
     private List<Orders> ordersList ;
+    private OrdersDao ordersDao;
 
     //私有属性
     private OnItemClickListener onItemClickListener = null;
@@ -80,6 +82,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull OrdersAdapter.ViewHolder viewHolder, int i) {
         Orders orders = ordersList.get(i);
+        ordersDao = new OrdersDao();
         viewHolder.shopName.setText("OnePill");
         if (orders.getStatus()==1){
             viewHolder.status.setText("已付款");
@@ -106,6 +109,9 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
             @Override
             public void onClick(View v) {
                 Toast.makeText(mContext,"快写删除功能",Toast.LENGTH_SHORT).show();
+                //删除订单
+                ordersDao.del(orders.getId());
+                ordersList.remove(i);
             }
         });
 
@@ -113,6 +119,8 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
             @Override
             public void onClick(View v) {
                 Toast.makeText(mContext,"在这里付款和选择地址",Toast.LENGTH_SHORT).show();
+                //跳转到详情页
+                
             }
         });
 
