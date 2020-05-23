@@ -218,6 +218,7 @@ public class CartActivity extends BaseActivity implements View.OnClickListener {
                 finish();
                 break;
             case R.id.btn_cart_settlement:
+
                 OrdersDao dao = new OrdersDao();
                 Orders orders = new Orders();
                 for (int i = 0; i < myCarts.size(); i++) {
@@ -227,6 +228,7 @@ public class CartActivity extends BaseActivity implements View.OnClickListener {
                     orders.setImg(myCarts.get(i).getImg());
                     orders.setCount(myCarts.get(i).getCount());
                     orders.setStatus(0);
+                    orders.setAddressId(0);
 //                  cartDao添加deletByUserId
 
                     dao.add(orders);

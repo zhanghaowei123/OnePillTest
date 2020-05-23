@@ -249,7 +249,8 @@
 
         <activity android:name=".personal.WalletMoreActivity" />
         <activity android:name=".nearby.NearMap" />
-        <activity android:name=".personal.focusArticle"></activity>
+        <activity android:name=".personal.focusArticle" />
+        <activity android:name=".personal.oder.OrderMore"></activity>
     </application>
 
 </manifest>
