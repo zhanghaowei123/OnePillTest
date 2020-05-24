@@ -1,6 +1,170 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">Hyphenate Demo</string>
+    <string name="app_slogon">IM as a service</string>
 
+
+    <string name="recall">Recall</string>
+    <string name="msg_conference_invite">Come to the conference</string>
+    <string name="msg_recall_by_self">This message has been recalled by myself</string>
+    <string name="msg_recall_by_user">This message has been recalled by %1$s</string>
+    <string name="search_contanier">Search："%s"</string>
+    <string name="stop_record">Stop record</string>
+    <string name="switch_camera">Switch camera</string>
+    <string name="capture_image">Capture image</string>
+    <string name="record_finish_toast">Recording finish, file saved in %s</string>
+    <string name="em_user_remove">This user has been removed</string>
+    <string name="user_forbidden">User is forbidden by server</string>
+    <string name="push_settings">Message push settings</string>
+    <string name="push_use_fcm">Message push use fcm</string>
+    <string name="set_custom_appkey">Set custom App key</string>
+    <string name="set_custom_server">Set custom servers</string>
+    <string name="conference_invite_error">Did not get the meeting information, can not invite other people to join</string>
+    <string name="call_option">Call Option</string>
+    <string name="multi_device_management">Multi device management</string>
+    <string name="add_public_chat_room">Add public channel</string>
+    <string name="group_not_found">Can not find this group</string>
+    <string name="join_need_owner_approval">Join need group owner approval</string>
+    <string name="serach_group_message">Search messages</string>
+    <string name="block_offline_group_push">Block offline push</string>
+    <string name="refuse">Refuse</string>
+    <string name="accept_join_group">%s accept join group</string>
+    <string name="refuse_join_group">%s refuse join group</string>
+    <string name="at_your_in_group">%s @ you in group chat</string>
+    <string name="emojicon_test_name">Test</string>
+
+    <string name="call_version_inconsistent">Both call version are inconsistent</string>
+    <string name="the_current_group">The current group has been dismissed</string>
+    <string name="messages_are_empty">Messages has been cleared</string>
+    <string name="is_modify_the_group_description">Modifying the group description..</string>
+    <string name="Modify_the_group_description_successful">Modify the group description successful</string>
+    <string name="Modify_the_group_extension_successful">Modify the group extension successful</string>
+    <string name="change_the_group_description_failed_please">Failed to change the group name, please check the network or try again later</string>
+    <string name="change_the_group_extension_failed_please">Failed to change the group extension, please check the network or try again later</string>
+    <string name="registration_failed_without_permission">Registration failed, without permission!</string>
+    <string name="Registration_failed">Registration failed</string>
+    <string name="have_connected_with">Connected to the peer</string>
+    <string name="invite_join_group">Invite to join the group</string>
+    <string name="Are_refuse_with">Refusing</string>
+    <string name="Refuse_with_failure">Failed to refuse</string>
+
+    <string name="change_the_group_description">Change group description</string>
+    <string name="change_the_group_extension">Change group extension</string>
+    <string name="Sync_Groups_From_Server">Sync groups with server</string>
+
+    <string name="update_contact_list">Update contact list</string>
+    <string name="update_black_list">Update black list</string>
+    <string name="update_groups">Update groups</string>
+
+    <string name="update_contact_list_failed">Update contact list failed</string>
+    <string name="update_black_list_failed">Update black list failed</string>
+    <string name="update_groups_failed">Update groups failed</string>
+
+    <string name="delete_msg_when_exit_group">Delete messages when exit group</string>
+    <string name="set_transfer_file_by_userself">No need to implement transfer file function by user</string>
+    <string name="set_autodownload_thumbnail">Autodownload thumbnail or not</string>
+    <string name="auto_accept_group_invitation">Auto accept group invitation</string>
+    <string name="adaptive_video_encode">Adaptive video encode</string>
+    <string name="msg_roaming">message roaming</string>
+    <string name="offline_call_push">Offline call push</string>
+    <string name="offline_use_large_conference_mode">Large conference mode</string>
+    <string name="group_announcement">Announcement</string>
+    <string name="share_files">Shared Files</string>
+    <string name="upload_files">Upload</string>
+    <string name="user_already_in_contactlist">This user already is your friend, only need remove out from the black list</string>
+    <string name="group_nick">Group Nickname:</string>
+    <string name="group_owner">Group Owner:</string>
+    <string name="user_removed_from_group">You are removed from the group</string>
+
+    <string name="register_exceed_service_limit">You have exceeded the limit of the community edition,Please upgrade to the enterprise edition</string>
+
+    <string name="network_unstable">Network unstable</string>
+    <string name="no_call_data">No call data</string>
+
+    <!-- lint -->
+    <string name="delete_contact">Delete contact</string>
+    <string name="push_no_disturb">Push no disturb</string>
+    <string name="push_no_disturb_on">On</string>
+    <string name="push_only_on">On only from 10pm to 7am</string>
+    <string name="push_no_disturb_off">Off</string>
+    <string name="push_saving_settings">Saving settings</string>
+    <string name="push_save_failed">Save settings failed</string>
+    <string name="loading_more">loading more…</string>
+
+    <string name="destroy_chatroom">Destroy the chatroom</string>
+    <string name="chatroom_subject">Chat room subject</string>
+    <string name="change_chatroom_subject">change chat room subject</string>
+    <string name="change_chatroom_description">change chat room description</string>
+    <string name="chat_room_nick">name: </string>
+    <string name="is_quit_the_chat_room">is quit chat room?</string>
+    <string name="chat_room_id">chat room ID</string>
+    <string name="The_new_chat_room">Create new chat room</string>
+    <string name="chat_room_name">Chat room name</string>
+    <string name="chat_room_description">Chat room description</string>
+    <string name="Failed_to_create_chat_room">Failed to create chat room</string>
+
+    <string name="mail_log_title">Send mail, contain logs</string>
+
+    <string name="multi_device_contact_accept">Accept contact %s in other device</string>
+    <string name="multi_device_contact_decline">Decline contact %s in other device</string>
+    <string name="multi_device_contact_add">Send contact invite to %s in other device</string>
+    <string name="multi_device_contact_ban">add %s into black list in other device</string>
+    <string name="multi_device_contact_allow">remove %s from black list in other device</string>
+
+
+    <string name="multi_device_group_create">Create group [remote]</string>
+    <string name="multi_device_group_destroy">Destroy group [remote]</string>
+    <string name="multi_device_group_join">Join group [remote]</string>
+    <string name="multi_device_group_leave">Leave group [remote]</string>
+    <string name="multi_device_group_apply">Apply to join group [remote]</string>
+    <string name="multi_device_group_apply_accept">Accept %s join group application[remote]</string>
+    <string name="multi_device_group_apply_decline">Decline %s join group application[remote]</string>
+    <string name="multi_device_group_invite">Invite %s join group [remote]</string>
+    <string name="multi_device_group_invite_accept">Accept %s join group invitation[remote]</string>
+    <string name="multi_device_group_invite_decline">Decline %s join group invitation[remote]</string>
+
+    <string name="multi_device_group_kick">Kick %s from group [remote]</string>
+    <string name="multi_device_group_ban">Add %s into blacklist in group [remote]</string>
+    <string name="multi_device_group_allow">Remove %s from blacklist in group [remote]</string>
+    <string name="multi_device_group_block">Block group [remote]</string>
+    <string name="multi_device_group_unblock">Unblock group [remote]</string>
+    <string name="multi_device_group_assign_owner">Assign group owner to %s [remote]</string>
+    <string name="multi_device_group_add_admin">Add %s as group admin [remote]</string>
+    <string name="multi_device_group_remove_admin">Deprive %s group admin role [remote]</string>
+    <string name="multi_device_group_add_mute">Mute %s from group [remote]</string>
+    <string name="multi_device_group_remove_mute">UnMute %s from group [remote]</string>
+
+    <string name="multi_device_logged_in_device_kick_item">kick online device</string>
+
+    <string name="sdk_service_check">SDK service check</string>
+    <string name="btn_service_check">CHECK</string>
+    <string name="check_service_start">Start check\n</string>
+    <string name="check_result_account_validate_fail">Account validate failed%1$s%2$s</string>
+    <string name="check_result_get_dns_list_fail">Get DNS list from server failed%1$s%2$s</string>
+    <string name="check_result_get_token_fail">Get token from server failed%1$s%2$s</string>
+    <string name="check_result_login_fail">Login failed%1$s%2$s</string>
+    <string name="check_result_msg_send_fail">Message send failed%1$s%2$s</string>
+    <string name="check_result_logout_fail">Logout failed%1$s%2$s</string>
+    <string name="check_result_get_dns_list_success">Get DNS list from server success</string>
+    <string name="check_result_get_token_success">Get token from server success</string>
+    <string name="check_result_login_success">Login success</string>
+    <string name="check_result_msg_send_success">Message send success</string>
+    <string name="check_result_logout_success">Logout success</string>
+
+    <string name="title_verification_information">Fill in the verification information</string>
+
+    <string name="button_start_video_conference">Start video conference (%1$d)</string>
+    <string name="tips_invite_to_join">%1$s invite you to join …</string>
+    <string name="tips_select_contacts_first">Select contacts first ~</string>
+
+    <string name="tips_desk_share">You\'re sharing screen</string>
+
+    <string name="alert_window_permission_denied">This app don\'t be granted ALERT_WINDOW permission :(</string>
+
+    <string name="title_live">Interactive Video</string>
+    <string name="msg_live_invite">%1$s invite you to join the interactive video - %2$s</string>
+    <string name="alert_request_tobe_talker">Request to be talker &#8230;</string>
+    <string name="alert_request_tobe_audience">Request to be audience &#8230;</string>
     <string name="text_ack_msg">Read</string>
     <string name="text_delivered_msg">Delivered</string>
     <string name="back">Back</string>

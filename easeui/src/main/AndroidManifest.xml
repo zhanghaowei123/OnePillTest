@@ -1,4 +1,8 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.hyphenate.easeui">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.hyphenate.easeui">
 
-
+    <application>
+        <activity android:name=".ui.VoiceCallActivity" />
+        <activity android:name=".ui.VideoCallActivity" />
+    </application>
 </manifest>

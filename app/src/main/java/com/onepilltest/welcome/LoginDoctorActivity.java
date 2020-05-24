@@ -20,6 +20,8 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
+import com.hyphenate.easeui.model.EaseGlobal;
+import com.hyphenate.easeui.model.EaseMember;
 import com.onepilltest.BaseActivity;
 import com.onepilltest.Ease.MyUserProvider;
 import com.onepilltest.MyDoctorDBHelper;
@@ -35,6 +37,8 @@ import com.onepilltest.util.SharedPreferencesUtil;
 import com.onepilltest.util.StatusBarUtil;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -167,10 +171,33 @@ public class LoginDoctorActivity extends BaseActivity implements View.OnClickLis
                     //把用户存入UserBook
                     UserBook.addDoctor(u);
                     save(u);//把u存进SharedPreferences
+
+                    List<EaseMember> memberList = new ArrayList<>();
+                    //设置病人的昵称和头像
+//                    for(UserPatient up : UserBook.getList()){
+                        EaseMember em = new EaseMember();
+                        em.member_hxid = "15227552449";
+                        em.member_nickname = "张昊伟";
+                        em.member_headphoto =Connect.BASE_URL+ "/image/headImg/33_headImgc4b4a6ed-fe53-449e-85b3-0d6ef566eb90.png";
+                        em.code = 2;
+                        Log.e("病人头像",em.member_nickname+","+em.member_hxid+","+em.member_headphoto);
+                        memberList.add(em);
+//                    }
+                    //设置自己的昵称和头像
+                    EaseMember easeMember = new EaseMember();
+                    easeMember.member_hxid = UserBook.NowDoctor.getPhone();
+                    easeMember.member_nickname = UserBook.NowDoctor.getName();
+                    easeMember.member_headphoto = Connect.BASE_URL+UserBook.NowDoctor.getHeadImg();
+                    easeMember.code = 1;
+                    memberList.add(easeMember);
+                    EaseGlobal.memberList = memberList;
+
                     //设置昵称和头像
                     MyUserProvider.getInstance().setUser(UserBook.NowDoctor.getPhone(),
                             UserBook.NowDoctor.getName(),
                             Connect.BASE_URL+UserBook.NowDoctor.getHeadImg());
+
+
                     //设置SQLite数据库，将用户信息保存进去
                     try{
                         //插入数据

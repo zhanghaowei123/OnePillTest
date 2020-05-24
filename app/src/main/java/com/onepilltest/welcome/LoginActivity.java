@@ -3,11 +3,8 @@ package com.onepilltest.welcome;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +16,8 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
+import com.hyphenate.easeui.model.EaseGlobal;
+import com.hyphenate.easeui.model.EaseMember;
 import com.onepilltest.BaseActivity;
 import com.onepilltest.Ease.MyUserProvider;
 import com.onepilltest.MyDBHelper;
@@ -29,13 +28,12 @@ import com.onepilltest.entity.Result;
 import com.onepilltest.entity.UserPatient;
 import com.onepilltest.index.HomeActivity;
 import com.onepilltest.personal.UserBook;
-import com.onepilltest.util.OkhttpUtil;
 import com.onepilltest.util.SharedPreferencesUtil;
 import com.onepilltest.util.StatusBarUtil;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -200,6 +198,27 @@ public class LoginActivity extends BaseActivity {
                     MyUserProvider.getInstance().setUser(UserBook.NowUser.getPhone(),
                             UserBook.NowUser.getNickName(),
                             Connect.BASE_URL + UserBook.NowUser.getHeadImg());
+
+                    List<EaseMember> memberList = new ArrayList<>();
+                    //设置医生的昵称和头像
+//                    for(UserDoctor ud : UserBook.getDoctorList()){
+                        EaseMember em = new EaseMember();
+                        em.member_hxid = "15232156137";
+                        em.member_nickname = "张昊伟医生";
+                        em.member_headphoto = Connect.BASE_URL
+                                +"image/timg.jpg";
+                        em.code = 1;
+                        Log.e("医生头像",em.member_nickname+","+em.member_hxid+","+em.member_headphoto);
+                        memberList.add(em);
+//                    }
+                    //设置自己的昵称和头像
+                    EaseMember easeMember = new EaseMember();
+                    easeMember.member_hxid = UserBook.NowUser.getPhone();
+                    easeMember.member_nickname = UserBook.NowUser.getNickName();
+                    easeMember.member_headphoto = Connect.BASE_URL+UserBook.NowUser.getHeadImg();
+                    easeMember.code = 2;
+                    memberList.add(easeMember);
+                    EaseGlobal.memberList = memberList;
 
                     //设置SQLite数据库，将用户信息保存进去
                     try{

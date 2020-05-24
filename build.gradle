@@ -33,7 +33,7 @@ allprojects {
         }*/
 
 
-
+        maven {url 'https://dl.bintray.com/jetbrains/anko'}
         maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
         jcenter { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter' }
 
