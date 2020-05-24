@@ -6,7 +6,6 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -32,7 +31,6 @@ import android.widget.Toast;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.EMMessageListener;
 import com.hyphenate.EMValueCallBack;
-import com.hyphenate.chat.EMChatManager;
 import com.hyphenate.chat.EMChatRoom;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMCmdMessageBody;
@@ -126,11 +124,14 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
     static final int ITEM_TAKE_PICTURE = 1;
     static final int ITEM_PICTURE = 2;
     static final int ITEM_LOCATION = 3;
+    static final int ITEM_VOICE = 4;
+    static final int ITEMM_VIDEO = 5;
 
-    protected int[] itemStrings = {R.string.attach_take_pic, R.string.attach_picture, R.string.attach_location};
+    protected int[] itemStrings = {R.string.attach_take_pic, R.string.attach_picture, R.string.attach_location,
+            R.string.attach_voice_call, R.string.attach_video_call};
     protected int[] itemdrawables = {R.drawable.ease_chat_takepic_selector, R.drawable.ease_chat_image_selector,
-            R.drawable.ease_chat_location_selector};
-    protected int[] itemIds = {ITEM_TAKE_PICTURE, ITEM_PICTURE, ITEM_LOCATION};
+            R.drawable.ease_chat_location_selector, R.drawable.em_chat_voice_call_selector, R.drawable.em_chat_video_call_selector};
+    protected int[] itemIds = {ITEM_TAKE_PICTURE, ITEM_PICTURE, ITEM_LOCATION, ITEM_VOICE, ITEMM_VIDEO};
     private boolean isMessageListInited;
     protected MyItemClickListener extendMenuItemClickListener;
     protected boolean isRoaming = false;
@@ -803,7 +804,13 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
 //            case ITEM_LOCATION:
 //                startActivityForResult(new Intent(getActivity(), EaseBaiduMapActivity.class), REQUEST_CODE_MAP);
 //                break;
-
+                case ITEM_VOICE:
+                    startActivity(new Intent(getActivity(), VoiceCallActivity.class).putExtra("username", toChatUsername)
+                            .putExtra("isComingCall", false));
+                    break;
+                case ITEMM_VIDEO:
+                    startActivity(new Intent(getActivity(), VideoCallActivity.class).putExtra("username", toChatUsername)
+                            .putExtra("isComingCall", false));
                 default:
                     break;
             }
@@ -921,48 +928,6 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
         } else if (chatType == EaseConstant.CHATTYPE_CHATROOM) {
             message.setChatType(ChatType.ChatRoom);
         }
-
-//        try{
-//            //在数据库中查找
-//            SQLiteDatabase db = SQLiteDatabase
-//                    .openOrCreateDatabase("/data/data/com.onepilltest/databases/user", null);
-//            // 查询获得游标
-//            Cursor cursor = db.query("PATIENT", null, null, null, null, null, null);
-//            // 判断游标是否为空
-//            if (cursor.moveToFirst()) {
-//                // 遍历游标
-//                do {
-//                    phone = cursor.getString(cursor.getColumnIndex("PHONE"));
-//                    name = cursor.getString(cursor.getColumnIndex("NAME"));
-//                    img = cursor.getString(cursor.getColumnIndex("IMG"));
-//                    Log.e("myPatientdb", phone + "|" + name + "|" + img);
-//                } while (cursor.moveToNext());
-//            }
-//            db.close();
-//            message.setAttribute("ImUserName", phone);//设置我的环信username
-//            message.setAttribute("ImNickName", name);//设置我的昵称
-//            message.setAttribute("ImImageUrl", img);//设置我的头像url
-//        }catch (Exception e){
-//            Log.e("===catch块===","");
-//            SQLiteDatabase db2 = SQLiteDatabase.
-//                    openOrCreateDatabase("/data/data/com.onepilltest/databases/doctor", null);
-//                // 查询获得游标
-//                Cursor cursor = db2.query("DOCTOR", null, null, null, null, null, null);
-//                // 判断游标是否为空
-//                if (cursor.moveToFirst()) {
-//                    // 遍历游标
-//                    do {
-//                        phone = cursor.getString(cursor.getColumnIndex("PHONE"));
-//                        name = cursor.getString(cursor.getColumnIndex("NAME"));
-//                        img = cursor.getString(cursor.getColumnIndex("IMG"));
-//                        Log.e("myDoctordb", phone + "|" + name + "|" + img);
-//                    } while (cursor.moveToNext());
-//                }
-//                db2.close();
-//                message.setAttribute("ImUserName", phone);//设置我的环信username
-//                message.setAttribute("ImNickName", name);//设置我的昵称
-//                message.setAttribute("ImImageUrl", img);//设置我的头像url
-//        }
         message.setMessageStatusCallback(messageStatusCallback);
 
         // Send message.
@@ -974,7 +939,8 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
     }
 
 
-    //===================================================================================
+    //
+    // ===================================================================================
 
     protected EMCallBack messageStatusCallback = new EMCallBack() {
         @Override
