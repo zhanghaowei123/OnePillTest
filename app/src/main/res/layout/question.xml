@@ -129,13 +129,13 @@
             android:layout_height="100dp"
             android:layout_margin="10dp"
             android:background="#f4f4f4"
-            android:src="@drawable/add" />
+            android:src="@drawable/addimg2" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="你上传的附件仅队解答问题的医生可见"
+            android:text="你上传的附件仅队解答问题的医生可见,且只将信息发送到所有在线医生。"
             android:textSize="12dp" />
     </LinearLayout>
 

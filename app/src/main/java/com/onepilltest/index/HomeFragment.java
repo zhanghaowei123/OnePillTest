@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -77,6 +78,7 @@ public class HomeFragment extends Fragment {
     private Article article;
     private ImageView imgFoundDoctor;
     private ImageView imgFoundMedicine;
+    private ImageView imgTianqi;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -172,6 +174,7 @@ public class HomeFragment extends Fragment {
         imgFoundDoctor.setOnClickListener(myListener);
         imgFoundMedicine = view.findViewById(R.id.iv_find_medicine);
         imgFoundMedicine.setOnClickListener(myListener);
+        imgTianqi = view.findViewById(R.id.img_tianqi);
     }
 
     private void setArticles() {
@@ -216,16 +219,20 @@ public class HomeFragment extends Fragment {
         String str = null;
         if (Integer.valueOf(heFeng.getTem()) < 0) {
             str = "温度很低，请注意添衣，小心生病";
+            imgTianqi.getDrawable().setLevel(1);
         } else if (Integer.valueOf(heFeng.getTem()) < 10) {
             str = "温度较低，请注意保暖";
+            imgTianqi.getDrawable().setLevel(3);
         } else if (Integer.valueOf(heFeng.getTem()) < 20) {
             str = "气温舒适，玩的开心";
+            imgTianqi.getDrawable().setLevel(2);
         } else if (Integer.valueOf(heFeng.getTem()) < 50) {
-            str = "热死个人！！";
+            str = "气温较高";
+            imgTianqi.getDrawable().setLevel(0);
         } else {
 
         }
-        text = "今天天气"+heFeng.getLife()+",温度：" + heFeng.getTem() + "°C----->" + str;
+        text = "今天天气"+heFeng.getLife()+",温度：" + heFeng.getTem() + "°C--" + str;
         bar.setText(text);
         Log.e("获取到天气数据", heFeng.getLife() + heFeng.getTem());
 

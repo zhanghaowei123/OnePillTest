@@ -126,7 +126,7 @@ public class NearFragment extends Fragment {
         //4.定位当前位置
         locationClient = new LocationClient(getActivity().getApplicationContext());//1.创建定位客户端对象
         NearFragment.this.requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_GPS);//动态申请GPS权限
-        BitmapDescriptor locationIcon = BitmapDescriptorFactory.fromResource(R.drawable.isfocus);//设置定位图层的参数
+        BitmapDescriptor locationIcon = BitmapDescriptorFactory.fromResource(R.drawable.jian);//设置定位图层的参数
         MyLocationConfiguration configuration = new MyLocationConfiguration//配置定位图层显示方式
                 (MyLocationConfiguration.LocationMode.COMPASS
                         , true, locationIcon);
