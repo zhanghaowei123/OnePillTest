@@ -132,6 +132,7 @@ public class HomeFragment extends Fragment {
                     //此时返回数据
                     NowBase now = date.getNow();
                     setText(new HeFeng(now.getTmp(), now.getCond_txt()));
+                    Log.e("setImg",now.getCond_code());
                 } else {
                     //在此查看返回数据失败的原因
                     String status = date.getStatus();
@@ -214,21 +215,29 @@ public class HomeFragment extends Fragment {
     }
 
     //设置每日提醒的内容
+    public void setImgTianqi(HeFeng heFeng){
+        if (Integer.valueOf(heFeng.getTem()) < 0) {
+            imgTianqi.getDrawable().setLevel(1);
+        } else if (Integer.valueOf(heFeng.getTem()) < 10) {
+            imgTianqi.getDrawable().setLevel(3);
+        } else if (Integer.valueOf(heFeng.getTem()) < 20) {
+            imgTianqi.getDrawable().setLevel(2);
+        } else if (Integer.valueOf(heFeng.getTem()) < 50) {
+            imgTianqi.getDrawable().setLevel(1);
+        } else {
 
+        }
+    }
     public void setText(HeFeng heFeng) {
         String str = null;
         if (Integer.valueOf(heFeng.getTem()) < 0) {
             str = "温度很低，请注意添衣，小心生病";
-            imgTianqi.getDrawable().setLevel(1);
         } else if (Integer.valueOf(heFeng.getTem()) < 10) {
             str = "温度较低，请注意保暖";
-            imgTianqi.getDrawable().setLevel(3);
         } else if (Integer.valueOf(heFeng.getTem()) < 20) {
             str = "气温舒适，玩的开心";
-            imgTianqi.getDrawable().setLevel(2);
         } else if (Integer.valueOf(heFeng.getTem()) < 50) {
             str = "气温较高";
-            imgTianqi.getDrawable().setLevel(0);
         } else {
 
         }
