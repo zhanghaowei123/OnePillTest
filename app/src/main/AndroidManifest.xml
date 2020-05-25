@@ -246,10 +246,14 @@
                 <category android:name="com.onepilltest" />
             </intent-filter>
         </receiver>
+        <receiver android:name="com.hyphenate.easeui.demofile.CallReceiver" />
 
         <activity android:name=".personal.WalletMoreActivity" />
         <activity android:name=".nearby.NearMap" />
         <activity android:name=".personal.focusArticle"></activity>
+        <activity android:name="com.hyphenate.easeui.ui.VoiceCallActivity" />
+        <activity android:name="com.hyphenate.easeui.ui.VideoCallActivity" />
+        <activity android:name="com.hyphenate.easeui.ui.CallActivity" />
     </application>
 
 </manifest>

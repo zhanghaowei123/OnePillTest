@@ -42,6 +42,7 @@ import com.hyphenate.chat.EMMessage;
 import com.hyphenate.chat.EMMessage.ChatType;
 import com.hyphenate.chat.EMTextMessageBody;
 import com.hyphenate.chat.adapter.EMAChatRoomManagerListener;
+import com.hyphenate.easeui.DemoHelper;
 import com.hyphenate.easeui.EaseConstant;
 import com.hyphenate.easeui.EaseUI;
 import com.hyphenate.easeui.R;
@@ -170,7 +171,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
     }
 
     protected boolean turnOnTyping() {
-        return false;
+        return DemoHelper.getInstance().getModel().isShowMsgTyping();
     }
 
     /**
@@ -805,17 +806,38 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
 //                startActivityForResult(new Intent(getActivity(), EaseBaiduMapActivity.class), REQUEST_CODE_MAP);
 //                break;
                 case ITEM_VOICE:
-                    startActivity(new Intent(getActivity(), VoiceCallActivity.class).putExtra("username", toChatUsername)
-                            .putExtra("isComingCall", false));
+                    startVoiceCall();
                     break;
                 case ITEMM_VIDEO:
-                    startActivity(new Intent(getActivity(), VideoCallActivity.class).putExtra("username", toChatUsername)
-                            .putExtra("isComingCall", false));
+                    startVideoCall();
+                    break;
                 default:
                     break;
             }
         }
 
+    }
+
+    protected void startVoiceCall() {
+        if (!EMClient.getInstance().isConnected()) {
+            Toast.makeText(getActivity(), R.string.not_connect_to_server, Toast.LENGTH_SHORT).show();
+        } else {
+            startActivity(new Intent(getActivity(), VoiceCallActivity.class).putExtra("username", toChatUsername)
+                    .putExtra("isComingCall", false));
+            // voiceCallBtn.setEnabled(false);
+            inputMenu.hideExtendMenuContainer();
+        }
+    }
+
+    protected void startVideoCall() {
+        if (!EMClient.getInstance().isConnected())
+            Toast.makeText(getActivity(), R.string.not_connect_to_server, Toast.LENGTH_SHORT).show();
+        else {
+            startActivity(new Intent(getActivity(), VideoCallActivity.class).putExtra("username", toChatUsername)
+                    .putExtra("isComingCall", false));
+            // videoCallBtn.setEnabled(false);
+            inputMenu.hideExtendMenuContainer();
+        }
     }
 
     /**
@@ -899,7 +921,8 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
         sendMessage(message);
     }
 
-    protected void sendLocationMessage(double latitude, double longitude, String locationAddress) {
+    protected void sendLocationMessage(double latitude, double longitude, String
+            locationAddress) {
         EMMessage message = EMMessage.createLocationSendMessage(latitude, longitude, locationAddress, toChatUsername);
         sendMessage(message);
     }

@@ -22,14 +22,14 @@ public class DemoModel {
     
     public boolean saveContactList(List<EaseUser> contactList) {
         UserDao dao = new UserDao(context);
-        dao.saveContactList(contactList);
+//        dao.saveContactList(contactList);
         return true;
     }
 
-    public Map<String, EaseUser> getContactList() {
-        UserDao dao = new UserDao(context);
-        return dao.getContactList();
-    }
+//    public Map<String, EaseUser> getContactList() {
+////        UserDao dao = new UserDao(context);
+////        return dao.getContactList();
+//    }
     
     public void saveContact(EaseUser user){
         UserDao dao = new UserDao(context);
