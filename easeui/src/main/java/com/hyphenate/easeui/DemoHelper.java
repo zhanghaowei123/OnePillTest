@@ -1683,7 +1683,8 @@ public class DemoHelper {
 
                    demoModel.setContactSynced(true);
                    EMLog.d(TAG, "set contact syn status to true");
-                   
+
+
                    isContactsSyncedWithServer = true;
                    isSyncingContactsWithServer = false;
                    

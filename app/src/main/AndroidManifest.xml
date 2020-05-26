@@ -70,6 +70,7 @@
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
+    <permission android:name="android.permission.BROADCAST_STICKY" />
     <!-- 百度地图 -->
     <!-- 这个权限用于进行网络定位 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -246,13 +247,25 @@
                 <category android:name="com.onepilltest" />
             </intent-filter>
         </receiver>
-        <receiver android:name="com.hyphenate.easeui.demofile.CallReceiver" />
+        <receiver
+            android:name="com.hyphenate.easeui.demofile.CallReceiver"
+            android:enabled="true"
+            android:exported="true"></receiver>
 
         <activity android:name=".personal.WalletMoreActivity" />
         <activity android:name=".nearby.NearMap" />
         <activity android:name=".personal.focusArticle"></activity>
-        <activity android:name="com.hyphenate.easeui.ui.VoiceCallActivity" />
-        <activity android:name="com.hyphenate.easeui.ui.VideoCallActivity" />
+        <activity
+            android:name="com.hyphenate.easeui.ui.VoiceCallActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/nornal_style" />
+        <activity
+            android:name="com.hyphenate.easeui.ui.VideoCallActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide" />
         <activity android:name="com.hyphenate.easeui.ui.CallActivity" />
     </application>
 

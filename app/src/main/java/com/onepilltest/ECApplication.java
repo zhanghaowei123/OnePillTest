@@ -41,9 +41,10 @@ public class ECApplication extends Application {
             IntentFilter callFilter = new IntentFilter(EMClient.getInstance().callManager().getIncomingCallBroadcastAction());
             if (callReceiver == null) {
                 callReceiver = new CallReceiver();
+                Log.e("CallReceiver初始化", "yes");
             }
             //register incoming call receiver
-            getApplicationContext().registerReceiver(callReceiver, callFilter);
+            this.registerReceiver(callReceiver, callFilter);
         } else {
             Log.e("EaseUI", "初始化失败");
         }
