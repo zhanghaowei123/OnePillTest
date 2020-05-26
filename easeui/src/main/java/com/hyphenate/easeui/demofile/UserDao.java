@@ -44,19 +44,19 @@ public class UserDao {
 	 * 
 	 * @param contactList
 	 */
-	public void saveContactList(List<EaseUser> contactList) {
-	    DemoDBManager.getInstance().saveContactList(contactList);
-	}
+//	public void saveContactList(List<EaseUser> contactList) {
+//	    DemoDBManager.getInstance().saveContactList(contactList);
+//	}
 
 	/**
 	 * get contact list
 	 * 
 	 * @return
 	 */
-	public Map<String, EaseUser> getContactList() {
-		
-	    return DemoDBManager.getInstance().getContactList();
-	}
+//	public Map<String, EaseUser> getContactList() {
+//
+//	    return DemoDBManager.getInstance().getContactList();
+//	}
 	
 	/**
 	 * delete a contact

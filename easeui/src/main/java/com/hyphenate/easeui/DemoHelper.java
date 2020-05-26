@@ -1461,7 +1461,7 @@ public class DemoHelper {
      */
     public Map<String, EaseUser> getContactList() {
         if (isLoggedIn() && contactList == null) {
-            contactList = demoModel.getContactList();
+//            contactList = demoModel.getContactList();
         }
         
         // return a empty non-null object to avoid app crash
@@ -1679,11 +1679,12 @@ public class DemoHelper {
                     // save the contact list to database
                    UserDao dao = new UserDao(appContext);
                    List<EaseUser> users = new ArrayList<EaseUser>(userlist.values());
-                   dao.saveContactList(users);
+//                   dao.saveContactList(users);
 
                    demoModel.setContactSynced(true);
                    EMLog.d(TAG, "set contact syn status to true");
-                   
+
+
                    isContactsSyncedWithServer = true;
                    isSyncingContactsWithServer = false;
                    

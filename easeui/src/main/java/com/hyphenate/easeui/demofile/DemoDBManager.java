@@ -20,9 +20,9 @@ public class DemoDBManager {
     static private DemoDBManager dbMgr = new DemoDBManager();
     private DbOpenHelper dbHelper;
     
-    private DemoDBManager(){
-        dbHelper = DbOpenHelper.getInstance(DemoApplication.getInstance().getApplicationContext());
-    }
+//    private DemoDBManager(){
+//        dbHelper = DbOpenHelper.getInstance(DemoApplication.getInstance().getApplicationContext());
+//    }
     
     public static synchronized DemoDBManager getInstance(){
         if(dbMgr == null){

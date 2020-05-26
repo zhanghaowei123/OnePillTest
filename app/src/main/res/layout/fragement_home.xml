@@ -15,12 +15,18 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:background="#D5F2F2">
-
+            <ImageView
+                android:id="@+id/img_tianqi"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/qing"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:paddingLeft="50dp"
+                android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:text="每日提醒"
                 android:textStyle="bold" />
@@ -36,7 +42,7 @@
                 app:clickEnable="false"
                 app:isHorizontal="true"
                 app:speed="2"
-                app:text="今天天挺好啊"
+                app:text=""
                 app:textColor="#555"
                 app:textSize="16dp" />
 
