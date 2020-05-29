@@ -93,8 +93,8 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
     }
 
     //绑定Order
-    @Override
-    public void onBindViewHolder(@NonNull OrdersAdapter.ViewHolder viewHolder, int i) {
+    @Override    public void onBindViewHolder(@NonNull OrdersAdapter.ViewHolder viewHolder, int i) {
+
         Orders orders = ordersList.get(i);
         ordersDao = new OrdersDao();
         viewHolder.shopName.setText("OnePill");
