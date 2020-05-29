@@ -16,7 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="病 人 登 录"
+        android:text="祝您早日康复"
         android:textColor="#fff"
         android:textSize="20dp"
         android:textStyle="bold" />

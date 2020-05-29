@@ -131,7 +131,9 @@ public class HomeFragment extends Fragment {
                 if (Code.OK.getCode().equalsIgnoreCase(date.getStatus())) {
                     //此时返回数据
                     NowBase now = date.getNow();
-                    setText(new HeFeng(now.getTmp(), now.getCond_txt()));
+                    Log.e("now数据",now.getTmp());
+                    setText(new HeFeng(now.getTmp(),now.getCond_txt()));
+                    setImgTianqi(new HeFeng(now.getTmp(), now.getCond_txt()));
                     Log.e("setImg",now.getCond_code());
                 } else {
                     //在此查看返回数据失败的原因
@@ -216,17 +218,16 @@ public class HomeFragment extends Fragment {
 
     //设置每日提醒的内容
     public void setImgTianqi(HeFeng heFeng){
-        if (Integer.valueOf(heFeng.getTem()) < 0) {
-            imgTianqi.getDrawable().setLevel(1);
-        } else if (Integer.valueOf(heFeng.getTem()) < 10) {
+        if (heFeng.getLife().equals("雨")) {
             imgTianqi.getDrawable().setLevel(3);
-        } else if (Integer.valueOf(heFeng.getTem()) < 20) {
-            imgTianqi.getDrawable().setLevel(2);
-        } else if (Integer.valueOf(heFeng.getTem()) < 50) {
+        } else if (heFeng.getLife().equals("晴")) {
+            imgTianqi.getDrawable().setLevel(0);
+        } else if (heFeng.getLife().equals("雪")) {
             imgTianqi.getDrawable().setLevel(1);
-        } else {
-
+        }else {
+            imgTianqi.getDrawable().setLevel(2);
         }
+        Log.e("获取的天气",imgTianqi.getDrawable().setLevel(0)+"");
     }
     public void setText(HeFeng heFeng) {
         String str = null;
