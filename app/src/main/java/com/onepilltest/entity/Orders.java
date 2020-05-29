@@ -8,38 +8,7 @@ public class Orders {
     private String img;
     private int price;
     private int status;
-
-
-    public Orders() {
-
-    }
-
-
-    public Orders(int id, int userId, int medicineId, int count, String img, int price, int status) {
-        this.id = id;
-        this.userId = userId;
-        this.medicineId = medicineId;
-        this.count = count;
-        this.img = img;
-        this.price = price;
-        this.status = status;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public String getImg() {
-        return img;
-    }
-
-    public void setImg(String img) {
-        this.img = img;
-    }
+    private int addressId;
 
     public int getId() {
         return id;
@@ -73,11 +42,49 @@ public class Orders {
         this.count = count;
     }
 
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
     public int getStatus() {
         return status;
     }
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public int getAddressId() {
+        return addressId;
+    }
+
+    public void setAddressId(int addressId) {
+        this.addressId = addressId;
+    }
+
+    @Override
+    public String toString() {
+        return "MyOrder{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", medicineId=" + medicineId +
+                ", count=" + count +
+                ", img='" + img + '\'' +
+                ", price=" + price +
+                ", status=" + status +
+                ", addressId=" + addressId +
+                '}';
     }
 }

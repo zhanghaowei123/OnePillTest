@@ -229,7 +229,7 @@ public class NearMap extends BaseActivity {
         back.setOnClickListener(myListener);
     }
 
-    public class MyListener implements View.OnClickListener{
+    private class MyListener implements View.OnClickListener{
 
         @Override
         public void onClick(View v) {

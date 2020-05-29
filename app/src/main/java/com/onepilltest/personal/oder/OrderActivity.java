@@ -1,6 +1,7 @@
 package com.onepilltest.personal.oder;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -123,6 +124,15 @@ public class OrderActivity extends BaseActivity {
             public void onItemClick(View v, Orders orders, int position) {
                 //跳转到详情页
                 Toast.makeText(OrderActivity.this,"请付款",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        ordersAdapter.setOnItemMoreClickListener(new OrdersAdapter.OnItemMoreClickListener() {
+            @Override
+            public void onMoreClick(View v, Orders orders, int position,String json) {
+                Intent intent = new Intent(OrderActivity.this,OrderMore.class);
+                intent.putExtra("json",json);
+                startActivity(intent);
             }
         });
     }

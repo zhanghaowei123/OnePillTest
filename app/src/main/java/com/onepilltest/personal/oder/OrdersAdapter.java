@@ -1,6 +1,8 @@
 package com.onepilltest.personal.oder;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.onepilltest.R;
 import com.onepilltest.URL.Connect;
 import com.onepilltest.entity.Dao.OrdersDao;
@@ -28,15 +31,26 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
 
     //私有属性
     private OnItemClickListener onItemClickListener = null;
+    private OnItemMoreClickListener onItemMorderClickListener = null;
 
     //setter方法
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
 
+    //setter方法
+    public void setOnItemMoreClickListener(OnItemMoreClickListener onItemMoreClickListener) {
+        this.onItemMorderClickListener = onItemMoreClickListener;
+    }
+
     //回调接口
     public interface OnItemClickListener {
         void onItemClick(View v,Orders orders, int position);
+    }
+
+    //跳转详情页接口
+    public  interface OnItemMoreClickListener{
+        void onMoreClick(View v,Orders orders,int position,String json);
     }
 
     public OrdersAdapter(List<Orders> baseList) {
@@ -79,15 +93,17 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
     }
 
     //绑定Order
-    @Override
-    public void onBindViewHolder(@NonNull OrdersAdapter.ViewHolder viewHolder, int i) {
+    @Override    public void onBindViewHolder(@NonNull OrdersAdapter.ViewHolder viewHolder, int i) {
+
         Orders orders = ordersList.get(i);
         ordersDao = new OrdersDao();
         viewHolder.shopName.setText("OnePill");
         if (orders.getStatus()==1){
             viewHolder.status.setText("已付款");
+            viewHolder.status.setTextColor(Color.rgb(100, 100, 100));
         }else if (orders.getStatus()==0){
             viewHolder.status.setText("未付款");
+            viewHolder.status.setTextColor(Color.rgb(255, 0, 0));
         }
 
         Glide.with(mContext)
@@ -120,7 +136,12 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
             public void onClick(View v) {
                 Toast.makeText(mContext,"在这里付款和选择地址",Toast.LENGTH_SHORT).show();
                 //跳转到详情页
-                
+                String str = new Gson().toJson(orders);
+//                Intent intent = new Intent(mContext,OrderMore.class);
+//                intent.putExtra("json",str);
+//                startActivity(intent);
+
+                onItemMorderClickListener.onMoreClick(v,orders,i,str);
             }
         });
 

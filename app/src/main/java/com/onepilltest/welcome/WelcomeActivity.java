@@ -13,6 +13,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import com.hyphenate.EMCallBack;
+import com.hyphenate.chat.EMClient;
 import com.onepilltest.BaseActivity;
 import com.onepilltest.R;
 import com.onepilltest.index.HomeActivity;
@@ -72,19 +74,60 @@ public class WelcomeActivity extends BaseActivity implements View.OnClickListene
 
     //自动登陆
     private void autoLogin() {
+        String phone = null;
+        String password = null;
         if (SharedPreferencesUtil.userExist(getApplicationContext())){
             SharedPreferencesUtil.initUserBook(getApplicationContext());
-            Log.e("用户自动登陆：",""+UserBook.NowUser.toString());
-            Intent intent = new Intent(WelcomeActivity.this, HomeActivity.class);
-            startActivity(intent);
-            finish();
+            Log.e("用户自动登陆：","phone:"+UserBook.NowUser.getPhone()+"pass:"+UserBook.NowUser.getPassword());
+            phone = UserBook.NowUser.getPhone();
+            password = UserBook.NowUser.getPassword();
+            EMClient.getInstance().login(phone, password, new EMCallBack() {
+                @Override
+                public void onSuccess() {
+                    Log.e("Welcome","环信登陆成功");
+
+                    Intent intent = new Intent(WelcomeActivity.this, HomeActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+
+                @Override
+                public void onError(int i, String s) {
+                    Log.e("Welcome","环信登陆失败");
+                }
+
+                @Override
+                public void onProgress(int i, String s) {
+                    Log.e("Welcome","环信登陆失败");
+                }
+            });
+
 
         }else if (SharedPreferencesUtil.doctorExist(getApplicationContext())){
             SharedPreferencesUtil.initUserBook(getApplicationContext());
-            Log.e("医生自动登陆：",""+UserBook.NowDoctor.toString());
-            Intent intent = new Intent(WelcomeActivity.this, HomeActivity.class);
-            startActivity(intent);
-            finish();
+            Log.e("医生自动登陆：","phone:"+UserBook.NowDoctor.getPhone()+"pass:"+UserBook.NowDoctor.getPassword());
+            phone = UserBook.NowDoctor.getPhone();
+            password = UserBook.NowDoctor.getPassword();
+            EMClient.getInstance().login(phone, password, new EMCallBack() {
+                @Override
+                public void onSuccess() {
+                    Log.e("Welcome","环信登陆成功");
+                    Intent intent = new Intent(WelcomeActivity.this, HomeActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+
+                @Override
+                public void onError(int i, String s) {
+                    Log.e("Welcome","环信登陆失败");
+                }
+
+                @Override
+                public void onProgress(int i, String s) {
+                    Log.e("Welcome","环信登陆失败");
+                }
+            });
+
         }
 
 
