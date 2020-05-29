@@ -85,6 +85,7 @@ public class WelcomeActivity extends BaseActivity implements View.OnClickListene
                 @Override
                 public void onSuccess() {
                     Log.e("Welcome","环信登陆成功");
+                    
                     Intent intent = new Intent(WelcomeActivity.this, HomeActivity.class);
                     startActivity(intent);
                     finish();
