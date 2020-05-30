@@ -168,7 +168,7 @@ public class LoginActivity extends BaseActivity {
                     List<EaseMember> memberList = new ArrayList<>();
                     //设置医生的昵称和头像
                     List<UserDoctor> doctorList = new InfoList().doctorsInfoList();
-//                    Log.e("doctorList", doctorList.get(0).toString());
+                    Log.e("doctorList", doctorList.toString());
                     for (UserDoctor ud : SharedPreferencesUtil.doctorList(LoginActivity.this)) {
                         EaseMember em = new EaseMember();
 //                        em.member_hxid = "15232156137";
