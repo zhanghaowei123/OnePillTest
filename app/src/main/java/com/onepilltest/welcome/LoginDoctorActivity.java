@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.easeui.model.EaseGlobal;
@@ -21,6 +22,7 @@ import com.onepilltest.BaseActivity;
 import com.onepilltest.Ease.MyUserProvider;
 import com.onepilltest.R;
 import com.onepilltest.URL.Connect;
+import com.onepilltest.entity.EventMessage;
 import com.onepilltest.entity.Result;
 import com.onepilltest.entity.UserDoctor;
 import com.onepilltest.entity.UserPatient;
@@ -29,7 +31,12 @@ import com.onepilltest.personal.UserBook;
 import com.onepilltest.util.SharedPreferencesUtil;
 import com.onepilltest.util.StatusBarUtil;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,6 +53,7 @@ public class LoginDoctorActivity extends BaseActivity implements View.OnClickLis
     private ImageView imgEye;
     private TextView textRegister;//注册
     private OkHttpClient okHttpClient;
+    List<UserPatient> userPatientList = null;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,7 +62,7 @@ public class LoginDoctorActivity extends BaseActivity implements View.OnClickLis
 //            getWindow().setStatusBarColor(0xff56ced4);
 //        }
         setContentView(R.layout.login_doctor);
-
+        EventBus.getDefault().register(LoginDoctorActivity.this);
         findViews();
 
         initBar(this);
@@ -162,6 +170,7 @@ public class LoginDoctorActivity extends BaseActivity implements View.OnClickLis
 
                     List<EaseMember> memberList = new ArrayList<>();
                     //设置病人的昵称和头像
+
                     for (UserPatient up : SharedPreferencesUtil.userList(LoginDoctorActivity.this)) {
                         EaseMember em = new EaseMember();
 //                        em.member_hxid = "15227552449";
@@ -203,5 +212,15 @@ public class LoginDoctorActivity extends BaseActivity implements View.OnClickLis
     //用SharedPreferences存储
     private void save(UserDoctor userDoctor) {
         SharedPreferencesUtil.saveDoctor(getApplicationContext(), userDoctor);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void getEventMsg(EventMessage msg){
+        if (msg.getCode().equals("patientsInfoList")){
+            String str = msg.getJson();
+            Type type = new TypeToken<List<UserPatient>>() {
+            }.getType();
+            userPatientList = new Gson().fromJson(str,type);
+        }
     }
 }

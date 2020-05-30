@@ -78,14 +78,13 @@ public class WelcomeActivity extends BaseActivity implements View.OnClickListene
         String password = null;
         if (SharedPreferencesUtil.userExist(getApplicationContext())){
             SharedPreferencesUtil.initUserBook(getApplicationContext());
-            Log.e("用户自动登陆：","phone:"+UserBook.NowUser.getPhone()+"pass:"+UserBook.NowUser.getPassword());
+            Log.e("用户自动登陆","phone:"+UserBook.NowUser.getPhone()+"pass:"+UserBook.NowUser.getPassword());
             phone = UserBook.NowUser.getPhone();
             password = UserBook.NowUser.getPassword();
             EMClient.getInstance().login(phone, password, new EMCallBack() {
                 @Override
                 public void onSuccess() {
                     Log.e("Welcome","环信登陆成功");
-
                     Intent intent = new Intent(WelcomeActivity.this, HomeActivity.class);
                     startActivity(intent);
                     finish();
@@ -105,7 +104,7 @@ public class WelcomeActivity extends BaseActivity implements View.OnClickListene
 
         }else if (SharedPreferencesUtil.doctorExist(getApplicationContext())){
             SharedPreferencesUtil.initUserBook(getApplicationContext());
-            Log.e("医生自动登陆：","phone:"+UserBook.NowDoctor.getPhone()+"pass:"+UserBook.NowDoctor.getPassword());
+            Log.e("医生自动登陆","phone:"+UserBook.NowDoctor.getPhone()+"pass:"+UserBook.NowDoctor.getPassword());
             phone = UserBook.NowDoctor.getPhone();
             password = UserBook.NowDoctor.getPassword();
             EMClient.getInstance().login(phone, password, new EMCallBack() {

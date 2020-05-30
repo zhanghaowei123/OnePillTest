@@ -5,8 +5,11 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.onepilltest.URL.Connect;
+import com.onepilltest.entity.EventMessage;
 import com.onepilltest.entity.UserDoctor;
 import com.onepilltest.entity.UserPatient;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -39,6 +42,10 @@ public class InfoList {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String userListStr = response.body().string();
+                EventMessage msg = new EventMessage();
+                msg.setCode("patientsInfoList");
+                msg.setJson(userListStr);
+                EventBus.getDefault().post(msg);
                 Log.e("userList", userListStr);
                 //定义他的派生类调用getType，真实对象
                 Type type = new TypeToken<List<UserPatient>>() {
