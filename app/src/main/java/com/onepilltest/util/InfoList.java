@@ -21,7 +21,7 @@ import okhttp3.Response;
 
 public class InfoList {
     private List<UserPatient> userPatientList = new ArrayList<>();
-    private List<UserDoctor> userDoctorList = new ArrayList<>();
+    public List<UserDoctor> userDoctorList = new ArrayList<>();
 
     public List<UserPatient> patientsInfoList() {
         OkHttpClient okHttpClient = new OkHttpClient();
@@ -56,23 +56,38 @@ public class InfoList {
                 .build();
         Log.e("LoginInfo", request.toString());
         Call call = okHttpClient.newCall(request);
-        call.enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
-                Log.e("youwenti", "");
-            }
+        try {
+            Response response = call.execute();
+            String doctorListStr = response.body().string();
+            Type type = new TypeToken<List<UserDoctor>>() {
+            }.getType();
+            userDoctorList.addAll(new Gson().fromJson(doctorListStr, type));
+            Log.e("aaaw", userDoctorList.toString());
+            return userDoctorList;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+//        return null;
+//        call.enqueue(new Callback() {
+//            @Override
+//            public void onFailure(Call call, IOException e) {
+//                e.printStackTrace();
+//                Log.e("youwenti", "");
+//            }
+//
+//            @Override
+//            public void onResponse(Call call, Response response) throws IOException {
+//                String doctorListStr = response.body().string();
+//                Type type = new TypeToken<List<UserDoctor>>() {
+//                }.getType();
+//                userDoctorList.addAll(new Gson().fromJson(doctorListStr, type));
+////                for (UserDoctor u : userDoctorList) {
+////                    Log.e("ff", u.toString());
+////                }
+//            }
+//        });
 
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                String doctorListStr = response.body().string();
-                Log.e("doctorList", doctorListStr);
-                Type type = new TypeToken<List<UserDoctor>>() {
-                }.getType();
-                userDoctorList.addAll(new Gson().fromJson(doctorListStr, type));
-            }
-        });
-        Log.e("ff", userDoctorList.toString());
-        return userDoctorList;
+//        return userDoctorList;
     }
 }
