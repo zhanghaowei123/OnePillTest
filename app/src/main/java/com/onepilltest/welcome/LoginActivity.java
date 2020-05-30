@@ -1,9 +1,7 @@
 package com.onepilltest.welcome;
 
 import android.app.Activity;
-import android.content.ContentValues;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -20,14 +18,15 @@ import com.hyphenate.easeui.model.EaseGlobal;
 import com.hyphenate.easeui.model.EaseMember;
 import com.onepilltest.BaseActivity;
 import com.onepilltest.Ease.MyUserProvider;
-import com.onepilltest.MyDBHelper;
 import com.onepilltest.R;
 import com.onepilltest.URL.Connect;
 import com.onepilltest.ceshi.ceshiActivity;
 import com.onepilltest.entity.Result;
+import com.onepilltest.entity.UserDoctor;
 import com.onepilltest.entity.UserPatient;
 import com.onepilltest.index.HomeActivity;
 import com.onepilltest.personal.UserBook;
+import com.onepilltest.util.InfoList;
 import com.onepilltest.util.SharedPreferencesUtil;
 import com.onepilltest.util.StatusBarUtil;
 
@@ -51,8 +50,6 @@ public class LoginActivity extends BaseActivity {
     private Button ceshi;//测试按钮
     MyListener myListener = new MyListener();
 
-    private SQLiteDatabase database;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,11 +57,6 @@ public class LoginActivity extends BaseActivity {
 //            getWindow().setStatusBarColor(0xff56ced4);
 //        }
         setContentView(R.layout.activity_login);
-
-        //打开或者创建一个数据库
-        MyDBHelper myDBHelper = new MyDBHelper(getApplicationContext(), "user", 1);
-        database = myDBHelper.getWritableDatabase();
-
 
         findViews();
         int i = editPassword.getText().length();
@@ -79,53 +71,27 @@ public class LoginActivity extends BaseActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                okHttpClient = new OkHttpClient();
+                EMClient.getInstance().login(editPhone.getText().toString(),
+                        editPassword.getText().toString(), new EMCallBack() {
+                            @Override
+                            public void onSuccess() {
+                                Log.e("环信登录账号:", "成功");
+                                login();
+                                finish();
+                            }
 
-//                if (editPhone.getText().toString().equals("18831107935")) {
-//
-//                    UserPatient u = new UserPatient();
-//                    String url = Connect.BASE_URL + "user/findById?id=33";
-//                    OkhttpUtil.get(url).enqueue(new Callback() {
-//                        @Override
-//                        public void onFailure(Call call, IOException e) {
-//                            Log.e("登陆失败：", "请检查网络");
-//                        }
-//
-//                        @Override
-//                        public void onResponse(Call call, Response response) throws IOException {
-//                            String str = response.body().string();
-//                            Log.e("已连接：", "返回值：" + str);
-//                            if (str != null) {
-//                                Gson gson = new Gson();
-//                                UserPatient userPatient = gson.fromJson(str, UserPatient.class);
-//                                Log.e("已连接：", "" + userPatient.toString());
-//                                SharedPreferencesUtil.saveUser(getApplicationContext(), userPatient);
-//                            }
-//                        }
-//                    });
-//                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-//                    startActivity(intent);
-//                } else {
-                    okHttpClient = new OkHttpClient();
-                    EMClient.getInstance().login(editPhone.getText().toString(),
-                            editPassword.getText().toString(), new EMCallBack() {
-                                @Override
-                                public void onSuccess() {
-                                    Log.e("环信登录账号:", "成功");
-                                    login();
-                                    finish();
-                                }
+                            @Override
+                            public void onError(int i, String s) {
+                                Log.e("环信登录账号:", "失败," + i + "" + s);
+                            }
 
-                                @Override
-                                public void onError(int i, String s) {
-                                    Log.e("环信登录账号:", "失败," + i + "" + s);
-                                }
+                            @Override
+                            public void onProgress(int i, String s) {
 
-                                @Override
-                                public void onProgress(int i, String s) {
-
-                                }
-                            });
-                }
+                            }
+                        });
+            }
 
         });
         //密码可视或不可视
@@ -155,11 +121,11 @@ public class LoginActivity extends BaseActivity {
     private void initBar(Activity activity) {
 
         //设置状态栏paddingTop
-        StatusBarUtil.setRootViewFitsSystemWindows(activity,true);
+        StatusBarUtil.setRootViewFitsSystemWindows(activity, true);
         //设置状态栏颜色0xff56ced4
-        StatusBarUtil.setStatusBarColor(activity,0xff56ced4);
+        StatusBarUtil.setStatusBarColor(activity, 0xff56ced4);
         //设置状态栏神色浅色切换
-        StatusBarUtil.setStatusBarDarkTheme(activity,false);
+        StatusBarUtil.setStatusBarDarkTheme(activity, false);
 
     }
 
@@ -186,7 +152,7 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String jsonStr = response.body().string();
-                Log.e("登陆信息：", "\n"+jsonStr.toString());
+                Log.e("登陆信息：", "\n" + jsonStr.toString());
                 Result msg = new Gson().fromJson(jsonStr, Result.class);
                 //获取当前用户的信息
                 if (msg.getCode() == 1) {//登录成功
@@ -201,37 +167,29 @@ public class LoginActivity extends BaseActivity {
 
                     List<EaseMember> memberList = new ArrayList<>();
                     //设置医生的昵称和头像
-//                    for(UserDoctor ud : UserBook.getDoctorList()){
+                    List<UserDoctor> doctorList = new InfoList().doctorsInfoList();
+//                    Log.e("doctorList", doctorList.get(0).toString());
+                    for (UserDoctor ud : SharedPreferencesUtil.doctorList(LoginActivity.this)) {
                         EaseMember em = new EaseMember();
-                        em.member_hxid = "15232156137";
-                        em.member_nickname = "张昊伟医生";
-                        em.member_headphoto = Connect.BASE_URL
-                                +"image/timg.jpg";
+//                        em.member_hxid = "15232156137";
+//                        em.member_nickname = "张昊伟医生";
+//                        em.member_headphoto = Connect.BASE_URL
+//                                + "image/timg.jpg";
+                        em.member_hxid = ud.getPhone();
+                        em.member_nickname = ud.getName();
+                        em.member_headphoto = Connect.BASE_URL + ud.getHeadImg();
                         em.code = 1;
-                        Log.e("医生头像",em.member_nickname+","+em.member_hxid+","+em.member_headphoto);
+                        Log.e("医生头像", em.member_nickname + "," + em.member_hxid + "," + em.member_headphoto);
                         memberList.add(em);
-//                    }
+                    }
                     //设置自己的昵称和头像
                     EaseMember easeMember = new EaseMember();
                     easeMember.member_hxid = UserBook.NowUser.getPhone();
                     easeMember.member_nickname = UserBook.NowUser.getNickName();
-                    easeMember.member_headphoto = Connect.BASE_URL+UserBook.NowUser.getHeadImg();
+                    easeMember.member_headphoto = Connect.BASE_URL + UserBook.NowUser.getHeadImg();
                     easeMember.code = 2;
                     memberList.add(easeMember);
                     EaseGlobal.memberList = memberList;
-
-                    //设置SQLite数据库，将用户信息保存进去
-                    try{
-                        //插入数据
-                        ContentValues contentValues = new ContentValues();
-                        contentValues.put("PHONE",UserBook.NowUser.getPhone());
-                        contentValues.put("NAME",UserBook.NowUser.getNickName());
-                        contentValues.put("IMG",Connect.BASE_URL+UserBook.NowUser.getHeadImg());
-                        database.insert("PATIENT",null,contentValues);
-                        database.close();
-                    }catch (Exception e){
-                        e.printStackTrace();
-                    }
 
                     //跳转
                     Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
@@ -249,8 +207,8 @@ public class LoginActivity extends BaseActivity {
 
     //用SharedPreferences存储
     private void save(UserPatient userPatient) {
-        Log.e("自动登陆已生效，保存用户信息",userPatient.toString()+"\n");
-        SharedPreferencesUtil.saveUser(getApplicationContext(),userPatient);
+        Log.e("自动登陆已生效，保存用户信息", userPatient.toString() + "\n");
+        SharedPreferencesUtil.saveUser(getApplicationContext(), userPatient);
     }
 
     private void findViews() {

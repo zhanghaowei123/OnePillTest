@@ -1,14 +1,9 @@
 package com.onepilltest.welcome;
 
 import android.app.Activity;
-import android.content.ContentValues;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.database.sqlite.SQLiteDatabase;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -24,7 +19,6 @@ import com.hyphenate.easeui.model.EaseGlobal;
 import com.hyphenate.easeui.model.EaseMember;
 import com.onepilltest.BaseActivity;
 import com.onepilltest.Ease.MyUserProvider;
-import com.onepilltest.MyDoctorDBHelper;
 import com.onepilltest.R;
 import com.onepilltest.URL.Connect;
 import com.onepilltest.entity.Result;
@@ -32,7 +26,6 @@ import com.onepilltest.entity.UserDoctor;
 import com.onepilltest.entity.UserPatient;
 import com.onepilltest.index.HomeActivity;
 import com.onepilltest.personal.UserBook;
-import com.onepilltest.util.OkhttpUtil;
 import com.onepilltest.util.SharedPreferencesUtil;
 import com.onepilltest.util.StatusBarUtil;
 
@@ -53,8 +46,6 @@ public class LoginDoctorActivity extends BaseActivity implements View.OnClickLis
     private ImageView imgEye;
     private TextView textRegister;//注册
     private OkHttpClient okHttpClient;
-    private MyDoctorDBHelper myDoctorDBHelper;
-    private SQLiteDatabase database;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -64,9 +55,6 @@ public class LoginDoctorActivity extends BaseActivity implements View.OnClickLis
 //        }
         setContentView(R.layout.login_doctor);
 
-        myDoctorDBHelper = new MyDoctorDBHelper(getApplicationContext(),"doctor",1);
-        database = myDoctorDBHelper.getWritableDatabase();
-
         findViews();
 
         initBar(this);
@@ -75,11 +63,11 @@ public class LoginDoctorActivity extends BaseActivity implements View.OnClickLis
     private void initBar(Activity activity) {
 
         //设置状态栏paddingTop
-        StatusBarUtil.setRootViewFitsSystemWindows(activity,true);
+        StatusBarUtil.setRootViewFitsSystemWindows(activity, true);
         //设置状态栏颜色0xff56ced4
-        StatusBarUtil.setStatusBarColor(activity,0xff56ced4);
+        StatusBarUtil.setStatusBarColor(activity, 0xff56ced4);
         //设置状态栏神色浅色切换
-        StatusBarUtil.setStatusBarDarkTheme(activity,false);
+        StatusBarUtil.setStatusBarDarkTheme(activity, false);
 
     }
 
@@ -162,7 +150,7 @@ public class LoginDoctorActivity extends BaseActivity implements View.OnClickLis
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String jsonStr = response.body().string();
-                Log.e("登陆信息：", "\n"+jsonStr.toString());
+                Log.e("登陆信息：", "\n" + jsonStr.toString());
                 Result msg = new Gson().fromJson(jsonStr, Result.class);
                 //获取当前医生的信息
                 if (msg.getCode() == 1) {//登录成功
@@ -174,20 +162,23 @@ public class LoginDoctorActivity extends BaseActivity implements View.OnClickLis
 
                     List<EaseMember> memberList = new ArrayList<>();
                     //设置病人的昵称和头像
-//                    for(UserPatient up : UserBook.getList()){
+                    for (UserPatient up : SharedPreferencesUtil.userList(LoginDoctorActivity.this)) {
                         EaseMember em = new EaseMember();
-                        em.member_hxid = "15227552449";
-                        em.member_nickname = "张昊伟";
-                        em.member_headphoto =Connect.BASE_URL+ "/image/headImg/33_headImgc4b4a6ed-fe53-449e-85b3-0d6ef566eb90.png";
+//                        em.member_hxid = "15227552449";
+//                        em.member_nickname = "张昊伟123";
+//                        em.member_headphoto = Connect.BASE_URL + "/image/headImg/33_headImgc4b4a6ed-fe53-449e-85b3-0d6ef566eb90.png";
+                        em.member_hxid = up.getPhone();
+                        em.member_nickname = up.getNickName();
+                        em.member_headphoto = Connect.BASE_URL + up.getHeadImg();
                         em.code = 2;
-                        Log.e("病人头像",em.member_nickname+","+em.member_hxid+","+em.member_headphoto);
+                        Log.e("病人头像", em.member_nickname + "," + em.member_hxid + "," + em.member_headphoto);
                         memberList.add(em);
-//                    }
+                    }
                     //设置自己的昵称和头像
                     EaseMember easeMember = new EaseMember();
                     easeMember.member_hxid = UserBook.NowDoctor.getPhone();
                     easeMember.member_nickname = UserBook.NowDoctor.getName();
-                    easeMember.member_headphoto = Connect.BASE_URL+UserBook.NowDoctor.getHeadImg();
+                    easeMember.member_headphoto = Connect.BASE_URL + UserBook.NowDoctor.getHeadImg();
                     easeMember.code = 1;
                     memberList.add(easeMember);
                     EaseGlobal.memberList = memberList;
@@ -195,21 +186,8 @@ public class LoginDoctorActivity extends BaseActivity implements View.OnClickLis
                     //设置昵称和头像
                     MyUserProvider.getInstance().setUser(UserBook.NowDoctor.getPhone(),
                             UserBook.NowDoctor.getName(),
-                            Connect.BASE_URL+UserBook.NowDoctor.getHeadImg());
+                            Connect.BASE_URL + UserBook.NowDoctor.getHeadImg());
 
-
-                    //设置SQLite数据库，将用户信息保存进去
-                    try{
-                        //插入数据
-                        ContentValues contentValues = new ContentValues();
-                        contentValues.put("PHONE",UserBook.NowDoctor.getPhone());
-                        contentValues.put("NAME",UserBook.NowDoctor.getName());
-                        contentValues.put("IMG",Connect.BASE_URL+UserBook.NowDoctor.getHeadImg());
-                        database.insert("DOCTOR",null,contentValues);
-                        database.close();
-                    }catch (Exception e){
-                        e.printStackTrace();
-                    }
                     Log.e("success", "登录成功");
                     Intent intent = new Intent(LoginDoctorActivity.this, HomeActivity.class);
                     startActivity(intent);
@@ -224,6 +202,6 @@ public class LoginDoctorActivity extends BaseActivity implements View.OnClickLis
 
     //用SharedPreferences存储
     private void save(UserDoctor userDoctor) {
-        SharedPreferencesUtil.saveDoctor(getApplicationContext(),userDoctor);
+        SharedPreferencesUtil.saveDoctor(getApplicationContext(), userDoctor);
     }
 }

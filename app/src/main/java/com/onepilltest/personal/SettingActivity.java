@@ -2,10 +2,6 @@ package com.onepilltest.personal;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.database.SQLException;
-import android.database.sqlite.SQLiteDatabase;
-import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -28,11 +24,8 @@ import com.onepilltest.entity.EventMessage;
 import com.onepilltest.entity.QR;
 import com.onepilltest.entity.UserDoctor;
 import com.onepilltest.entity.UserPatient;
-import com.onepilltest.index.HomeActivity;
-import com.onepilltest.message.QuestionActivity;
 import com.onepilltest.util.SharedPreferencesUtil;
 import com.onepilltest.util.StatusBarUtil;
-import com.onepilltest.welcome.LoginActivity;
 import com.onepilltest.welcome.WelcomeActivity;
 
 import org.greenrobot.eventbus.EventBus;
@@ -218,28 +211,6 @@ public class SettingActivity extends BaseActivity {
                     EMClient.getInstance().logout(false, new EMCallBack() {
                         @Override
                         public void onSuccess() {
-                            if (UserBook.Code == 2){
-                                try{
-                                    SQLiteDatabase db = SQLiteDatabase
-                                            .openOrCreateDatabase("/data/data/com.onepilltest/databases/user", null);
-                                    db.delete("PATIENT",null,null);
-                                    Log.e("SQLite","删除PATIENT表成功");
-                                    db.close();
-                                }catch (SQLException e){
-                                    Log.e("SQLite",e.getMessage()+","+e.getCause());
-                                }
-                            }else if(UserBook.Code == 1){
-                                try{
-                                    SQLiteDatabase db = SQLiteDatabase
-                                            .openOrCreateDatabase("/data/data/com.onepilltest/databases/doctor", null);
-                                    db.delete("DOCTOR",null,null);
-                                    Log.e("SQLite","删除DOCTOR表成功");
-                                    db.close();
-                                }catch (SQLException e){
-                                    Log.e("SQLite",e.getMessage()+","+e.getCause());
-                                }
-                            }
-
                             SharedPreferencesUtil.delUser(getApplicationContext());
                             SharedPreferencesUtil.delDoctor(getApplicationContext());
                             Intent intent = new Intent(SettingActivity.this, WelcomeActivity.class);
@@ -254,14 +225,11 @@ public class SettingActivity extends BaseActivity {
                         public void onError(int i, String s) {
                             Log.e("退出失败", i + "," + s);
                         }
-
                         @Override
                         public void onProgress(int i, String s) {
-
                         }
                     });
                     break;
-
             }
         }
     }
@@ -272,8 +240,6 @@ public class SettingActivity extends BaseActivity {
         } else if (UserBook.Code == 2) {//用户
             initPatient();
         }
-
-
     }
 
     //初始化用户信息
@@ -351,8 +317,6 @@ public class SettingActivity extends BaseActivity {
                 }
             }
         }
-
-
     }
 
     @Override
