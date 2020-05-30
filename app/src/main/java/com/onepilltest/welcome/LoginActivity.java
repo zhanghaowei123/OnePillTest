@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.easeui.model.EaseGlobal;
@@ -21,6 +22,7 @@ import com.onepilltest.Ease.MyUserProvider;
 import com.onepilltest.R;
 import com.onepilltest.URL.Connect;
 import com.onepilltest.ceshi.ceshiActivity;
+import com.onepilltest.entity.EventMessage;
 import com.onepilltest.entity.Result;
 import com.onepilltest.entity.UserDoctor;
 import com.onepilltest.entity.UserPatient;
@@ -30,7 +32,12 @@ import com.onepilltest.util.InfoList;
 import com.onepilltest.util.SharedPreferencesUtil;
 import com.onepilltest.util.StatusBarUtil;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,6 +56,7 @@ public class LoginActivity extends BaseActivity {
     private OkHttpClient okHttpClient;
     private Button ceshi;//测试按钮
     MyListener myListener = new MyListener();
+    private List<UserDoctor> userDoctorList = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +65,7 @@ public class LoginActivity extends BaseActivity {
 //            getWindow().setStatusBarColor(0xff56ced4);
 //        }
         setContentView(R.layout.activity_login);
+        EventBus.getDefault().register(LoginActivity.this);
 
         findViews();
         int i = editPassword.getText().length();
@@ -167,8 +176,7 @@ public class LoginActivity extends BaseActivity {
 
                     List<EaseMember> memberList = new ArrayList<>();
                     //设置医生的昵称和头像
-                    List<UserDoctor> doctorList = new InfoList().doctorsInfoList();
-                    Log.e("doctorList", doctorList.toString());
+//                    List<UserDoctor> doctorList = new InfoList().doctorsInfoList();
                     for (UserDoctor ud : SharedPreferencesUtil.doctorList(LoginActivity.this)) {
                         EaseMember em = new EaseMember();
 //                        em.member_hxid = "15232156137";
@@ -237,5 +245,16 @@ public class LoginActivity extends BaseActivity {
         startActivity(intent);
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void getEventMsg(EventMessage msg){
+        if (msg.getCode().equals("doctorsInfoList")){
+            String str = msg.getJson();
+            Type type = new TypeToken<List<UserPatient>>() {
+            }.getType();
+            userDoctorList = new Gson().fromJson(str,type);
+            //设置医生的昵称和头像
+
+        }
+    }
 
 }

@@ -221,6 +221,7 @@ public class LoginDoctorActivity extends BaseActivity implements View.OnClickLis
             Type type = new TypeToken<List<UserPatient>>() {
             }.getType();
             userPatientList = new Gson().fromJson(str,type);
+            //设置病人的昵称和头像
         }
     }
 }

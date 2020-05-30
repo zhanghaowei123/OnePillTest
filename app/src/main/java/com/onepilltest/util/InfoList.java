@@ -26,17 +26,11 @@ public class InfoList {
     private List<UserPatient> userPatientList = new ArrayList<>();
     public List<UserDoctor> userDoctorList = new ArrayList<>();
 
-    public List<UserPatient> patientsInfoList() {
-        OkHttpClient okHttpClient = new OkHttpClient();
-        Request request = new Request.Builder()
-                .url(Connect.BASE_URL + "user/list")
-                .build();
-        Log.e("LoginInfo", request.toString());
-        Call call = okHttpClient.newCall(request);
-        call.enqueue(new Callback() {
+    public void patientsInfoList() {
+        OkhttpUtil.get(Connect.BASE_URL + "user/list").enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
+
             }
 
             @Override
@@ -47,54 +41,29 @@ public class InfoList {
                 msg.setJson(userListStr);
                 EventBus.getDefault().post(msg);
                 Log.e("userList", userListStr);
-                //定义他的派生类调用getType，真实对象
-                Type type = new TypeToken<List<UserPatient>>() {
-                }.getType();
-                userPatientList.addAll(new Gson().fromJson(userListStr, type));
             }
         });
-        return userPatientList;
     }
 
-    public List<UserDoctor> doctorsInfoList() {
-        OkHttpClient okHttpClient = new OkHttpClient();
-        Request request = new Request.Builder()
-                .url(Connect.BASE_URL + "doctor/getList")
-                .build();
-        Log.e("LoginInfo", request.toString());
-        Call call = okHttpClient.newCall(request);
-        try {
-            Response response = call.execute();
-            String doctorListStr = response.body().string();
-            Type type = new TypeToken<List<UserDoctor>>() {
-            }.getType();
-            userDoctorList.addAll(new Gson().fromJson(doctorListStr, type));
-            Log.e("aaaw", userDoctorList.toString());
-            return userDoctorList;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+    public void doctorsInfoList() {
+
+        OkhttpUtil.get(Connect.BASE_URL + "doctor/getList").enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String str = response.body().string();
+                EventMessage msg = new EventMessage();
+                msg.setCode("doctorsInfoList");
+                msg.setJson(str);
+                EventBus.getDefault().post(msg);
+                Log.e("userList", str);
+            }
+        });
+
         }
-//        return null;
-//        call.enqueue(new Callback() {
-//            @Override
-//            public void onFailure(Call call, IOException e) {
-//                e.printStackTrace();
-//                Log.e("youwenti", "");
-//            }
-//
-//            @Override
-//            public void onResponse(Call call, Response response) throws IOException {
-//                String doctorListStr = response.body().string();
-//                Type type = new TypeToken<List<UserDoctor>>() {
-//                }.getType();
-//                userDoctorList.addAll(new Gson().fromJson(doctorListStr, type));
-////                for (UserDoctor u : userDoctorList) {
-////                    Log.e("ff", u.toString());
-////                }
-//            }
-//        });
 
-//        return userDoctorList;
-    }
 }
