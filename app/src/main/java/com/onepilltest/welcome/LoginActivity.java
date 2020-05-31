@@ -174,31 +174,7 @@ public class LoginActivity extends BaseActivity {
                             UserBook.NowUser.getNickName(),
                             Connect.BASE_URL + UserBook.NowUser.getHeadImg());
 
-                    List<EaseMember> memberList = new ArrayList<>();
-                    //设置医生的昵称和头像
-//                    List<UserDoctor> doctorList = new InfoList().doctorsInfoList();
-                    for (UserDoctor ud : SharedPreferencesUtil.doctorList(LoginActivity.this)) {
-                        EaseMember em = new EaseMember();
-//                        em.member_hxid = "15232156137";
-//                        em.member_nickname = "张昊伟医生";
-//                        em.member_headphoto = Connect.BASE_URL
-//                                + "image/timg.jpg";
-                        em.member_hxid = ud.getPhone();
-                        em.member_nickname = ud.getName();
-                        em.member_headphoto = Connect.BASE_URL + ud.getHeadImg();
-                        em.code = 1;
-                        Log.e("医生头像", em.member_nickname + "," + em.member_hxid + "," + em.member_headphoto);
-                        memberList.add(em);
-                    }
-                    //设置自己的昵称和头像
-                    EaseMember easeMember = new EaseMember();
-                    easeMember.member_hxid = UserBook.NowUser.getPhone();
-                    easeMember.member_nickname = UserBook.NowUser.getNickName();
-                    easeMember.member_headphoto = Connect.BASE_URL + UserBook.NowUser.getHeadImg();
-                    easeMember.code = 2;
-                    memberList.add(easeMember);
-                    EaseGlobal.memberList = memberList;
-
+                    new InfoList().patientsInfoList();
                     //跳转
                     Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                     startActivity(intent);
@@ -246,14 +222,35 @@ public class LoginActivity extends BaseActivity {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void getEventMsg(EventMessage msg){
-        if (msg.getCode().equals("doctorsInfoList")){
+    public void getEventMsg(EventMessage msg) {
+        if (msg.getCode().equals("doctorsInfoList")) {
             String str = msg.getJson();
             Type type = new TypeToken<List<UserPatient>>() {
             }.getType();
-            userDoctorList = new Gson().fromJson(str,type);
+            userDoctorList = new Gson().fromJson(str, type);
             //设置医生的昵称和头像
-
+            List<EaseMember> memberList = new ArrayList<>();
+            for (UserDoctor ud : userDoctorList) {
+                EaseMember em = new EaseMember();
+//                        em.member_hxid = "15232156137";
+//                        em.member_nickname = "张昊伟医生";
+//                        em.member_headphoto = Connect.BASE_URL
+//                                + "image/timg.jpg";
+                em.member_hxid = ud.getPhone();
+                em.member_nickname = ud.getName();
+                em.member_headphoto = Connect.BASE_URL + ud.getHeadImg();
+                em.code = 1;
+                Log.e("医生头像", em.member_nickname + "," + em.member_hxid + "," + em.member_headphoto);
+                memberList.add(em);
+            }
+            //设置自己的昵称和头像
+            EaseMember easeMember = new EaseMember();
+            easeMember.member_hxid = UserBook.NowUser.getPhone();
+            easeMember.member_nickname = UserBook.NowUser.getNickName();
+            easeMember.member_headphoto = Connect.BASE_URL + UserBook.NowUser.getHeadImg();
+            easeMember.code = 2;
+            memberList.add(easeMember);
+            EaseGlobal.memberList = memberList;
         }
     }
 

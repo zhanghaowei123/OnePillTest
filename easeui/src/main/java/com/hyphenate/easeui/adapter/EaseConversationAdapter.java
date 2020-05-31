@@ -1,7 +1,6 @@
 package com.hyphenate.easeui.adapter;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.TypedValue;
@@ -131,7 +130,7 @@ public class EaseConversationAdapter extends ArrayAdapter<EMConversation> {
                 Glide.with(getContext())
                         .load(img)
                         .into(holder.avatar);
-//            EaseUserUtils.setUserAvatar(getContext(), username, holder.avatar);
+//                EaseUserUtils.setUserAvatar(getContext(), username, holder.avatar);
                 EaseUserUtils.setUserNick(name, holder.name);
             } else if (User.code == 1) {//医生
                 String img = User.doctor_headPhoto;
@@ -140,7 +139,7 @@ public class EaseConversationAdapter extends ArrayAdapter<EMConversation> {
                 Glide.with(getContext())
                         .load(img)
                         .into(holder.avatar);
-//            EaseUserUtils.setUserAvatar(getContext(), username, holder.avatar);
+//                EaseUserUtils.setUserAvatar(getContext(), username, holder.avatar);
                 EaseUserUtils.setUserNick(name, holder.name);
             }
             holder.motioned.setVisibility(View.GONE);

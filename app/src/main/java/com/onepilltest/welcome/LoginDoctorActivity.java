@@ -28,6 +28,7 @@ import com.onepilltest.entity.UserDoctor;
 import com.onepilltest.entity.UserPatient;
 import com.onepilltest.index.HomeActivity;
 import com.onepilltest.personal.UserBook;
+import com.onepilltest.util.InfoList;
 import com.onepilltest.util.SharedPreferencesUtil;
 import com.onepilltest.util.StatusBarUtil;
 
@@ -168,30 +169,7 @@ public class LoginDoctorActivity extends BaseActivity implements View.OnClickLis
                     UserBook.addDoctor(u);
                     save(u);//把u存进SharedPreferences
 
-                    List<EaseMember> memberList = new ArrayList<>();
-                    //设置病人的昵称和头像
-
-                    for (UserPatient up : SharedPreferencesUtil.userList(LoginDoctorActivity.this)) {
-                        EaseMember em = new EaseMember();
-//                        em.member_hxid = "15227552449";
-//                        em.member_nickname = "张昊伟123";
-//                        em.member_headphoto = Connect.BASE_URL + "/image/headImg/33_headImgc4b4a6ed-fe53-449e-85b3-0d6ef566eb90.png";
-                        em.member_hxid = up.getPhone();
-                        em.member_nickname = up.getNickName();
-                        em.member_headphoto = Connect.BASE_URL + up.getHeadImg();
-                        em.code = 2;
-                        Log.e("病人头像", em.member_nickname + "," + em.member_hxid + "," + em.member_headphoto);
-                        memberList.add(em);
-                    }
-                    //设置自己的昵称和头像
-                    EaseMember easeMember = new EaseMember();
-                    easeMember.member_hxid = UserBook.NowDoctor.getPhone();
-                    easeMember.member_nickname = UserBook.NowDoctor.getName();
-                    easeMember.member_headphoto = Connect.BASE_URL + UserBook.NowDoctor.getHeadImg();
-                    easeMember.code = 1;
-                    memberList.add(easeMember);
-                    EaseGlobal.memberList = memberList;
-
+                    new InfoList().patientsInfoList();
                     //设置昵称和头像
                     MyUserProvider.getInstance().setUser(UserBook.NowDoctor.getPhone(),
                             UserBook.NowDoctor.getName(),
@@ -215,13 +193,35 @@ public class LoginDoctorActivity extends BaseActivity implements View.OnClickLis
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void getEventMsg(EventMessage msg){
-        if (msg.getCode().equals("patientsInfoList")){
+    public void getEventMsg(EventMessage msg) {
+
+        if (msg.getCode().equals("patientsInfoList")) {
             String str = msg.getJson();
             Type type = new TypeToken<List<UserPatient>>() {
             }.getType();
-            userPatientList = new Gson().fromJson(str,type);
+            userPatientList = new Gson().fromJson(str, type);
             //设置病人的昵称和头像
+            List<EaseMember> memberList = new ArrayList<>();
+            for (UserPatient up : userPatientList) {
+                EaseMember em = new EaseMember();
+//                        em.member_hxid = "15227552449";
+//                        em.member_nickname = "张昊伟123";
+//                        em.member_headphoto = Connect.BASE_URL + "/image/headImg/33_headImgc4b4a6ed-fe53-449e-85b3-0d6ef566eb90.png";
+                em.member_hxid = up.getPhone();
+                em.member_nickname = up.getNickName();
+                em.member_headphoto = Connect.BASE_URL + up.getHeadImg();
+                em.code = 2;
+                Log.e("病人头像", em.member_nickname + "," + em.member_hxid + "," + em.member_headphoto);
+                memberList.add(em);
+            }
+            //设置自己的昵称和头像
+            EaseMember easeMember = new EaseMember();
+            easeMember.member_hxid = UserBook.NowDoctor.getPhone();
+            easeMember.member_nickname = UserBook.NowDoctor.getName();
+            easeMember.member_headphoto = Connect.BASE_URL + UserBook.NowDoctor.getHeadImg();
+            easeMember.code = 1;
+            memberList.add(easeMember);
+            EaseGlobal.memberList = memberList;
         }
     }
 }
