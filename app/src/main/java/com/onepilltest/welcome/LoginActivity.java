@@ -232,10 +232,6 @@ public class LoginActivity extends BaseActivity {
             List<EaseMember> memberList = new ArrayList<>();
             for (UserDoctor ud : userDoctorList) {
                 EaseMember em = new EaseMember();
-//                        em.member_hxid = "15232156137";
-//                        em.member_nickname = "张昊伟医生";
-//                        em.member_headphoto = Connect.BASE_URL
-//                                + "image/timg.jpg";
                 em.member_hxid = ud.getPhone();
                 em.member_nickname = ud.getName();
                 em.member_headphoto = Connect.BASE_URL + ud.getHeadImg();

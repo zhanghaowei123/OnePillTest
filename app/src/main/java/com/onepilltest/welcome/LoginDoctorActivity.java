@@ -194,7 +194,6 @@ public class LoginDoctorActivity extends BaseActivity implements View.OnClickLis
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getEventMsg(EventMessage msg) {
-
         if (msg.getCode().equals("patientsInfoList")) {
             String str = msg.getJson();
             Type type = new TypeToken<List<UserPatient>>() {
@@ -204,9 +203,6 @@ public class LoginDoctorActivity extends BaseActivity implements View.OnClickLis
             List<EaseMember> memberList = new ArrayList<>();
             for (UserPatient up : userPatientList) {
                 EaseMember em = new EaseMember();
-//                        em.member_hxid = "15227552449";
-//                        em.member_nickname = "张昊伟123";
-//                        em.member_headphoto = Connect.BASE_URL + "/image/headImg/33_headImgc4b4a6ed-fe53-449e-85b3-0d6ef566eb90.png";
                 em.member_hxid = up.getPhone();
                 em.member_nickname = up.getNickName();
                 em.member_headphoto = Connect.BASE_URL + up.getHeadImg();
