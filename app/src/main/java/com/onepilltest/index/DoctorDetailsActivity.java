@@ -80,7 +80,7 @@ public class DoctorDetailsActivity extends BaseActivity {
         //设置状态栏透明
 //        StatusBarUtil.setTranslucentStatus(activity);
         //设置状态栏paddingTop
-//        StatusBarUtil.setRootViewFitsSystemWindows(activity,true);
+        StatusBarUtil.setRootViewFitsSystemWindows(activity,true);
         //设置状态栏颜色0xff56ced4
         StatusBarUtil.setStatusBarColor(activity,0xff808080);
         //设置状态栏神色浅色切换
