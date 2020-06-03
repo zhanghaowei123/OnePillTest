@@ -1,6 +1,7 @@
 package com.onepilltest.personal;
 
 import android.content.Context;
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.gson.Gson;
 import com.onepilltest.R;
 import com.onepilltest.URL.Connect;
 import com.onepilltest.entity.Article;
@@ -40,6 +42,21 @@ public class FocusArticleAdapter extends RecyclerView.Adapter<FocusArticleAdapte
             text = itemView.findViewById(R.id.focus_article_item_text);
         }
     }
+
+    //item点击接口
+    //私有属性
+    private OnItemClickListener onItemClickListener = null;
+
+    //setter方法
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
+    //回调接口
+    public interface OnItemClickListener {
+        void onItemClick(View v,String json);
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -53,8 +70,24 @@ public class FocusArticleAdapter extends RecyclerView.Adapter<FocusArticleAdapte
     public void onBindViewHolder(@NonNull FocusArticleAdapter.ViewHolder viewHolder, int i) {
         Article article = articleList.get(i);
 //        RequestOptions requestOptions = new RequestOptions().circleCrop();
+        String tag = "tag1.png";
+        switch (article.getTag()){
+            case "日常医学":
+                tag = "tag1.png";
+                break;
+            case "急救知识":
+                tag = "tag1.png";
+                break;
+            case "疾病科普":
+                tag = "tag1.png";
+                break;
+            case "个人饮食":
+                tag = "tag1.png";
+                break;
+        }
+        article.setHeadImg(Connect.BASE_URL+"/image/"+tag);
         Glide.with(mContext)
-                .load(Connect.BASE_URL+article.getHeadImg())
+                .load(article.getHeadImg())
 //                .apply(requestOptions)
                 .into(viewHolder.img);
         viewHolder.title.setText(article.getTitle());
@@ -63,6 +96,16 @@ public class FocusArticleAdapter extends RecyclerView.Adapter<FocusArticleAdapte
             viewHolder.text.setText(str);
         }else
         viewHolder.text.setText(article.getContent());
+
+        //实现点击效果
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onItemClickListener != null) {
+                    onItemClickListener.onItemClick(v,new Gson().toJson(article));
+                }
+            }
+        });
 
     }
 

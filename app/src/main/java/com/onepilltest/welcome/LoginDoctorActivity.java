@@ -74,9 +74,9 @@ public class LoginDoctorActivity extends BaseActivity implements View.OnClickLis
         //设置状态栏paddingTop
         StatusBarUtil.setRootViewFitsSystemWindows(activity, true);
         //设置状态栏颜色0xff56ced4
-        StatusBarUtil.setStatusBarColor(activity, 0xff56ced4);
+//        StatusBarUtil.setStatusBarColor(activity, 0xff56ced4);
         //设置状态栏神色浅色切换
-        StatusBarUtil.setStatusBarDarkTheme(activity, false);
+        StatusBarUtil.setStatusBarDarkTheme(activity, true);
 
     }
 
@@ -122,7 +122,7 @@ public class LoginDoctorActivity extends BaseActivity implements View.OnClickLis
 
                             @Override
                             public void onProgress(int i, String s) {
-
+                                Log.e("环信登录账号:", "失败," + i + "" + s);
                             }
                         });
                 break;

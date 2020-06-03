@@ -7,6 +7,7 @@ public class Article {
     private String content;
     private String tag;
     private String title;
+    private int userId;
 
     public int getId() {
         return id;
@@ -54,6 +55,14 @@ public class Article {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     @Override

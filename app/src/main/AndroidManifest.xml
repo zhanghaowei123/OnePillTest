@@ -250,11 +250,11 @@
         <receiver
             android:name="com.hyphenate.easeui.demofile.CallReceiver"
             android:enabled="true"
-            android:exported="true"></receiver>
+            android:exported="true" />
 
         <activity android:name=".personal.WalletMoreActivity" />
         <activity android:name=".nearby.NearMap" />
-        <activity android:name=".personal.focusArticle"></activity>
+        <activity android:name=".personal.focusArticle" />
         <activity
             android:name="com.hyphenate.easeui.ui.VoiceCallActivity"
             android:launchMode="singleTask"
@@ -267,7 +267,8 @@
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide" />
         <activity android:name="com.hyphenate.easeui.ui.CallActivity" />
-        <activity android:name=".personal.oder.OrderMore"></activity>
+        <activity android:name=".personal.oder.OrderMore" />
+        <activity android:name=".index.ArticleActivity"></activity>
     </application>
 
 </manifest>

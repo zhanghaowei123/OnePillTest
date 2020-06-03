@@ -4,109 +4,157 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#56ced4">
+    android:background="#F5FFFA">
     <!-- 一丸app-->
-    <ImageView
-        android:layout_width="250dp"
-        android:layout_height="200dp"
-        android:src="@drawable/qwer"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"/>
+    <!--<ImageView-->
+        <!--android:layout_width="250dp"-->
+        <!--android:layout_height="200dp"-->
+        <!--android:src="@drawable/qwer"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:layout_marginTop="10dp"/>-->
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="欢迎您，医生！"
-        android:textStyle="bold"
-        android:textColor="#fff"
-        android:textSize="20dp" />
-    <!--登录-->
     <LinearLayout
-        android:layout_marginTop="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="center">
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:layout_weight="2"
+        android:orientation="vertical">
 
-        <ImageView
-            android:src="@drawable/shoujihao"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <EditText
-            android:layout_marginLeft="5dp"
-            android:id="@+id/edit_phone_doctor"
-            android:inputType="number"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:hint="请输入您的手机号"
-            android:textColorHint="#fff"
-            android:textColor="#fff"
-            android:textSize="15dp" />
     </LinearLayout>
+
+    <!--标题-->
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="center"
-        android:layout_marginTop="40dp">
-        <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:layout_weight="2"
+        android:orientation="vertical">
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:src="@drawable/suo"/>
-        <RelativeLayout
+            android:gravity="center"
+            android:text="OnePill"
+            android:textColor="#555"
+            android:textSize="35dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:text="欢迎您，医生！"-->
+        <!--android:textStyle="bold"-->
+        <!--android:textColor="#fff"-->
+        <!--android:textSize="20dp" />-->
+
+    <!--登陆选项-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_marginTop="20dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+
+            <!--<ImageView-->
+            <!--android:src="@drawable/shoujihao"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content" />-->
+
             <EditText
                 android:layout_marginLeft="5dp"
-                android:id="@+id/edit_password_doctor"
+                android:id="@+id/edit_phone_doctor"
+                android:inputType="number"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:hint="请输入您的密码"
-                android:textColorHint="#fff"
-                android:textColor="#fff"
-                android:textSize="15dp"
-                android:inputType="textPassword"/>
-            <ImageView
-                android:id="@+id/img_eye_doctor"
-                android:src="@drawable/eyeclose"
-                android:layout_marginLeft="210dp"
+                android:hint="请输入您的手机号"
+                android:textColorHint="#555"
+                android:textColor="#555"
+                android:textSize="15dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:layout_marginTop="40dp">
+            <!--<ImageView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:src="@drawable/suo"/>-->
+            <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </RelativeLayout>
+                android:layout_height="wrap_content">
+                <EditText
+                    android:layout_marginLeft="5dp"
+                    android:id="@+id/edit_password_doctor"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:hint="请输入您的密码"
+                    android:textColorHint="#555"
+                    android:textColor="#555"
+                    android:textSize="15dp"
+                    android:inputType="textPassword"/>
+                <ImageView
+                    android:id="@+id/img_eye_doctor"
+                    android:src="@drawable/eyeclose"
+                    android:layout_marginLeft="210dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+        </LinearLayout>
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="260dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="50dp"
-        android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/btn_login_doctor"
-            android:layout_width="wrap_content"
-            android:layout_height="45dp"
-            android:text="登录"
-            android:layout_marginLeft="90dp"
-            android:textColor="#fff"
-            android:textSize="18dp"
-            android:textStyle="bold"
-            android:background="@drawable/button_circle_shape"/>
-        <!--注册-->
-        <TextView
-            android:id="@+id/text_register_doctor"
-            android:textStyle="bold"
-            android:text="点我注册"
-            android:textColor="#fff"
-            android:textSize="15dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+
+    <!--按钮-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="260dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btn_login_doctor"
+                android:layout_width="230dp"
+                android:layout_height="45dp"
+                android:background="@drawable/button_circle_shape"
+                android:text="登录"
+                android:layout_marginTop="20dp"
+                android:textColor="#fff"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+            <!--注册-->
+            <TextView
+
+                android:id="@+id/text_register_doctor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:text="还没有账号？点我注册"
+                android:textColor="#708090"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
     </LinearLayout>
+
 
 
 </LinearLayout>

@@ -16,18 +16,25 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
 import com.onepilltest.R;
+import com.onepilltest.entity.Dao.focusDao;
 import com.onepilltest.entity.UserDoctor;
 import com.onepilltest.entity.UserPatient;
 import com.onepilltest.entity.ZxingMessage;
+import com.onepilltest.personal.UserBook;
 import com.onepilltest.util.SharedPreferencesUtil;
 
 public class ZxingUser extends Fragment {
-    ImageView img = null;
-    TextView name = null;
-    TextView phone = null;
-    ImageView focus = null;
-    boolean isFocus = false;
-    View view = null;
+    private ImageView img = null;
+    private TextView name = null;
+    private TextView phone = null;
+    private ImageView focus = null;
+    private boolean isFocus = false;
+    private View view = null;
+    private focusDao dao  = new focusDao();
+    private int code = 0;
+    private UserPatient userPatient = null;
+    private UserDoctor userDoctor = null;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,12 +52,24 @@ public class ZxingUser extends Fragment {
             @Override
             public void onClick(View v) {
                 Log.e("zxingUser:","点击关注");
-                if (!isFocus){
-                    focus.setImageResource(R.drawable.isfocus);
-                    isFocus = true;
-                }else{
+
+                if (isFocus){
+                    if (UserBook.Code ==1){
+                        dao.del(UserBook.NowDoctor.getId(),UserBook.Code,code,(code == 1? userDoctor.getId():userPatient.getId()));
+                    }else{
+                        dao.del(UserBook.NowUser.getId(),2,code,(code == 1? userDoctor.getId():userPatient.getId()));
+                    }
+
                     focus.setImageResource(R.drawable.notfocus);
                     isFocus = false;
+                }else{
+                    if (UserBook.Code ==1){
+                        dao.add(UserBook.NowDoctor.getId(),1,code,(code == 1? userDoctor.getId():userPatient.getId()));
+                    }else{
+                        dao.add(UserBook.NowUser.getId(),2,code,(code == 1? userDoctor.getId():userPatient.getId()));
+                    }
+                    focus.setImageResource(R.drawable.isfocus);
+                    isFocus = true;
                 }
             }
         });
@@ -71,14 +90,14 @@ public class ZxingUser extends Fragment {
        SharedPreferences sharedPreferences =  SharedPreferencesUtil.getShared(getContext(),"zxing");
        String json = sharedPreferences.getString("result","no");
         ZxingMessage zxingMessage = new Gson().fromJson(json,ZxingMessage.class);
-        int code = zxingMessage.getCode();
+        code = zxingMessage.getCode();
         if (code == 1){
-            UserDoctor userDoctor = new Gson().fromJson(zxingMessage.getJson(),UserDoctor.class);
+            userDoctor = new Gson().fromJson(zxingMessage.getJson(),UserDoctor.class);
             imgs = userDoctor.getHeadImg();
             names = userDoctor.getName();
             phones = userDoctor.getPhone();
         }else {
-            UserPatient userPatient = new Gson().fromJson(zxingMessage.getJson(),UserPatient.class);
+            userPatient = new Gson().fromJson(zxingMessage.getJson(),UserPatient.class);
             imgs = userPatient.getHeadImg();
             names = userPatient.getNickName();
             phones = userPatient.getPhone();
@@ -94,6 +113,7 @@ public class ZxingUser extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.zxing_user,container, false);
     }
+
 
 
 }

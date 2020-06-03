@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.google.gson.Gson;
@@ -38,8 +39,8 @@ import java.util.List;
 import cn.jpush.android.api.JPushInterface;
 
 public class WelcomeActivity extends BaseActivity implements View.OnClickListener {
-    private LinearLayout linearDoctor;
-    private LinearLayout linearPatient;
+    private Button linearDoctor;
+    private Button linearPatient;
     private CustomVideoView videoview;
     private List<UserDoctor> userDoctorList = null;
     private List<UserPatient> userPatientList = null;
@@ -60,6 +61,7 @@ public class WelcomeActivity extends BaseActivity implements View.OnClickListene
         autoLogin();
 
         init();
+        //初始化视频
         initView();
 
         /*if (UserBook.NowUser != null ){
@@ -155,7 +157,7 @@ public class WelcomeActivity extends BaseActivity implements View.OnClickListene
     private void initView() {
 
 
-        videoview.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.video3));
+        videoview.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.view11));
 
         //播放
         videoview.start();

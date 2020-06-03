@@ -46,29 +46,6 @@ public class focusDao {
                 EventBus.getDefault().post(msg);
             }
         });
-
-//        OkHttpClient okHttpClient = new OkHttpClient();
-//        String code = "searchDoctorList";
-//        Request request = new Request.Builder().url(Connect.BASE_URL+"focusServlet?userId="+userId+"&userType="+userType+"&Code="+code).build();
-//        Call call = okHttpClient.newCall(request);
-//        call.enqueue(new Callback() {
-//            @Override
-//            public void onFailure(Call call, IOException e) {
-//
-//            }
-//
-//            @Override
-//            public void onResponse(Call call, Response response) throws IOException {
-//                String re = response.body().string();
-//                Log.e("focusDao","获取关注医生列表!!\n"+re);
-//                EventMessage msg = new EventMessage();
-//                msg.setCode("focusDao_searchDoctor");
-//                msg.setJson(re);
-//                EventBus.getDefault().post(msg);
-//            }
-//        });
-
-
     }
 
 
@@ -96,28 +73,6 @@ public class focusDao {
                 EventBus.getDefault().post(msg);
             }
         });
-
-
-//        OkHttpClient okHttpClient = new OkHttpClient();
-//        String code = "searchMedicineList";
-//        Request request = new Request.Builder().url(Connect.BASE_URL+"focusServlet?userId="+userId+"&userType="+userType+"&Code="+code).build();
-//        Call call = okHttpClient.newCall(request);
-//        call.enqueue(new Callback() {
-//            @Override
-//            public void onFailure(Call call, IOException e) {
-//
-//            }
-//
-//            @Override
-//            public void onResponse(Call call, Response response) throws IOException {
-//                String re = response.body().string();
-//                Log.e("focusDao","查询收藏药品列表!!\n"+re);
-//                EventMessage msg = new EventMessage();
-//                msg.setCode("focusDao_searchMedicine");
-//                msg.setJson(re);
-//                EventBus.getDefault().post(msg);
-//            }
-//        });
 
 
     }
@@ -158,28 +113,6 @@ public class focusDao {
                 EventBus.getDefault().post(msg);
             }
         });
-
-//        OkHttpClient okHttpClient = new OkHttpClient();
-//        String code = "add";
-//        Request request = new Request.Builder().url(Connect.BASE_URL+"focusServlet?userId="+userId+"&userType="+userType+"&type="+type+"&typeId="+typeId+"&Code="+code).build();
-//        Call call = okHttpClient.newCall(request);
-//        call.enqueue(new Callback() {
-//            @Override
-//            public void onFailure(Call call, IOException e) {
-//
-//            }
-//
-//            @Override
-//            public void onResponse(Call call, Response response) throws IOException {
-//                String re = response.body().string();
-//                Log.e("focusDao","添加收藏");
-//                EventMessage msg = new EventMessage();
-//                msg.setCode("focusDao_add");
-//                msg.setJson(re);
-//                EventBus.getDefault().post(msg);
-//            }
-//        });
-
     }
 
 
@@ -203,29 +136,6 @@ public class focusDao {
                EventBus.getDefault().post(msg);
            }
        });
-
-//        OkHttpClient okHttpClient = new OkHttpClient();
-//        String code = "del";
-//        Request request = new Request.Builder().url(Connect.BASE_URL+"focusServlet?userId="+userId+"&userType="+userType+"&type="+type+"&typeId="+typeId+"&Code="+code).build();
-//        Call call = okHttpClient.newCall(request);
-//        call.enqueue(new Callback() {
-//            @Override
-//            public void onFailure(Call call, IOException e) {
-//
-//            }
-//
-//            @Override
-//            public void onResponse(Call call, Response response) throws IOException {
-//                String re = response.body().string();
-//                Log.e("focusDao","取消收藏");
-//                EventMessage msg = new EventMessage();
-//                msg.setCode("focusDao_del");
-//                msg.setJson(re);
-//                EventBus.getDefault().post(msg);
-//            }
-//        });
-
-
     }
 
 
@@ -248,29 +158,26 @@ public class focusDao {
                 EventBus.getDefault().post(msg);
             }
         });
+    }
 
-//        OkHttpClient okHttpClient = new OkHttpClient();
-//        String code = "isHave";
-//        Request request = new Request.Builder().url(Connect.BASE_URL+"focusServlet?userId="+userId+"&userType="+userType+"&type="+type+"&typeId="+typeId+"&Code="+code).build();
-//        Call call = okHttpClient.newCall(request);
-//        call.enqueue(new Callback() {
-//            @Override
-//            public void onFailure(Call call, IOException e) {
-//
-//            }
-//
-//            @Override
-//            public void onResponse(Call call, Response response) throws IOException {
-//                String re = response.body().string();
-//                Log.e("focusDao","查询是否收藏"+re);
-//                EventMessage msg = new EventMessage();
-//                msg.setCode("focusDao_isHave");
-//                msg.setJson(re);
-//                EventBus.getDefault().post(msg);
-//            }
-//        });
+    //查询收藏的文章
+    public void searchArticle(int userId,int userType){
+        String url = Connect.BASE_URL+"focus/articleList?userId="+userId+"&userType="+userType;
+        OkhttpUtil.get(url).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
 
+            }
 
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String str = response.body().string();
+                EventMessage msg = new EventMessage();
+                msg.setJson(str);
+                msg.setCode("focusDao_article");
+                EventBus.getDefault().post(msg);
+            }
+        });
     }
 
 }

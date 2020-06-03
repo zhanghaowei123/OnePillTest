@@ -101,7 +101,7 @@ public class ZxingActivity extends BaseActivity {
         //设置状态栏颜色0xff56ced4
 //        StatusBarUtil.setStatusBarColor(activity,0xff56ced4);
         //设置状态栏神色浅色切换
-        StatusBarUtil.setStatusBarDarkTheme(activity,false);
+        StatusBarUtil.setStatusBarDarkTheme(activity,true);
 
     }
 

@@ -54,7 +54,6 @@ public class LoginActivity extends BaseActivity {
     private ImageView imgEye;
     private TextView textRegister;//注册
     private OkHttpClient okHttpClient;
-    private Button ceshi;//测试按钮
     MyListener myListener = new MyListener();
     private List<UserDoctor> userDoctorList = null;
 
@@ -87,7 +86,6 @@ public class LoginActivity extends BaseActivity {
                             public void onSuccess() {
                                 Log.e("环信登录账号:", "成功");
                                 login();
-                                finish();
                             }
 
                             @Override
@@ -132,9 +130,9 @@ public class LoginActivity extends BaseActivity {
         //设置状态栏paddingTop
         StatusBarUtil.setRootViewFitsSystemWindows(activity, true);
         //设置状态栏颜色0xff56ced4
-        StatusBarUtil.setStatusBarColor(activity, 0xff56ced4);
+//        StatusBarUtil.setStatusBarColor(activity, 0xff56ced4);
         //设置状态栏神色浅色切换
-        StatusBarUtil.setStatusBarDarkTheme(activity, false);
+        StatusBarUtil.setStatusBarDarkTheme(activity, true);
 
     }
 
@@ -196,8 +194,7 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void findViews() {
-        ceshi = findViewById(R.id.ceshi);
-        ceshi.setOnClickListener(myListener);
+
         editPhone = findViewById(R.id.edit_phone);
         editPassword = findViewById(R.id.edit_password);
         imgEye = findViewById(R.id.img_eye);
@@ -209,17 +206,11 @@ public class LoginActivity extends BaseActivity {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
-                case R.id.ceshi:
-                    ceshi();
+
             }
         }
     }
 
-    private void ceshi() {
-
-        Intent intent = new Intent(LoginActivity.this, ceshiActivity.class);
-        startActivity(intent);
-    }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getEventMsg(EventMessage msg) {

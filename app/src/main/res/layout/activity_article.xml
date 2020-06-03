@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="#f7f7f7"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <!--标题栏-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#f7f7f7"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/article_back"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_weight="4"
+                android:background="@drawable/back" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="38"
+                android:text="文章详情"
+                android:textColor="#000"
+                android:textSize="16dp" />
+
+
+        </LinearLayout>
+
+
+        <!--文章标题-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:paddingLeft="20dp">
+
+            <ImageView
+                android:id="@+id/article_img"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:src="@drawable/user" />
+
+            <TextView
+                android:id="@+id/article_title"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="14"
+                android:text="震惊！医生竟然不会给自己开药"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/article_focus"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="15dp"
+                android:layout_weight="2"
+                android:src="@drawable/isfocus" />
+        </LinearLayout>
+
+        <!--文章内容-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:paddingRight="30dp"
+            android:paddingLeft="30dp">
+
+            <!--作者信息-->
+            <TextView
+                android:id="@+id/article_from"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="本文作者：Charlotte" />
+
+            <!--文章主体-->
+            <TextView
+                android:id="@+id/article_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:text="1233333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333"
+                android:textColor="#000" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

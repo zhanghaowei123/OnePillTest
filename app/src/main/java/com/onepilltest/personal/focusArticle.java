@@ -1,10 +1,13 @@
 package com.onepilltest.personal;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 
 import com.google.gson.Gson;
@@ -13,7 +16,9 @@ import com.onepilltest.BaseActivity;
 import com.onepilltest.R;
 import com.onepilltest.entity.Article;
 import com.onepilltest.entity.Dao.ArticleDao;
+import com.onepilltest.entity.Dao.focusDao;
 import com.onepilltest.entity.EventMessage;
+import com.onepilltest.index.ArticleActivity;
 import com.onepilltest.util.StatusBarUtil;
 
 import org.greenrobot.eventbus.EventBus;
@@ -31,6 +36,7 @@ public class focusArticle extends BaseActivity {
     List<Article>articleList = new ArrayList<>();
     ArticleDao articleDao = new ArticleDao();
     FocusArticleAdapter focusArticleAdapter = null;
+    focusDao focusDao = new focusDao();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +72,8 @@ public class focusArticle extends BaseActivity {
 
     public void init(){
         //请求数据
-        articleDao.getAllArticles();
+        Log.e("focusArticle","请求数据"+(UserBook.Code == 1 ? UserBook.NowDoctor.getId():UserBook.NowUser.getId())+UserBook.Code);
+        focusDao.searchArticle(UserBook.Code == 1 ? UserBook.NowDoctor.getId():UserBook.NowUser.getId(),UserBook.Code);
 
 
     }
@@ -76,7 +83,9 @@ public class focusArticle extends BaseActivity {
     //EventBus监听器
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getArticles(EventMessage msg){
-        if (msg.getCode().equals("articleDao_list")){
+        Log.e("focusArticle","获取数据"+msg.getCode());
+        if (msg.getCode().equals("focusDao_article")){
+            Log.e("focusArticle","获取数据"+msg.getJson());
             Type type = new TypeToken<List<Article>>() {
             }.getType();
             articleList.addAll(new Gson().fromJson(msg.getJson(), type));
@@ -84,6 +93,14 @@ public class focusArticle extends BaseActivity {
             list.setLayoutManager(layoutManager);
             focusArticleAdapter = new FocusArticleAdapter(articleList);
             list.setAdapter(focusArticleAdapter);
+            focusArticleAdapter.setOnItemClickListener(new FocusArticleAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(View v, String json) {
+                    Intent intent = new Intent(focusArticle.this, ArticleActivity.class);
+                    intent.putExtra("json",json);
+                    startActivity(intent);
+                }
+            });
 
         }
     }

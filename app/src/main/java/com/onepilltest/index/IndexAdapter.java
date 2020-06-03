@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.gson.Gson;
 import com.onepilltest.R;
 import com.onepilltest.URL.Connect;
 import com.onepilltest.entity.Article;
@@ -76,6 +77,10 @@ public class IndexAdapter extends RecyclerView.Adapter {
             @Override
             public void onClick(View v) {
                 Toast.makeText(context, "点击第" + (i + 1) + "条数据", Toast.LENGTH_SHORT).show();
+                Intent intent1 = new Intent(context,ArticleActivity.class);
+                String json = new Gson().toJson(article);
+                intent1.putExtra("json",json);
+                context.startActivity(intent1);
 
             }
         });
@@ -89,6 +94,8 @@ public class IndexAdapter extends RecyclerView.Adapter {
             }
         });
     }
+
+
 
     @Override
     public int getItemCount() {

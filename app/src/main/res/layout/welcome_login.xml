@@ -12,75 +12,75 @@
         android:id="@+id/welcome_video"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-    
+
     <!--<ImageView-->
-        <!--android:src="@drawable/qwer"-->
-        <!--android:layout_gravity="center"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content" />-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:scaleType="centerCrop"-->
+        <!--android:src="@drawable/welcome01"/>-->
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Hi，欢迎您"
+        android:textColor="#fff"
+        android:textSize="28dp"
+        android:layout_marginTop="100dp"
+        android:textStyle="bold" />
 
     <LinearLayout
-        android:gravity="center_vertical"
+        android:gravity="center"
+        android:layout_marginTop="150dp"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <!--<TextView-->
 
-            <!--android:layout_gravity="center"-->
-            <!--android:layout_marginTop="30dp"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="尊敬的用户您好，"-->
-            <!--android:textSize="16dp"/>-->
-        <!--<TextView-->
-            <!--android:layout_marginTop="30dp"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="请选择您的登录方式："-->
-            <!--android:layout_gravity="center"-->
-            <!--android:textSize="16dp"/>-->
+
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center"
-            android:layout_marginTop="100dp">
-            <LinearLayout
-                android:id="@+id/linear_doctor"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center">
-                <ImageView
-                    android:src="@drawable/welcome_doc"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:layout_marginTop="10dp"
-                    android:textColor="#fff"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="医生登录"/>
-            </LinearLayout>
+            android:layout_weight="2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"></LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/linear_patient"
-                android:layout_marginLeft="100dp"
-                android:layout_width="wrap_content"
+
+        <LinearLayout
+            android:layout_weight="2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:gravity="center">
+            <Button
+                android:id="@+id/linear_doctor"
+                android:layout_marginBottom="20dp"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:textStyle="bold"
+                android:background="@drawable/welcome_button"
+                android:text="医生登陆"
                 android:gravity="center">
-                <ImageView
-                    android:src="@drawable/welcome_pa"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:textColor="#fff"
-                    android:layout_marginTop="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="用户登录"/>
-            </LinearLayout>
+                <!--<ImageView-->
+                    <!--android:src="@drawable/welcome_doc"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content" />-->
+                <!--<TextView-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:textColor="#fff"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="医生登录"/>-->
+            </Button>
+
+            <Button
+                android:id="@+id/linear_patient"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:background="@drawable/welcome_button"
+                android:text="用户登陆"
+                android:gravity="center">
+
+            </Button>
 
         </LinearLayout>
     </LinearLayout>
