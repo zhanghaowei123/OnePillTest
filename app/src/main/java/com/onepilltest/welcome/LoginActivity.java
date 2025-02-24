@@ -29,6 +29,7 @@ import com.onepilltest.entity.UserPatient;
 import com.onepilltest.index.HomeActivity;
 import com.onepilltest.personal.UserBook;
 import com.onepilltest.util.InfoList;
+import com.onepilltest.util.OkhttpUtil;
 import com.onepilltest.util.SharedPreferencesUtil;
 import com.onepilltest.util.StatusBarUtil;
 
@@ -79,25 +80,28 @@ public class LoginActivity extends BaseActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                okHttpClient = new OkHttpClient();
-                EMClient.getInstance().login(editPhone.getText().toString(),
-                        editPassword.getText().toString(), new EMCallBack() {
-                            @Override
-                            public void onSuccess() {
-                                Log.e("环信登录账号:", "成功");
-                                login();
-                            }
+                okHttpClient = OkhttpUtil.getClient();
+                // TODO 环信登录SDK已失效
+//                EMClient.getInstance().login(editPhone.getText().toString(),
+//                        editPassword.getText().toString(), new EMCallBack() {
+//                            @Override
+//                            public void onSuccess() {
+//                                Log.e("环信登录账号:", "成功");
+//                                login();
+//                            }
+//
+//                            @Override
+//                            public void onError(int i, String s) {
+//                                Log.e("环信登录账号:", "失败," + i + "" + s);
+//                            }
+//
+//                            @Override
+//                            public void onProgress(int i, String s) {
+//
+//                            }
+//                        });
 
-                            @Override
-                            public void onError(int i, String s) {
-                                Log.e("环信登录账号:", "失败," + i + "" + s);
-                            }
-
-                            @Override
-                            public void onProgress(int i, String s) {
-
-                            }
-                        });
+                login();
             }
 
         });
@@ -143,13 +147,8 @@ public class LoginActivity extends BaseActivity {
 
 
     private void login() {
-        Request request = new Request.Builder()
-                .url(Connect.BASE_URL + "user/login?phone=" + editPhone.getText().toString()
-                        + "&password=" + editPassword.getText().toString())
-                .build();
-        Log.e("LoginInfo", request.toString());
-        Call call = okHttpClient.newCall(request);
-        call.enqueue(new Callback() {
+        OkhttpUtil.get(Connect.BASE_URL + "user/login?phone=" + editPhone.getText().toString()
+                + "&password=" + editPassword.getText().toString()).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 Log.e("LoginFailed", e.getMessage());

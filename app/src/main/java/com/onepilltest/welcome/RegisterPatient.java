@@ -96,19 +96,7 @@ public class RegisterPatient extends BaseActivity implements View.OnClickListene
                             }
                         } else if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
                             if (result == SMSSDK.RESULT_COMPLETE) {
-                                // TODO 处理验证码验证通过的结果
-                                Toast.makeText(RegisterPatient.this,
-                                        "验证成功", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent();
-                                intent.setClass(RegisterPatient.this,
-                                        PerfectInforPatientActivity.class);
-                                register();
-                                if (newFlag) {
-                                    startActivity(intent);
-                                    finish();
-                                } else
-                                    Toast.makeText(getApplicationContext(),
-                                            "请完善个人信息并同意用户协议", Toast.LENGTH_SHORT).show();
+                                verifySuccess();
                             } else {
                                 // TODO 处理错误的结果
                                 ((Throwable) data).printStackTrace();
@@ -122,6 +110,22 @@ public class RegisterPatient extends BaseActivity implements View.OnClickListene
         SMSSDK.registerEventHandler(eventHandler);/// 注册一个事件回调，用于处理SMSSDK接口请求的结果
 
         initBar(this);
+    }
+
+    private void verifySuccess() {
+        // TODO 处理验证码验证通过的结果
+        Toast.makeText(RegisterPatient.this,
+                "验证成功", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent();
+        intent.setClass(RegisterPatient.this,
+                PerfectInforPatientActivity.class);
+        register();
+        if (newFlag) {
+            startActivity(intent);
+            finish();
+        } else
+            Toast.makeText(getApplicationContext(),
+                    "请完善个人信息并同意用户协议", Toast.LENGTH_SHORT).show();
     }
 
 
@@ -195,6 +199,7 @@ public class RegisterPatient extends BaseActivity implements View.OnClickListene
             case R.id.btn_send_verification_code:
                 if (!TextUtils.isEmpty(editPhone.getText())) {
                     if (editPhone.getText().length() == 11) {
+                        Log.e("SMS", "正在发送验证码");
                         phoneNumber = editPhone.getText().toString();
                         SMSSDK.getVerificationCode("86", phoneNumber); // 发送验证码给号码的 phoneNumber 的手机
                         etVerificationCode.requestFocus();
@@ -211,7 +216,9 @@ public class RegisterPatient extends BaseActivity implements View.OnClickListene
                 if (!TextUtils.isEmpty(etVerificationCode.getText())) {
                     if (etVerificationCode.getText().length() == 4) {
                         verificationCode = etVerificationCode.getText().toString();
-                        SMSSDK.submitVerificationCode("86", phoneNumber, verificationCode);
+                        // TODO 移除无效SMS验证逻辑
+//                        SMSSDK.submitVerificationCode("86", phoneNumber, verificationCode);
+                        verifySuccess();
                     } else {
                         Toast.makeText(this, "请输入完整的验证码", Toast.LENGTH_SHORT).show();
                         etVerificationCode.requestFocus();
